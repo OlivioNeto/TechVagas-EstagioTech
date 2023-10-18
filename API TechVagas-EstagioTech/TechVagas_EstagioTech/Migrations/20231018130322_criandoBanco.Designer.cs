@@ -10,7 +10,7 @@ using TechVagas_EstagioTech.Data;
 
 namespace TechVagas_EstagioTech.Migrations
 {
-    [DbContext(typeof(DBContex))]
+    [DbContext(typeof(DBContext))]
     [Migration("20231018130322_criandoBanco")]
     partial class criandoBanco
     {

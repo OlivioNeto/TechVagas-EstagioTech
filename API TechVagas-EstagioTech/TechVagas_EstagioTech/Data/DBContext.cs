@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TechVagas_EstagioTech.Data
 {
-    public class DBContex : DbContext
+    public class DBContext : DbContext
     {
-        public DBContex(DbContextOptions<DBContex> options)
+        public DBContext(DbContextOptions<DBContext> options)
             : base(options)
         {
 
@@ -19,8 +19,9 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<TipoDocumentoModel> TipoDocumento { get; set; }
 
         public DbSet<DocumentoModel> Documento { get; set; }
+		public DbSet<CargoModel> Cargos { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TipoEsatgioMap());
             modelBuilder.ApplyConfiguration(new CursoMap());

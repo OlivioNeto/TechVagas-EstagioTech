@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\TechVagas_EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj": {}
+    "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\TechVagas_EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\TechVagas_EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
         "projectName": "TechVagas_EstagioTech",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\TechVagas_EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\TechVagas_EstagioTech\\TechVagas_EstagioTech\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -93,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

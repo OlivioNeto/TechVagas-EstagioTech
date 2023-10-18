@@ -20,7 +20,7 @@ namespace TechVagas_EstagioTech
             builder.Services.AddSwaggerGen();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<DBContex>(options =>
+            builder.Services.AddDbContext<DBContext>(options =>
                           options.UseNpgsql(connectionString));
 
             builder.Services.AddTransient<ITipoEstagioRepositorio, TipoEstagioRepositorio>();

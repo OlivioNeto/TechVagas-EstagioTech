@@ -6,8 +6,8 @@ namespace TechVagas_EstagioTech.Repositorios
 {
     public class CursoRepositorio : ICursoRepositorio
     {
-        private readonly DBContex _dbContext;
-        public CursoRepositorio(DBContex cursoDBContex)
+        private readonly DBContext _dbContext;
+        public CursoRepositorio(DBContext cursoDBContex)
         {
             _dbContext = cursoDBContex;
         }

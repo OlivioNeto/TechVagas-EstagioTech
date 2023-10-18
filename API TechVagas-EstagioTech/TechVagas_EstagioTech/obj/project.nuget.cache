@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "12xXgbQR5FvNWFfYmq1dEL57sHxtlczrchx83FrqZyv4cUNenfOg38F7hn1WT6XQSTZnYo9g89TrMDK11X23Og==",
+  "dgSpecHash": "DmIYU1xiy7O9SoTvv8pRAZ2ihEEbLGyDEwIKPqeo/1p8A1t5WWsR/2olk5h9malYAppKJjA7IbxGUJ4yAG1N2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\TechVagas_EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
+  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aluno\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.7\\microsoft.aspnetcore.openapi.7.0.7.nupkg.sha512",
