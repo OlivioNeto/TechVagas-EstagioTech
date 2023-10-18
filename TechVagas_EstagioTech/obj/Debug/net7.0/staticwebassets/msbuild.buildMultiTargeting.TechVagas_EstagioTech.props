@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TechVagas_EstagioTech.props" />
+</Project>
