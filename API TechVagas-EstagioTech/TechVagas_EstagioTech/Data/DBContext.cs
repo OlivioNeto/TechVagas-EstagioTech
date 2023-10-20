@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using TechVagas_EstagioTech.Data.Map;
-using TechVagas_EstagioTech.Model;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data
 {

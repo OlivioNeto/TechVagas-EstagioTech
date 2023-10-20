@@ -1,6 +1,7 @@
 ﻿using TechVagas_EstagioTech.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data.Map
 {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
-using TechVagas_EstagioTech.Model;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data.Map
 {
-	public class CargoMap : IEntityTypeConfiguration<CargoModel>
+    public class CargoMap : IEntityTypeConfiguration<CargoModel>
 	{
 		public void Configure(EntityTypeBuilder<CargoModel> builder)
 		{

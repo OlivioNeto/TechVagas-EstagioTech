@@ -1,4 +1,4 @@
-﻿namespace TechVagas_EstagioTech.Data
+﻿namespace TechVagas_EstagioTech.Model.Entities
 {
     public class CursoModel
     {
