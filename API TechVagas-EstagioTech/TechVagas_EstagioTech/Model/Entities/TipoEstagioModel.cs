@@ -4,6 +4,6 @@
     {
         public int idTipoEstagio { get; set; }
 
-        public string descricaoTipoEstagio { get; set; }
+        public string? descricaoTipoEstagio { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		[Required(ErrorMessage = "Informe a descrição do tipo do estágio")]
 		[MinLength(3)]
 		[MaxLength(100)]
-		public string descricaoTipoEstagio { get; set; }
+		public string? descricaoTipoEstagio { get; set; }
 	}
 }

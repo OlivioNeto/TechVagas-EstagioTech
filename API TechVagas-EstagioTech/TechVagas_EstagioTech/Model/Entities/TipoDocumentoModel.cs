@@ -4,6 +4,6 @@
     {
         public int idTipoDocumento { get; set; }
 
-        public string descricaoTipoDocumento { get; set; }
+        public string? descricaoTipoDocumento { get; set; }
     }
 }
