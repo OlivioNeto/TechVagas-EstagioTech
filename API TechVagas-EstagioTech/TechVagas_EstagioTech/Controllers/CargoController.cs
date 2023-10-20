@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
-using TechVagas_EstagioTech.Model;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class CargoController : ControllerBase
 	{
