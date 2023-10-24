@@ -5,7 +5,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
 {
-    public class CursoRepositorio : ICursoRepositorio
+    public class CursoRepositorio : ICursoInterface
     {
         private readonly DBContext _dbContext;
         public CursoRepositorio(DBContext cursoDBContex)
