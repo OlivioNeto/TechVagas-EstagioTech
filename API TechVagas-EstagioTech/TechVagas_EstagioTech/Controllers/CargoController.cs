@@ -52,18 +52,12 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-		public ActionResult Delete(int id)
+		public async Task<ActionResult<CargoDto>> Delete(int id)
 		{
-			var cargo = _context.Cargos.FirstOrDefault(c => c.CargoId == id);
-
-			if (cargo is null)
-			{
-				return NotFound("Cargos não encontrado...");
-			}
-			_context.Cargos.Remove(cargo);
-			_context.SaveChanges();
-
-			return Ok(cargo);
+			var cargoDto = await _cargo.BuscarPorId(id);
+			if (cargoDto == null) return NotFound("Cargo não econtrado!");
+			await _cargo.Apagar(id);
+			return Ok(cargoDto);
 		}
 	}
 }
