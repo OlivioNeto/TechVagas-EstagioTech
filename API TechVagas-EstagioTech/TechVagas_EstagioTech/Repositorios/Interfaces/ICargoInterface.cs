@@ -7,5 +7,7 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 		Task<List<CargoModel>> BuscarTodosCargos();
 
 		Task<CargoModel> BuscarPorId(int id);
+
+		Task<CargoModel> Adicionar(CargoModel cargo);
 	}
 }
