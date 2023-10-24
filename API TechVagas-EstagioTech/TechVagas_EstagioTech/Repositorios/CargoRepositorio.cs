@@ -27,5 +27,20 @@ namespace TechVagas_EstagioTech.Repositorios
 
 			return cargo;
 		}
+		public async Task<CargoModel> Atualizar(CargoModel cargo)
+		{
+			CargoModel CargoPorId = await BuscarPorId(cargo.CargoId);
+
+			if (CargoPorId == null)
+			{
+				throw new Exception($"O id: {cargo.CargoId} do cargo não foi encontrado no banco");
+			}
+			CargoPorId.Descricao = cargo.Descricao;
+
+			_dbContext.Cargos.Update(CargoPorId);
+			await _dbContext.SaveChangesAsync();
+
+			return CargoPorId;
+		}
 	}
 }
