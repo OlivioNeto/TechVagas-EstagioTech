@@ -44,17 +44,13 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPut("{id:int}")]
-		public ActionResult Put(int id, CargoModel cargo)
+		public async Task<ActionResult> Put([FromBody] CargoDto cargoDto)
 		{
-			if (id != cargo.CargoId)
-			{
-				return BadRequest();
-			}
-			_context.Entry(cargo).State = EntityState.Modified;
-			_context.SaveChanges();
-
-			return Ok(cargo);
+			if (cargoDto is null) return BadRequest("Dado invalido!");
+			await _cargo.Atualizar(cargoDto);
+			return Ok(cargoDto);
 		}
+
 		[HttpDelete("{id:int}")]
 		public ActionResult Delete(int id)
 		{
