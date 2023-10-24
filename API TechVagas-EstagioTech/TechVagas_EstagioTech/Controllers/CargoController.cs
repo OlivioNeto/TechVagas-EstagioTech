@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Repositorios;
+using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,22 +12,19 @@ namespace TechVagas_EstagioTech.Controllers
 	[ApiController]
 	public class CargoController : ControllerBase
 	{
-		private readonly DBContext _context;
+		private readonly ICargoInterface _cargo;
 
-		public CargoController(DBContext context)
+		public CargoController(ICargoInterface cargo)
 		{
-			_context = context;
+			_cargo = cargo;
 		}
 
 		[HttpGet]
-		public ActionResult<IEnumerable<CargoModel>> Get()
+		public async Task<ActionResult<IEnumerable<CargoDto>>> Get()
 		{
-			var cargos = _context.Cargos.ToList();
-			if (cargos is null)
-			{
-				return NotFound("Cargos não encontrados");
-			}
-			return cargos;
+			var cargoDto = await _cargo.BuscarTodosCargos();
+			if (cargoDto == null) return NotFound("Cargos não encontradas!");
+			return Ok(cargoDto);
 		}
 
 		[HttpGet("{id:int}", Name = "ObterCargo")]

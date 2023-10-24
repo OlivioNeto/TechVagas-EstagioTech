@@ -1,4 +1,5 @@
-﻿using TechVagas_EstagioTech.Model.Entities;
+﻿using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
@@ -8,9 +9,9 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 
 		Task<CargoModel> BuscarPorId(int id);
 
-		Task<CargoModel> Adicionar(CargoModel cargo);
+		Task<CargoModel> Adicionar(CargoDto cargo);
 
-		Task<CargoModel> Atualizar(CargoModel cargo);
+		Task<CargoModel> Atualizar(CargoDto cargo);
 
 		Task<bool> Apagar(int id);
 	}
