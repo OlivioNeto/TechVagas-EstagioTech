@@ -9,8 +9,8 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class CursoController : ControllerBase
     {
-        private readonly ICursoRepositorio _curso;
-        public CursoController(ICursoRepositorio curso)
+        private readonly ICursoInterface _curso;
+        public CursoController(ICursoInterface curso)
         {
             _curso = curso;
         }

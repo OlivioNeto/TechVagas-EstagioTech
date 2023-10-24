@@ -2,7 +2,7 @@
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-    public interface IDocumentoRepositorio
+    public interface IDocumentoInterface
     {
         Task<List<DocumentoModel>> BuscarTodosDocumentos();
 

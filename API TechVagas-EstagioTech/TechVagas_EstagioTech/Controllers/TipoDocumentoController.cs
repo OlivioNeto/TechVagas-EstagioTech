@@ -9,8 +9,8 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class TipoDocumentoController : ControllerBase
     {
-        private readonly ITipoDocumentoRepositorio _tipoDocumentoRepositorio;
-        public TipoDocumentoController(ITipoDocumentoRepositorio tipoDocumentoRepositorio)
+        private readonly ITipoDocumentoInterface _tipoDocumentoRepositorio;
+        public TipoDocumentoController(ITipoDocumentoInterface tipoDocumentoRepositorio)
         {
             _tipoDocumentoRepositorio = tipoDocumentoRepositorio;
         }
