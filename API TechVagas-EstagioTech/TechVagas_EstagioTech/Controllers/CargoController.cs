@@ -28,14 +28,11 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterCargo")]
-		public ActionResult<CargoModel> Get(int id)
+		public async Task<ActionResult<CargoDto>> Get(int id)
 		{
-			var cargos = _context.Cargos.FirstOrDefault(c => c.CargoId == id);
-			if (cargos is null)
-			{
-				return NotFound("Cargo não encontrado");
-			}
-			return cargos;
+			var cargoDto = await _cargo.BuscarPorId(id);
+			if (cargoDto == null) return NotFound("Cargo não encontrado");
+			return Ok(cargoDto);
 		}
 
 		[HttpPost]
