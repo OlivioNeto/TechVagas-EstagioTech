@@ -16,5 +16,9 @@ namespace TechVagas_EstagioTech.Repositorios
 		{
 			return await _dbContext.Cargos.FirstOrDefaultAsync(x => x.CargoId == id);
 		}
+		public async Task<List<CargoModel>> BuscarTodosCargos()
+		{
+			return await _dbContext.Cargos.ToListAsync();
+		}
 	}
 }
