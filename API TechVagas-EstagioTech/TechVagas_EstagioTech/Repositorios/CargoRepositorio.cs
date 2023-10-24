@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
 {
-	public class CargoRepositorio 
+	public class CargoRepositorio : ICargoInterface
 	{
 		private readonly DBContext _dbContext;
 

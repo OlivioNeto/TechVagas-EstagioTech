@@ -11,5 +11,7 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 		Task<CargoModel> Adicionar(CargoModel cargo);
 
 		Task<CargoModel> Atualizar(CargoModel cargo);
+
+		Task<bool> Apagar(int id);
 	}
 }
