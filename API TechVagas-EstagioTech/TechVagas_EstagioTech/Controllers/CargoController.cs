@@ -36,16 +36,11 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Post(CargoModel cargo)
+		public async Task<ActionResult> Post([FromBody] CargoDto cargoDto)
 		{
-			if (cargo is null)
-				return BadRequest();
-
-			_context.Cargos.Add(cargo);
-			_context.SaveChanges();
-
-			return new CreatedAtRouteResult("ObterCargo",
-				new { id = cargo.CargoId }, cargo);
+			if (cargoDto is null) return BadRequest("Dado inválido!");
+			await _cargo.Adicionar(cargoDto);
+			return new CreatedAtRouteResult("GetCargo", new { id = cargoDto.CargoId }, cargoDto);
 		}
 
 		[HttpPut("{id:int}")]
