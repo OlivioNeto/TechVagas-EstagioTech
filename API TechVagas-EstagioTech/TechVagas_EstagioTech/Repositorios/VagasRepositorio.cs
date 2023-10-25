@@ -27,5 +27,20 @@ namespace TechVagas_EstagioTech.Repositorios
 
             return vagas;
         }
+        public async Task<VagasModel> Atualizar(VagasModel vagas)
+        {
+            VagasModel VagasPorId = await BuscarPorId(vagas.VagasId);
+
+            if (VagasPorId == null)
+            {
+                throw new Exception($"O id: {vagas.VagasId} da vaga não foi encontrado no banco");
+            }
+            VagasPorId.Descricao = vagas.Descricao;
+
+            _dbContext.Vagas.Update(VagasPorId);
+            await _dbContext.SaveChangesAsync();
+
+            return VagasPorId;
+        }
     }
 }
