@@ -39,5 +39,13 @@ namespace TechVagas_EstagioTech.Controllers
             await _vagas.Adicionar(vagasDto);
             return new CreatedAtRouteResult("GetCargo", new { id = vagasDto.VagasId }, vagasDto);
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put([FromBody] VagasDto vagasDto)
+        {
+            if (vagasDto is null) return BadRequest("Dado invalido!");
+            await _vagas.Atualizar(vagasDto);
+            return Ok(vagasDto);
+        }
     }
 }
