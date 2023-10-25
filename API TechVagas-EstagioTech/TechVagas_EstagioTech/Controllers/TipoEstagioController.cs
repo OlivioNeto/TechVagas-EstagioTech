@@ -9,8 +9,8 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class TipoEstagioController : ControllerBase
     {
-        private readonly ITipoEstagioInterface _tipoEstagioRepositorio;
-        public TipoEstagioController(ITipoEstagioInterface tipoEstagioRepositorio)
+        private readonly ITipoEstagioRepositorio _tipoEstagioRepositorio;
+        public TipoEstagioController(ITipoEstagioRepositorio tipoEstagioRepositorio)
         {
             _tipoEstagioRepositorio = tipoEstagioRepositorio;
         }

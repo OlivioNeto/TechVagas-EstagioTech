@@ -3,7 +3,7 @@ using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-    public interface IVagasInteface
+    public interface IVagasRepositorio
     {
         Task<List<VagasModel>> BuscarTodasVagas();
 
