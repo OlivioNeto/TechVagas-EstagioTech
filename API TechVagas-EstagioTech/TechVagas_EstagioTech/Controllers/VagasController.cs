@@ -47,5 +47,14 @@ namespace TechVagas_EstagioTech.Controllers
             await _vagas.Atualizar(vagasDto);
             return Ok(vagasDto);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<VagasDto>> Delete(int id)
+        {
+            var vagasDto = await _vagas.BuscarPorId(id);
+            if (vagasDto == null) return NotFound("Vagas não econtradas!");
+            await _vagas.Apagar(id);
+            return Ok(vagasDto);
+        }
     }
 }
