@@ -5,7 +5,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
 {
-    public class TipoEstagioRepositorio : ITipoEstagioRepositorio
+    public class TipoEstagioRepositorio : ITipoEstagioInterface
     {
         private readonly DBContext _dbContext;
         public TipoEstagioRepositorio(DBContext tipoEstagioDBContex)

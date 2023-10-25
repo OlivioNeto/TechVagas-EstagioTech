@@ -9,8 +9,8 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class DocumentoController : ControllerBase
     {
-        private readonly IDocumentoRepositorio _documento;
-        public DocumentoController(IDocumentoRepositorio documento)
+        private readonly IDocumentoInterface _documento;
+        public DocumentoController(IDocumentoInterface documento)
         {
             _documento = documento;
         }

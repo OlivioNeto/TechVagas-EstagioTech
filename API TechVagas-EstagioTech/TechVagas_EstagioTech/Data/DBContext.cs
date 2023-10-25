@@ -20,6 +20,7 @@ namespace TechVagas_EstagioTech.Data
 
         public DbSet<DocumentoModel> Documento { get; set; }
 		public DbSet<CargoModel> Cargos { get; set; }
+        public DbSet<VagasModel> Vagas { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

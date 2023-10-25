@@ -2,7 +2,7 @@
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-    public interface ICursoRepositorio
+    public interface ICursoInterface
     {
         Task<List<CursoModel>> BuscarTodosTiposEstagios();
 
