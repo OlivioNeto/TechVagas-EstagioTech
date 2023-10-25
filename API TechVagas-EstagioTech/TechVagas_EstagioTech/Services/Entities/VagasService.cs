@@ -21,5 +21,11 @@ namespace TechVagas_EstagioTech.Services.Entities
 			var vagas = await _vagasRepositorio.BuscarPorId(id);
 			return _mapper.Map<VagasDto>(vagas);
 		}
+
+		public async Task<IEnumerable<VagasDto>> BuscarTodasVagas()
+		{
+			var vagas = await _vagasRepositorio.BuscarTodasVagas();
+			return _mapper.Map<IEnumerable<VagasDto>>(vagas);
+		}
 	}
 }
