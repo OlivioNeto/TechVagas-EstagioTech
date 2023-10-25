@@ -23,5 +23,13 @@ namespace TechVagas_EstagioTech.Controllers
             if (vagasDto == null) return NotFound("Vagas não encontradas!");
             return Ok(vagasDto);
         }
+
+        [HttpGet("{id:int}", Name = "ObterVaga")]
+        public async Task<ActionResult<VagasDto>> Get(int id)
+        {
+            var vagasDto = await _vagas.BuscarPorId(id);
+            if (vagasDto == null) return NotFound("Cargo não encontrado");
+            return Ok(vagasDto);
+        }
     }
 }
