@@ -23,10 +23,10 @@ namespace TechVagas_EstagioTech
             builder.Services.AddDbContext<DBContext>(options =>
                           options.UseNpgsql(connectionString));
 
-            builder.Services.AddTransient<ITipoEstagioInterface, TipoEstagioRepositorio>();
-            builder.Services.AddTransient<ICursoInterface, CursoRepositorio>();
-            builder.Services.AddTransient<ITipoDocumentoInterface, TipoDocumentoRepositorio>();
-            builder.Services.AddTransient<IDocumentoInterface, DocumentoRepositorio>();
+            builder.Services.AddTransient<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
+            builder.Services.AddTransient<ICursoRepositorio, CursoRepositorio>();
+            builder.Services.AddTransient<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+            builder.Services.AddTransient<IDocumentoRepositorio, DocumentoRepositorio>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

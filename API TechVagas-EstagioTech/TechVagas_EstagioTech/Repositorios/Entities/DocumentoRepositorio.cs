@@ -5,7 +5,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
 {
-    public class DocumentoRepositorio : IDocumentoInterface
+    public class DocumentoRepositorio : IDocumentoRepositorio
     {
         private readonly DBContext _dbContext;
         public DocumentoRepositorio(DBContext documentoDBContex)

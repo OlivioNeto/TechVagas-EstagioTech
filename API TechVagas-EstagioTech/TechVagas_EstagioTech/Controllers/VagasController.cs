@@ -9,9 +9,9 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class VagasController : ControllerBase
     {
-        private readonly IVagasInteface _vagas;
+        private readonly IVagasRepositorio _vagas;
 
-        public VagasController(IVagasInteface vagas)
+        public VagasController(IVagasRepositorio vagas)
         {
             _vagas = vagas;
         }
