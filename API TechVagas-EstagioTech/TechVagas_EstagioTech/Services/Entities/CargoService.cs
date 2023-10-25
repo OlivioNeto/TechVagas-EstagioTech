@@ -42,6 +42,10 @@ namespace TechVagas_EstagioTech.Services.Entities
             await _cargoRepositorio.Atualizar(cargo);
         }
 
+        public async Task Apagar(int id)
+        {
+            await _cargoRepositorio.Apagar(id);
+        }
 
     }
 }
