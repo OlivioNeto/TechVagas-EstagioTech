@@ -15,10 +15,19 @@ namespace TechVagas_EstagioTech.Services.Entities
             _cargoRepositorio = cargoRepositorio;
             _mapper = mapper;
         }
+
+        public async Task<CargoDto> BuscarPorId(int id)
+        {
+            var cargo = await _cargoRepositorio.BuscarPorId(id);
+            return _mapper.Map<CargoDto>(cargo);
+        }
+
         public async Task<IEnumerable<CargoDto>> BuscarTodosCargos()
         {
-            var cargos = await _cargoRepositorio.BuscarTodosCargos();
-            return _mapper.Map<IEnumerable<CargoDto>>(cargos);
+            var cargo = await _cargoRepositorio.BuscarTodosCargos();
+            return _mapper.Map<IEnumerable<CargoDto>>(cargo);
         }
+
+
     }
 }
