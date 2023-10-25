@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 
@@ -56,5 +57,15 @@ namespace TechVagas_EstagioTech.Repositorios
 			await _dbContext.SaveChangesAsync();
 			return true;
 		}
-	}
+
+        public Task<CargoModel> Adicionar(CargoDto cargoDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<CargoModel> Atualizar(CargoDto cargoDto)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
