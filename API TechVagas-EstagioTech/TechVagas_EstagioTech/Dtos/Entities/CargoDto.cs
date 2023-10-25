@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -17,5 +18,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         public string? Descricao { get; set; }
         [Column("tipo")]
         public string? Tipo { get; set; }
+
+        [JsonIgnore]
+        public VagasDto? VagasDto { get; set; }
 	}
 }

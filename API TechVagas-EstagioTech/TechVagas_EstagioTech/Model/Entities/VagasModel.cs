@@ -1,4 +1,7 @@
-﻿namespace TechVagas_EstagioTech.Model.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TechVagas_EstagioTech.Dtos.Entities;
+
+namespace TechVagas_EstagioTech.Model.Entities
 {
 	public class VagasModel
 	{
@@ -13,5 +16,10 @@
 		public string? HorarioEntrada { get; set; }
 		public string? HorarioSaida { get; set; }
 		public string? TotalHorasSemanis { get; set; }
-	}
+
+        public CargoModel? CargoModel { get; set; }
+
+        [ForeignKey("cargoid")]
+        public int CargoId { get; set; }
+    }
 }
