@@ -48,7 +48,7 @@ namespace TechVagas_EstagioTech.Repositorios
 
             if (VagasPorId == null)
             {
-                throw new Exception($"O id: {id} do cargo não foi encontrado no banco");
+                throw new Exception($"O id: {id} da vaga não foi encontrado no banco");
             }
 
             _dbContext.Vagas.Remove(VagasPorId);
