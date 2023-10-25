@@ -31,5 +31,13 @@ namespace TechVagas_EstagioTech.Controllers
             if (vagasDto == null) return NotFound("Cargo não encontrado");
             return Ok(vagasDto);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] VagasDto vagasDto)
+        {
+            if (vagasDto is null) return BadRequest("Dado inválido!");
+            await _vagas.Adicionar(vagasDto);
+            return new CreatedAtRouteResult("GetCargo", new { id = vagasDto.VagasId }, vagasDto);
+        }
     }
 }
