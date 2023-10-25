@@ -20,5 +20,12 @@ namespace TechVagas_EstagioTech.Repositorios
         {
             return await _dbContext.Vagas.ToListAsync();
         }
+        public async Task<VagasModel> Adicionar(VagasModel vagas)
+        {
+            await _dbContext.Vagas.AddAsync(vagas);
+            await _dbContext.SaveChangesAsync();
+
+            return vagas;
+        }
     }
 }
