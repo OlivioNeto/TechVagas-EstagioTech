@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 
@@ -26,6 +27,13 @@ namespace TechVagas_EstagioTech.Services.Entities
 		{
 			var vagas = await _vagasRepositorio.BuscarTodasVagas();
 			return _mapper.Map<IEnumerable<VagasDto>>(vagas);
+		}
+
+		public async Task Adicionar(VagasDto vagasDto)
+		{
+			var vagas = _mapper.Map<VagasDto>(vagasDto);
+			await _vagasRepositorio.Adicionar(vagas);
+			vagasDto.VagasId = vagas.VagasId;
 		}
 	}
 }
