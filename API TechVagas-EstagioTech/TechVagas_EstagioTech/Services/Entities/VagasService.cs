@@ -35,5 +35,11 @@ namespace TechVagas_EstagioTech.Services.Entities
 			await _vagasRepositorio.Adicionar(vagas);
 			vagasDto.VagasId = vagas.VagasId;
 		}
+
+		public async Task Atualizar(VagasDto vagasDto)
+		{
+			var vagas = _mapper.Map<VagasDto>(vagasDto);
+			await _vagasRepositorio.Atualizar(vagas);
+		}
 	}
 }
