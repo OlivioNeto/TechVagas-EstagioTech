@@ -36,6 +36,12 @@ namespace TechVagas_EstagioTech.Services.Entities
             cargoDto.CargoId = cargo.CargoId;
         }
 
+        public async Task Atualizar(CargoDto cargoDto)
+        {
+            var cargo = _mapper.Map<CargoModel>(cargoDto);
+            await _cargoRepositorio.Atualizar(cargo);
+        }
+
 
     }
 }
