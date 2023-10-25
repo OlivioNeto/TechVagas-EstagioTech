@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "sy2iworJCqs7/p6FNAdZAE5reBsCteQ6vy/Z+HftZCiJrH6yoAC/gkGK/ARnyYwCwpYalApKXpsQwm2GDhRp+g==",
+  "dgSpecHash": "i0Or0LviHFKc8A4bfY4ixtHbV1z7p/O6+PGU4HxDDWCLqt7RlsI+NO5w09gzrhyN/URbcOdiAkf0sr9U7qRvTA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Aluno\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Aluno\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.7\\microsoft.aspnetcore.openapi.7.0.7.nupkg.sha512",
+    "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.12\\microsoft.entityframeworkcore.7.0.12.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.12\\microsoft.entityframeworkcore.abstractions.7.0.12.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.12\\microsoft.entityframeworkcore.analyzers.7.0.12.nupkg.sha512",

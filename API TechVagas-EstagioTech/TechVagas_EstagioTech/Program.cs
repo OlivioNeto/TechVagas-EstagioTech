@@ -1,8 +1,8 @@
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
-using TechVagas_EstagioTech.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using System;
+using TechVagas_EstagioTech.Repositorios.Entities;
 
 namespace TechVagas_EstagioTech
 {

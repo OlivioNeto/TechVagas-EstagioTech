@@ -3,15 +3,15 @@ using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-	public interface ICargoInterface
+	public interface ICargoRepositorio
 	{
 		Task<List<CargoModel>> BuscarTodosCargos();
 
 		Task<CargoModel> BuscarPorId(int id);
 
-		Task<CargoModel> Adicionar(CargoDto cargoDto);
+		Task<CargoModel> Adicionar(CargoModel cargoModel);
 
-		Task<CargoModel> Atualizar(CargoDto cargoDto);
+		Task<CargoModel> Atualizar(CargoModel cargoModel);
 
 		Task<bool> Apagar(int id);
 	}

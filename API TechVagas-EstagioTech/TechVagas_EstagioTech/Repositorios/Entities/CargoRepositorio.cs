@@ -6,7 +6,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
 {
-	public class CargoRepositorio : ICargoInterface
+	public class CargoRepositorio : ICargoRepositorio
 	{
 		private readonly DBContext _dbContext;
 
