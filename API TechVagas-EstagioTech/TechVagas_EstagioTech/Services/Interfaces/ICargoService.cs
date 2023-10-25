@@ -2,7 +2,7 @@
 
 namespace TechVagas_EstagioTech.Services.Interfaces
 {
-    public interface ICargoInterface
+    public interface ICargoService
     {
         Task<IEnumerable<CargoDto>> BuscarTodosCargos();
         Task<CargoDto> BuscarPorId(int id);

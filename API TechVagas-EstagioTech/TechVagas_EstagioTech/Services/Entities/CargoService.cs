@@ -2,16 +2,17 @@
 using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Services.Entities
 
 {
-    public class CargoService
+    public class CargoService : ICargoService
     {
-        private readonly ICargoInterface _cargoRepositorio;
+        private readonly ICargoRepositorio _cargoRepositorio;
         private readonly IMapper _mapper;
 
-        public CargoService(ICargoInterface cargoRepositorio, IMapper mapper)
+        public CargoService(ICargoRepositorio cargoRepositorio, IMapper mapper)
         {
             _cargoRepositorio = cargoRepositorio;
             _mapper = mapper;

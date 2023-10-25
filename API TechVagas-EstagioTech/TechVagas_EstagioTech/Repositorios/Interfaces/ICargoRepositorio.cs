@@ -3,7 +3,7 @@ using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-	public interface ICargoInterface
+	public interface ICargoRepositorio
 	{
 		Task<List<CargoModel>> BuscarTodosCargos();
 
