@@ -53,11 +53,13 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(cursoDto);
 		}
 
-		[HttpDelete("{id}")]
-        public async Task<ActionResult<CursoModel>> Apagar(int id)
-        {
-            bool apagado = await _curso.Apagar(id);
-            return Ok(apagado);
-        }
-    }
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult<CursoDto>> Delete(int id)
+		{
+			var cursoDto = await _cursoService.BuscarPorId(id);
+			if (cursoDto == null) return NotFound("Curso não econtrado!");
+			await _cursoService.Apagar(id);
+			return Ok(cursoDto);
+		}
+	}
 }
