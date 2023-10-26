@@ -28,14 +28,15 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(cursoDto);
 		}
 
-		[HttpGet("{id}")]
-        public async Task<ActionResult<List<CursoModel>>> BuscarPorId(int id)
-        {
-            CursoModel curso = await _curso.BuscarPorId(id);
-            return Ok(curso);
-        }
+		[HttpGet("{id:int}", Name = "ObterCurso")]
+		public async Task<ActionResult<CursoDto>> Get(int id)
+		{
+			var cursoDto = await _cursoService.BuscarPorId(id);
+			if (cursoDto == null) return NotFound("Curso não encontrado");
+			return Ok(cursoDto);
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<ActionResult<CursoModel>> Cadastrar([FromBody] CursoModel CursoModel)
         {
             CursoModel curso = await _curso.Adicionar(CursoModel);
