@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -27,6 +28,13 @@ namespace TechVagas_EstagioTech.Services.Entities
 		{
 			var documento = await _documentoRepositorio.BuscarTodosDocumentos();
 			return _mapper.Map<IEnumerable<DocumentoDto>>(documento);
+		}
+
+		public async Task Adicionar(DocumentoDto documentoDto)
+		{
+			var documento = _mapper.Map<DocumentoModel>(documentoDto);
+			await _documentoRepositorio.Adicionar(documento);
+			documentoDto.idDocumento = documento.idDocumento;
 		}
 	}
 }
