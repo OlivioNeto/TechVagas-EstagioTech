@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,20 +12,22 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class DocumentoController : ControllerBase
     {
-        private readonly IDocumentoRepositorio _documento;
-        public DocumentoController(IDocumentoRepositorio documento)
-        {
-            _documento = documento;
-        }
+		private readonly IDocumentoService _documentoService;
 
-        [HttpGet]
-        public async Task<ActionResult<List<DocumentoModel>>> BuscarTodosDocumentos()
-        {
-            List<DocumentoModel> documento = await _documento.BuscarTodosDocumentos();
-            return Ok(documento);
-        }
+		public DocumentoController(IDocumentoService documentoService)
+		{
+			_documentoService = documentoService;
+		}
 
-        [HttpGet("{id}")]
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<DocumentoDto>>> Get()
+		{
+			var documentoDto = await _documentoService.BuscarTodosDocumentos();
+			if (documentoDto == null) return NotFound("Documentos não encontrados!");
+			return Ok(documentoDto);
+		}
+
+		[HttpGet("{id}")]
         public async Task<ActionResult<List<DocumentoModel>>> BuscarPorId(int id)
         {
             DocumentoModel documento = await _documento.BuscarPorId(id);
