@@ -23,6 +23,12 @@ namespace TechVagas_EstagioTech.Services.Entities
 			return _mapper.Map<CursoDto>(curso);
 		}
 
+		public async Task<IEnumerable<CursoDto>> BuscarTodosCursos()
+		{
+			var curso = await _cursoRepositorio.BuscarTodosCursos();
+			return _mapper.Map<IEnumerable<CursoDto>>(curso);
+		}
+
 
 	}
 }
