@@ -42,5 +42,10 @@ namespace TechVagas_EstagioTech.Services.Entities
 			var tipoDocumento = _mapper.Map<TipoDocumentoModel>(tipoDocumentoDto);
 			await _tipoDocumentoRepositorio.Atualizar(tipoDocumento);
 		}
+
+		public async Task Apagar(int id)
+		{
+			await _tipoDocumentoRepositorio.Apagar(id);
+		}
 	}
 }
