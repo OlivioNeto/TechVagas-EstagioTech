@@ -13,7 +13,7 @@ namespace TechVagas_EstagioTech.Data.Map
             builder.Property(x => x.DataPublicacao).IsRequired();
             builder.Property(x => x.DataLimite).IsRequired();
             builder.Property(x => x.Localidade).IsRequired().HasMaxLength(80);
-            builder.Property(x => x.Descricao).IsRequired().HasMaxLength(120);
+            builder.Property(x => x.Descricao).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Titulo).IsRequired().HasMaxLength(80);
             builder.Property(x => x.LocalidadeTrabalho).IsRequired().HasMaxLength(20);
             builder.Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);
