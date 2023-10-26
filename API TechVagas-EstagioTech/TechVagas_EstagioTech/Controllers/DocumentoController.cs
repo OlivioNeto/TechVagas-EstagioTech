@@ -27,14 +27,15 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(documentoDto);
 		}
 
-		[HttpGet("{id}")]
-        public async Task<ActionResult<List<DocumentoModel>>> BuscarPorId(int id)
-        {
-            DocumentoModel documento = await _documento.BuscarPorId(id);
-            return Ok(documento);
-        }
+		[HttpGet("{id:int}", Name = "ObterDocumento")]
+		public async Task<ActionResult<DocumentoDto>> Get(int id)
+		{
+			var documentoDto = await _documentoService.BuscarPorId(id);
+			if (documentoDto == null) return NotFound("Documento não encontrado");
+			return Ok(documentoDto);
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<ActionResult<DocumentoModel>> Cadastrar([FromBody] DocumentoModel DocumentoModel)
         {
             DocumentoModel documento = await _documento.Adicionar(DocumentoModel);
