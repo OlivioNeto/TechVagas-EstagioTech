@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,8 +10,8 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class CursoController : ControllerBase
     {
-        private readonly ICursoRepositorio _curso;
-        public CursoController(ICursoRepositorio curso)
+        private readonly ICurso _curso;
+        public CursoController(ICursoService curso)
         {
             _curso = curso;
         }

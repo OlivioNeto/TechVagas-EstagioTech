@@ -127,3 +127,13 @@ C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas
 C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.pdb
 C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.genruntimeconfig.cache
 C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\ref\TechVagas_EstagioTech.dll
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.csproj.AssemblyReference.cache
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.GeneratedMSBuildEditorConfig.editorconfig
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.AssemblyInfoInputs.cache
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.AssemblyInfo.cs
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.csproj.CoreCompileInputs.cache
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.MvcApplicationPartsAssemblyInfo.cs
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.MvcApplicationPartsAssemblyInfo.cache
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.dll
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\refint\TechVagas_EstagioTech.dll
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.pdb
