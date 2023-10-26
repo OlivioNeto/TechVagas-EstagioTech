@@ -37,6 +37,12 @@ namespace TechVagas_EstagioTech.Services.Entities
 			cursoDto.idCurso = curso.idCurso;
 		}
 
+		public async Task Atualizar(CursoDto cursoDto)
+		{
+			var curso = _mapper.Map<CursoDto>(cursoDto);
+			//await _cursoRepositorio.Atualizar(curso);
+		}
+
 
 	}
 }
