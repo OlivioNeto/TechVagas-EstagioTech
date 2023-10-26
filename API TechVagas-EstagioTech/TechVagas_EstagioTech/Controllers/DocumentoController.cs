@@ -36,13 +36,14 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-        public async Task<ActionResult<DocumentoModel>> Cadastrar([FromBody] DocumentoModel DocumentoModel)
-        {
-            DocumentoModel documento = await _documento.Adicionar(DocumentoModel);
-            return Ok(documento);
-        }
+		public async Task<ActionResult> Post([FromBody] DocumentoDto documentoDto)
+		{
+			if (documentoDto is null) return BadRequest("Dado inválido!");
+			await _documentoService.Adicionar(documentoDto);
+			return new CreatedAtRouteResult("GetDocumento", new { id = documentoDto.idDocumento }, documentoDto);
+		}
 
-        [HttpPut]
+		[HttpPut]
         public async Task<ActionResult<DocumentoModel>> Atualizar([FromBody] DocumentoModel DocumentoModel)
         {
             DocumentoModel documento = await _documento.Atualizar(DocumentoModel);
