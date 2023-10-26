@@ -51,11 +51,13 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(documentoDto);
 		}
 
-		[HttpDelete("{id}")]
-        public async Task<ActionResult<DocumentoModel>> Apagar(int id)
-        {
-            bool apagado = await _documento.Apagar(id);
-            return Ok(apagado);
-        }
-    }
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult<DocumentoDto>> Delete(int id)
+		{
+			var documentoDto = await _documentoService.BuscarPorId(id);
+			if (documentoDto == null) return NotFound("Documento não econtrado!");
+			await _documentoService.Apagar(id);
+			return Ok(documentoDto);
+		}
+	}
 }
