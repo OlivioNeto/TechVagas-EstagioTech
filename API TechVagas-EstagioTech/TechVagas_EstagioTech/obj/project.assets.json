@@ -1597,19 +1597,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Guilherme\\.nuget\\packages\\": {}
+    "C:\\Users\\vhfn2\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Guilherme\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
+      "projectUniqueName": "E:\\Dev\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
       "projectName": "TechVagas_EstagioTech",
-      "projectPath": "C:\\Users\\Guilherme\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
-      "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Guilherme\\Desktop\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\obj\\",
+      "projectPath": "E:\\Dev\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\TechVagas_EstagioTech.csproj",
+      "packagesPath": "C:\\Users\\vhfn2\\.nuget\\packages\\",
+      "outputPath": "E:\\Dev\\TechVagas-EstagioTech\\API TechVagas-EstagioTech\\TechVagas_EstagioTech\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vhfn2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -2,15 +2,15 @@
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-    public interface ICursoInterface
+    public interface ICursoRepositorio
     {
-        Task<List<CursoModel>> BuscarTodosTiposEstagios();
+        Task<List<CursoModel>> BuscarTodosCursos();
 
         Task<CursoModel> BuscarPorId(int id);
 
-        Task<CursoModel> Adicionar(CursoModel curso);
+        Task<CursoModel> Adicionar(CursoModel cursoModel);
 
-        Task<CursoModel> Atualizar(CursoModel curso);
+        Task<CursoModel> Atualizar(CursoModel cursoModel);
 
         Task<bool> Apagar(int id);
     }

@@ -18,7 +18,7 @@ namespace TechVagas_EstagioTech.Repositorios
             return await _dbContext.Curso.FirstOrDefaultAsync(x => x.idCurso == id);
         }
 
-        public async Task<List<CursoModel>> BuscarTodosTiposEstagios()
+        public async Task<List<CursoModel>> BuscarTodosCursos()
         {
             return await _dbContext.Curso.ToListAsync();
         }

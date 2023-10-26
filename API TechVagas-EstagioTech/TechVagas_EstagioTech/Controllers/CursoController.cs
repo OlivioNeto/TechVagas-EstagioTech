@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,47 +12,54 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class CursoController : ControllerBase
     {
-        private readonly ICursoRepositorio _curso;
-        public CursoController(ICursoRepositorio curso)
-        {
-            _curso = curso;
-        }
+		private readonly ICursoService _cursoService;
 
-        [HttpGet]
-
-        public async Task<ActionResult<List<CursoModel>>> BuscarTodosTiposEstagio()
-        {
-            List<CursoModel> curso = await _curso.BuscarTodosTiposEstagios();
-            return Ok(curso);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<List<CursoModel>>> BuscarPorId(int id)
-        {
-            CursoModel curso = await _curso.BuscarPorId(id);
-            return Ok(curso);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<CursoModel>> Cadastrar([FromBody] CursoModel CursoModel)
-        {
-            CursoModel curso = await _curso.Adicionar(CursoModel);
-            return Ok(curso);
-        }
+		public CursoController(ICursoService cursoService)
+		{
+			_cursoService = cursoService;
+		}
 
 
-        [HttpPut]
-        public async Task<ActionResult<CursoModel>> Atualizar([FromBody] CursoModel CursoModel)
-        {
-            CursoModel tipoEstagio = await _curso.Atualizar(CursoModel);
-            return Ok(tipoEstagio);
-        }
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<CursoDto>>> Get()
+		{
+			var cursoDto = await _cursoService.BuscarTodosCursos();
+			if (cursoDto == null) return NotFound("Cursos não encontradas!");
+			return Ok(cursoDto);
+		}
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<CursoModel>> Apagar(int id)
-        {
-            bool apagado = await _curso.Apagar(id);
-            return Ok(apagado);
-        }
-    }
+		[HttpGet("{id:int}", Name = "ObterCurso")]
+		public async Task<ActionResult<CursoDto>> Get(int id)
+		{
+			var cursoDto = await _cursoService.BuscarPorId(id);
+			if (cursoDto == null) return NotFound("Curso não encontrado");
+			return Ok(cursoDto);
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> Post([FromBody] CursoDto cursoDto)
+		{
+			if (cursoDto is null) return BadRequest("Dado inválido!");
+			await _cursoService.Adicionar(cursoDto);
+			return new CreatedAtRouteResult("GetCurso", new { id = cursoDto.idCurso }, cursoDto);
+		}
+
+
+		[HttpPut("{id:int}")]
+		public async Task<ActionResult> Put([FromBody] CursoDto cursoDto)
+		{
+			if (cursoDto is null) return BadRequest("Dado invalido!");
+			await _cursoService.Atualizar(cursoDto);
+			return Ok(cursoDto);
+		}
+
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult<CursoDto>> Delete(int id)
+		{
+			var cursoDto = await _cursoService.BuscarPorId(id);
+			if (cursoDto == null) return NotFound("Curso não econtrado!");
+			await _cursoService.Apagar(id);
+			return Ok(cursoDto);
+		}
+	}
 }
