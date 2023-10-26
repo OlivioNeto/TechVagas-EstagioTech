@@ -36,5 +36,11 @@ namespace TechVagas_EstagioTech.Services.Entities
 			await _tipoDocumentoRepositorio.Adicionar(tipoDocumento);
 			tipoDocumentoDto.idTipoDocumento = tipoDocumento.idTipoDocumento;
 		}
+
+		public async Task Atualizar(TipoDocumentoDto tipoDocumentoDto)
+		{
+			var tipoDocumento = _mapper.Map<TipoDocumentoModel>(tipoDocumentoDto);
+			await _tipoDocumentoRepositorio.Atualizar(tipoDocumento);
+		}
 	}
 }
