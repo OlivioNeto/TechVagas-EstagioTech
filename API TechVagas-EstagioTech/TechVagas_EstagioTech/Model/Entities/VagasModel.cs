@@ -3,19 +3,41 @@ using TechVagas_EstagioTech.Dtos.Entities;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {
-	public class VagasModel
+    [Table("vagas")]
+    public class VagasModel
 	{
-		public int VagasId { get; set; }
-		public int Quantidade { get; set; }
-		public DateTime DataPublicacao { get; set; }
-		public DateTime DataLimite { get; set; }
-		public string? Localidade { get; set; }
-		public string? Descricao { get; set; }
-		public string? Titulo { get; set; }
-		public string? LocalidadeTrabalho { get; set; }
-		public string? HorarioEntrada { get; set; }
-		public string? HorarioSaida { get; set; }
-		public string? TotalHorasSemanis { get; set; }
+        [Column("vagasid")]
+        public int VagasId { get; set; }
+
+        [Column("quantidade")]
+        public int Quantidade { get; set; }
+
+        [Column("datapublicacao")]
+        public DateTime DataPublicacao { get; set; }
+
+        [Column("datalimite")]
+        public DateTime DataLimite { get; set; }
+
+        [Column("localidade")]
+        public string? Localidade { get; set; }
+
+        [Column("descricao")]
+        public string? Descricao { get; set; }
+
+        [Column("titulo")]
+        public string? Titulo { get; set; }
+
+        [Column("localidadetrabalho")]
+        public string? LocalidadeTrabalho { get; set; }
+
+        [Column("horarioentrada")]
+        public string? HorarioEntrada { get; set; }
+
+        [Column("horariosaida")]
+        public string? HorarioSaida { get; set; }
+
+        [Column("totalhorassemanais")]
+        public string? TotalHorasSemanis { get; set; }
 
         public CargoModel? CargoModel { get; set; }
 
