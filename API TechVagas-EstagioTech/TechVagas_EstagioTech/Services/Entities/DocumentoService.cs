@@ -42,5 +42,10 @@ namespace TechVagas_EstagioTech.Services.Entities
 			var documento = _mapper.Map<DocumentoModel>(documentoDto);
 			await _documentoRepositorio.Atualizar(documento);
 		}
+
+		public async Task Apagar(int id)
+		{
+			await _documentoRepositorio.Apagar(id);
+		}
 	}
 }
