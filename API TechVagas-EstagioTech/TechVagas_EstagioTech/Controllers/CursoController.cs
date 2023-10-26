@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
@@ -10,21 +12,23 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class CursoController : ControllerBase
     {
-        private readonly ICurso _curso;
-        public CursoController(ICursoService curso)
-        {
-            _curso = curso;
-        }
+		private readonly ICursoService _cursoService;
 
-        [HttpGet]
+		public CursoController(ICursoService cursoService)
+		{
+			_cursoService = cursoService;
+		}
 
-        public async Task<ActionResult<List<CursoModel>>> BuscarTodosTiposEstagio()
-        {
-            List<CursoModel> curso = await _curso.BuscarTodosTiposEstagios();
-            return Ok(curso);
-        }
 
-        [HttpGet("{id}")]
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<CursoDto>>> Get()
+		{
+			var cursoDto = await _cursoService.BuscarTodosCursos();
+			if (cursoDto == null) return NotFound("Cursos não encontradas!");
+			return Ok(cursoDto);
+		}
+
+		[HttpGet("{id}")]
         public async Task<ActionResult<List<CursoModel>>> BuscarPorId(int id)
         {
             CursoModel curso = await _curso.BuscarPorId(id);
