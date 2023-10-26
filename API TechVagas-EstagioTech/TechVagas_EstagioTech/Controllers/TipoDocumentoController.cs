@@ -16,7 +16,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarTodosDocumentos()
+        public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarTodosTipoDocumentos()
         {
             List<TipoDocumentoModel> tipoDocumentos = await _tipoDocumentoRepositorio.BuscarTodosTiposDocumentos();
             return Ok(tipoDocumentos);

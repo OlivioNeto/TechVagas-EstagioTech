@@ -22,5 +22,11 @@ namespace TechVagas_EstagioTech.Services.Entities
 			var tdocumento = await _tipoDocumentoRepositorio.BuscarPorId(id);
 			return _mapper.Map<TipoDocumentoDto>(tdocumento);
 		}
+
+		public async Task<IEnumerable<TipoDocumentoDto>> BuscarTodosTipoDocumentos()
+		{
+			var tdocumento = await _tipoDocumentoRepositorio.BuscarTodosTipoDocumentos();
+			return _mapper.Map<IEnumerable<TipoDocumentoDto>>(tdocumento);
+		}
 	}
 }
