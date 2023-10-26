@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -19,14 +20,21 @@ namespace TechVagas_EstagioTech.Services.Entities
 
 		public async Task<TipoDocumentoDto> BuscarPorId(int id)
 		{
-			var tdocumento = await _tipoDocumentoRepositorio.BuscarPorId(id);
-			return _mapper.Map<TipoDocumentoDto>(tdocumento);
+			var tipoDocumento = await _tipoDocumentoRepositorio.BuscarPorId(id);
+			return _mapper.Map<TipoDocumentoDto>(tipoDocumento);
 		}
 
 		public async Task<IEnumerable<TipoDocumentoDto>> BuscarTodosTipoDocumentos()
 		{
-			var tdocumento = await _tipoDocumentoRepositorio.BuscarTodosTipoDocumentos();
-			return _mapper.Map<IEnumerable<TipoDocumentoDto>>(tdocumento);
+			var tipoDocumento = await _tipoDocumentoRepositorio.BuscarTodosTipoDocumentos();
+			return _mapper.Map<IEnumerable<TipoDocumentoDto>>(tipoDocumento);
+		}
+
+		public async Task Adicionar(TipoDocumentoDto tipoDocumentoDto)
+		{
+			var tipoDocumento = _mapper.Map<TipoDocumentoModel>(tipoDocumentoDto);
+			await _tipoDocumentoRepositorio.Adicionar(tipoDocumento);
+			tipoDocumentoDto.idTipoDocumento = tipoDocumento.idTipoDocumento;
 		}
 	}
 }
