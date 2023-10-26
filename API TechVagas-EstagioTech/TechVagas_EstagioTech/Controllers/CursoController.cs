@@ -45,14 +45,15 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 
-		[HttpPut]
-        public async Task<ActionResult<CursoModel>> Atualizar([FromBody] CursoModel CursoModel)
-        {
-            CursoModel tipoEstagio = await _curso.Atualizar(CursoModel);
-            return Ok(tipoEstagio);
-        }
+		[HttpPut("{id:int}")]
+		public async Task<ActionResult> Put([FromBody] CursoDto cursoDto)
+		{
+			if (cursoDto is null) return BadRequest("Dado invalido!");
+			await _cursoService.Atualizar(cursoDto);
+			return Ok(cursoDto);
+		}
 
-        [HttpDelete("{id}")]
+		[HttpDelete("{id}")]
         public async Task<ActionResult<CursoModel>> Apagar(int id)
         {
             bool apagado = await _curso.Apagar(id);
