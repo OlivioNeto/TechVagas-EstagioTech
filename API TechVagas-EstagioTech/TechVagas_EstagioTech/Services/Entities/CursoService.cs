@@ -32,15 +32,15 @@ namespace TechVagas_EstagioTech.Services.Entities
 
 		public async Task Adicionar(CursoDto cursoDto)
 		{
-			var curso = _mapper.Map<CursoDto>(cursoDto);
-			//await _cursoRepositorio.Adicionar(curso);
+			var curso = _mapper.Map<CursoModel>(cursoDto);
+			await _cursoRepositorio.Adicionar(curso);
 			cursoDto.idCurso = curso.idCurso;
 		}
 
 		public async Task Atualizar(CursoDto cursoDto)
 		{
-			var curso = _mapper.Map<CursoDto>(cursoDto);
-			//await _cursoRepositorio.Atualizar(curso);
+			var curso = _mapper.Map<CursoModel>(cursoDto);
+			await _cursoRepositorio.Atualizar(curso);
 		}
 
 		public async Task Apagar(int id)
