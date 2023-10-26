@@ -37,14 +37,15 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-        public async Task<ActionResult<CursoModel>> Cadastrar([FromBody] CursoModel CursoModel)
-        {
-            CursoModel curso = await _curso.Adicionar(CursoModel);
-            return Ok(curso);
-        }
+		public async Task<ActionResult> Post([FromBody] CursoDto cursoDto)
+		{
+			if (cursoDto is null) return BadRequest("Dado inválido!");
+			await _cursoService.Adicionar(cursoDto);
+			return new CreatedAtRouteResult("GetCurso", new { id = cursoDto.idCurso }, cursoDto);
+		}
 
 
-        [HttpPut]
+		[HttpPut]
         public async Task<ActionResult<CursoModel>> Atualizar([FromBody] CursoModel CursoModel)
         {
             CursoModel tipoEstagio = await _curso.Atualizar(CursoModel);
