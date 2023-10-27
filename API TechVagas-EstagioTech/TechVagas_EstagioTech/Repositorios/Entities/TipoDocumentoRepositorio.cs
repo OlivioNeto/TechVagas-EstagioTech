@@ -7,57 +7,42 @@ namespace TechVagas_EstagioTech.Repositorios
 {
     public class TipoDocumentoRepositorio : ITipoDocumentoRepositorio
 	{
-        private readonly DBContext _dbContex;
+        private readonly DBContext _dbContext;
         public TipoDocumentoRepositorio(DBContext tipoDocumentoDBContext)
         {
-            _dbContex = tipoDocumentoDBContext;
+            _dbContext = tipoDocumentoDBContext;
         }
         public async Task<TipoDocumentoModel> BuscarPorId(int id)
         {
-            return await _dbContex.TipoDocumento.FirstOrDefaultAsync(x => x.idTipoDocumento == id);
-        }
+			return await _dbContext.TipoDocumento.Where(x => x.idTipoDocumento == id).FirstOrDefaultAsync();
+		}
 
         public async Task<List<TipoDocumentoModel>> BuscarTodosTipoDocumentos()
         {
-            return await _dbContex.TipoDocumento.ToListAsync();
+            return await _dbContext.TipoDocumento.ToListAsync();
         }
 
 
         public async Task<TipoDocumentoModel> Adicionar(TipoDocumentoModel tipoDocumentoModel)
         {
-            await _dbContex.TipoDocumento.AddAsync(tipoDocumentoModel);
-            await _dbContex.SaveChangesAsync();
-
-            return tipoDocumentoModel;
-        }
+			_dbContext.TipoDocumento.Add(tipoDocumentoModel);
+			await _dbContext.SaveChangesAsync();
+			return tipoDocumentoModel;
+		}
 
         public async Task<TipoDocumentoModel> Atualizar(TipoDocumentoModel tipoDocumentoModel)
         {
-            TipoDocumentoModel tipoDocumentoPorId = await BuscarPorId(tipoDocumentoModel.idTipoDocumento);
-
-            if (tipoDocumentoPorId == null)
-            {
-                throw new Exception($"O id: {tipoDocumentoModel.idTipoDocumento} do tipo documento não foi encontrado no banco");
-            }
-            tipoDocumentoPorId.descricaoTipoDocumento = tipoDocumentoModel.descricaoTipoDocumento;
-
-            _dbContex.TipoDocumento.Update(tipoDocumentoPorId);
-            await _dbContex.SaveChangesAsync();
-
-            return tipoDocumentoPorId;
-        }
+			_dbContext.Entry(tipoDocumentoModel).State = EntityState.Modified;
+			await _dbContext.SaveChangesAsync();
+			return tipoDocumentoModel;
+		}
 
         public async Task<bool> Apagar(int id)
         {
-            TipoDocumentoModel tipoDocumentoPorId = await BuscarPorId(id);
-
-            if (tipoDocumentoPorId == null)
-            {
-                throw new Exception($"O id: {id} do tipo documento não foi encontrado no banco");
-            }
-            _dbContex.TipoDocumento.Remove(tipoDocumentoPorId);
-            await _dbContex.SaveChangesAsync();
-            return true;
-        }        
+			var tipoDocumento = await BuscarPorId(id);
+			_dbContext.TipoDocumento.Remove(tipoDocumento);
+			await _dbContext.SaveChangesAsync();
+			return true;
+		}        
     }
 }
