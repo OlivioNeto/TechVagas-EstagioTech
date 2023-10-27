@@ -43,14 +43,15 @@ namespace TechVagas_EstagioTech.Controllers
 			return new CreatedAtRouteResult("GetTipoDocumento", new { id = tipoDocumentoDto.idTipoDocumento }, tipoDocumentoDto);
 		}
 
-		[HttpPut]
-        public async Task<ActionResult<TipoDocumentoModel>> Atualizar([FromBody] TipoDocumentoModel tipoDocumentoModel)
-        {
-            TipoDocumentoModel tipoDocumento = await _tipoDocumentoRepositorio.Atualizar(tipoDocumentoModel);
-            return Ok(tipoDocumento);
-        }
+		[HttpPut("{id:int}")]
+		public async Task<ActionResult> Put([FromBody] TipoDocumentoDto tipoDocumentoDto)
+		{
+			if (tipoDocumentoDto is null) return BadRequest("Dado invalido!");
+			await _tipoDocumentoService.Atualizar(tipoDocumentoDto);
+			return Ok(tipoDocumentoDto);
+		}
 
-        [HttpDelete("{id}")]
+		[HttpDelete("{id}")]
         public async Task<ActionResult<TipoDocumentoModel>> Apagar(int id)
         {
             bool apagado = await _tipoDocumentoRepositorio.Apagar(id);
