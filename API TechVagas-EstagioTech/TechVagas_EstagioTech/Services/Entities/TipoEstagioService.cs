@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -27,6 +28,13 @@ namespace TechVagas_EstagioTech.Services.Entities
 		{
 			var tipoEstagio = await _tipoEstagioRepositorio.BuscarTodosTipoEstagio();
 			return _mapper.Map<IEnumerable<TipoEstagioDto>>(tipoEstagio);
+		}
+
+		public async Task Adicionar(TipoEstagioDto tipoEstagioDto)
+		{
+			var tipoEstagio = _mapper.Map<TipoEstagioModel>(tipoEstagioDto);
+			await _tipoEstagioRepositorio.Adicionar(tipoEstagio);
+			tipoEstagioDto.idTipoEstagio = tipoEstagio.idTipoEstagio;
 		}
 	}
 }
