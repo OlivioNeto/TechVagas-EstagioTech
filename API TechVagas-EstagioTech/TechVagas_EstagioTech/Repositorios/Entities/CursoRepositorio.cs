@@ -22,23 +22,23 @@ namespace TechVagas_EstagioTech.Repositorios
         {
             return await _dbContext.Curso.ToListAsync();
         }
-        public async Task<CursoModel> Adicionar(CursoModel curso)
+        public async Task<CursoModel> Adicionar(CursoModel cursoModel)
         {
-            await _dbContext.Curso.AddAsync(curso);
+            await _dbContext.Curso.AddAsync(cursoModel);
             await _dbContext.SaveChangesAsync();
 
-            return curso;
+            return cursoModel;
         }
 
-        public async Task<CursoModel> Atualizar(CursoModel curso)
+        public async Task<CursoModel> Atualizar(CursoModel cursoModel)
         {
-            CursoModel CursoPorId = await BuscarPorId(curso.idCurso);
+            CursoModel CursoPorId = await BuscarPorId(cursoModel.idCurso);
 
             if (CursoPorId == null)
             {
-                throw new Exception($"O id: {curso.idCurso} do Curso não foi encontrado no banco");
+                throw new Exception($"O id: {cursoModel.idCurso} do Curso não foi encontrado no banco");
             }
-            CursoPorId.nomeCurso = curso.nomeCurso;
+            CursoPorId.nomeCurso = cursoModel.nomeCurso;
 
             _dbContext.Curso.Update(CursoPorId);
             await _dbContext.SaveChangesAsync();

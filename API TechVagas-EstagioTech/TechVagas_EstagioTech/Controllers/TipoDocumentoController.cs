@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,45 +12,52 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class TipoDocumentoController : ControllerBase
     {
-        private readonly ITipoDocumentoRepositorio _tipoDocumentoRepositorio;
-        public TipoDocumentoController(ITipoDocumentoRepositorio tipoDocumentoRepositorio)
-        {
-            _tipoDocumentoRepositorio = tipoDocumentoRepositorio;
-        }
+		private readonly ITipoDocumentoService _tipoDocumentoService;
 
-        [HttpGet]
-        public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarTodosTipoDocumentos()
-        {
-            List<TipoDocumentoModel> tipoDocumentos = await _tipoDocumentoRepositorio.BuscarTodosTipoDocumentos();
-            return Ok(tipoDocumentos);
-        }
+		public TipoDocumentoController(ITipoDocumentoService tipoDocumentoService)
+		{
+			_tipoDocumentoService = tipoDocumentoService;
+		}
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarPorId(int id)
-        {
-            TipoDocumentoModel tipoDocumentos = await _tipoDocumentoRepositorio.BuscarPorId(id);
-            return Ok(tipoDocumentos);
-        }
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<TipoDocumentoDto>>> Get()
+		{
+			var tipoDocumentoDto = await _tipoDocumentoService.BuscarTodosTipoDocumentos();
+			if (tipoDocumentoDto == null) return NotFound("Tipos de Documentos não encontrados!");
+			return Ok(tipoDocumentoDto);
+		}
 
-        [HttpPost]
-        public async Task<ActionResult<TipoDocumentoModel>> Cadastrar([FromBody] TipoDocumentoModel tipoDocumentoModel)
-        {
-            TipoDocumentoModel tipoDocumento = await _tipoDocumentoRepositorio.Adicionar(tipoDocumentoModel);
-            return Ok(tipoDocumento);
-        }
+		[HttpGet("{id:int}", Name = "ObterTipoDocumento")]
+		public async Task<ActionResult<TipoDocumentoDto>> Get(int id)
+		{
+			var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);
+			if (tipoDocumentoDto == null) return NotFound("Tipo de Documento não encontrado");
+			return Ok(tipoDocumentoDto);
+		}
 
-        [HttpPut]
-        public async Task<ActionResult<TipoDocumentoModel>> Atualizar([FromBody] TipoDocumentoModel tipoDocumentoModel)
-        {
-            TipoDocumentoModel tipoDocumento = await _tipoDocumentoRepositorio.Atualizar(tipoDocumentoModel);
-            return Ok(tipoDocumento);
-        }
+		[HttpPost]
+		public async Task<ActionResult> Post([FromBody] TipoDocumentoDto tipoDocumentoDto)
+		{
+			if (tipoDocumentoDto is null) return BadRequest("Dado inválido!");
+			await _tipoDocumentoService.Adicionar(tipoDocumentoDto);
+			return new CreatedAtRouteResult("GetTipoDocumento", new { id = tipoDocumentoDto.idTipoDocumento }, tipoDocumentoDto);
+		}
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<TipoDocumentoModel>> Apagar(int id)
-        {
-            bool apagado = await _tipoDocumentoRepositorio.Apagar(id);
-            return Ok(apagado);
-        }
-    }
+		[HttpPut("{id:int}")]
+		public async Task<ActionResult> Put([FromBody] TipoDocumentoDto tipoDocumentoDto)
+		{
+			if (tipoDocumentoDto is null) return BadRequest("Dado invalido!");
+			await _tipoDocumentoService.Atualizar(tipoDocumentoDto);
+			return Ok(tipoDocumentoDto);
+		}
+
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult<TipoDocumentoDto>> Delete(int id)
+		{
+			var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);
+			if (tipoDocumentoDto == null) return NotFound("Tipo de Documento não econtrado!");
+			await _tipoDocumentoService.Apagar(id);
+			return Ok(tipoDocumentoDto);
+		}
+	}
 }

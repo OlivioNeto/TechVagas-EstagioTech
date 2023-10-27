@@ -23,25 +23,25 @@ namespace TechVagas_EstagioTech.Repositorios
             return await _dbContext.Documento.ToListAsync();
         }
 
-        public async Task<DocumentoModel> Adicionar(DocumentoModel documento)
+        public async Task<DocumentoModel> Adicionar(DocumentoModel documentoModel)
         {
-            await _dbContext.Documento.AddAsync(documento);
+            await _dbContext.Documento.AddAsync(documentoModel);
             await _dbContext.SaveChangesAsync();
 
-            return documento;
+            return documentoModel;
         }
 
-        public async Task<DocumentoModel> Atualizar(DocumentoModel documento)
+        public async Task<DocumentoModel> Atualizar(DocumentoModel documentoModel)
         {
-            DocumentoModel DocumentoPorId = await BuscarPorId(documento.idDocumento);
+            DocumentoModel DocumentoPorId = await BuscarPorId(documentoModel.idDocumento);
 
             if (DocumentoPorId == null)
             {
-                throw new Exception($"O id: {documento.idDocumento} do Documento não foi encontrado no banco");
+                throw new Exception($"O id: {documentoModel.idDocumento} do Documento não foi encontrado no banco");
             }
-            DocumentoPorId.descricaoDocumento = documento.descricaoDocumento;
-            DocumentoPorId.documento = documento.documento;
-            DocumentoPorId.situacaoDocumento = documento.situacaoDocumento;
+            DocumentoPorId.descricaoDocumento = documentoModel.descricaoDocumento;
+            DocumentoPorId.documento = documentoModel.documento;
+            DocumentoPorId.situacaoDocumento = documentoModel.situacaoDocumento;
 
             _dbContext.Documento.Update(DocumentoPorId);
             await _dbContext.SaveChangesAsync();

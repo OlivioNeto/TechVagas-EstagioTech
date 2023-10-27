@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,47 +12,52 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class TipoEstagioController : ControllerBase
     {
-        private readonly ITipoEstagioRepositorio _tipoEstagioRepositorio;
-        public TipoEstagioController(ITipoEstagioRepositorio tipoEstagioRepositorio)
-        {
-            _tipoEstagioRepositorio = tipoEstagioRepositorio;
-        }
+		private readonly ITipoEstagioService _tipoEstagioService;
 
-        [HttpGet]
+		public TipoEstagioController(ITipoEstagioService tipoEstagioService)
+		{
+			_tipoEstagioService = tipoEstagioService;
+		}
 
-        public async Task<ActionResult<List<TipoEstagioModel>>> BuscarTodosTiposEstagio()
-        {
-            List<TipoEstagioModel> tipoEstagios = await _tipoEstagioRepositorio.BuscarTodosTiposEstagios();
-            return Ok(tipoEstagios);
-        }
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<TipoEstagioDto>>> Get()
+		{
+			var tipoEstagioDto = await _tipoEstagioService.BuscarTodosTipoEstagio();
+			if (tipoEstagioDto == null) return NotFound("Tipos de Estagio não encontrados!");
+			return Ok(tipoEstagioDto);
+		}
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<List<TipoEstagioModel>>> BuscarPorId(int id)
-        {
-            TipoEstagioModel tipoEstagios = await _tipoEstagioRepositorio.BuscarPorId(id);
-            return Ok(tipoEstagios);
-        }
+		[HttpGet("{id:int}", Name = "ObterTipoEstagio")]
+		public async Task<ActionResult<TipoEstagioDto>> Get(int id)
+		{
+			var tipoEstagioDto = await _tipoEstagioService.BuscarPorId(id);
+			if (tipoEstagioDto == null) return NotFound("Tipo de Estagio não encontrado");
+			return Ok(tipoEstagioDto);
+		}
 
-        [HttpPost]
-        public async Task<ActionResult<TipoEstagioModel>> Cadastrar([FromBody] TipoEstagioModel tipoEstagioModel)
-        {
-            TipoEstagioModel tipoEstagio = await _tipoEstagioRepositorio.Adicionar(tipoEstagioModel);
-            return Ok(tipoEstagio);
-        }
+		[HttpPost]
+		public async Task<ActionResult> Post([FromBody] TipoEstagioDto tipoEstagioDto)
+		{
+			if (tipoEstagioDto is null) return BadRequest("Dado inválido!");
+			await _tipoEstagioService.Adicionar(tipoEstagioDto);
+			return new CreatedAtRouteResult("GetTipoEstagio", new { id = tipoEstagioDto.idTipoEstagio }, tipoEstagioDto);
+		}
 
-        [HttpPut]
-        public async Task<ActionResult<TipoEstagioModel>> Atualizar([FromBody] TipoEstagioModel tipoEstagioModel)
-        {
-            TipoEstagioModel tipoEstagio = await _tipoEstagioRepositorio.Atualizar(tipoEstagioModel);
+		[HttpPut("{id:int}")]
+		public async Task<ActionResult> Put([FromBody] TipoEstagioDto tipoEstagioDto)
+		{
+			if (tipoEstagioDto is null) return BadRequest("Dado invalido!");
+			await _tipoEstagioService.Atualizar(tipoEstagioDto);
+			return Ok(tipoEstagioDto);
+		}
 
-            return Ok(tipoEstagio);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<TipoEstagioModel>> Apagar(int id)
-        {
-            bool apagado = await _tipoEstagioRepositorio.Apagar(id);
-            return Ok(apagado);
-        }
-    }
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult<TipoEstagioDto>> Delete(int id)
+		{
+			var tipoEstagioDto = await _tipoEstagioService.BuscarPorId(id);
+			if (tipoEstagioDto == null) return NotFound("Tipo de Estagio não econtrado!");
+			await _tipoEstagioService.Apagar(id);
+			return Ok(tipoEstagioDto);
+		}
+	}
 }

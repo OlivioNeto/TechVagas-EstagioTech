@@ -1,12 +1,11 @@
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using TechVagas_EstagioTech.Repositorios.Entities;
+using TechVagas_EstagioTech.Repositorios;
 
 namespace TechVagas_EstagioTech
 {
-    public class Program
+	public class Program
     {
         public static void Main(string[] args)
         {

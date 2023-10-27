@@ -18,28 +18,28 @@ namespace TechVagas_EstagioTech.Repositorios
             return await _dbContext.TipoEstagio.FirstOrDefaultAsync(x => x.idTipoEstagio == id);
         }
 
-        public async Task<List<TipoEstagioModel>> BuscarTodosTiposEstagios()
+        public async Task<List<TipoEstagioModel>> BuscarTodosTipoEstagio()
         {
             return await _dbContext.TipoEstagio.ToListAsync();
         }
 
-        public async Task<TipoEstagioModel> Adicionar(TipoEstagioModel tipoEstagio)
+        public async Task<TipoEstagioModel> Adicionar(TipoEstagioModel tipoEstagioModel)
         {
-            await _dbContext.TipoEstagio.AddAsync(tipoEstagio);
+            await _dbContext.TipoEstagio.AddAsync(tipoEstagioModel);
             await _dbContext.SaveChangesAsync();
 
-            return tipoEstagio;
+            return tipoEstagioModel;
         }
 
-        public async Task<TipoEstagioModel> Atualizar(TipoEstagioModel tipoEstagio)
+        public async Task<TipoEstagioModel> Atualizar(TipoEstagioModel tipoEstagioModel)
         {
-            TipoEstagioModel tipoEstagioPorId = await BuscarPorId(tipoEstagio.idTipoEstagio);
+            TipoEstagioModel tipoEstagioPorId = await BuscarPorId(tipoEstagioModel.idTipoEstagio);
 
             if (tipoEstagioPorId == null)
             {
-                throw new Exception($"O id: {tipoEstagio.idTipoEstagio} do tipo estágio não foi encontrado no banco");
+                throw new Exception($"O id: {tipoEstagioModel.idTipoEstagio} do tipo estágio não foi encontrado no banco");
             }
-            tipoEstagioPorId.descricaoTipoEstagio = tipoEstagio.descricaoTipoEstagio;
+            tipoEstagioPorId.descricaoTipoEstagio = tipoEstagioModel.descricaoTipoEstagio;
 
             _dbContext.TipoEstagio.Update(tipoEstagioPorId);
             await _dbContext.SaveChangesAsync();

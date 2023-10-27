@@ -6,7 +6,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 namespace TechVagas_EstagioTech.Repositorios
 {
     public class TipoDocumentoRepositorio : ITipoDocumentoRepositorio
-    {
+	{
         private readonly DBContext _dbContex;
         public TipoDocumentoRepositorio(DBContext tipoDocumentoDBContext)
         {
@@ -17,29 +17,29 @@ namespace TechVagas_EstagioTech.Repositorios
             return await _dbContex.TipoDocumento.FirstOrDefaultAsync(x => x.idTipoDocumento == id);
         }
 
-        public async Task<List<TipoDocumentoModel>> BuscarTodosTiposDocumentos()
+        public async Task<List<TipoDocumentoModel>> BuscarTodosTipoDocumentos()
         {
             return await _dbContex.TipoDocumento.ToListAsync();
         }
 
 
-        public async Task<TipoDocumentoModel> Adicionar(TipoDocumentoModel tipoDocumento)
+        public async Task<TipoDocumentoModel> Adicionar(TipoDocumentoModel tipoDocumentoModel)
         {
-            await _dbContex.TipoDocumento.AddAsync(tipoDocumento);
+            await _dbContex.TipoDocumento.AddAsync(tipoDocumentoModel);
             await _dbContex.SaveChangesAsync();
 
-            return tipoDocumento;
+            return tipoDocumentoModel;
         }
 
-        public async Task<TipoDocumentoModel> Atualizar(TipoDocumentoModel tipoDocumento)
+        public async Task<TipoDocumentoModel> Atualizar(TipoDocumentoModel tipoDocumentoModel)
         {
-            TipoDocumentoModel tipoDocumentoPorId = await BuscarPorId(tipoDocumento.idTipoDocumento);
+            TipoDocumentoModel tipoDocumentoPorId = await BuscarPorId(tipoDocumentoModel.idTipoDocumento);
 
             if (tipoDocumentoPorId == null)
             {
-                throw new Exception($"O id: {tipoDocumento.idTipoDocumento} do tipo documento não foi encontrado no banco");
+                throw new Exception($"O id: {tipoDocumentoModel.idTipoDocumento} do tipo documento não foi encontrado no banco");
             }
-            tipoDocumentoPorId.descricaoTipoDocumento = tipoDocumento.descricaoTipoDocumento;
+            tipoDocumentoPorId.descricaoTipoDocumento = tipoDocumentoModel.descricaoTipoDocumento;
 
             _dbContex.TipoDocumento.Update(tipoDocumentoPorId);
             await _dbContex.SaveChangesAsync();
