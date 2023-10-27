@@ -23,18 +23,19 @@ namespace TechVagas_EstagioTech.Controllers
 		public async Task<ActionResult<IEnumerable<TipoDocumentoDto>>> Get()
 		{
 			var tipoDocumentoDto = await _tipoDocumentoService.BuscarTodosTipoDocumentos();
-			if (tipoDocumentoDto == null) return NotFound("Documentos não encontrados!");
+			if (tipoDocumentoDto == null) return NotFound("Tipos de Documentos não encontrados!");
 			return Ok(tipoDocumentoDto);
 		}
 
-		[HttpGet("{id}")]
-        public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarPorId(int id)
-        {
-            TipoDocumentoModel tipoDocumentos = await _tipoDocumentoRepositorio.BuscarPorId(id);
-            return Ok(tipoDocumentos);
-        }
+		[HttpGet("{id:int}", Name = "ObterTipoDocumento")]
+		public async Task<ActionResult<DocumentoDto>> Get(int id)
+		{
+			var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);
+			if (tipoDocumentoDto == null) return NotFound("Tipo de Documento não encontrado");
+			return Ok(tipoDocumentoDto);
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<ActionResult<TipoDocumentoModel>> Cadastrar([FromBody] TipoDocumentoModel tipoDocumentoModel)
         {
             TipoDocumentoModel tipoDocumento = await _tipoDocumentoRepositorio.Adicionar(tipoDocumentoModel);
