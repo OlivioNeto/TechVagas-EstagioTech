@@ -22,11 +22,22 @@ namespace TechVagas_EstagioTech
             builder.Services.AddDbContext<DBContext>(options =>
                           options.UseNpgsql(connectionString));
 
-            builder.Services.AddTransient<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
-            builder.Services.AddTransient<ICursoRepositorio, CursoRepositorio>();
-            builder.Services.AddTransient<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
-            builder.Services.AddTransient<IDocumentoRepositorio, DocumentoRepositorio>();
-            var app = builder.Build();
+
+			//garantir que todos os assemblies do domain sejam injetados
+			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+			//Injeção de dependencia
+			builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+			builder.Services.AddScoped<ICursoRepositorio, CursoRepositorio>();
+			builder.Services.AddScoped<IDocumentoRepositorio, DocumentoRepositorio>();
+			builder.Services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+			builder.Services.AddScoped<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
+			builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
+
+
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
