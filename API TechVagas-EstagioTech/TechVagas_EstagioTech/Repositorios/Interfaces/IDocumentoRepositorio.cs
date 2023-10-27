@@ -8,9 +8,9 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 
         Task<DocumentoModel> BuscarPorId(int id);
 
-        Task<DocumentoModel> Adicionar(DocumentoModel documento);
+        Task<DocumentoModel> Adicionar(DocumentoModel documentoModel);
 
-        Task<DocumentoModel> Atualizar(DocumentoModel documento);
+        Task<DocumentoModel> Atualizar(DocumentoModel documentoModel);
 
         Task<bool> Apagar(int id);
     }
