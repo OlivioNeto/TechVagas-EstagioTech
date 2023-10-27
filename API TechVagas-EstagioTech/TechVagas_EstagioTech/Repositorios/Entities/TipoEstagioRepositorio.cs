@@ -15,8 +15,8 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<TipoEstagioModel> BuscarPorId(int id)
         {
-            return await _dbContext.TipoEstagio.FirstOrDefaultAsync(x => x.idTipoEstagio == id);
-        }
+			return await _dbContext.TipoEstagio.Where(x => x.idTipoEstagio == id).FirstOrDefaultAsync();
+		}
 
         public async Task<List<TipoEstagioModel>> BuscarTodosTipoEstagio()
         {
@@ -25,40 +25,24 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<TipoEstagioModel> Adicionar(TipoEstagioModel tipoEstagioModel)
         {
-            await _dbContext.TipoEstagio.AddAsync(tipoEstagioModel);
-            await _dbContext.SaveChangesAsync();
-
-            return tipoEstagioModel;
-        }
+			_dbContext.TipoEstagio.Add(tipoEstagioModel);
+			await _dbContext.SaveChangesAsync();
+			return tipoEstagioModel;
+		}
 
         public async Task<TipoEstagioModel> Atualizar(TipoEstagioModel tipoEstagioModel)
         {
-            TipoEstagioModel tipoEstagioPorId = await BuscarPorId(tipoEstagioModel.idTipoEstagio);
-
-            if (tipoEstagioPorId == null)
-            {
-                throw new Exception($"O id: {tipoEstagioModel.idTipoEstagio} do tipo estágio não foi encontrado no banco");
-            }
-            tipoEstagioPorId.descricaoTipoEstagio = tipoEstagioModel.descricaoTipoEstagio;
-
-            _dbContext.TipoEstagio.Update(tipoEstagioPorId);
-            await _dbContext.SaveChangesAsync();
-
-            return tipoEstagioPorId;
-        }
+			_dbContext.Entry(tipoEstagioModel).State = EntityState.Modified;
+			await _dbContext.SaveChangesAsync();
+			return tipoEstagioModel;
+		}
 
         public async Task<bool> Apagar(int id)
         {
-            TipoEstagioModel tipoEstagioPorId = await BuscarPorId(id);
-
-            if (tipoEstagioPorId == null)
-            {
-                throw new Exception($"O id: {id} do tipo estágio não foi encontrado no banco");
-            }
-
-            _dbContext.TipoEstagio.Remove(tipoEstagioPorId);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }        
+			var tipoEstagio = await BuscarPorId(id);
+			_dbContext.TipoEstagio.Remove(tipoEstagio);
+			await _dbContext.SaveChangesAsync();
+			return true;
+		}        
     }
 }

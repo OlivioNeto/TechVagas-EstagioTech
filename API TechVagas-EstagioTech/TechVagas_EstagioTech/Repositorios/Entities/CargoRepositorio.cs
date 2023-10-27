@@ -16,7 +16,7 @@ namespace TechVagas_EstagioTech.Repositorios
 		}
 		public async Task<CargoModel> BuscarPorId(int id)
 		{
-			return await _dbContext.Cargos.FirstOrDefaultAsync(x => x.CargoId == id);
+			return await _dbContext.Cargos.Where(x => x.CargoId == id).FirstOrDefaultAsync();
 		}
 		public async Task<List<CargoModel>> BuscarTodosCargos()
 		{
@@ -24,36 +24,20 @@ namespace TechVagas_EstagioTech.Repositorios
 		}
 		public async Task<CargoModel> Adicionar(CargoModel cargoModel)
 		{
-			await _dbContext.Cargos.AddAsync(cargoModel);
+			_dbContext.Cargos.Add(cargoModel);
 			await _dbContext.SaveChangesAsync();
-
 			return cargoModel;
 		}
 		public async Task<CargoModel> Atualizar(CargoModel cargoModel)
 		{
-			CargoModel CargoPorId = await BuscarPorId(cargoModel.CargoId);
-
-			if (CargoPorId == null)
-			{
-				throw new Exception($"O id: {cargoModel.CargoId} do cargo não foi encontrado no banco");
-			}
-			CargoPorId.Descricao = cargoModel.Descricao;
-
-			_dbContext.Cargos.Update(CargoPorId);
+			_dbContext.Entry(cargoModel).State = EntityState.Modified;
 			await _dbContext.SaveChangesAsync();
-
-			return CargoPorId;
+			return cargoModel;
 		}
 		public async Task<bool> Apagar(int id)
 		{
-			CargoModel CargoPorId = await BuscarPorId(id);
-
-			if (CargoPorId == null)
-			{
-				throw new Exception($"O id: {id} do cargo não foi encontrado no banco");
-			}
-
-			_dbContext.Cargos.Remove(CargoPorId);
+			var cargo = await BuscarPorId(id);
+			_dbContext.Cargos.Remove(cargo);
 			await _dbContext.SaveChangesAsync();
 			return true;
 		}

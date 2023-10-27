@@ -15,7 +15,7 @@ namespace TechVagas_EstagioTech.Repositorios
         }
         public async Task<VagasModel> BuscarPorId(int id)
         {
-            return await _dbContext.Vagas.FirstOrDefaultAsync(x => x.VagasId == id);
+            return await _dbContext.Vagas.Where(x => x.VagasId == id).FirstOrDefaultAsync();
         }
         public async Task<List<VagasModel>> BuscarTodasVagas()
         {
@@ -23,36 +23,20 @@ namespace TechVagas_EstagioTech.Repositorios
         }
         public async Task<VagasModel> Adicionar(VagasModel vagasModel)
         {
-            await _dbContext.Vagas.AddAsync(vagasModel);
+            _dbContext.Vagas.Add(vagasModel);
             await _dbContext.SaveChangesAsync();
-
             return vagasModel;
         }
         public async Task<VagasModel> Atualizar(VagasModel vagasModel)
         {
-            VagasModel VagasPorId = await BuscarPorId(vagasModel.VagasId);
-
-            if (VagasPorId == null)
-            {
-                throw new Exception($"O id: {vagasModel.VagasId} da vaga não foi encontrado no banco");
-            }
-            VagasPorId.Descricao = vagasModel.Descricao;
-
-            _dbContext.Vagas.Update(VagasPorId);
+            _dbContext.Entry(vagasModel).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
-
-            return VagasPorId;
+            return vagasModel;
         }
         public async Task<bool> Apagar(int id)
         {
-            VagasModel VagasPorId = await BuscarPorId(id);
-
-            if (VagasPorId == null)
-            {
-                throw new Exception($"O id: {id} da vaga não foi encontrado no banco");
-            }
-
-            _dbContext.Vagas.Remove(VagasPorId);
+            var vagas = await BuscarPorId(id);
+            _dbContext.Vagas.Remove(vagas);
             await _dbContext.SaveChangesAsync();
             return true;
         }
