@@ -30,8 +30,7 @@ namespace TechVagas_EstagioTech
 
 
 			//Injeção de dependencia
-			builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
-			builder.Services.AddScoped<ICargoService, CargoService>();
+			
 
 			builder.Services.AddScoped<ICursoRepositorio, CursoRepositorio>();
 			builder.Services.AddScoped<ICursoService, CursoService>();
@@ -48,10 +47,11 @@ namespace TechVagas_EstagioTech
 			builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
 			builder.Services.AddScoped<IVagasService, VagasService>();
 
+            builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+            builder.Services.AddScoped<ICargoService, CargoService>();
 
 
-
-			var app = builder.Build();
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

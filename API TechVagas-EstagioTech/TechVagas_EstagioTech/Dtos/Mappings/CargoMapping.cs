@@ -6,14 +6,11 @@ namespace TechVagas_EstagioTech.Dtos.Mappings
 {
 	public class CargoMapping : Profile
 	{
-		public CargoMapping() 
+		public CargoMapping()
 		{
-			CreateMap<CargoDto, CargoModel>();
+			CreateMap<CargoDto, CargoModel>().ReverseMap();
+			CreateMap<VagasDto, VagasModel>().ReverseMap();
 
-			CreateMap<CargoDto, CargoModel>().ForMember(
-				c => c.CargoId,
-				options => options.MapFrom(
-					src => src.VagasId));
 		}
 	}
 }

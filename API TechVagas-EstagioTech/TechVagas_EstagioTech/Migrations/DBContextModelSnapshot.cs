@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TechVagas_EstagioTech.Data;
@@ -12,11 +11,9 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231027132303_migracao2")]
-    partial class migracao2
+    partial class DBContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,12 +46,9 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Property<int>("VagasId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("VagasModelVagasId")
-                        .HasColumnType("integer");
-
                     b.HasKey("CargoId");
 
-                    b.HasIndex("VagasModelVagasId");
+                    b.HasIndex("VagasId");
 
                     b.ToTable("cargo");
                 });
@@ -211,16 +205,18 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.VagasModel", "VagasModel")
-                        .WithMany("CargoModel")
-                        .HasForeignKey("VagasModelVagasId");
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.VagasModel", "Vagas")
+                        .WithMany("Cargos")
+                        .HasForeignKey("VagasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("VagasModel");
+                    b.Navigation("Vagas");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
                 {
-                    b.Navigation("CargoModel");
+                    b.Navigation("Cargos");
                 });
 #pragma warning restore 612, 618
         }
