@@ -15,8 +15,8 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<CursoModel> BuscarPorId(int id)
         {
-            return await _dbContext.Curso.FirstOrDefaultAsync(x => x.idCurso == id);
-        }
+			return await _dbContext.Curso.Where(x => x.idCurso == id).FirstOrDefaultAsync();
+		}
 
         public async Task<List<CursoModel>> BuscarTodosCursos()
         {
@@ -24,40 +24,24 @@ namespace TechVagas_EstagioTech.Repositorios
         }
         public async Task<CursoModel> Adicionar(CursoModel cursoModel)
         {
-            await _dbContext.Curso.AddAsync(cursoModel);
-            await _dbContext.SaveChangesAsync();
-
-            return cursoModel;
-        }
+			_dbContext.Curso.Add(cursoModel);
+			await _dbContext.SaveChangesAsync();
+			return cursoModel;
+		}
 
         public async Task<CursoModel> Atualizar(CursoModel cursoModel)
         {
-            CursoModel CursoPorId = await BuscarPorId(cursoModel.idCurso);
-
-            if (CursoPorId == null)
-            {
-                throw new Exception($"O id: {cursoModel.idCurso} do Curso não foi encontrado no banco");
-            }
-            CursoPorId.nomeCurso = cursoModel.nomeCurso;
-
-            _dbContext.Curso.Update(CursoPorId);
-            await _dbContext.SaveChangesAsync();
-
-            return CursoPorId;
-        }
+			_dbContext.Entry(cursoModel).State = EntityState.Modified;
+			await _dbContext.SaveChangesAsync();
+			return cursoModel;
+		}
 
         public async Task<bool> Apagar(int id)
         {
-            CursoModel CursoPorId = await BuscarPorId(id);
-
-            if (CursoPorId == null)
-            {
-                throw new Exception($"O id: {id} do Curso não foi encontrado no banco");
-            }
-
-            _dbContext.Curso.Remove(CursoPorId);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }   
+			var curso = await BuscarPorId(id);
+			_dbContext.Curso.Remove(curso);
+			await _dbContext.SaveChangesAsync();
+			return true;
+		}   
     }
 }
