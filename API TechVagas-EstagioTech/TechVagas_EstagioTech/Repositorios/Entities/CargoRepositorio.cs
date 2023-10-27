@@ -24,9 +24,8 @@ namespace TechVagas_EstagioTech.Repositorios
 		}
 		public async Task<CargoModel> Adicionar(CargoModel cargoModel)
 		{
-			await _dbContext.Cargos.AddAsync(cargoModel);
+			_dbContext.Cargos.Add(cargoModel);
 			await _dbContext.SaveChangesAsync();
-
 			return cargoModel;
 		}
 		public async Task<CargoModel> Atualizar(CargoModel cargoModel)
