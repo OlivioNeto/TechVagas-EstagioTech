@@ -28,7 +28,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterTipoDocumento")]
-		public async Task<ActionResult<DocumentoDto>> Get(int id)
+		public async Task<ActionResult<TipoDocumentoDto>> Get(int id)
 		{
 			var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);
 			if (tipoDocumentoDto == null) return NotFound("Tipo de Documento não encontrado");
@@ -36,13 +36,14 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-        public async Task<ActionResult<TipoDocumentoModel>> Cadastrar([FromBody] TipoDocumentoModel tipoDocumentoModel)
-        {
-            TipoDocumentoModel tipoDocumento = await _tipoDocumentoRepositorio.Adicionar(tipoDocumentoModel);
-            return Ok(tipoDocumento);
-        }
+		public async Task<ActionResult> Post([FromBody] TipoDocumentoDto tipoDocumentoDto)
+		{
+			if (tipoDocumentoDto is null) return BadRequest("Dado inválido!");
+			await _tipoDocumentoService.Adicionar(tipoDocumentoDto);
+			return new CreatedAtRouteResult("GetTipoDocumento", new { id = tipoDocumentoDto.idTipoDocumento }, tipoDocumentoDto);
+		}
 
-        [HttpPut]
+		[HttpPut]
         public async Task<ActionResult<TipoDocumentoModel>> Atualizar([FromBody] TipoDocumentoModel tipoDocumentoModel)
         {
             TipoDocumentoModel tipoDocumento = await _tipoDocumentoRepositorio.Atualizar(tipoDocumentoModel);
