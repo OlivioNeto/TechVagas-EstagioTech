@@ -24,6 +24,7 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<CargoModel>().Property(x => x.Tipo).IsRequired().HasMaxLength(50);
 
 			//Relacionamento: Cargo -> Vagas
+			modelBuilder.Entity<VagasModel>().HasMany(x => x.CargoModel).WithOne(x => x.VagasModel).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 			//Curso
 			modelBuilder.Entity<CursoModel>().HasKey(x => x.idCurso);
