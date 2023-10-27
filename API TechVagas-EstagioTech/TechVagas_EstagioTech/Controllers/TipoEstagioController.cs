@@ -27,14 +27,15 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(tipoEstagioDto);
 		}
 
-		[HttpGet("{id}")]
-        public async Task<ActionResult<List<TipoEstagioModel>>> BuscarPorId(int id)
-        {
-            TipoEstagioModel tipoEstagios = await _tipoEstagioRepositorio.BuscarPorId(id);
-            return Ok(tipoEstagios);
-        }
+		[HttpGet("{id:int}", Name = "ObterTipoEstagio")]
+		public async Task<ActionResult<TipoEstagioDto>> Get(int id)
+		{
+			var tipoEstagioDto = await _tipoEstagioService.BuscarPorId(id);
+			if (tipoEstagioDto == null) return NotFound("Tipo de Estagio não encontrado");
+			return Ok(tipoEstagioDto);
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<ActionResult<TipoEstagioModel>> Cadastrar([FromBody] TipoEstagioModel tipoEstagioModel)
         {
             TipoEstagioModel tipoEstagio = await _tipoEstagioRepositorio.Adicionar(tipoEstagioModel);
