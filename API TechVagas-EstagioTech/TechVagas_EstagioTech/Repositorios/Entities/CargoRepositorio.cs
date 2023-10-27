@@ -30,18 +30,9 @@ namespace TechVagas_EstagioTech.Repositorios
 		}
 		public async Task<CargoModel> Atualizar(CargoModel cargoModel)
 		{
-			CargoModel CargoPorId = await BuscarPorId(cargoModel.CargoId);
-
-			if (CargoPorId == null)
-			{
-				throw new Exception($"O id: {cargoModel.CargoId} do cargo não foi encontrado no banco");
-			}
-			CargoPorId.Descricao = cargoModel.Descricao;
-
-			_dbContext.Cargos.Update(CargoPorId);
+			_dbContext.Entry(cargoModel).State = EntityState.Modified;
 			await _dbContext.SaveChangesAsync();
-
-			return CargoPorId;
+			return cargoModel;
 		}
 		public async Task<bool> Apagar(int id)
 		{
