@@ -36,5 +36,11 @@ namespace TechVagas_EstagioTech.Services.Entities
 			await _tipoEstagioRepositorio.Adicionar(tipoEstagio);
 			tipoEstagioDto.idTipoEstagio = tipoEstagio.idTipoEstagio;
 		}
+
+		public async Task Atualizar(TipoEstagioDto tipoEstagioDto)
+		{
+			var tipoEstagio = _mapper.Map<TipoEstagioModel>(tipoEstagioDto);
+			await _tipoEstagioRepositorio.Atualizar(tipoEstagio);
+		}
 	}
 }
