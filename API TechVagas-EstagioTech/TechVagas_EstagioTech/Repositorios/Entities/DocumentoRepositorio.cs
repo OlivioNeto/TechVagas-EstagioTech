@@ -15,8 +15,8 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<DocumentoModel> BuscarPorId(int id)
         {
-            return await _dbContext.Documento.FirstOrDefaultAsync(x => x.idDocumento == id);
-        }
+			return await _dbContext.Documento.Where(x => x.idDocumento == id).FirstOrDefaultAsync();
+		}
 
         public async Task<List<DocumentoModel>> BuscarTodosDocumentos()
         {
@@ -25,42 +25,24 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<DocumentoModel> Adicionar(DocumentoModel documentoModel)
         {
-            await _dbContext.Documento.AddAsync(documentoModel);
-            await _dbContext.SaveChangesAsync();
-
-            return documentoModel;
-        }
+			_dbContext.Documento.Add(documentoModel);
+			await _dbContext.SaveChangesAsync();
+			return documentoModel;
+		}
 
         public async Task<DocumentoModel> Atualizar(DocumentoModel documentoModel)
         {
-            DocumentoModel DocumentoPorId = await BuscarPorId(documentoModel.idDocumento);
-
-            if (DocumentoPorId == null)
-            {
-                throw new Exception($"O id: {documentoModel.idDocumento} do Documento não foi encontrado no banco");
-            }
-            DocumentoPorId.descricaoDocumento = documentoModel.descricaoDocumento;
-            DocumentoPorId.documento = documentoModel.documento;
-            DocumentoPorId.situacaoDocumento = documentoModel.situacaoDocumento;
-
-            _dbContext.Documento.Update(DocumentoPorId);
-            await _dbContext.SaveChangesAsync();
-
-            return DocumentoPorId;
-        }
+			_dbContext.Entry(documentoModel).State = EntityState.Modified;
+			await _dbContext.SaveChangesAsync();
+			return documentoModel;
+		}
 
         public async Task<bool> Apagar(int id)
         {
-            DocumentoModel DocumentoPorId = await BuscarPorId(id);
-
-            if (DocumentoPorId == null)
-            {
-                throw new Exception($"O id: {id} do Documento não foi encontrado no banco");
-            }
-
-            _dbContext.Documento.Remove(DocumentoPorId);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }      
+			var documento = await BuscarPorId(id);
+			_dbContext.Documento.Remove(documento);
+			await _dbContext.SaveChangesAsync();
+			return true;
+		}      
     }
 }
