@@ -39,9 +39,6 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("totalhorassemanais")]
         public string? TotalHorasSemanis { get; set; }
 
-        public CargoModel? CargoModel { get; set; }
-
-        [ForeignKey("cargoid")]
-        public int CargoId { get; set; }
-    }
+        public ICollection<CargoModel>? Cargos { get; set; }
+	}
 }

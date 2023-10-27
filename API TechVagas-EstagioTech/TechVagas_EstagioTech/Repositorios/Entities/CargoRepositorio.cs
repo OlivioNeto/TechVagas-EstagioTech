@@ -58,14 +58,5 @@ namespace TechVagas_EstagioTech.Repositorios
 			return true;
 		}
 
-        public Task<CargoModel> Adicionar(CargoDto cargoDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<CargoModel> Atualizar(CargoDto cargoDto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

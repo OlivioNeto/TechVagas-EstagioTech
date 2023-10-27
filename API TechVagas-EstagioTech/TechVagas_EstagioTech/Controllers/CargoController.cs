@@ -41,7 +41,7 @@ namespace TechVagas_EstagioTech.Controllers
 		{
 			if (cargoDto is null) return BadRequest("Dado inválido!");
 			await _cargoService.Adicionar(cargoDto);
-			return new CreatedAtRouteResult("GetCargo", new { id = cargoDto.CargoId }, cargoDto);
+			return new CreatedAtRouteResult("ObterCargo", new { id = cargoDto.CargoId }, cargoDto);
 		}
 
 		[HttpPut("{id:int}")]

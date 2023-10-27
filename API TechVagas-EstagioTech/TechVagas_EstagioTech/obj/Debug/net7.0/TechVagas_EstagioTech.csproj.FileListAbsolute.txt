@@ -171,3 +171,6 @@ E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj
 E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.csproj.CopyComplete
 E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.genruntimeconfig.cache
 E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\ref\TechVagas_EstagioTech.dll
+E:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

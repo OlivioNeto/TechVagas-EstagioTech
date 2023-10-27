@@ -24,5 +24,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         [JsonIgnore]
         public VagasDto? VagasDto { get; set; }
+
+		[ForeignKey("vagasid")]
+		public int VagasId { get; set; }
 	}
 }
