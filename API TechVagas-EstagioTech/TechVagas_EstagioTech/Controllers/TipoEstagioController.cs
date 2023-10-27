@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,21 +12,22 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class TipoEstagioController : ControllerBase
     {
-        private readonly ITipoEstagioRepositorio _tipoEstagioRepositorio;
-        public TipoEstagioController(ITipoEstagioRepositorio tipoEstagioRepositorio)
-        {
-            _tipoEstagioRepositorio = tipoEstagioRepositorio;
-        }
+		private readonly ITipoEstagioService _tipoEstagioService;
 
-        [HttpGet]
+		public TipoEstagioController(ITipoEstagioService tipoEstagioService)
+		{
+			_tipoEstagioService = tipoEstagioService;
+		}
 
-        public async Task<ActionResult<List<TipoEstagioModel>>> BuscarTodosTiposEstagio()
-        {
-            List<TipoEstagioModel> tipoEstagios = await _tipoEstagioRepositorio.BuscarTodosTiposEstagios();
-            return Ok(tipoEstagios);
-        }
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<TipoEstagioDto>>> Get()
+		{
+			var tipoEstagioDto = await _tipoEstagioService.BuscarTodosTipoEstagio();
+			if (tipoEstagioDto == null) return NotFound("Tipos de Estagio não encontrados!");
+			return Ok(tipoEstagioDto);
+		}
 
-        [HttpGet("{id}")]
+		[HttpGet("{id}")]
         public async Task<ActionResult<List<TipoEstagioModel>>> BuscarPorId(int id)
         {
             TipoEstagioModel tipoEstagios = await _tipoEstagioRepositorio.BuscarPorId(id);
