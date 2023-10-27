@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
 {
-    public class VagasRepositorio
+    public class VagasRepositorio : IVagasRepositorio
     {
         private readonly DBContext _dbContext;
 
@@ -20,22 +21,22 @@ namespace TechVagas_EstagioTech.Repositorios
         {
             return await _dbContext.Vagas.ToListAsync();
         }
-        public async Task<VagasModel> Adicionar(VagasModel vagas)
+        public async Task<VagasModel> Adicionar(VagasModel vagasModel)
         {
-            await _dbContext.Vagas.AddAsync(vagas);
+            await _dbContext.Vagas.AddAsync(vagasModel);
             await _dbContext.SaveChangesAsync();
 
-            return vagas;
+            return vagasModel;
         }
-        public async Task<VagasModel> Atualizar(VagasModel vagas)
+        public async Task<VagasModel> Atualizar(VagasModel vagasModel)
         {
-            VagasModel VagasPorId = await BuscarPorId(vagas.VagasId);
+            VagasModel VagasPorId = await BuscarPorId(vagasModel.VagasId);
 
             if (VagasPorId == null)
             {
-                throw new Exception($"O id: {vagas.VagasId} da vaga não foi encontrado no banco");
+                throw new Exception($"O id: {vagasModel.VagasId} da vaga não foi encontrado no banco");
             }
-            VagasPorId.Descricao = vagas.Descricao;
+            VagasPorId.Descricao = vagasModel.Descricao;
 
             _dbContext.Vagas.Update(VagasPorId);
             await _dbContext.SaveChangesAsync();

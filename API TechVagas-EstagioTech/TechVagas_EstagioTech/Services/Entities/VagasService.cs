@@ -32,14 +32,14 @@ namespace TechVagas_EstagioTech.Services.Entities
 
 		public async Task Adicionar(VagasDto vagasDto)
 		{
-			var vagas = _mapper.Map<VagasDto>(vagasDto);
+			var vagas = _mapper.Map<VagasModel>(vagasDto);
 			await _vagasRepositorio.Adicionar(vagas);
 			vagasDto.VagasId = vagas.VagasId;
 		}
 
 		public async Task Atualizar(VagasDto vagasDto)
 		{
-			var vagas = _mapper.Map<VagasDto>(vagasDto);
+			var vagas = _mapper.Map<VagasModel>(vagasDto);
 			await _vagasRepositorio.Atualizar(vagas);
 		}
 

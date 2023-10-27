@@ -9,10 +9,11 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 
         Task<VagasModel> BuscarPorId(int id);
 
-        Task<VagasModel> Adicionar(VagasDto vagasDto);
+        Task<VagasModel> Adicionar(VagasModel vagasModel);
 
-        Task<VagasModel> Atualizar(VagasDto vagasDto);
+        Task<VagasModel> Atualizar(VagasModel vagasModel);
 
         Task<bool> Apagar(int id);
-    }
+
+	}
 }

@@ -6,7 +6,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 namespace TechVagas_EstagioTech.Repositorios
 {
     public class TipoDocumentoRepositorio : ITipoDocumentoRepositorio
-    {
+	{
         private readonly DBContext _dbContex;
         public TipoDocumentoRepositorio(DBContext tipoDocumentoDBContext)
         {
@@ -17,7 +17,7 @@ namespace TechVagas_EstagioTech.Repositorios
             return await _dbContex.TipoDocumento.FirstOrDefaultAsync(x => x.idTipoDocumento == id);
         }
 
-        public async Task<List<TipoDocumentoModel>> BuscarTodosTiposDocumentos()
+        public async Task<List<TipoDocumentoModel>> BuscarTodosTipoDocumentos()
         {
             return await _dbContex.TipoDocumento.ToListAsync();
         }

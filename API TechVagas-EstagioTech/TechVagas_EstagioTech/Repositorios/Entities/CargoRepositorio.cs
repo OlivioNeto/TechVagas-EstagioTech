@@ -22,22 +22,22 @@ namespace TechVagas_EstagioTech.Repositorios
 		{
 			return await _dbContext.Cargos.ToListAsync();
 		}
-		public async Task<CargoModel> Adicionar(CargoModel cargo)
+		public async Task<CargoModel> Adicionar(CargoModel cargoModel)
 		{
-			await _dbContext.Cargos.AddAsync(cargo);
+			await _dbContext.Cargos.AddAsync(cargoModel);
 			await _dbContext.SaveChangesAsync();
 
-			return cargo;
+			return cargoModel;
 		}
-		public async Task<CargoModel> Atualizar(CargoModel cargo)
+		public async Task<CargoModel> Atualizar(CargoModel cargoModel)
 		{
-			CargoModel CargoPorId = await BuscarPorId(cargo.CargoId);
+			CargoModel CargoPorId = await BuscarPorId(cargoModel.CargoId);
 
 			if (CargoPorId == null)
 			{
-				throw new Exception($"O id: {cargo.CargoId} do cargo não foi encontrado no banco");
+				throw new Exception($"O id: {cargoModel.CargoId} do cargo não foi encontrado no banco");
 			}
-			CargoPorId.Descricao = cargo.Descricao;
+			CargoPorId.Descricao = cargoModel.Descricao;
 
 			_dbContext.Cargos.Update(CargoPorId);
 			await _dbContext.SaveChangesAsync();
