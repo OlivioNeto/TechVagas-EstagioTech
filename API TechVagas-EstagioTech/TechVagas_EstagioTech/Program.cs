@@ -2,6 +2,8 @@ using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Repositorios;
+using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
 
 namespace TechVagas_EstagioTech
 {
@@ -14,7 +16,7 @@ namespace TechVagas_EstagioTech
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbucklee 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -29,11 +31,23 @@ namespace TechVagas_EstagioTech
 
 			//Injeção de dependencia
 			builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+			builder.Services.AddScoped<ICargoService, CargoService>();
+
 			builder.Services.AddScoped<ICursoRepositorio, CursoRepositorio>();
+			builder.Services.AddScoped<ICursoService, CursoService>();
+
 			builder.Services.AddScoped<IDocumentoRepositorio, DocumentoRepositorio>();
+			builder.Services.AddScoped<IDocumentoService, DocumentoService>();
+
 			builder.Services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+			builder.Services.AddScoped<ITipoDocumentoService, TipoDocumentoService>();
+
 			builder.Services.AddScoped<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
+			builder.Services.AddScoped<ITipoEstagioService, TipoEstagioService>();
+
 			builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
+			builder.Services.AddScoped<IVagasService, VagasService>();
+
 
 
 
