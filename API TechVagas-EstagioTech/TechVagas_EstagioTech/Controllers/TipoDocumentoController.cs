@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,20 +12,22 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class TipoDocumentoController : ControllerBase
     {
-        private readonly ITipoDocumentoRepositorio _tipoDocumentoRepositorio;
-        public TipoDocumentoController(ITipoDocumentoRepositorio tipoDocumentoRepositorio)
-        {
-            _tipoDocumentoRepositorio = tipoDocumentoRepositorio;
-        }
+		private readonly ITipoDocumentoService _tipoDocumentoService;
 
-        [HttpGet]
-        public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarTodosTipoDocumentos()
-        {
-            List<TipoDocumentoModel> tipoDocumentos = await _tipoDocumentoRepositorio.BuscarTodosTipoDocumentos();
-            return Ok(tipoDocumentos);
-        }
+		public TipoDocumentoController(ITipoDocumentoService tipoDocumentoService)
+		{
+			_tipoDocumentoService = tipoDocumentoService;
+		}
 
-        [HttpGet("{id}")]
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<TipoDocumentoDto>>> Get()
+		{
+			var tipoDocumentoDto = await _tipoDocumentoService.BuscarTodosTipoDocumentos();
+			if (tipoDocumentoDto == null) return NotFound("Documentos não encontrados!");
+			return Ok(tipoDocumentoDto);
+		}
+
+		[HttpGet("{id}")]
         public async Task<ActionResult<List<TipoDocumentoModel>>> BuscarPorId(int id)
         {
             TipoDocumentoModel tipoDocumentos = await _tipoDocumentoRepositorio.BuscarPorId(id);
