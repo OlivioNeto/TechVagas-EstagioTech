@@ -52,6 +52,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MaxLength(20)]        
         public string? TotalHorasSemanis { get; set; }
 
-        public ICollection<CargoDto>? CargoDto { get; set; }
+		[Column("cargos")]
+		public ICollection<CargoDto>? CargoDto { get; set; }
     }
 }

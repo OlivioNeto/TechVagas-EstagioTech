@@ -23,6 +23,8 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
 			modelBuilder.Entity<CargoModel>().Property(x => x.Tipo).IsRequired().HasMaxLength(50);
 
+			//Relacionamento: Cargo -> Vagas
+
 			//Curso
 			modelBuilder.Entity<CursoModel>().HasKey(x => x.idCurso);
 			modelBuilder.Entity<CursoModel>().Property(x => x.nomeCurso).IsRequired().HasMaxLength(200);
