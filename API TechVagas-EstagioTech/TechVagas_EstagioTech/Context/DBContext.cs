@@ -39,6 +39,14 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<TipoEstagioModel>().HasKey(x => x.idTipoEstagio);
 			modelBuilder.Entity<TipoEstagioModel>().Property(x => x.descricaoTipoEstagio).IsRequired().HasMaxLength(200);
 
+
+            //Concedente
+            modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.RazaoSocial).IsRequired().HasMaxLength(80);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.ResponsavelEstagio).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.Cnpj).IsRequired().HasMaxLength(16);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(50);
+
             //Vagas
             modelBuilder.Entity<VagasModel>().HasKey(x => x.VagasId);
 			modelBuilder.Entity<VagasModel>().Property(x => x.Quantidade).IsRequired();
@@ -51,19 +59,9 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioSaida).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(20);
+			          
 
-            //Concedente
-            modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
-            modelBuilder.Entity<ConcedenteModel>().Property(x => x.RazaoSocial);
-            modelBuilder.Entity<ConcedenteModel>().Property(x => x.ResponsavelEstagio);
-            modelBuilder.Entity<ConcedenteModel>().Property(x => x.Cnpj);
-            modelBuilder.Entity<ConcedenteModel>().Property(x => x.Localidade);
-
-			//Relacionamento: Concedente -> Vagas
-			modelBuilder.Entity<ConcedenteModel>()
-				.HasMany(c => c.Vagas)
-				.WithOne(c => c.Concedente)
-				.IsRequired().OnDelete(DeleteBehavior.Cascade);
+			
 
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
@@ -75,6 +73,12 @@ namespace TechVagas_EstagioTech.Data
 				.HasMany(c => c.Cargos)
 				.WithOne(v => v.Vagas)
 				.IsRequired().OnDelete(DeleteBehavior.Cascade);
+
+            //Relacionamento: Concedente -> Vagas
+            modelBuilder.Entity<ConcedenteModel>()
+                .HasMany(x => x.Vagas)
+                .WithOne(y => y.Concedente)
+                .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 
         }

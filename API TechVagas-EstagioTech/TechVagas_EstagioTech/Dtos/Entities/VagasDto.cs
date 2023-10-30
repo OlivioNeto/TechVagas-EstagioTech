@@ -8,7 +8,6 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     public class VagasDto
     {
         [Key]
-        
         public int VagasId { get; set; }
 
         public int Quantidade { get; set; }
@@ -52,11 +51,11 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MaxLength(20)]        
         public string? TotalHorasSemanis { get; set; }
 
-        [JsonIgnore]
-
         [Column("cargos")]
-		public ICollection<CargoDto>? CargoDto { get; set; }
+        [JsonIgnore]
+        public ICollection<CargoDto>? CargoDto { get; set; }
 
+        [JsonIgnore]
         public ConcedenteDto? ConcedenteDto { get; set; }
 
         [ForeignKey("concedenteid")]

@@ -7,7 +7,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     
     public class CargoDto
 	{
-        
+        [Key]
         public int CargoId { get; set; }
 
 		[Required(ErrorMessage = "E necessário uma descrição")]

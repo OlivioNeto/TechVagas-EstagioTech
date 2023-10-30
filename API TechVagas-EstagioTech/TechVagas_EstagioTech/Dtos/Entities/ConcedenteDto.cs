@@ -7,7 +7,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 {
     public class ConcedenteDto
     {
-
+        [Key]
         public int concedenteId { get; set; }
 
         [Required(ErrorMessage = "E necessário uma Razão Social")]
@@ -18,7 +18,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         [Required(ErrorMessage = "E necessário um Responsável de Estágio")]
         [MinLength(3)]
-        [MaxLength(80)]
+        [MaxLength(50)]
         public string? ResponsavelEstagio { get; set; }
 
 
@@ -36,6 +36,6 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [JsonIgnore]
 
         [Column("vagas")]
-        public ICollection<VagasModel> Vagas { get; set; }
+        public ICollection<VagasModel>? Vagas { get; set; }
     }
 }

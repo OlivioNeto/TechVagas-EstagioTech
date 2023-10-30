@@ -26,6 +26,6 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("localidade")]
         public string? Localidade { get; set; }
 
-        public ICollection<VagasModel> Vagas { get; set; }
+        public ICollection<VagasModel>? Vagas { get; set; }
     }
 }
