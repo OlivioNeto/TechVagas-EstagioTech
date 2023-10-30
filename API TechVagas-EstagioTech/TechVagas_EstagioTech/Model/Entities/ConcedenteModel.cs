@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.PortableExecutable;
+using System.Text.Json.Serialization;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {
@@ -23,5 +25,7 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         [Column("localidade")]
         public string? Localidade { get; set; }
+
+        public ICollection<VagasModel> Vagas { get; set; }
     }
 }

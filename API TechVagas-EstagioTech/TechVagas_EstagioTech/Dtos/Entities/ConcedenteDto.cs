@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -30,5 +32,10 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MinLength(3)]
         [MaxLength(50)]
         public string? Localidade { get; set; }
+
+        [JsonIgnore]
+
+        [Column("vagas")]
+        public ICollection<VagasModel> Vagas { get; set; }
     }
 }
