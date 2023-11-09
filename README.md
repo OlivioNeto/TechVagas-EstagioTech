@@ -4,7 +4,7 @@
 
 </br>
 
-## 🤝 Colaboradores
+## 🤝 Colaboradores TECHVAGAS
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
@@ -44,6 +44,10 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     </td>
   </tr>
 </table>
+
+## 🤝 Colaboradores ESTAGIOTECH
+
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
