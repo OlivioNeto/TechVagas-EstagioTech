@@ -1,4 +1,4 @@
-## 📝 - Descrição do Projeto - TECHVAGAS
+## 📝 - Descrição dos Projetos: TECHVAGAS e ESTAGIOTECH
 
   Este projeto tem como finalidade promover o acesso mais amplo e dinâmico aos alunos da Fatec, proporcionando um sistema limpo e de fácil acesso tanto pelos alunos que irão se cadastrar para as vagas e para as empresas responsáveis que estarão implantando essas oportunidades de emprego para todos os docentes da Faculdade.                             
 
