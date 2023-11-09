@@ -16,6 +16,7 @@ namespace TechVagas_EstagioTech.Data
 		
         public DbSet<VagasModel> Vagas { get; set; }
         public DbSet<CargoModel> Cargos { get; set; }
+		public DbSet<ConcedenteModel> Concedentes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,7 +39,13 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<TipoEstagioModel>().HasKey(x => x.idTipoEstagio);
 			modelBuilder.Entity<TipoEstagioModel>().Property(x => x.descricaoTipoEstagio).IsRequired().HasMaxLength(200);
 
-           
+
+            //Concedente
+            modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.RazaoSocial).IsRequired().HasMaxLength(80);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.ResponsavelEstagio).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.Cnpj).IsRequired().HasMaxLength(16);
+            modelBuilder.Entity<ConcedenteModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(50);
 
             //Vagas
             modelBuilder.Entity<VagasModel>().HasKey(x => x.VagasId);
@@ -52,6 +59,9 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioSaida).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(20);
+			          
+
+			
 
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
@@ -63,6 +73,12 @@ namespace TechVagas_EstagioTech.Data
 				.HasMany(c => c.Cargos)
 				.WithOne(v => v.Vagas)
 				.IsRequired().OnDelete(DeleteBehavior.Cascade);
+
+            //Relacionamento: Concedente -> Vagas
+            modelBuilder.Entity<ConcedenteModel>()
+                .HasMany(x => x.Vagas)
+                .WithOne(y => y.Concedente)
+                .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
 
         }

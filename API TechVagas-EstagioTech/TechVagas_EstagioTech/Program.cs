@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Services.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Repositorios.Entities;
 
 namespace TechVagas_EstagioTech
 {
@@ -44,7 +45,10 @@ namespace TechVagas_EstagioTech
 			builder.Services.AddScoped<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
 			builder.Services.AddScoped<ITipoEstagioService, TipoEstagioService>();
 
-			builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
+            builder.Services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
+            builder.Services.AddScoped<IConcedenteService, ConcedenteService>();
+
+            builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
 			builder.Services.AddScoped<IVagasService, VagasService>();
 
             builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
