@@ -1,6 +1,6 @@
 ## 📝 - Descrição dos Projetos: TECHVAGAS e ESTAGIOTECH
 
-  Este projeto tem como finalidade promover o acesso mais amplo e dinâmico aos alunos da Fatec, proporcionando um sistema limpo e de fácil acesso tanto pelos alunos que irão se cadastrar para as vagas e para as empresas responsáveis que estarão implantando essas oportunidades de emprego para todos os docentes da Faculdade.                             
+ Neste repositório teremos a divisão de dois projetos: TechVagas é o projeto em que um candidato a vagas de estágio se inscreve para vagas de estágio. O EstagioTech é o projeto onde ocorre a contratação do estagiário fazendo todo o processo burocrático.                           
 
 </br>
 
