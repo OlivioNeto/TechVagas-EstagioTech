@@ -16,6 +16,7 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         public VagasModel? Vagas { get; set; }
 
-		public int VagasId { get; set; }
+        [Column("vagasid")]
+        public int VagasId { get; set; }
 	}
 }
