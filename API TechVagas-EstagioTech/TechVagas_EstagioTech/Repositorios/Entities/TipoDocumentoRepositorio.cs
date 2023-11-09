@@ -25,6 +25,7 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<TipoDocumentoModel> Adicionar(TipoDocumentoModel tipoDocumentoModel)
         {
+
 			_dbContext.TipoDocumento.Add(tipoDocumentoModel);
 			await _dbContext.SaveChangesAsync();
 			return tipoDocumentoModel;

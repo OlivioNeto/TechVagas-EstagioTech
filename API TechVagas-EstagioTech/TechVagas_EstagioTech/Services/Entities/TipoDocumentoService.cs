@@ -30,11 +30,10 @@ namespace TechVagas_EstagioTech.Services.Entities
 			return _mapper.Map<IEnumerable<TipoDocumentoDto>>(tipoDocumento);
 		}
 
-		public async Task Adicionar(TipoDocumentoDto tipoDocumentoDto)
+		public async Task Adicionar(string descricaoTipoDocumento)
 		{
-			var tipoDocumento = _mapper.Map<TipoDocumentoModel>(tipoDocumentoDto);
-			await _tipoDocumentoRepositorio.Adicionar(tipoDocumento);
-			tipoDocumentoDto.idTipoDocumento = tipoDocumento.idTipoDocumento;
+			var tipoDocumento = new TipoDocumentoModel() {descricaoTipoDocumento=descricaoTipoDocumento}; //mapeamento para converter a dto em model antes
+            await _tipoDocumentoRepositorio.Adicionar(tipoDocumento);
 		}
 
 		public async Task Atualizar(TipoDocumentoDto tipoDocumentoDto)

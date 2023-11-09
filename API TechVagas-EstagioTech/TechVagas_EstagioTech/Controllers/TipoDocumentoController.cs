@@ -36,11 +36,11 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] TipoDocumentoDto tipoDocumentoDto)
+		public async Task<ActionResult> Post([FromBody] string descricaoTipoDocumento)
 		{
-			if (tipoDocumentoDto is null) return BadRequest("Dado inválido!");
-			await _tipoDocumentoService.Adicionar(tipoDocumentoDto);
-			return new CreatedAtRouteResult("GetTipoDocumento", new { id = tipoDocumentoDto.idTipoDocumento }, tipoDocumentoDto);
+			if (descricaoTipoDocumento is null) return BadRequest("Dado inválido!");
+			await _tipoDocumentoService.Adicionar(descricaoTipoDocumento);
+			return Ok("Documento registrado com sucesso");
 		}
 
 		[HttpPut("{id:int}")]
