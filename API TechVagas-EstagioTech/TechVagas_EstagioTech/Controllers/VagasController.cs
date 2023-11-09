@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -9,17 +10,17 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class VagasController : ControllerBase
     {
-        private readonly IVagasInteface _vagas;
+        private readonly IVagasService _vagasService;
 
-        public VagasController(IVagasInteface vagas)
+        public VagasController(IVagasService vagasService)
         {
-            _vagas = vagas;
+			_vagasService = vagasService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VagasDto>>> Get()
         {
-            var vagasDto = await _vagas.BuscarTodasVagas();
+            var vagasDto = await _vagasService.BuscarTodasVagas();
             if (vagasDto == null) return NotFound("Vagas não encontradas!");
             return Ok(vagasDto);
         }
@@ -27,8 +28,8 @@ namespace TechVagas_EstagioTech.Controllers
         [HttpGet("{id:int}", Name = "ObterVaga")]
         public async Task<ActionResult<VagasDto>> Get(int id)
         {
-            var vagasDto = await _vagas.BuscarPorId(id);
-            if (vagasDto == null) return NotFound("Cargo não encontrado");
+            var vagasDto = await _vagasService.BuscarPorId(id);
+            if (vagasDto == null) return NotFound("Vaga não encontrada");
             return Ok(vagasDto);
         }
 
@@ -36,24 +37,24 @@ namespace TechVagas_EstagioTech.Controllers
         public async Task<ActionResult> Post([FromBody] VagasDto vagasDto)
         {
             if (vagasDto is null) return BadRequest("Dado inválido!");
-            await _vagas.Adicionar(vagasDto);
-            return new CreatedAtRouteResult("GetCargo", new { id = vagasDto.VagasId }, vagasDto);
+            await _vagasService.Adicionar(vagasDto);
+            return new CreatedAtRouteResult("ObterVaga", new { id = vagasDto.VagasId }, vagasDto);
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put([FromBody] VagasDto vagasDto)
         {
             if (vagasDto is null) return BadRequest("Dado invalido!");
-            await _vagas.Atualizar(vagasDto);
+            await _vagasService.Atualizar(vagasDto);
             return Ok(vagasDto);
         }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<VagasDto>> Delete(int id)
         {
-            var vagasDto = await _vagas.BuscarPorId(id);
+            var vagasDto = await _vagasService.BuscarPorId(id);
             if (vagasDto == null) return NotFound("Vagas não econtradas!");
-            await _vagas.Apagar(id);
+            await _vagasService.Apagar(id);
             return Ok(vagasDto);
         }
     }
