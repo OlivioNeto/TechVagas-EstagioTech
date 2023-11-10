@@ -12,13 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-<<<<<<<< HEAD:API TechVagas-EstagioTech/TechVagas_EstagioTech/Migrations/20231109121306_testando.Designer.cs
-    [Migration("20231109121306_testando")]
-    partial class testando
-========
-    [Migration("20231109131249_teste")]
-    partial class teste
->>>>>>>> b931c8739448e4ed1b8096dca9d64e54cb0f5010:API TechVagas-EstagioTech/TechVagas_EstagioTech/Migrations/20231109131249_teste.Designer.cs
+    [Migration("20231110142523_mudandomodel")]
+    partial class mudandomodel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,36 +145,40 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     b.Property<int>("idTipoDocumento")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("tipodocumentoid");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idTipoDocumento"));
 
                     b.Property<string>("descricaoTipoDocumento")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("descricao");
 
                     b.HasKey("idTipoDocumento");
 
-                    b.ToTable("TipoDocumento");
+                    b.ToTable("tipodocumento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
                 {
                     b.Property<int>("idTipoEstagio")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("tipoestagioid");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idTipoEstagio"));
 
                     b.Property<string>("descricaoTipoEstagio")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("descricao");
 
                     b.HasKey("idTipoEstagio");
 
-                    b.ToTable("TipoEstagio");
+                    b.ToTable("tipoestagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>

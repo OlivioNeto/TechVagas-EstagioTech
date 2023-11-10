@@ -142,36 +142,40 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     b.Property<int>("idTipoDocumento")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("tipodocumentoid");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idTipoDocumento"));
 
                     b.Property<string>("descricaoTipoDocumento")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("descricao");
 
                     b.HasKey("idTipoDocumento");
 
-                    b.ToTable("TipoDocumento");
+                    b.ToTable("tipodocumento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
                 {
                     b.Property<int>("idTipoEstagio")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("tipoestagioid");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idTipoEstagio"));
 
                     b.Property<string>("descricaoTipoEstagio")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("descricao");
 
                     b.HasKey("idTipoEstagio");
 
-                    b.ToTable("TipoEstagio");
+                    b.ToTable("tipoestagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>

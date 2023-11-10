@@ -36,12 +36,12 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] TipoEstagioDto tipoEstagioDto)
+		public async Task<ActionResult> Post([FromBody] string descricaoTipoEstagio)
 		{
-			if (tipoEstagioDto is null) return BadRequest("Dado inválido!");
-			await _tipoEstagioService.Adicionar(tipoEstagioDto);
-			return new CreatedAtRouteResult("GetTipoEstagio", new { id = tipoEstagioDto.idTipoEstagio }, tipoEstagioDto);
-		}
+            if (descricaoTipoEstagio is null) return BadRequest("Dado inválido!");
+			await _tipoEstagioService.Adicionar(descricaoTipoEstagio);
+            return Ok("Estagio registrado com sucesso");
+        }
 
 		[HttpPut("{id:int}")]
 		public async Task<ActionResult> Put([FromBody] TipoEstagioDto tipoEstagioDto)
