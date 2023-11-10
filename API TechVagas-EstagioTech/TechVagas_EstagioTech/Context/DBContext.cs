@@ -13,10 +13,10 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<CursoModel> Curso { get; set; }
         public DbSet<TipoDocumentoModel> TipoDocumento { get; set; }
         public DbSet<DocumentoModel> Documento { get; set; }
-		
         public DbSet<VagasModel> Vagas { get; set; }
         public DbSet<CargoModel> Cargos { get; set; }
 		public DbSet<ConcedenteModel> Concedentes { get; set; }
+        public DbSet<AlunoModel> Alunos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,9 +60,6 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioSaida).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(20);
 			          
-
-			
-
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
@@ -79,6 +76,29 @@ namespace TechVagas_EstagioTech.Data
                 .HasMany(x => x.Vagas)
                 .WithOne(y => y.Concedente)
                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
+
+            //Alunos
+            modelBuilder.Entity<AlunoModel>().HasKey(x => x.AlunoId);
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Nome).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Idade).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Rg).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.StatusAluno).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.NumeroMatricula).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.AreaInteresse).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Habilidades).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Experiencias).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.DisponibilidadeHorario).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Curriculo).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Cpf).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Cidade).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.DataNascimento).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.NivelEscolaridade).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Telefone).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Email).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Endereco).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Genero).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Bairro).IsRequired();
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Cep).IsRequired();
 
 
         }
