@@ -54,8 +54,11 @@ namespace TechVagas_EstagioTech
             builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
             builder.Services.AddScoped<ICargoService, CargoService>();
 
+			builder.Services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
+			builder.Services.AddScoped<IAlunoService, AlunoService>();
 
-            var app = builder.Build();
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
