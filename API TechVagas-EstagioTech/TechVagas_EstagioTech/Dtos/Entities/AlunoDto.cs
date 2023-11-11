@@ -47,7 +47,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
 
 		[Required(ErrorMessage = "E necessário informar sua disponibilidade de horário")]
-		[MaxLength(350)]
+		[MaxLength(35)]
 		public string? DisponibilidadeHorario { get; set; }
 
 		[Required(ErrorMessage = "E necessário anexar seu curriculo")]
