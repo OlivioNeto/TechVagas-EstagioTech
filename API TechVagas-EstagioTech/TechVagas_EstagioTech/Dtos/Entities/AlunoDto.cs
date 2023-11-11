@@ -1,49 +1,108 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
     public class AlunoDto
     {
-        public int AlunoId { get; set; }
+		[Key]
+		public int AlunoId { get; set; }
 
-        public string? Nome { get; set; }
+		[Required(ErrorMessage = "E necessário um nome")]
+		[MinLength(3)]
+		[MaxLength(150)]
 
-        public int Idade { get; set; }
+		public string? Nome { get; set; }
 
-        public string? Rg { get; set; }
+		[Required(ErrorMessage = "E necessário uma idade")]
+		public int Idade { get; set; }
 
-        public Boolean StatusAluno { get; set; }
 
-        public string? NumeroMatricula { get; set; }
+		[Required(ErrorMessage = "E necessário um Rg")]
+		[MinLength(7)]
+		[MaxLength(12)]
+		public string? Rg { get; set; }
 
-        public string? AreaInteresse { get; set; }
+		[Required(ErrorMessage = "E necessário um status")]
+		public Boolean StatusAluno { get; set; }
 
-        public string? Habilidades { get; set; }
 
-        public string? Experiencias { get; set; }
+		[Required(ErrorMessage = "E necessário um Numero Matricula")]
+		[MaxLength(50)]
+		public string? NumeroMatricula { get; set; }
 
-        public string? DisponibilidadeHorario { get; set; }
+		[Required(ErrorMessage = "E necessário uma aréa de interesse ")]
+		[MaxLength(100)]
+		public string? AreaInteresse { get; set; }
 
-        public string? Curriculo { get; set; }
 
-        public string? Cpf { get; set; }
+		[Required(ErrorMessage = "E necessário informar as suas habilidades")]
+		[MaxLength(100)]
+		public string? Habilidades { get; set; }
 
-        public string? Cidade { get; set; }
+
+		[Required(ErrorMessage = "E necessário informar suas experiencias")]
+		[MaxLength(350)]
+		public string? Experiencias { get; set; }
+
+
+		[Required(ErrorMessage = "E necessário informar sua disponibilidade de horário")]
+		[MaxLength(350)]
+		public string? DisponibilidadeHorario { get; set; }
+
+		[Required(ErrorMessage = "E necessário anexar seu curriculo")]
+		public string? Curriculo { get; set; }
+
+		[Required(ErrorMessage = "E necessário inserir seu Cpf")]
+		[MinLength(11)]
+		[MaxLength(14)]
+		public string? Cpf { get; set; }
+
+
+		[Required(ErrorMessage = "E necessário informar uma cidade")]
+		[MinLength(3)]
+		[MaxLength(50)]
+		public string? Cidade { get; set; }
 
         public DateTime DataNascimento { get; set; }
 
-        public string? NivelEscolaridade { get; set; }
 
-        public string? Telefone { get; set; }
+		[Required(ErrorMessage = "E necessário informar seu nivel de escolaridade")]
+		[MinLength(3)]
+		[MaxLength(80)]
+		public string? NivelEscolaridade { get; set; }
 
-        public string? Email { get; set; }
 
-        public string? Endereco { get; set; }
+		[Required(ErrorMessage = "E necessário informar seu telefone")]
+		[MinLength(11)]
+		[MaxLength(14)]
+		public string? Telefone { get; set; }
 
-        public string? Genero { get; set; }
+		[Required(ErrorMessage = "E necessário informar seu email")]
+		[MinLength(3)]
+		[MaxLength(50)]
+		public string? Email { get; set; }
 
-        public string? Bairro { get; set; }
+		[Required(ErrorMessage = "E necessário informar seu endereco")]
+		[MinLength(3)]
+		[MaxLength(50)]
+		public string? Endereco { get; set; }
 
-        public string? Cep { get; set; }
+
+		[Required(ErrorMessage = "E necessário informar seu genero")]
+		[MinLength(3)]
+		[MaxLength(30)]
+		public string? Genero { get; set; }
+
+		[Required(ErrorMessage = "E necessário informar seu Bairro")]
+		[MinLength(3)]
+		[MaxLength(30)]
+		public string? Bairro { get; set; }
+
+
+		[Required(ErrorMessage = "E necessário informar seu Bairro")]
+		[MinLength(8)]
+		[MaxLength(9)]
+		public string? Cep { get; set; }
     }
 }
