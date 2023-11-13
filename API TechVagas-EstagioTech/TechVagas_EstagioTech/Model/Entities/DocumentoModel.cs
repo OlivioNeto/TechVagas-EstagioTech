@@ -1,13 +1,24 @@
-﻿namespace TechVagas_EstagioTech.Model.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using TechVagas_EstagioTech.Model.Entities;
+
+namespace TechVagas_EstagioTech.Model.Entities
 {
+    [Table("documento")]
     public class DocumentoModel
     {
-        public int idDocumento { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //coluna de id gerada automitacamente
+        [Key] //define como chave primaria
 
+        [Column("documentoid")]
+        public int DocumentoId { get; set; }
+
+        [Column("descricao")]
         public string? descricaoDocumento { get; set; }
 
-        public string? documento { get; set; }
-
+        [Column("situacao")]
         public string? situacaoDocumento { get; set; }
+
+        public ICollection<DocumentoModel>? Documentos  { get; set; }
     }
 }
