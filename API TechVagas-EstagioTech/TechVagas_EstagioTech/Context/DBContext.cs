@@ -17,6 +17,7 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<CargoModel> Cargos { get; set; }
 		public DbSet<ConcedenteModel> Concedentes { get; set; }
         public DbSet<AlunoModel> Alunos { get; set; }
+        public DbSet<DocumentoVersaoModel> DocumentoVersao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,9 +27,8 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<CursoModel>().Property(x => x.nomeCurso).IsRequired().HasMaxLength(200);
 
 			//Documento
-			modelBuilder.Entity<DocumentoModel>().HasKey(x => x.idDocumento);
+			modelBuilder.Entity<DocumentoModel>().HasKey(x => x.DocumentoId);
 			modelBuilder.Entity<DocumentoModel>().Property(x => x.descricaoDocumento).IsRequired().HasMaxLength(200);
-			modelBuilder.Entity<DocumentoModel>().Property(x => x.documento).IsRequired().HasMaxLength(200);
 			modelBuilder.Entity<DocumentoModel>().Property(x => x.situacaoDocumento).IsRequired().HasMaxLength(200);
 
 			//TipoDocumento
