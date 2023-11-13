@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -21,26 +22,27 @@ namespace TechVagas_EstagioTech.Services.Entities
             var documentoVersao = await _documentoVersaoRepositorio.BuscarPorId(id);
             return _mapper.Map<DocumentoVersaoDto>(documentoVersao);
         }
-        public Task Adicionar(string comentario)
+        public async Task<IEnumerable<DocumentoVersaoDto>> BuscarTodosTipoDocumentos()
         {
-            throw new NotImplementedException();
+            var documentoVersao = await _documentoVersaoRepositorio.BuscarTodasVersoesDocumentos();
+            return _mapper.Map<IEnumerable<DocumentoVersaoDto>>(documentoVersao);
+        }
+        public async Task Adicionar(string comentario)
+        {
+
+            var documentoVersao = new DocumentoVersaoModel() { Comentario = comentario };
+            await _documentoVersaoRepositorio.Adicionar(documentoVersao);
         }
 
-        public Task Apagar(int id)
+        public async Task Atualizar(DocumentoVersaoDto documentoVersaoDto)
         {
-            throw new NotImplementedException();
+            var documentoVersao = _mapper.Map<DocumentoVersaoModel>(documentoVersaoDto);
+            await _documentoVersaoRepositorio.Atualizar(documentoVersao);
         }
 
-        public Task Atualizar(DocumentoVersaoDto documentoVersaoDto)
+        public async Task Apagar(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        
-
-        public Task<IEnumerable<DocumentoVersaoDto>> BuscarTodosTipoDocumentos()
-        {
-            throw new NotImplementedException();
-        }
+            await _documentoVersaoRepositorio.Apagar(id);
+        }   
     }
 }

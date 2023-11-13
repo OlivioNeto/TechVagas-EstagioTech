@@ -30,33 +30,39 @@ namespace TechVagas_EstagioTech
 			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-			//Injeção de dependencia
-			
+            //Injeção de dependencia
 
-			builder.Services.AddScoped<ICursoRepositorio, CursoRepositorio>();
-			builder.Services.AddScoped<ICursoService, CursoService>();
+            //aluno
+            builder.Services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
+            builder.Services.AddScoped<IAlunoService, AlunoService>();
 
-			builder.Services.AddScoped<IDocumentoRepositorio, DocumentoRepositorio>();
-			builder.Services.AddScoped<IDocumentoService, DocumentoService>();
-
-			builder.Services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
-			builder.Services.AddScoped<ITipoDocumentoService, TipoDocumentoService>();
-
-			builder.Services.AddScoped<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
-			builder.Services.AddScoped<ITipoEstagioService, TipoEstagioService>();
-
-            builder.Services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
-            builder.Services.AddScoped<IConcedenteService, ConcedenteService>();
-
-            builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
-			builder.Services.AddScoped<IVagasService, VagasService>();
-
+            //cargo
             builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
             builder.Services.AddScoped<ICargoService, CargoService>();
 
-			builder.Services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
-			builder.Services.AddScoped<IAlunoService, AlunoService>();
+            //curso
+            builder.Services.AddScoped<ICursoRepositorio, CursoRepositorio>();
+			builder.Services.AddScoped<ICursoService, CursoService>();
 
+            //documento
+			builder.Services.AddScoped<IDocumentoRepositorio, DocumentoRepositorio>();
+			builder.Services.AddScoped<IDocumentoService, DocumentoService>();
+
+            //documemento versão
+            builder.Services.AddScoped<IDocumentoVersaoRepositorio, DocumentoVersaoRepositorio>();
+            builder.Services.AddScoped<IDocumentoVersaoService, DocumentoVersaoService>();
+
+            //tipo documento
+            builder.Services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+			builder.Services.AddScoped<ITipoDocumentoService, TipoDocumentoService>();
+
+            //tipo estagio
+			builder.Services.AddScoped<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
+			builder.Services.AddScoped<ITipoEstagioService, TipoEstagioService>();
+
+            //vagas
+            builder.Services.AddScoped<IVagasRepositorio, VagasRepositorio>();
+			builder.Services.AddScoped<IVagasService, VagasService>();
 
 			var app = builder.Build();
 
