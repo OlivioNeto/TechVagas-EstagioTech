@@ -7,15 +7,43 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:API TechVagas-EstagioTech/TechVagas_EstagioTech/Migrations/20231109121306_testando.cs
-    public partial class testando : Migration
-========
-    public partial class teste : Migration
->>>>>>>> b931c8739448e4ed1b8096dca9d64e54cb0f5010:API TechVagas-EstagioTech/TechVagas_EstagioTech/Migrations/20231109131249_teste.cs
+    public partial class legal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "aluno",
+                columns: table => new
+                {
+                    alunoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nome = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    idade = table.Column<int>(type: "integer", nullable: false),
+                    rg = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
+                    statusaluno = table.Column<bool>(type: "boolean", nullable: false),
+                    numeromatricula = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    areainteresse = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    habilidades = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    experiencias = table.Column<string>(type: "character varying(350)", maxLength: 350, nullable: false),
+                    disponibilidadehorario = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false),
+                    curriculo = table.Column<string>(type: "text", nullable: false),
+                    cpf = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
+                    cidade = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    datanascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    nivelescolaridade = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    telefone = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
+                    email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    endereco = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    genero = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    bairro = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    cep = table.Column<string>(type: "character varying(9)", maxLength: 9, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_aluno", x => x.alunoid);
+                });
+
             migrationBuilder.CreateTable(
                 name: "concedente",
                 columns: table => new
@@ -61,29 +89,29 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoDocumento",
+                name: "tipodocumento",
                 columns: table => new
                 {
-                    idTipoDocumento = table.Column<int>(type: "integer", nullable: false)
+                    tipodocumentoid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricaoTipoDocumento = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoDocumento", x => x.idTipoDocumento);
+                    table.PrimaryKey("PK_tipodocumento", x => x.tipodocumentoid);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoEstagio",
+                name: "tipoestagio",
                 columns: table => new
                 {
-                    idTipoEstagio = table.Column<int>(type: "integer", nullable: false)
+                    tipoestagioid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricaoTipoEstagio = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoEstagio", x => x.idTipoEstagio);
+                    table.PrimaryKey("PK_tipoestagio", x => x.tipoestagioid);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,6 +179,9 @@ namespace TechVagas_EstagioTech.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "aluno");
+
+            migrationBuilder.DropTable(
                 name: "cargo");
 
             migrationBuilder.DropTable(
@@ -160,10 +191,10 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "Documento");
 
             migrationBuilder.DropTable(
-                name: "TipoDocumento");
+                name: "tipodocumento");
 
             migrationBuilder.DropTable(
-                name: "TipoEstagio");
+                name: "tipoestagio");
 
             migrationBuilder.DropTable(
                 name: "vagas");

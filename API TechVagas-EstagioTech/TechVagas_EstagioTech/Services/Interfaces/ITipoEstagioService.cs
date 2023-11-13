@@ -6,8 +6,8 @@ namespace TechVagas_EstagioTech.Services.Interfaces
 	{
 		Task<IEnumerable<TipoEstagioDto>> BuscarTodosTipoEstagio();
 		Task<TipoEstagioDto> BuscarPorId(int id);
-		Task Adicionar(TipoEstagioDto tipoEstagioDto);
-		Task Atualizar(TipoEstagioDto tipoEstagioDto);
+        Task Adicionar(string descricaoTipoEstagio);
+        Task Atualizar(TipoEstagioDto tipoEstagioDto);
 		Task Apagar(int id);
 	}
 }
