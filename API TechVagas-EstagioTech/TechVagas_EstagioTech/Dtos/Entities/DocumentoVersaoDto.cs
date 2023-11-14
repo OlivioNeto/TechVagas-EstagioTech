@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -34,7 +35,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         
         [JsonIgnore]
-        public DocumentoDto? DocumentoDto { get; set; }
+		public ICollection<DocumentoModel> Documentos { get; set; }
 
 		[ForeignKey("documentoid")]
 		public int documentoId { get; set; }
