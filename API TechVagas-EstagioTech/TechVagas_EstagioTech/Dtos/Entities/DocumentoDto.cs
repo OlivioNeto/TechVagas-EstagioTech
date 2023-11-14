@@ -7,6 +7,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 	public class DocumentoDto
 	{
         [Key]
+        [JsonIgnore]
         public int idDocumento { get; set; }
 
 		[Required(ErrorMessage = "Informe a descrição do documento")]
@@ -14,13 +15,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		[MaxLength(100)]
 		public string? descricaoDocumento { get; set; }
 
-		[Required(ErrorMessage = "Informe o documento")]
-		public string? documento { get; set; }
 
 		[Required(ErrorMessage = "Informe a situação do documento")]
 		public string? situacaoDocumento { get; set; }
-
-		[JsonIgnore]
-		public DocumentoVersaoModel? DocumentoVersao { get; set; }
 	}
 }

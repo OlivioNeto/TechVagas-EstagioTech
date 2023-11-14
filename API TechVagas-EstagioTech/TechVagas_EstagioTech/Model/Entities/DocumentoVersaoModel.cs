@@ -24,9 +24,9 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("situacao")]
         public string? Situacao { get; set; }
 
-        public ICollection<DocumentoModel> Documentos { get; set; }
+        public virtual DocumentoModel Documento { get; set; }
 
-		[Column("documentoid")]
+        [Column("documentoid")]
         public int DocumentoId { get; set; }
     }
 }

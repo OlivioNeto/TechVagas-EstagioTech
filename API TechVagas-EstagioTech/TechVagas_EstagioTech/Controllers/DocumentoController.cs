@@ -40,7 +40,7 @@ namespace TechVagas_EstagioTech.Controllers
 		{
 			if (documentoDto is null) return BadRequest("Dado inválido!");
 			await _documentoService.Adicionar(documentoDto);
-			return new CreatedAtRouteResult("GetDocumento", new { id = documentoDto.idDocumento }, documentoDto);
+			return Ok("Dado cadastrado com sucesso");
 		}
 
 		[HttpPut("{id:int}")]

@@ -27,11 +27,10 @@ namespace TechVagas_EstagioTech.Services.Entities
             var documentoVersao = await _documentoVersaoRepositorio.BuscarTodasVersoesDocumentos();
             return _mapper.Map<IEnumerable<DocumentoVersaoDto>>(documentoVersao);
         }
-        public async Task Adicionar(string comentario)
+        public async Task Adicionar(DocumentoVersaoDto documentoVersaoDto)
         {
-
-            var documentoVersao = new DocumentoVersaoModel() { Comentario = comentario };
-            await _documentoVersaoRepositorio.Adicionar(documentoVersao);
+            var documento = _mapper.Map<DocumentoVersaoModel>(documentoVersaoDto);
+            await _documentoVersaoRepositorio.Adicionar(documento);
         }
 
         public async Task Atualizar(DocumentoVersaoDto documentoVersaoDto)
