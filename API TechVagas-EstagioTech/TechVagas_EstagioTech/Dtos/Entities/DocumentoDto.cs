@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -17,5 +19,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
 		[Required(ErrorMessage = "Informe a situação do documento")]
 		public string? situacaoDocumento { get; set; }
+
+		[JsonIgnore]
+		public DocumentoVersaoModel? DocumentoVersao { get; set; }
 	}
 }

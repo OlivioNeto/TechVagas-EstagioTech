@@ -105,11 +105,11 @@ namespace TechVagas_EstagioTech.Data
                 .WithOne(y => y.Concedente)
                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
-            //Relacionamento: Documento -> Documento Versão
-            modelBuilder.Entity<DocumentoModel>()
-                .HasMany(x => x.Documentos)
-                .WithOne(y => y.DocumentoVersao)
-                .IsRequired().OnDelete(DeleteBehavior.Cascade);
-        }
+			//Relacionamento: Documento -> Documento Versão
+			modelBuilder.Entity<DocumentoVersaoModel>()
+				.HasMany(x => x.Documentos)
+				.WithOne(y => y.DocumentoVersao)
+				.IsRequired().OnDelete(DeleteBehavior.Cascade);
+		}
     }
 }
