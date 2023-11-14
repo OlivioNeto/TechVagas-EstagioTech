@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231114131901_teste")]
+    [Migration("20231114160849_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -249,9 +249,6 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DocumentoId"));
 
-                    b.Property<int>("DocumentoVersaoId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("descricaoDocumento")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -265,8 +262,6 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("situacao");
 
                     b.HasKey("DocumentoId");
-
-                    b.HasIndex("DocumentoVersaoId");
 
                     b.ToTable("documento");
                 });
@@ -309,6 +304,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("situacao");
 
                     b.HasKey("DocumentoVersaoId");
+
+                    b.HasIndex("DocumentoId");
 
                     b.ToTable("documentoversao");
                 });
@@ -437,15 +434,15 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Vagas");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", "DocumentoVersao")
-                        .WithMany("Documentos")
-                        .HasForeignKey("DocumentoVersaoId")
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.DocumentoModel", "Documento")
+                        .WithMany("DocumentoVersoes")
+                        .HasForeignKey("DocumentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DocumentoVersao");
+                    b.Navigation("Documento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
@@ -464,9 +461,9 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Vagas");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
                 {
-                    b.Navigation("Documentos");
+                    b.Navigation("DocumentoVersoes");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
