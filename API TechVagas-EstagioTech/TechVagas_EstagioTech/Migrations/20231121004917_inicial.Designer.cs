@@ -12,8 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231114160849_teste")]
-    partial class teste
+    [Migration("20231121004917_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

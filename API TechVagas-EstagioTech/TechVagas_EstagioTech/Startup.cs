@@ -1,0 +1,95 @@
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using TechVagas_EstagioTech.Data;
+using TechVagas_EstagioTech.Repositorios.Entities;
+using TechVagas_EstagioTech.Repositorios.Interfaces;
+using TechVagas_EstagioTech.Repositorios;
+using TechVagas_EstagioTech.Services.Entities;
+using TechVagas_EstagioTech.Services.Interfaces;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+
+namespace TechVagas_EstagioTech
+{
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
+
+		public IConfiguration Configuration { get; }
+
+		public void ConfigureServices(IServiceCollection services)
+		{
+			var connectionString = Configuration.GetConnectionString("DefaultConnection");
+			services.AddDbContext<DBContext>(options =>
+				options.UseNpgsql(connectionString));
+
+			// Garantir que todos os assemblies do domínio sejam injetados
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+			// Injeção de dependência
+			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
+			services.AddScoped<IAlunoService, AlunoService>();
+
+			services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
+			services.AddScoped<IConcedenteService, ConcedenteService>();
+
+			services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+			services.AddScoped<ICargoService, CargoService>();
+
+			services.AddScoped<ICursoRepositorio, CursoRepositorio>();
+			services.AddScoped<ICursoService, CursoService>();
+
+			services.AddScoped<IDocumentoRepositorio, DocumentoRepositorio>();
+			services.AddScoped<IDocumentoService, DocumentoService>();
+
+			services.AddScoped<IDocumentoVersaoRepositorio, DocumentoVersaoRepositorio>();
+			services.AddScoped<IDocumentoVersaoService, DocumentoVersaoService>();
+
+			services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+			services.AddScoped<ITipoDocumentoService, TipoDocumentoService>();
+
+			services.AddScoped<ITipoEstagioRepositorio, TipoEstagioRepositorio>();
+			services.AddScoped<ITipoEstagioService, TipoEstagioService>();
+
+			services.AddScoped<IVagasRepositorio, VagasRepositorio>();
+			services.AddScoped<IVagasService, VagasService>();
+		}
+
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+				app.UseSwagger();
+				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sua API V1"));
+			}
+
+			app.UseCors(options =>
+			{
+				options.WithOrigins("http://localhost:3000");
+				options.AllowAnyMethod();
+				options.AllowAnyHeader();
+			});
+
+			app.UseHttpsRedirection();
+			app.UseRouting();
+			app.UseStaticFiles();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
+
+			app.UseCors("MyPolicy");
+
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+			});
+		}
+	}
+}
