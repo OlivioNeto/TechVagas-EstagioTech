@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Repositorios.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
@@ -59,6 +60,26 @@ namespace TechVagas_EstagioTech
 
 			services.AddScoped<IVagasRepositorio, VagasRepositorio>();
 			services.AddScoped<IVagasService, VagasService>();
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy("MyPolicy",
+					builder =>
+					{
+						builder.WithOrigins("http://localhost:3000")
+							   .AllowAnyMethod()
+							   .AllowAnyHeader();
+					});
+			});
+
+			services.AddAuthorization(); // Configuração do serviço de autorização
+
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sua API", Version = "v1" });
+			});
+
+			services.AddMvc(); // Certifique-se de adicionar isto se ainda não estiver adicionado
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -70,21 +91,14 @@ namespace TechVagas_EstagioTech
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sua API V1"));
 			}
 
-			app.UseCors(options =>
-			{
-				options.WithOrigins("http://localhost:3000");
-				options.AllowAnyMethod();
-				options.AllowAnyHeader();
-			});
-
 			app.UseHttpsRedirection();
 			app.UseRouting();
 			app.UseStaticFiles();
 
+			app.UseCors("MyPolicy");
+
 			app.UseAuthentication();
 			app.UseAuthorization();
-
-			app.UseCors("MyPolicy");
 
 			app.UseEndpoints(endpoints =>
 			{
