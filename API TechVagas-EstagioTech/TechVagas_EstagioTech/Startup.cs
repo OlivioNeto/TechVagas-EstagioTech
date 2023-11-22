@@ -61,18 +61,24 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<IVagasRepositorio, VagasRepositorio>();
 			services.AddScoped<IVagasService, VagasService>();
 
-			services.AddCors(options =>
-			{
-				options.AddPolicy("MyPolicy",
-					builder =>
-					{
-						builder.WithOrigins("http://localhost:3000")
-							   .AllowAnyMethod()
-							   .AllowAnyHeader();
-					});
-			});
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:3000", "http://localhost:5173")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }));
 
-			services.AddAuthorization(); // Configuração do serviço de autorização
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiScope", policy =>
+                {
+                    policy.RequireClaim("scope", "sged");
+                });
+            });
+
+
+            services.AddAuthorization(); // Configuração do serviço de autorização
 
 			services.AddSwaggerGen(c =>
 			{
