@@ -12,8 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231127112233_funfs")]
-    partial class funfs
+    [Migration("20231127160005_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -7,7 +7,6 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 	public class DocumentoDto
 	{
         [Key]
-        [JsonIgnore]
         public int DocumentoId { get; set; }
 
 		[Required(ErrorMessage = "Informe a descrição do documento")]
