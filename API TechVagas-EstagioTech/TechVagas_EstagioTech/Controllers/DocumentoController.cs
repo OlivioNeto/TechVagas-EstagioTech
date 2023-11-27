@@ -43,10 +43,11 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok("Dado cadastrado com sucesso");
 		}
 
-		[HttpPut("{id:int}")]
-		public async Task<ActionResult> Put([FromBody] DocumentoDto documentoDto)
+		[HttpPut]
+		public async Task<ActionResult> Put(int id, [FromBody] DocumentoDto documentoDto)
 		{
-			if (documentoDto is null) return BadRequest("Dado invalido!");
+			if (documentoDto is null || id == 0) return BadRequest("Dado invalido!");
+			documentoDto.DocumentoId = id;
 			await _documentoService.Atualizar(documentoDto);
 			return Ok(documentoDto);
 		}
