@@ -6,7 +6,7 @@ namespace TechVagas_EstagioTech.Services.Interfaces
     {
         Task<IEnumerable<DocumentoVersaoDto>> BuscarTodosTipoDocumentos();
         Task<DocumentoVersaoDto> BuscarPorId(int id);
-        Task Adicionar(string comentario);
+        Task Adicionar(DocumentoVersaoDto documentoVersaoDto);
         Task Atualizar(DocumentoVersaoDto documentoVersaoDto);
         Task Apagar(int id);
     }
