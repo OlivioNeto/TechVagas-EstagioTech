@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
-using TechVagas_EstagioTech.Repositorios.Interfaces;
-using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
@@ -37,8 +33,8 @@ namespace TechVagas_EstagioTech.Controllers
 
 		[HttpPost]
 		public async Task<ActionResult> Post([FromBody] string descricaoTipoDocumento)
-		{
-			if (descricaoTipoDocumento is null) return BadRequest("Dado inválido!");
+		{	
+			if (string.IsNullOrEmpty(descricaoTipoDocumento)) return BadRequest("Dado inválido!");
 			await _tipoDocumentoService.Adicionar(descricaoTipoDocumento);
 			return Ok("Documento registrado com sucesso");
 		}
