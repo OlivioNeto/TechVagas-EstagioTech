@@ -12,6 +12,7 @@ using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace TechVagas_EstagioTech
 {
@@ -29,6 +30,10 @@ namespace TechVagas_EstagioTech
 			var connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddDbContext<DBContext>(options =>
 				options.UseNpgsql(connectionString));
+
+			services.AddIdentity<IdentityUser, IdentityRole>()
+				.AddEntityFrameworkStores<DbContext>()
+				.AddDefaultTokenProviders();
 
 			// Garantir que todos os assemblies do domínio sejam injetados
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
