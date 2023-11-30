@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {
@@ -23,7 +24,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         public TipoUsuarioModel? TipoUsuario { get; set; }
 
         [ForeignKey("idtipousuario")]
-        public int IdTipoUsuario { get; set; }
+        public int tipoUsuarioId { get; set; }
 
     }
 }

@@ -17,7 +17,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("descricaotipousuario")]
         public string DescricaoTipoUsuario { get; set; }
 
-        public ICollection<UsuarioModel>? Usuarios { get; set; }
+        public ICollection<UsuarioModel>? UsuarioModel { get; set; }
 
     }
 }

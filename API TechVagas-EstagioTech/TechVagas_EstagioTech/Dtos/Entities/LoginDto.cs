@@ -4,6 +4,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 {
     public class LoginDto
     {
+        [Key]
         [Required(ErrorMessage = "O e-mail é requerido!")]
         [EmailAddress]
         public string Email { get; set; }

@@ -74,7 +74,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<UsuarioModel>().Property(b => b.StatusUsuario).HasMaxLength(19).IsRequired();
 
             // Relacionamento: TipoUsuario -> Usuario
-            modelBuilder.Entity<TipoUsuarioModel>().HasMany(p => p.Usuarios).WithOne(b => b.TipoUsuario).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<TipoUsuarioModel>().HasMany(p => p.UsuarioModel).WithOne(b => b.TipoUsuario).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             //Curso
             modelBuilder.Entity<CursoModel>().HasKey(x => x.idCurso);
@@ -138,9 +138,9 @@ namespace TechVagas_EstagioTech.Data
 );
 
             modelBuilder.Entity<UsuarioModel>().HasData(
-                new UsuarioModel { usuarioId = 1, NomeUsuario = "Dev", EmailUsuario = "devproduction@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, IdTipoUsuario = 1 },
-                new UsuarioModel { usuarioId = 2, NomeUsuario = "Admin", EmailUsuario = "admin@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, IdTipoUsuario = 2 },
-                new UsuarioModel { usuarioId = 3, NomeUsuario = "Aluno", EmailUsuario = "aluno@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, IdTipoUsuario = 3 }
+                new UsuarioModel { usuarioId = 1, NomeUsuario = "Dev", EmailUsuario = "devproduction@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, tipoUsuarioId = 1 },
+                new UsuarioModel { usuarioId = 2, NomeUsuario = "Admin", EmailUsuario = "admin@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, tipoUsuarioId = 2 },
+                new UsuarioModel { usuarioId = 3, NomeUsuario = "Aluno", EmailUsuario = "aluno@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, tipoUsuarioId = 3 }
             );
 
 
