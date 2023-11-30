@@ -7,8 +7,8 @@ namespace TechVagas_EstagioTech.Repositorios
 {
     public class TipoEstagioRepositorio : ITipoEstagioRepositorio
     {
-        private readonly DBContext _dbContext;
-        public TipoEstagioRepositorio(DBContext tipoEstagioDBContex)
+        private readonly AppDbContext _dbContext;
+        public TipoEstagioRepositorio(AppDbContext tipoEstagioDBContex)
         {
             _dbContext = tipoEstagioDBContex;
         }

@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-    public partial class teste : Migration
+    public partial class Banco : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,6 +90,18 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "login",
+                columns: table => new
+                {
+                    email = table.Column<string>(type: "text", nullable: false),
+                    senha = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_login", x => x.email);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tipodocumento",
                 columns: table => new
                 {
@@ -111,6 +125,21 @@ namespace TechVagas_EstagioTech.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tipoestagio", x => x.tipoestagioid);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tipousuario",
+                columns: table => new
+                {
+                    idtipousuario = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nivelacesso = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
+                    nometipousuario = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    descricaotipousuario = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tipousuario", x => x.idtipousuario);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,6 +195,29 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "usuario",
+                columns: table => new
+                {
+                    idusuario = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nomeusuario = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false),
+                    emailusuario = table.Column<string>(type: "text", nullable: false),
+                    senhausuario = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    statususuario = table.Column<bool>(type: "boolean", maxLength: 19, nullable: false),
+                    tipoUsuarioId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_usuario", x => x.idusuario);
+                    table.ForeignKey(
+                        name: "FK_usuario_tipousuario_tipoUsuarioId",
+                        column: x => x.tipoUsuarioId,
+                        principalTable: "tipousuario",
+                        principalColumn: "idtipousuario",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "cargo",
                 columns: table => new
                 {
@@ -186,6 +238,26 @@ namespace TechVagas_EstagioTech.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "tipousuario",
+                columns: new[] { "idtipousuario", "descricaotipousuario", "nivelacesso", "nometipousuario" },
+                values: new object[,]
+                {
+                    { 1, "Pode efetuar todas as funcionalidades disponíveis. Voltado ao time de desenvolvimento.", "A", "Desenvolvedor" },
+                    { 2, "Pode efetuar todas as funcionalidades disponíveis. .", "A", "Admin" },
+                    { 3, "Apenas vizualizar informações, porém dados sensíveis são mascarados.", "C", "Aluno" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "usuario",
+                columns: new[] { "idusuario", "emailusuario", "nomeusuario", "senhausuario", "statususuario", "tipoUsuarioId" },
+                values: new object[,]
+                {
+                    { 1, "devproduction@gmail.com", "Dev", "123456", true, 1 },
+                    { 2, "admin@gmail.com", "Admin", "123456", true, 2 },
+                    { 3, "aluno@gmail.com", "Aluno", "123456", true, 3 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_cargo_vagasid",
                 table: "cargo",
@@ -195,6 +267,11 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "IX_documentoversao_documentoid",
                 table: "documentoversao",
                 column: "documentoid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuario_tipoUsuarioId",
+                table: "usuario",
+                column: "tipoUsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_vagas_concedenteId",
@@ -218,16 +295,25 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "documentoversao");
 
             migrationBuilder.DropTable(
+                name: "login");
+
+            migrationBuilder.DropTable(
                 name: "tipodocumento");
 
             migrationBuilder.DropTable(
                 name: "tipoestagio");
 
             migrationBuilder.DropTable(
+                name: "usuario");
+
+            migrationBuilder.DropTable(
                 name: "vagas");
 
             migrationBuilder.DropTable(
                 name: "documento");
+
+            migrationBuilder.DropTable(
+                name: "tipousuario");
 
             migrationBuilder.DropTable(
                 name: "concedente");

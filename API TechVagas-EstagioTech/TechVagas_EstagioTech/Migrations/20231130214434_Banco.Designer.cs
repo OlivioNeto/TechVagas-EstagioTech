@@ -11,9 +11,9 @@ using TechVagas_EstagioTech.Data;
 
 namespace TechVagas_EstagioTech.Migrations
 {
-    [DbContext(typeof(DBContext))]
-    [Migration("20231128141017_teste")]
-    partial class teste
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20231130214434_Banco")]
+    partial class Banco
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,6 +310,22 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("documentoversao");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.LoginModel", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("senha");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("login");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
                 {
                     b.Property<int>("idTipoDocumento")
@@ -348,6 +364,131 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("idTipoEstagio");
 
                     b.ToTable("tipoestagio");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoUsuarioModel", b =>
+                {
+                    b.Property<int>("tipoUsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("idtipousuario");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("tipoUsuarioId"));
+
+                    b.Property<string>("DescricaoTipoUsuario")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("descricaotipousuario");
+
+                    b.Property<string>("NivelAcesso")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("character varying(1)")
+                        .HasColumnName("nivelacesso");
+
+                    b.Property<string>("NomeTipoUsuario")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("nometipousuario");
+
+                    b.HasKey("tipoUsuarioId");
+
+                    b.ToTable("tipousuario");
+
+                    b.HasData(
+                        new
+                        {
+                            tipoUsuarioId = 1,
+                            DescricaoTipoUsuario = "Pode efetuar todas as funcionalidades disponíveis. Voltado ao time de desenvolvimento.",
+                            NivelAcesso = "A",
+                            NomeTipoUsuario = "Desenvolvedor"
+                        },
+                        new
+                        {
+                            tipoUsuarioId = 2,
+                            DescricaoTipoUsuario = "Pode efetuar todas as funcionalidades disponíveis. .",
+                            NivelAcesso = "A",
+                            NomeTipoUsuario = "Admin"
+                        },
+                        new
+                        {
+                            tipoUsuarioId = 3,
+                            DescricaoTipoUsuario = "Apenas vizualizar informações, porém dados sensíveis são mascarados.",
+                            NivelAcesso = "C",
+                            NomeTipoUsuario = "Aluno"
+                        });
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.UsuarioModel", b =>
+                {
+                    b.Property<int>("usuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("idusuario");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("usuarioId"));
+
+                    b.Property<string>("EmailUsuario")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("emailusuario");
+
+                    b.Property<string>("NomeUsuario")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("character varying(70)")
+                        .HasColumnName("nomeusuario");
+
+                    b.Property<string>("SenhaUsuario")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("senhausuario");
+
+                    b.Property<bool>("StatusUsuario")
+                        .HasMaxLength(19)
+                        .HasColumnType("boolean")
+                        .HasColumnName("statususuario");
+
+                    b.Property<int>("tipoUsuarioId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("usuarioId");
+
+                    b.HasIndex("tipoUsuarioId");
+
+                    b.ToTable("usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            usuarioId = 1,
+                            EmailUsuario = "devproduction@gmail.com",
+                            NomeUsuario = "Dev",
+                            SenhaUsuario = "123456",
+                            StatusUsuario = true,
+                            tipoUsuarioId = 1
+                        },
+                        new
+                        {
+                            usuarioId = 2,
+                            EmailUsuario = "admin@gmail.com",
+                            NomeUsuario = "Admin",
+                            SenhaUsuario = "123456",
+                            StatusUsuario = true,
+                            tipoUsuarioId = 2
+                        },
+                        new
+                        {
+                            usuarioId = 3,
+                            EmailUsuario = "aluno@gmail.com",
+                            NomeUsuario = "Aluno",
+                            SenhaUsuario = "123456",
+                            StatusUsuario = true,
+                            tipoUsuarioId = 3
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
@@ -445,6 +586,17 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Documento");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.UsuarioModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoUsuarioModel", "TipoUsuario")
+                        .WithMany("UsuarioModel")
+                        .HasForeignKey("tipoUsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoUsuario");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", "Concedente")
@@ -464,6 +616,11 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
                 {
                     b.Navigation("DocumentoVersoes");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoUsuarioModel", b =>
+                {
+                    b.Navigation("UsuarioModel");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>

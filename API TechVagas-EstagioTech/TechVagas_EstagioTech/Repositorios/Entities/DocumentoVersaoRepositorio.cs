@@ -8,8 +8,8 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
     public class DocumentoVersaoRepositorio : IDocumentoVersaoRepositorio
     {
         
-        private readonly DBContext _dbContext;
-        public DocumentoVersaoRepositorio(DBContext documentoVersaoDBContext)
+        private readonly AppDbContext _dbContext;
+        public DocumentoVersaoRepositorio(AppDbContext documentoVersaoDBContext)
         {
             _dbContext = documentoVersaoDBContext;
         }
