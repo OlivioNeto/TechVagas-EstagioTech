@@ -20,7 +20,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("statususuario")]
         public Boolean StatusUsuario { get; set; }
 
-        public TipoUsuario? TipoUsuario { get; set; }
+        public TipoUsuarioModel? TipoUsuario { get; set; }
 
         [ForeignKey("idtipousuario")]
         public int IdTipoUsuario { get; set; }
