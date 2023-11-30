@@ -19,6 +19,9 @@ namespace TechVagas_EstagioTech.Data
 		public DbSet<ConcedenteModel> Concedentes { get; set; }
         public DbSet<AlunoModel> Alunos { get; set; }
         public DbSet<DocumentoVersaoModel> DocumentoVersao { get; set; }
+        public DbSet<UsuarioModel> Usuarios { get; set; }
+        public DbSet<TipoUsuarioModel> tipoUsuario { get; set; }
+        public DbSet<LoginModel> login { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
