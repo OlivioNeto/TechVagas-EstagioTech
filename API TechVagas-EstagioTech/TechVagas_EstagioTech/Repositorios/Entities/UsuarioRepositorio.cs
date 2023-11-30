@@ -2,10 +2,11 @@
 using System;
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios.Entities
 {
-    public class UsuarioRepositorio
+    public class UsuarioRepositorio : IUsuarioRepositorio
     {
         private readonly AppDbContext _dbContext;
 
