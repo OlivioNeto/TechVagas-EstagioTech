@@ -43,10 +43,16 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
 			services.AddScoped<IAlunoService, AlunoService>();
 
-			services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
+            services.AddScoped<ITipoUsuarioRepositorio, TipoUsuarioRepositorio>();
+            services.AddScoped<ITipoUsuarioService, TipoUsuarioService>();
+
+            services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
 			services.AddScoped<IConcedenteService, ConcedenteService>();
 
-			services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+
+            services.AddScoped<ICargoRepositorio, CargoRepositorio>();
 			services.AddScoped<ICargoService, CargoService>();
 
 			services.AddScoped<ICursoRepositorio, CursoRepositorio>();

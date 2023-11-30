@@ -48,6 +48,12 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<AlunoModel>().Property(x => x.Bairro).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Cep).IsRequired().HasMaxLength(9);
 
+            // Builder: TipoUsuario
+            modelBuilder.Entity<TipoUsuarioModel>().HasKey(b => b.tipoUsuarioId);
+            modelBuilder.Entity<TipoUsuarioModel>().Property(b => b.NivelAcesso).HasMaxLength(1).IsRequired();
+            modelBuilder.Entity<TipoUsuarioModel>().Property(b => b.NomeTipoUsuario).HasMaxLength(20).IsRequired();
+            modelBuilder.Entity<TipoUsuarioModel>().Property(b => b.DescricaoTipoUsuario).HasMaxLength(300).IsRequired();
+
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
@@ -59,6 +65,16 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.ResponsavelEstagio).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.Cnpj).IsRequired().HasMaxLength(16);
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(50);
+
+            // Builder: Usuario 
+            modelBuilder.Entity<UsuarioModel>().HasKey(b => b.usuarioId);
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.NomeUsuario).HasMaxLength(70).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.EmailUsuario).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.SenhaUsuario).HasMaxLength(50).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.StatusUsuario).HasMaxLength(19).IsRequired();
+
+            // Relacionamento: TipoUsuario -> Usuario
+            modelBuilder.Entity<TipoUsuarioModel>().HasMany(p => p.Usuarios).WithOne(b => b.TipoUsuario).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             //Curso
             modelBuilder.Entity<CursoModel>().HasKey(x => x.idCurso);
@@ -113,6 +129,21 @@ namespace TechVagas_EstagioTech.Data
             //Relacionamento: Documento -> Documento Versão
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.DocumentoVersaoId);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x=> x.Situacao).IsRequired();
-		}
+
+            //Iserções
+            modelBuilder.Entity<TipoUsuarioModel>().HasData(
+                new TipoUsuarioModel { tipoUsuarioId = 1, NomeTipoUsuario = "Desenvolvedor", NivelAcesso = "A", DescricaoTipoUsuario = "Pode efetuar todas as funcionalidades disponíveis. Voltado ao time de desenvolvimento." },
+                new TipoUsuarioModel { tipoUsuarioId = 2, NomeTipoUsuario = "Admin", NivelAcesso = "A", DescricaoTipoUsuario = "Pode efetuar todas as funcionalidades disponíveis. ." },
+                new TipoUsuarioModel { tipoUsuarioId = 3, NomeTipoUsuario = "Aluno", NivelAcesso = "C", DescricaoTipoUsuario = "Apenas vizualizar informações, porém dados sensíveis são mascarados." }
+);
+
+            modelBuilder.Entity<UsuarioModel>().HasData(
+                new UsuarioModel { usuarioId = 1, NomeUsuario = "Dev", EmailUsuario = "devproduction@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, IdTipoUsuario = 1 },
+                new UsuarioModel { usuarioId = 2, NomeUsuario = "Admin", EmailUsuario = "admin@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, IdTipoUsuario = 2 },
+                new UsuarioModel { usuarioId = 3, NomeUsuario = "Aluno", EmailUsuario = "aluno@gmail.com", SenhaUsuario = "123456", StatusUsuario = true, IdTipoUsuario = 3 }
+            );
+
+
+        }
     }
 }
