@@ -6,7 +6,7 @@ namespace TechVagas_EstagioTech.Model.Entities
     public class TipoUsuarioModel
     {
         [Column("idtipousuario")]
-        public int TipoUsuarioId { get; set; }
+        public int tipoUsuarioId { get; set; }
 
         [Column("nivelacesso")]
         public string NivelAcesso { get; set; }

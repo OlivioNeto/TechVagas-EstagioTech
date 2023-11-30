@@ -6,7 +6,7 @@ namespace TechVagas_EstagioTech.Model.Entities
     public class UsuarioModel
     {
         [Column("idusuario")]
-        public int Id { get; set; }
+        public int usuarioId { get; set; }
 
         [Column("nomeusuario")]
         public string NomeUsuario { get; set; }
