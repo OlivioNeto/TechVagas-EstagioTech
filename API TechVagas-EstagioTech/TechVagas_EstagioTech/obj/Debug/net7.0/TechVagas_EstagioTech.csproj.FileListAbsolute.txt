@@ -264,3 +264,11 @@ C:\PROJETOS\FATEC\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_Esta
 C:\PROJETOS\FATEC\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.pdb
 C:\PROJETOS\FATEC\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.genruntimeconfig.cache
 C:\PROJETOS\FATEC\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\ref\TechVagas_EstagioTech.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\Dev\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

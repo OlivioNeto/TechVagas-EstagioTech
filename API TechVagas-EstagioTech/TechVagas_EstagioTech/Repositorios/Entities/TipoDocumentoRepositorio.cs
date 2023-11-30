@@ -7,8 +7,8 @@ namespace TechVagas_EstagioTech.Repositorios
 {
     public class TipoDocumentoRepositorio : ITipoDocumentoRepositorio
 	{
-        private readonly DBContext _dbContext;
-        public TipoDocumentoRepositorio(DBContext tipoDocumentoDBContext)
+        private readonly AppDbContext _dbContext;
+        public TipoDocumentoRepositorio(AppDbContext tipoDocumentoDBContext)
         {
             _dbContext = tipoDocumentoDBContext;
         }

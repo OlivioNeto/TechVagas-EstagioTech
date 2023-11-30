@@ -8,9 +8,9 @@ namespace TechVagas_EstagioTech.Repositorios
 {
 	public class CargoRepositorio : ICargoRepositorio
 	{
-		private readonly DBContext _dbContext;
+		private readonly AppDbContext _dbContext;
 
-		public CargoRepositorio(DBContext cargoDBContex)
+		public CargoRepositorio(AppDbContext cargoDBContex)
 		{
 			_dbContext = cargoDBContex;
 		}

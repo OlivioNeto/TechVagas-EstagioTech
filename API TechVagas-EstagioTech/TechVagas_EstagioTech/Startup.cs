@@ -13,6 +13,10 @@ using TechVagas_EstagioTech.Services.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace TechVagas_EstagioTech
 {
@@ -28,12 +32,9 @@ namespace TechVagas_EstagioTech
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var connectionString = Configuration.GetConnectionString("DefaultConnection");
-			services.AddDbContext<DBContext>(options =>
+			services.AddDbContext<AppDbContext>(options =>
 				options.UseNpgsql(connectionString));
 
-			services.AddIdentity<IdentityUser, IdentityRole>()
-				.AddEntityFrameworkStores<DbContext>()
-				.AddDefaultTokenProviders();
 
 			// Garantir que todos os assemblies do domínio sejam injetados
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -83,11 +84,39 @@ namespace TechVagas_EstagioTech
             });
 
 
-            services.AddAuthorization(); // Configuração do serviço de autorização
+            services.AddAuthentication(options => // Configuração do serviço de autorização
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }) 
+			.AddJwtBearer(options =>
 
-			services.AddSwaggerGen(c =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "TechVagasEstagioTech",
+                    ValidAudience = "WebSite",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("E2F53C76E74237C824A47C7C4156510C818A7D4C98C8E9A3105C1C7D9240E5C3"))
+                };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Bearer", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+            });
+
+
+            services.AddSwaggerGen(c =>
 			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sua API", Version = "v1" });
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechVagas_EstagioTech", Version = "v1" });
 			});
 
 			services.AddMvc(); // Certifique-se de adicionar isto se ainda não estiver adicionado
@@ -108,10 +137,13 @@ namespace TechVagas_EstagioTech
 
 			app.UseCors("MyPolicy");
 
-			app.UseAuthentication();
-			app.UseAuthorization();
+            //Adiciona a autenticacão
+            app.UseAuthentication();
 
-			app.UseEndpoints(endpoints =>
+            //habilita a autorização
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
 			});

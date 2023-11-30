@@ -7,9 +7,9 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
 {
     public class AlunoRepositorio : IAlunoRepositorio
     {
-        private readonly DBContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public AlunoRepositorio(DBContext cargoDBContex)
+        public AlunoRepositorio(AppDbContext cargoDBContex)
         {
             _dbContext = cargoDBContex;
         }

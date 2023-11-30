@@ -7,9 +7,9 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
 {
     public class ConcedenteRepositorio : IConcedenteRepositorio
     {
-        private readonly DBContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public ConcedenteRepositorio(DBContext concedenteDBContex)
+        public ConcedenteRepositorio(AppDbContext concedenteDBContex)
         {
             _dbContext = concedenteDBContex;
         }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
@@ -6,9 +6,9 @@ using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data
 {
-    public class DBContext : IdentityDbContext
+    public class AppDbContext : DbContext
     {
-        public DBContext(DbContextOptions<DBContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<TipoEstagioModel> TipoEstagio { get; set; }
         public DbSet<CursoModel> Curso { get; set; }
