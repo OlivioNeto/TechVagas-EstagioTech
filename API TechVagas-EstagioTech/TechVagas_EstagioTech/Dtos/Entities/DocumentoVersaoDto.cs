@@ -33,11 +33,11 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MaxLength (150)]
         public string? Situacao { get; set; }
 
-        
+       
         [JsonIgnore]
-		public ICollection<DocumentoModel> Documentos { get; set; }
+        public DocumentoModel? Documentos { get; set; }
 
-		[ForeignKey("documentoid")]
-		public int documentoId { get; set; }
+        [ForeignKey("documentoid")]
+		public int DocumentoId { get; set; }
     }
 }

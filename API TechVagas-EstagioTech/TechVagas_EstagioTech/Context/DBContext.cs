@@ -62,7 +62,6 @@ namespace TechVagas_EstagioTech.Data
 
 			//Documento
 			modelBuilder.Entity<DocumentoModel>().HasKey(x => x.DocumentoId);
-            modelBuilder.Entity<DocumentoModel>().HasMany(d => d.DocumentoVersoes).WithOne(v => v.Documento).HasForeignKey(v => v.DocumentoId);
             modelBuilder.Entity<DocumentoModel>().Property(x => x.descricaoDocumento).IsRequired().HasMaxLength(200);
 			modelBuilder.Entity<DocumentoModel>().Property(x => x.situacaoDocumento).IsRequired().HasMaxLength(200);
 
@@ -107,8 +106,10 @@ namespace TechVagas_EstagioTech.Data
                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             //Relacionamento: Documento -> Documento Versão
-            modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.DocumentoVersaoId);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x=> x.Situacao).IsRequired();
-		}
+            modelBuilder.Entity<DocumentoModel>()
+                 .HasMany(x => x.DocumentoVersao)
+                 .WithOne(y => y.Documentos)
+                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
