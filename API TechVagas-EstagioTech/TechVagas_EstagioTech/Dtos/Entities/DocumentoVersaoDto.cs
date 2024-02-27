@@ -20,7 +20,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [Required(ErrorMessage = "É necessário um anexo")]
         [MinLength(3)]
         [MaxLength(150)]
-        public int Anexo { get; set; }
+        public string? Anexo { get; set; }
 
 
         [Required(ErrorMessage = "É necessário uma data")]
@@ -35,9 +35,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         
         [JsonIgnore]
-		public ICollection<DocumentoModel> Documentos { get; set; }
+		public ICollection<DocumentoModel>? Documentos { get; set; }
 
-		[ForeignKey("documentoid")]
-		public int documentoId { get; set; }
+		public int DocumentoId { get; set; }
     }
 }
