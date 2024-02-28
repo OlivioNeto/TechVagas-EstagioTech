@@ -263,6 +263,29 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("documento");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
+                {
+                    b.Property<int>("DocumentoNecessarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("documentonecessarioid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DocumentoNecessarioId"));
+
+                    b.Property<int?>("TipoDocumentosidTipoDocumento")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("idTipoDocumento")
+                        .HasColumnType("integer")
+                        .HasColumnName("tipodocumentoid");
+
+                    b.HasKey("DocumentoNecessarioId");
+
+                    b.HasIndex("TipoDocumentosidTipoDocumento");
+
+                    b.ToTable("documentonecessario");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
                 {
                     b.Property<int>("DocumentoVersaoId")
@@ -431,6 +454,15 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Vagas");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", "TipoDocumentos")
+                        .WithMany("DocumentosNecessarios")
+                        .HasForeignKey("TipoDocumentosidTipoDocumento");
+
+                    b.Navigation("TipoDocumentos");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.DocumentoModel", "Documento")
@@ -461,6 +493,11 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
                 {
                     b.Navigation("DocumentoVersoes");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
+                {
+                    b.Navigation("DocumentosNecessarios");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>

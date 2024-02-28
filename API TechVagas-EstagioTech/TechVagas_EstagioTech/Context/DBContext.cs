@@ -19,6 +19,8 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<AlunoModel> Alunos { get; set; }
         public DbSet<DocumentoVersaoModel> DocumentoVersao { get; set; }
 
+        public DbSet<DocumentoNecessarioModel> DocumentoNecessario { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Alunos
@@ -73,6 +75,9 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Data).IsRequired().HasMaxLength(200);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Situacao).IsRequired().HasMaxLength(200);
 
+            //Documento necessário
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
+
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
 			modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
@@ -109,6 +114,9 @@ namespace TechVagas_EstagioTech.Data
             //Relacionamento: Documento -> Documento Versão
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.DocumentoVersaoId);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x=> x.Situacao).IsRequired();
+
+            //Relacionamento: TipoDocumento -> Documento Necessário
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
 		}
     }
 }

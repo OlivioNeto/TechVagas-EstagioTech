@@ -166,6 +166,25 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "documentonecessario",
+                columns: table => new
+                {
+                    documentonecessarioid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoDocumentosidTipoDocumento = table.Column<int>(type: "integer", nullable: true),
+                    tipodocumentoid = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_documentonecessario", x => x.documentonecessarioid);
+                    table.ForeignKey(
+                        name: "FK_documentonecessario_tipodocumento_TipoDocumentosidTipoDocum~",
+                        column: x => x.TipoDocumentosidTipoDocumento,
+                        principalTable: "tipodocumento",
+                        principalColumn: "tipodocumentoid");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "cargo",
                 columns: table => new
                 {
@@ -192,6 +211,11 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "vagasid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_documentonecessario_TipoDocumentosidTipoDocumento",
+                table: "documentonecessario",
+                column: "TipoDocumentosidTipoDocumento");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_documentoversao_documentoid",
                 table: "documentoversao",
                 column: "documentoid");
@@ -215,16 +239,19 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "Curso");
 
             migrationBuilder.DropTable(
-                name: "documentoversao");
+                name: "documentonecessario");
 
             migrationBuilder.DropTable(
-                name: "tipodocumento");
+                name: "documentoversao");
 
             migrationBuilder.DropTable(
                 name: "tipoestagio");
 
             migrationBuilder.DropTable(
                 name: "vagas");
+
+            migrationBuilder.DropTable(
+                name: "tipodocumento");
 
             migrationBuilder.DropTable(
                 name: "documento");
