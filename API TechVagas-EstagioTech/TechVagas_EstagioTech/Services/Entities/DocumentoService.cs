@@ -30,14 +30,14 @@ namespace TechVagas_EstagioTech.Services.Entities
 			return _mapper.Map<IEnumerable<DocumentoDto>>(documento);
 		}
 
-		public async Task Adicionar(DocumentoDto documentoDto)
-		{
-			var documento = _mapper.Map<DocumentoModel>(documentoDto);
-			await _documentoRepositorio.Adicionar(documento);
-			documentoDto.idDocumento = documento.DocumentoId;
-		}
+        public async Task Adicionar(DocumentoDto documentoDto)
+        {
+            var documento = _mapper.Map<DocumentoModel>(documentoDto);
+            await _documentoRepositorio.Adicionar(documento);
+            documentoDto.DocumentoId = documento.DocumentoId;
+        }
 
-		public async Task Atualizar(DocumentoDto documentoDto)
+        public async Task Atualizar(DocumentoDto documentoDto)
 		{
 			var documento = _mapper.Map<DocumentoModel>(documentoDto);
 			await _documentoRepositorio.Atualizar(documento);

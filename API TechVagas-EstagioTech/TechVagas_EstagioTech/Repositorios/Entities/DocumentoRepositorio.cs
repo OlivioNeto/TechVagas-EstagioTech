@@ -32,9 +32,13 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<DocumentoModel> Atualizar(DocumentoModel documentoModel)
         {
-			_dbContext.Entry(documentoModel).State = EntityState.Modified;
+            var EditedObj = _dbContext
+                    .Documento.Where(x => x.DocumentoId == documentoModel.DocumentoId)
+                    .First();
+            _dbContext.Entry(EditedObj).CurrentValues.SetValues(documentoModel);
 			await _dbContext.SaveChangesAsync();
 			return documentoModel;
+
 		}
 
         public async Task<bool> Apagar(int id)
