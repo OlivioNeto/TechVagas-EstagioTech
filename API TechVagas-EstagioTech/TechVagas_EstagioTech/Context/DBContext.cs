@@ -117,6 +117,9 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: TipoDocumento -> Documento Necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
+
+            //Relacionamento: TipoEstagio -> Documento Necessário
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
 		}
     }
 }

@@ -310,3 +310,4 @@ C:\Users\Hérika.DESKTOP-9688MQA\OneDrive\Área de Trabalho\TechVagas-EstagioTec
 C:\Users\Hérika.DESKTOP-9688MQA\OneDrive\Área de Trabalho\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.pdb
 C:\Users\Hérika.DESKTOP-9688MQA\OneDrive\Área de Trabalho\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.genruntimeconfig.cache
 C:\Users\Hérika.DESKTOP-9688MQA\OneDrive\Área de Trabalho\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\ref\TechVagas_EstagioTech.dll
+C:\Users\Aluno\Desktop\TechVagas-EstagioTech\API TechVagas-EstagioTech\TechVagas_EstagioTech\obj\Debug\net7.0\TechVagas_EstagioTech.sourcelink.json

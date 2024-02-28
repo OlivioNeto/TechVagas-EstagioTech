@@ -15,5 +15,7 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         [Column("descricao")]
         public string? descricaoTipoEstagio { get; set; }
+
+        public virtual ICollection<DocumentoNecessarioModel>? DocumentosNecessarios { get; set; }
     }
 }

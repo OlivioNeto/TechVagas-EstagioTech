@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240228140117_teste")]
+    [Migration("20240228165157_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -278,13 +278,22 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Property<int?>("TipoDocumentosidTipoDocumento")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("TipoEstagiosidTipoEstagio")
+                        .HasColumnType("integer");
+
                     b.Property<int>("idTipoDocumento")
                         .HasColumnType("integer")
                         .HasColumnName("tipodocumentoid");
 
+                    b.Property<int>("idTipoEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("tipoestagioid");
+
                     b.HasKey("DocumentoNecessarioId");
 
                     b.HasIndex("TipoDocumentosidTipoDocumento");
+
+                    b.HasIndex("TipoEstagiosidTipoEstagio");
 
                     b.ToTable("documentonecessario");
                 });
@@ -463,7 +472,13 @@ namespace TechVagas_EstagioTech.Migrations
                         .WithMany("DocumentosNecessarios")
                         .HasForeignKey("TipoDocumentosidTipoDocumento");
 
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", "TipoEstagios")
+                        .WithMany("DocumentosNecessarios")
+                        .HasForeignKey("TipoEstagiosidTipoEstagio");
+
                     b.Navigation("TipoDocumentos");
+
+                    b.Navigation("TipoEstagios");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
@@ -499,6 +514,11 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
+                {
+                    b.Navigation("DocumentosNecessarios");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
                 {
                     b.Navigation("DocumentosNecessarios");
                 });

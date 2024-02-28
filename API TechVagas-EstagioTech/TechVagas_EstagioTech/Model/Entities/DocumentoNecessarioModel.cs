@@ -15,5 +15,9 @@ namespace TechVagas_EstagioTech.Model.Entities
         public TipoDocumentoModel? TipoDocumentos { get; set; }
         [Column("tipodocumentoid")]
         public int idTipoDocumento { get; set; }
+
+        public TipoEstagioModel? TipoEstagios { get; set; }
+        [Column("tipoestagioid")]
+        public int idTipoEstagio { get; set; }
     }
 }
