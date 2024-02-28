@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechVagas_EstagioTech")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4684c0e13cebe8a3b379a98721b2b3eabc787bf9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+468167b23cbcb1dffe5f00cf049fe456ee6f1e29")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechVagas_EstagioTech")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechVagas_EstagioTech")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
