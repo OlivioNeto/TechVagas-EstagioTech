@@ -9,9 +9,9 @@ namespace TechVagas_EstagioTech.Repositorios
     {
         private readonly DBContext _dbContext;
 
-        public VagasRepositorio(DBContext cargoDBContex)
+        public VagasRepositorio(DBContext vagasDBContex)
         {
-            _dbContext = cargoDBContex;
+            _dbContext = vagasDBContex;
         }
         public async Task<VagasModel> BuscarPorId(int id)
         {
