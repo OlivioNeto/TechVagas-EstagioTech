@@ -18,8 +18,9 @@ namespace TechVagas_EstagioTech.Data
 		public DbSet<ConcedenteModel> Concedentes { get; set; }
         public DbSet<AlunoModel> Alunos { get; set; }
         public DbSet<DocumentoVersaoModel> DocumentoVersao { get; set; }
-
         public DbSet<DocumentoNecessarioModel> DocumentoNecessario { get; set; }
+
+        public DbSet<InstituicaoEnsinoModel> InstituicaoEnsino { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -98,7 +99,13 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioSaida).IsRequired().HasMaxLength(20);
 			modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(20);
-			          
+
+            //Instituicao Ensino
+            modelBuilder.Entity<InstituicaoEnsinoModel>().HasKey(x => x.Id);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.NomeInstituicao).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Local).IsRequired().HasMaxLength(120);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(17);
+
             //Relacionamento: Cargo -> Vagas
             modelBuilder.Entity<VagasModel>()
 				.HasMany(c => c.Cargos)
