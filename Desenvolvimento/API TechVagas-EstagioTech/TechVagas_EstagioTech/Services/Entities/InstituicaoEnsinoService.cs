@@ -9,10 +9,10 @@ namespace TechVagas_EstagioTech.Services.Entities
 {
     public class InstituicaoEnsinoService : IInstituicaoEnsinoService
     {
-        private readonly IInstituicaoEnsinoService _instituicaoEnsinoRepositorio;
+        private readonly IInstituicaoEnsinoRepositorio _instituicaoEnsinoRepositorio;
         private readonly IMapper _mapper;
 
-        public InstituicaoEnsinoService(IInstituicaoEnsinoService instituicaoEnsinoRepositorio, IMapper mapper)
+        public InstituicaoEnsinoService(IInstituicaoEnsinoRepositorio instituicaoEnsinoRepositorio, IMapper mapper)
         {
             _instituicaoEnsinoRepositorio = instituicaoEnsinoRepositorio;
             _mapper = mapper;
@@ -32,14 +32,14 @@ namespace TechVagas_EstagioTech.Services.Entities
         public async Task Adicionar(InstituicaoEnsinoDto instituicaoEnsinoDto)
         {
             var instituicao = _mapper.Map<InstituicaoEnsinoModel>(instituicaoEnsinoDto);
-            await _instituicaoEnsinoRepositorio.Adicionar(instituicaoEnsinoDto);
+            await _instituicaoEnsinoRepositorio.Adicionar(instituicao);
             instituicaoEnsinoDto.Id = instituicao.Id;
         }
 
         public async Task Atualizar(InstituicaoEnsinoDto instituicaoEnsinoDto)
         {
             var instituicao = _mapper.Map<InstituicaoEnsinoModel>(instituicaoEnsinoDto);
-            await _instituicaoEnsinoRepositorio.Atualizar(instituicaoEnsinoDto);
+            await _instituicaoEnsinoRepositorio.Atualizar(instituicao);
         }
 
         public async Task Apagar(int id)
