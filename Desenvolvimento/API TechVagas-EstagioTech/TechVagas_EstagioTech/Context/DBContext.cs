@@ -19,9 +19,8 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<AlunoModel> Alunos { get; set; }
         public DbSet<DocumentoVersaoModel> DocumentoVersao { get; set; }
         public DbSet<DocumentoNecessarioModel> DocumentoNecessario { get; set; }
-
         public DbSet<InstituicaoEnsinoModel> InstituicaoEnsino { get; set; }
-
+        public DbSet<ApontamentoModel> Apontamento { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Alunos
@@ -47,6 +46,10 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<AlunoModel>().Property(x => x.Bairro).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Cep).IsRequired().HasMaxLength(9);
 
+            //Apontamento
+            modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
+            modelBuilder.Entity<ApontamentoModel>().Property(x => x.descricaoApontamento).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired().HasMaxLength(150);
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);

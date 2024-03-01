@@ -19,7 +19,7 @@ namespace TechVagas_EstagioTech.Dtos.Mappings
 			CreateMap<DocumentoVersaoDto, DocumentoVersaoModel>().ReverseMap();
 			CreateMap<DocumentoNecessarioDto, DocumentoNecessarioModel>().ReverseMap();
 			CreateMap<InstituicaoEnsinoDto, InstituicaoEnsinoModel>().ReverseMap();
-
+			CreateMap<ApontamentoDto, ApontamentoModel>().ReverseMap();
 
         }
 	}
