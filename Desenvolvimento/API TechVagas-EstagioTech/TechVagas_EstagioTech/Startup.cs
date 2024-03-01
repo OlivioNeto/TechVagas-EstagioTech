@@ -37,6 +37,9 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
 			services.AddScoped<IAlunoService, AlunoService>();
 
+			services.AddScoped<IApontamentoRepositorio, ApontamentoRepositorio>();
+			services.AddScoped<IApontamentoService, ApontamentoService>();
+
 			services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
 			services.AddScoped<IConcedenteService, ConcedenteService>();
 
