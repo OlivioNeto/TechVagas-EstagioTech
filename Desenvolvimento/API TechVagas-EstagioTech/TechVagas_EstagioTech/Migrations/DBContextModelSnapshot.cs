@@ -158,21 +158,30 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idApontamento"));
 
-                    b.Property<string>("dataApontatamento")
+                    b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("dataApontamento")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)")
                         .HasColumnName("dataApontamento");
 
-                    b.Property<string>("descricaoApontatamento")
+                    b.Property<string>("descricaoApontamento")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)")
                         .HasColumnName("descricaoApontamento");
 
+                    b.Property<int>("idCoordenadorEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("coordenadorestagioid");
+
                     b.HasKey("idApontamento");
 
-                    b.ToTable("Apontamento");
+                    b.HasIndex("CoordenadorEstagioidCoordenadorEstagio");
+
+                    b.ToTable("apontamento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
@@ -243,6 +252,32 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("concedenteId");
 
                     b.ToTable("concedente");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
+                {
+                    b.Property<int>("idCoordenadorEstagio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("coordenadorestagioid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
+
+                    b.Property<string>("StatusCoordenadorEstagio")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("statuscoordenador");
+
+                    b.Property<string>("dataCadastro")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("datacadastro");
+
+                    b.HasKey("idCoordenadorEstagio");
+
+                    b.ToTable("coordenadorestagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
@@ -510,6 +545,15 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("vagas");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ApontamentoModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                        .WithMany("Apontamento")
+                        .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
+
+                    b.Navigation("CoordenadorEstagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.VagasModel", "Vagas")
@@ -561,6 +605,11 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", b =>
                 {
                     b.Navigation("Vagas");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
+                {
+                    b.Navigation("Apontamento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
