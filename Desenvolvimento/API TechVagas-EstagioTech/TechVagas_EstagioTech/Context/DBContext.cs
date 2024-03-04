@@ -21,6 +21,7 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<DocumentoNecessarioModel> DocumentoNecessario { get; set; }
         public DbSet<InstituicaoEnsinoModel> InstituicaoEnsino { get; set; }
         public DbSet<ApontamentoModel> Apontamento { get; set; }
+        public DbSet<CoordenadorEstagioModel> CoordenadorEstagio { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Alunos
@@ -55,6 +56,10 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
             modelBuilder.Entity<CargoModel>().Property(x => x.Tipo).IsRequired().HasMaxLength(50);
 
+            //Coordenador Estágio
+            modelBuilder.Entity<CoordenadorEstagioModel>().HasKey(x => x.idCoordenadorEstagio);
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.StatusCoordenadorEstagio).IsRequired().HasMaxLength(20);
             //Concedente
             modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.RazaoSocial).IsRequired().HasMaxLength(80);
@@ -130,6 +135,9 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: TipoEstagio -> Documento Necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
+
+            //Relacionamento: CoordenadorEstagio -> Apontamento
+            modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
 		}
     }
 }

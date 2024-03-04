@@ -16,7 +16,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		public string? descricaoTipoEstagio { get; set; }
 
         [JsonIgnore]
-        //[Column("tipoestagioid")] 
+        [Column("tipoestagioid")] 
         public ICollection<TipoEstagioModel>? TipoEstagios { get; set; }
     }
 }

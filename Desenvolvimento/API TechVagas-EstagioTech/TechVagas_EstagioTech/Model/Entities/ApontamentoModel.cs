@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {
+    [Table("apontamento")]
     public class ApontamentoModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //coluna de id gerada automitacamente
@@ -16,5 +17,9 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         [Column("dataApontamento")]
         public string? dataApontamento { get; set; }
+
+        public CoordenadorEstagioModel? CoordenadorEstagio { get; set; }
+        [Column("coordenadorestagioid")]
+        public int idCoordenadorEstagio { get; set; }
     }
 }

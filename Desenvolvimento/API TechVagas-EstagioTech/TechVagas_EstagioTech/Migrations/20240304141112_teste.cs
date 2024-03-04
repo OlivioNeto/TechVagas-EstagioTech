@@ -45,20 +45,6 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Apontamento",
-                columns: table => new
-                {
-                    apontamentoid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricaoApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    dataApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Apontamento", x => x.apontamentoid);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "concedente",
                 columns: table => new
                 {
@@ -72,6 +58,20 @@ namespace TechVagas_EstagioTech.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_concedente", x => x.concedenteid);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "coordenadorestagio",
+                columns: table => new
+                {
+                    coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    datacadastro = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    statuscoordenador = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_coordenadorestagio", x => x.coordenadorestagioid);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,6 +172,27 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "apontamento",
+                columns: table => new
+                {
+                    apontamentoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    descricaoApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    dataApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    CoordenadorEstagioidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true),
+                    coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_apontamento", x => x.apontamentoid);
+                    table.ForeignKey(
+                        name: "FK_apontamento_coordenadorestagio_CoordenadorEstagioidCoordena~",
+                        column: x => x.CoordenadorEstagioidCoordenadorEstagio,
+                        principalTable: "coordenadorestagio",
+                        principalColumn: "coordenadorestagioid");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "documentoversao",
                 columns: table => new
                 {
@@ -242,6 +263,11 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
+                table: "apontamento",
+                column: "CoordenadorEstagioidCoordenadorEstagio");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_cargo_vagasid",
                 table: "cargo",
                 column: "vagasid");
@@ -274,7 +300,7 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "aluno");
 
             migrationBuilder.DropTable(
-                name: "Apontamento");
+                name: "apontamento");
 
             migrationBuilder.DropTable(
                 name: "cargo");
@@ -290,6 +316,9 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "instituicaoensino");
+
+            migrationBuilder.DropTable(
+                name: "coordenadorestagio");
 
             migrationBuilder.DropTable(
                 name: "vagas");
