@@ -37,11 +37,17 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
 			services.AddScoped<IAlunoService, AlunoService>();
 
+			services.AddScoped<IApontamentoRepositorio, ApontamentoRepositorio>();
+			services.AddScoped<IApontamentoService, ApontamentoService>();
+
 			services.AddScoped<IConcedenteRepositorio, ConcedenteRepositorio>();
 			services.AddScoped<IConcedenteService, ConcedenteService>();
 
 			services.AddScoped<ICargoRepositorio, CargoRepositorio>();
 			services.AddScoped<ICargoService, CargoService>();
+
+			services.AddScoped<ICoordenadorEstagioRepositorio, CoordenadorEstagioRepositorio>();
+			services.AddScoped<ICoordenadorEstagioService, CoordenadorEstagioService>();
 
 			services.AddScoped<ICursoRepositorio, CursoRepositorio>();
 			services.AddScoped<ICursoService, CursoService>();
@@ -55,6 +61,9 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<IDocumentoVersaoRepositorio, DocumentoVersaoRepositorio>();
 			services.AddScoped<IDocumentoVersaoService, DocumentoVersaoService>();
 
+			services.AddScoped<ISupervisorEstagioRepositorio, SupervisorEstagioRepositorio>();
+			services.AddScoped<ISupervisorEstagioService , SupervisorEstagioService>();
+
 			services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
 			services.AddScoped<ITipoDocumentoService, TipoDocumentoService>();
 
@@ -63,6 +72,9 @@ namespace TechVagas_EstagioTech
 
 			services.AddScoped<IVagasRepositorio, VagasRepositorio>();
 			services.AddScoped<IVagasService, VagasService>();
+
+			services.AddScoped<IInstituicaoEnsinoRepositorio, InstituicaoEnsinoRepositorio>();
+            services.AddScoped<IInstituicaoEnsinoService, InstituicaoEnsinoService>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
