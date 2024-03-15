@@ -22,6 +22,7 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<InstituicaoEnsinoModel> InstituicaoEnsino { get; set; }
         public DbSet<ApontamentoModel> Apontamento { get; set; }
         public DbSet<CoordenadorEstagioModel> CoordenadorEstagio { get; set; }
+        public DbSet<SupervisorEstagioModel> SupervisorEstagio {get; set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Alunos
@@ -86,6 +87,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Documento necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
+
+            //Supervisor Estagio
+            modelBuilder.Entity<SupervisorEstagioModel>().HasKey(x => x.idSupervisor);
+            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.statusSupervisor).IsRequired().HasMaxLength(200);
 
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);

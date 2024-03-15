@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-    public partial class teste : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -114,6 +114,19 @@ namespace TechVagas_EstagioTech.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_instituicaoensino", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "supervisorestagio",
+                columns: table => new
+                {
+                    supervisorid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    status = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_supervisorestagio", x => x.supervisorid);
                 });
 
             migrationBuilder.CreateTable(
@@ -316,6 +329,9 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "instituicaoensino");
+
+            migrationBuilder.DropTable(
+                name: "supervisorestagio");
 
             migrationBuilder.DropTable(
                 name: "coordenadorestagio");

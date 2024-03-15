@@ -12,8 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240304141112_teste")]
-    partial class teste
+    [Migration("20240315120723_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -433,6 +433,26 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("instituicaoensino");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
+                {
+                    b.Property<int>("idSupervisor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("supervisorid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
+
+                    b.Property<string>("statusSupervisor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("status");
+
+                    b.HasKey("idSupervisor");
+
+                    b.ToTable("supervisorestagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
