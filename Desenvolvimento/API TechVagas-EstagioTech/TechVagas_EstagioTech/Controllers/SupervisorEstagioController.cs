@@ -41,7 +41,7 @@ namespace TechVagas_EstagioTech.Controllers
         {
             if (statusSupervisor is null) return BadRequest("Dado inválido!");
             await _supervisorEstagioService.Adicionar(statusSupervisor);
-            return Ok("Supervisor registrado com sucesso");
+            return Ok("Status de supervisor adicionado com sucesso");
         }
 
         [HttpPut("{id:int}")]
