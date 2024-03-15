@@ -21,6 +21,7 @@ namespace TechVagas_EstagioTech.Dtos.Mappings
 			CreateMap<InstituicaoEnsinoDto, InstituicaoEnsinoModel>().ReverseMap();
 			CreateMap<ApontamentoDto, ApontamentoModel>().ReverseMap();
             CreateMap<CoordenadorEstagioDto, CoordenadorEstagioModel>().ReverseMap();
+			CreateMap<SupervisorEstagioDto, SupervisorEstagioModel>().ReverseMap();
         }
 	}
 }

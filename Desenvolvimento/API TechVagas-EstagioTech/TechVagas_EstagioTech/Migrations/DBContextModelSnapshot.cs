@@ -432,6 +432,26 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("instituicaoensino");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
+                {
+                    b.Property<int>("idSupervisor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("supervisorid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
+
+                    b.Property<string>("statusSupervisor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("status");
+
+                    b.HasKey("idSupervisor");
+
+                    b.ToTable("supervisorestagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
                 {
                     b.Property<int>("idTipoDocumento")
