@@ -61,6 +61,28 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "contratoestagio",
+                columns: table => new
+                {
+                    ContratoEstagioid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StatusdoContratoEstagio = table.Column<string>(name: "Status do ContratoEstagio", type: "character varying(150)", maxLength: 150, nullable: false),
+                    notafinal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    situacao = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    HorariodeEntrada = table.Column<string>(name: "Horario de Entrada", type: "character varying(150)", maxLength: 150, nullable: false),
+                    HorariodeSaida = table.Column<string>(name: "Horario de Saida", type: "character varying(150)", maxLength: 150, nullable: false),
+                    datainicio = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    datafim = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    salario = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    cargasemanal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    cargatotal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_contratoestagio", x => x.ContratoEstagioid);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "coordenadorestagio",
                 columns: table => new
                 {
@@ -317,6 +339,9 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "cargo");
+
+            migrationBuilder.DropTable(
+                name: "contratoestagio");
 
             migrationBuilder.DropTable(
                 name: "Curso");
