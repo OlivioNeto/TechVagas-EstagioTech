@@ -6,7 +6,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     public class MatriculaDto
     {
         [Key]
-        public string Id { get; set; }
+        public int MatriculaId { get; set; }
 
         [Required(ErrorMessage = "E necessário uma Número de Matricula")]
         [MinLength(11)]
