@@ -24,6 +24,8 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<CoordenadorEstagioModel> CoordenadorEstagio { get; set; }
         public DbSet<SupervisorEstagioModel> SupervisorEstagio {get; set;}
         public DbSet<ContratoEstagioModel> ContratoEstagio { get; set; }
+
+        public DbSet<MatriculaModel> Matricula { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Alunos
@@ -135,6 +137,10 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.NomeInstituicao).IsRequired().HasMaxLength(200);
             modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Local).IsRequired().HasMaxLength(120);
             modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(17);
+
+            //Matricula
+            modelBuilder.Entity<MatriculaModel>().HasKey(x => x.Id);
+            modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
 
             //Relacionamento: Cargo -> Vagas
             modelBuilder.Entity<VagasModel>()
