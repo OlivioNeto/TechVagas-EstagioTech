@@ -76,6 +76,9 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<IInstituicaoEnsinoRepositorio, InstituicaoEnsinoRepositorio>();
             services.AddScoped<IInstituicaoEnsinoService, InstituicaoEnsinoService>();
 
+            services.AddScoped<IMatriculaRepositorio, MatriculaRepositorio>();
+            services.AddScoped<IMatriculaService, MatriculaService>();
+
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.WithOrigins("http://localhost:3000", "http://localhost:5173")
