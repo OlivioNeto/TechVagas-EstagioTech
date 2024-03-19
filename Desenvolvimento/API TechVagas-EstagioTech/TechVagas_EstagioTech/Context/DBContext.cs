@@ -24,7 +24,6 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<CoordenadorEstagioModel> CoordenadorEstagio { get; set; }
         public DbSet<SupervisorEstagioModel> SupervisorEstagio {get; set;}
         public DbSet<ContratoEstagioModel> ContratoEstagio { get; set; }
-
         public DbSet<MatriculaModel> Matricula { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -88,11 +87,12 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(50);
 
             //Curso
-            modelBuilder.Entity<CursoModel>().HasKey(x => x.idCurso);
-			modelBuilder.Entity<CursoModel>().Property(x => x.nomeCurso).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<CursoModel>().HasKey(x => x.Id);
+			modelBuilder.Entity<CursoModel>().Property(x => x.nomeCurso).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<CursoModel>().Property(x => x.turnoCurso).IsRequired().HasMaxLength(100);
 
-			//Documento
-			modelBuilder.Entity<DocumentoModel>().HasKey(x => x.DocumentoId);
+            //Documento
+            modelBuilder.Entity<DocumentoModel>().HasKey(x => x.DocumentoId);
             modelBuilder.Entity<DocumentoModel>().HasMany(d => d.DocumentoVersoes).WithOne(v => v.Documento).HasForeignKey(v => v.DocumentoId);
             modelBuilder.Entity<DocumentoModel>().Property(x => x.descricaoDocumento).IsRequired().HasMaxLength(200);
 			modelBuilder.Entity<DocumentoModel>().Property(x => x.situacaoDocumento).IsRequired().HasMaxLength(200);
