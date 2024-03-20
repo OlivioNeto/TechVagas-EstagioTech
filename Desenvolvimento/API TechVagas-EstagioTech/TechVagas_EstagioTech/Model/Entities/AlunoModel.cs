@@ -46,7 +46,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? Cidade { get; set; }
 
         [Column("datanascimento")]
-        public DateTime DataNascimento { get; set; }
+        public DateOnly DataNascimento { get; set; }
 
         [Column("nivelescolaridade")]
         public string? NivelEscolaridade { get; set; }
