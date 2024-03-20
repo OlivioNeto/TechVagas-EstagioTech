@@ -19,7 +19,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? Anexo { get; set; }
 
         [Column("data")]
-        public string? Data { get; set; }
+        public DateOnly? Data { get; set; }
 
         [Column("situacao")]
         public string? Situacao { get; set; }

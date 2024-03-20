@@ -53,7 +53,7 @@ namespace TechVagas_EstagioTech.Data
             //Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
             modelBuilder.Entity<ApontamentoModel>().Property(x => x.descricaoApontamento).IsRequired().HasMaxLength(150);
-            modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired();
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
@@ -61,7 +61,7 @@ namespace TechVagas_EstagioTech.Data
 
             //Coordenador Estágio
             modelBuilder.Entity<CoordenadorEstagioModel>().HasKey(x => x.idCoordenadorEstagio);
-            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired();
             modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.StatusCoordenadorEstagio).IsRequired().HasMaxLength(20);
 
             //Contrato Estagio 
@@ -101,7 +101,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.DocumentoVersaoId);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Comentario).IsRequired().HasMaxLength(200);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Anexo).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Data).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Data).IsRequired();
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Situacao).IsRequired().HasMaxLength(200);
 
             //Documento necessário
