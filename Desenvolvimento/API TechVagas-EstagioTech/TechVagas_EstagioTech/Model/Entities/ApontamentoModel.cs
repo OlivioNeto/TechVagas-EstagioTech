@@ -16,7 +16,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? descricaoApontamento { get; set; }
 
         [Column("dataApontamento")]
-        public string? dataApontamento { get; set; }
+        public DateOnly dataApontamento { get; set; }
 
         public CoordenadorEstagioModel? CoordenadorEstagio { get; set; }
         [Column("coordenadorestagioid")]
