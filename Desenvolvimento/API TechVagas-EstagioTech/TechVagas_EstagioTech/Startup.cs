@@ -87,6 +87,8 @@ namespace TechVagas_EstagioTech
                     .AllowCredentials();
             }));
 
+			services.AddAuthentication("Bearer").AddJwtBearer();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ApiScope", policy =>
