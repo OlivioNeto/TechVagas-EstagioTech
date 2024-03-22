@@ -71,8 +71,8 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.situacao).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.horarioEntrada).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.horarioSaida).IsRequired().HasMaxLength(150);
-            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.dataInicio).IsRequired().HasMaxLength(150);
-            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.dataFim).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.dataInicio).IsRequired();
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.dataFim).IsRequired();
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.salario).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaSemanal).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaTotal).IsRequired().HasMaxLength(150);
