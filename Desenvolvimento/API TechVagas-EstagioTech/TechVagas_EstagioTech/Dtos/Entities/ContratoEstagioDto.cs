@@ -39,12 +39,12 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [Required(ErrorMessage = "E necessário uma Data do Inicio")]
         [MinLength(3)]
         [MaxLength(50)]
-        public string? dataInicio { get; set; }
+        public DateOnly? dataInicio { get; set; }
 
         [Required(ErrorMessage = "E necessário uma Data do Fim")]
         [MinLength(3)]
         [MaxLength(50)]
-        public string? dataFim { get; set; }
+        public DateOnly? dataFim { get; set; }
 
         [Required(ErrorMessage = "Quantidade do Salario")]
         [MinLength(3)]

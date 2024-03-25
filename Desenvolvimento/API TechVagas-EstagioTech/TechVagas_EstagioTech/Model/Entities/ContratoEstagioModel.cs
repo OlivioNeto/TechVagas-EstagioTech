@@ -28,10 +28,10 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? horarioSaida { get; set; }
 
         [Column("datainicio")]
-        public string? dataInicio { get; set; }
+        public DateOnly? dataInicio { get; set; }
 
         [Column("datafim")]
-        public string? dataFim { get; set; }
+        public DateOnly? dataFim { get; set; }
 
         [Column("salario")]
         public string? salario { get; set; }
