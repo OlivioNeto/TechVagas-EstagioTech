@@ -66,8 +66,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("text")
                         .HasColumnName("curriculo");
 
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("DataNascimento")
+                        .HasColumnType("date")
                         .HasColumnName("datanascimento");
 
                     b.Property<string>("DisponibilidadeHorario")
@@ -163,7 +163,6 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.Property<DateOnly?>("dataApontamento")
                         .IsRequired()
-                        .HasMaxLength(150)
                         .HasColumnType("date")
                         .HasColumnName("dataApontamento");
 
@@ -275,16 +274,14 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(150)")
                         .HasColumnName("cargatotal");
 
-                    b.Property<string>("dataFim")
+                    b.Property<DateOnly?>("dataFim")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasColumnType("date")
                         .HasColumnName("datafim");
 
-                    b.Property<string>("dataInicio")
+                    b.Property<DateOnly?>("dataInicio")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasColumnType("date")
                         .HasColumnName("datainicio");
 
                     b.Property<string>("horarioEntrada")
@@ -345,7 +342,6 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.Property<DateOnly?>("dataCadastro")
                         .IsRequired()
-                        .HasMaxLength(150)
                         .HasColumnType("date")
                         .HasColumnName("datacadastro");
 
@@ -461,7 +457,6 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.Property<DateOnly?>("Data")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("date")
                         .HasColumnName("data");
 

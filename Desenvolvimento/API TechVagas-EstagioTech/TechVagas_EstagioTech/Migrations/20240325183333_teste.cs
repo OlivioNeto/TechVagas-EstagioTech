@@ -30,7 +30,7 @@ namespace TechVagas_EstagioTech.Migrations
                     curriculo = table.Column<string>(type: "text", nullable: false),
                     cpf = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
                     cidade = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    datanascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    datanascimento = table.Column<DateOnly>(type: "date", nullable: false),
                     nivelescolaridade = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     telefone = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
                     email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -71,8 +71,8 @@ namespace TechVagas_EstagioTech.Migrations
                     situacao = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     HorariodeEntrada = table.Column<string>(name: "Horario de Entrada", type: "character varying(150)", maxLength: 150, nullable: false),
                     HorariodeSaida = table.Column<string>(name: "Horario de Saida", type: "character varying(150)", maxLength: 150, nullable: false),
-                    datainicio = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    datafim = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    datainicio = table.Column<DateOnly>(type: "date", nullable: false),
+                    datafim = table.Column<DateOnly>(type: "date", nullable: false),
                     salario = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     cargasemanal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     cargatotal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false)
@@ -88,7 +88,7 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    datacadastro = table.Column<DateOnly>(type: "date", maxLength: 150, nullable: false),
+                    datacadastro = table.Column<DateOnly>(type: "date", nullable: false),
                     statuscoordenador = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -227,7 +227,7 @@ namespace TechVagas_EstagioTech.Migrations
                     apontamentoid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     descricaoApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    dataApontamento = table.Column<DateOnly>(type: "date", maxLength: 150, nullable: false),
+                    dataApontamento = table.Column<DateOnly>(type: "date", nullable: false),
                     CoordenadorEstagioidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true),
                     coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -249,7 +249,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     comentario = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     anexo = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    data = table.Column<DateOnly>(type: "date", maxLength: 200, nullable: false),
+                    data = table.Column<DateOnly>(type: "date", nullable: false),
                     situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     documentoid = table.Column<int>(type: "integer", nullable: false)
                 },
