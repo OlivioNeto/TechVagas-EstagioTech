@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {
     [Table("contratoestagio")]
     public class ContratoEstagioModel
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //coluna de id gerada automitacamente
+        [Key] //define como chave primaria
+
         [Column("ContratoEstagioid")]
         public int contratoestagioId { get; set; }
 
@@ -41,5 +45,7 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         [Column("cargatotal")]
         public string? cargaTotal { get; set; }
+
+        public virtual ICollection<DocumentoModel>? Documento { get; set; }
     }
 }

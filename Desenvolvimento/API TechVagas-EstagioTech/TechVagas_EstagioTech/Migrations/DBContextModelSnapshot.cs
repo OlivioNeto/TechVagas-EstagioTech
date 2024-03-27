@@ -385,6 +385,10 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DocumentoId"));
 
+                    b.Property<int>("contratoestagioId")
+                        .HasColumnType("integer")
+                        .HasColumnName("ContratoEstagioid");
+
                     b.Property<string>("descricaoDocumento")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -398,6 +402,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("situacao");
 
                     b.HasKey("DocumentoId");
+
+                    b.HasIndex("contratoestagioId");
 
                     b.ToTable("documento");
                 });
@@ -682,6 +688,17 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Vagas");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", "ContratoEstagio")
+                        .WithMany("Documento")
+                        .HasForeignKey("contratoestagioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContratoEstagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", "TipoDocumentos")
@@ -722,6 +739,11 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", b =>
                 {
                     b.Navigation("Vagas");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
+                {
+                    b.Navigation("Documento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
