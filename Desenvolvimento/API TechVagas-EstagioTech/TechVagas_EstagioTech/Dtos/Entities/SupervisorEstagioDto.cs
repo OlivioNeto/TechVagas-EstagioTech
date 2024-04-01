@@ -13,10 +13,10 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [Required(ErrorMessage = "Informe o Status do SupervisorEstagio")]
         [MinLength(3)]
         [MaxLength(100)]
-        public string? statusSupervisor { get; set; }
+        public bool statusSupervisor { get; set; }
 
-        //[JsonIgnore]
-        ////[Column("tipoestagioid")] 
-        //public ICollection<TipoEstagioModel>? TipoEstagios { get; set; }
+        [JsonIgnore]
+        [Column("tipoestagioid")]
+        public ICollection<TipoEstagioModel>? TipoEstagios { get; set; }
     }
 }

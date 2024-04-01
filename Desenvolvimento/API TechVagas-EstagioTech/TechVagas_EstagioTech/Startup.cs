@@ -49,9 +49,6 @@ namespace TechVagas_EstagioTech
 			services.AddScoped<ICoordenadorEstagioRepositorio, CoordenadorEstagioRepositorio>();
 			services.AddScoped<ICoordenadorEstagioService, CoordenadorEstagioService>();
 
-			services.AddScoped<IContratoEstagioRepositorio, ContratoEstagioRepositorio>();
-			services.AddScoped<IContratoEstagioService, ContratoEstagioService>();
-
 			services.AddScoped<ICursoRepositorio, CursoRepositorio>();
 			services.AddScoped<ICursoService, CursoService>();
 
@@ -78,9 +75,6 @@ namespace TechVagas_EstagioTech
 
 			services.AddScoped<IInstituicaoEnsinoRepositorio, InstituicaoEnsinoRepositorio>();
             services.AddScoped<IInstituicaoEnsinoService, InstituicaoEnsinoService>();
-
-            services.AddScoped<IMatriculaRepositorio, MatriculaRepositorio>();
-            services.AddScoped<IMatriculaService, MatriculaService>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

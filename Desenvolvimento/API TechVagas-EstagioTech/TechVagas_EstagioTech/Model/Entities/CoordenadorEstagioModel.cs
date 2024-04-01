@@ -13,10 +13,10 @@ namespace TechVagas_EstagioTech.Model.Entities
         public int idCoordenadorEstagio { get; set; }
 
         [Column("datacadastro")]
-        public DateOnly? dataCadastro { get; set; }
+        public string? dataCadastro { get; set; }
 
         [Column("statuscoordenador")]
-        public string? StatusCoordenadorEstagio { get; set; }
+        public bool StatusCoordenadorEstagio { get; set; }
 
         public virtual ICollection<ApontamentoModel>? Apontamento { get; set; }
     }

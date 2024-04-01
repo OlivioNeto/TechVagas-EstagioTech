@@ -20,9 +20,5 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? situacaoDocumento { get; set; }
 
         public virtual ICollection<DocumentoVersaoModel>? DocumentoVersoes { get;  set; }
-
-        public ContratoEstagioModel? ContratoEstagio { get; set; }
-        [Column("ContratoEstagioid")]
-        public int contratoestagioId { get; set; }
     }
 }

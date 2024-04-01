@@ -15,7 +15,9 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         public string? descricaoApontamento { get; set; }
 
         [Required(ErrorMessage = "Informe a data do apontamento")]
-        public DateOnly? dataApontamento { get; set; }
+        [MinLength(3)]
+        [MaxLength(100)]
+        public string? dataApontamento { get; set; }
 
         [JsonIgnore]
         public ICollection<CoordenadorEstagioModel>? CoordenadorEstagio { get; set; }
