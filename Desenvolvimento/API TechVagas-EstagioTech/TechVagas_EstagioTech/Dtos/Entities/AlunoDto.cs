@@ -64,7 +64,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		[MaxLength(50)]
 		public string? Cidade { get; set; }
 
-        public DateOnly DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
 
 		[Required(ErrorMessage = "E necessário informar seu nivel de escolaridade")]

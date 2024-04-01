@@ -30,7 +30,7 @@ namespace TechVagas_EstagioTech.Migrations
                     curriculo = table.Column<string>(type: "text", nullable: false),
                     cpf = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
                     cidade = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    datanascimento = table.Column<DateOnly>(type: "date", nullable: false),
+                    datanascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     nivelescolaridade = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     telefone = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
                     email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -61,35 +61,13 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "contratoestagio",
-                columns: table => new
-                {
-                    ContratoEstagioid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StatusdoContratoEstagio = table.Column<string>(name: "Status do ContratoEstagio", type: "character varying(150)", maxLength: 150, nullable: false),
-                    notafinal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    situacao = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    HorariodeEntrada = table.Column<string>(name: "Horario de Entrada", type: "character varying(150)", maxLength: 150, nullable: false),
-                    HorariodeSaida = table.Column<string>(name: "Horario de Saida", type: "character varying(150)", maxLength: 150, nullable: false),
-                    datainicio = table.Column<DateOnly>(type: "date", nullable: false),
-                    datafim = table.Column<DateOnly>(type: "date", nullable: false),
-                    salario = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    cargasemanal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    cargatotal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_contratoestagio", x => x.ContratoEstagioid);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "coordenadorestagio",
                 columns: table => new
                 {
                     coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    datacadastro = table.Column<DateOnly>(type: "date", nullable: false),
-                    statuscoordenador = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    datacadastro = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    statuscoordenador = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,17 +75,30 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "curso",
+                name: "Curso",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    idCurso = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nomecurso = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    turnocurso = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    nomeCurso = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_curso", x => x.id);
+                    table.PrimaryKey("PK_Curso", x => x.idCurso);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "documento",
+                columns: table => new
+                {
+                    documentoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_documento", x => x.documentoid);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,25 +117,12 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "matricula",
-                columns: table => new
-                {
-                    matriculaid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    numeromatricula = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_matricula", x => x.matriculaid);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "supervisorestagio",
                 columns: table => new
                 {
                     supervisorid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    status = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    status = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,34 +185,13 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "documento",
-                columns: table => new
-                {
-                    documentoid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    ContratoEstagioid = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_documento", x => x.documentoid);
-                    table.ForeignKey(
-                        name: "FK_documento_contratoestagio_ContratoEstagioid",
-                        column: x => x.ContratoEstagioid,
-                        principalTable: "contratoestagio",
-                        principalColumn: "ContratoEstagioid",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "apontamento",
                 columns: table => new
                 {
                     apontamentoid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     descricaoApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    dataApontamento = table.Column<DateOnly>(type: "date", nullable: false),
+                    dataApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     CoordenadorEstagioidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true),
                     coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -246,6 +203,29 @@ namespace TechVagas_EstagioTech.Migrations
                         column: x => x.CoordenadorEstagioidCoordenadorEstagio,
                         principalTable: "coordenadorestagio",
                         principalColumn: "coordenadorestagioid");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "documentoversao",
+                columns: table => new
+                {
+                    documentoversaoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    comentario = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    anexo = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    data = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    documentoid = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_documentoversao", x => x.documentoversaoid);
+                    table.ForeignKey(
+                        name: "FK_documentoversao_documento_documentoid",
+                        column: x => x.documentoid,
+                        principalTable: "documento",
+                        principalColumn: "documentoid",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -295,29 +275,6 @@ namespace TechVagas_EstagioTech.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "documentoversao",
-                columns: table => new
-                {
-                    documentoversaoid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    comentario = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    anexo = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    data = table.Column<DateOnly>(type: "date", nullable: false),
-                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    documentoid = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_documentoversao", x => x.documentoversaoid);
-                    table.ForeignKey(
-                        name: "FK_documentoversao_documento_documentoid",
-                        column: x => x.documentoid,
-                        principalTable: "documento",
-                        principalColumn: "documentoid",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
                 table: "apontamento",
@@ -327,11 +284,6 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "IX_cargo_vagasid",
                 table: "cargo",
                 column: "vagasid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_documento_ContratoEstagioid",
-                table: "documento",
-                column: "ContratoEstagioid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_documentonecessario_TipoDocumentosidTipoDocumento",
@@ -367,7 +319,7 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "cargo");
 
             migrationBuilder.DropTable(
-                name: "curso");
+                name: "Curso");
 
             migrationBuilder.DropTable(
                 name: "documentonecessario");
@@ -377,9 +329,6 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "instituicaoensino");
-
-            migrationBuilder.DropTable(
-                name: "matricula");
 
             migrationBuilder.DropTable(
                 name: "supervisorestagio");
@@ -401,9 +350,6 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "concedente");
-
-            migrationBuilder.DropTable(
-                name: "contratoestagio");
         }
     }
 }

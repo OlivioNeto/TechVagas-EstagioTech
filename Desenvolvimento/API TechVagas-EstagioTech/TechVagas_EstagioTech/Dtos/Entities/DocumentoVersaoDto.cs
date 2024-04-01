@@ -24,7 +24,9 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
 
         [Required(ErrorMessage = "É necessário uma data")]
-        public DateOnly? Data { get; set; }
+        [MinLength(7)]
+        [MaxLength(12)]
+        public string? Data { get; set; }
 
         [Required(ErrorMessage = "É necessário uma situação")]
         [MinLength(3)]
