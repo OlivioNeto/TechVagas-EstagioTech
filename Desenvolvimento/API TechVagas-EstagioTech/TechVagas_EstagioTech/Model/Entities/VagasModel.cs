@@ -13,10 +13,10 @@ namespace TechVagas_EstagioTech.Model.Entities
         public int Quantidade { get; set; }
 
         [Column("datapublicacao")]
-        public DateTime DataPublicacao { get; set; }
+        public DateOnly DataPublicacao { get; set; }
 
         [Column("datalimite")]
-        public DateTime DataLimite { get; set; }
+        public DateOnly DataLimite { get; set; }
 
         [Column("localidade")]
         public string? Localidade { get; set; }

@@ -149,6 +149,41 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("aluno");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ApontamentoModel", b =>
+                {
+                    b.Property<int>("idApontamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("apontamentoid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idApontamento"));
+
+                    b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("dataApontamento")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("dataApontamento");
+
+                    b.Property<string>("descricaoApontamento")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("descricaoApontamento");
+
+                    b.Property<int>("idCoordenadorEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("coordenadorestagioid");
+
+                    b.HasKey("idApontamento");
+
+                    b.HasIndex("CoordenadorEstagioidCoordenadorEstagio");
+
+                    b.ToTable("apontamento");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
                 {
                     b.Property<int>("CargoId")
@@ -219,22 +254,130 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("concedente");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
+                {
+                    b.Property<int>("contratoestagioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("ContratoEstagioid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("contratoestagioId"));
+
+                    b.Property<string>("cargaSemanal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("cargasemanal");
+
+                    b.Property<string>("cargaTotal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("cargatotal");
+
+                    b.Property<string>("dataFim")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("datafim");
+
+                    b.Property<string>("dataInicio")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("datainicio");
+
+                    b.Property<string>("horarioEntrada")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("Horario de Entrada");
+
+                    b.Property<string>("horarioSaida")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("Horario de Saida");
+
+                    b.Property<string>("notaFinal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("notafinal");
+
+                    b.Property<string>("salario")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("salario");
+
+                    b.Property<string>("situacao")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("situacao");
+
+                    b.Property<string>("statusContratoEstagio")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("Status do ContratoEstagio");
+
+                    b.HasKey("contratoestagioId");
+
+                    b.ToTable("contratoestagio");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
+                {
+                    b.Property<int>("idCoordenadorEstagio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("coordenadorestagioid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
+
+                    b.Property<string>("StatusCoordenadorEstagio")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("statuscoordenador");
+
+                    b.Property<string>("dataCadastro")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("datacadastro");
+
+                    b.HasKey("idCoordenadorEstagio");
+
+                    b.ToTable("coordenadorestagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
                 {
-                    b.Property<int>("idCurso")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCurso"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("nomeCurso")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("nomecurso");
 
-                    b.HasKey("idCurso");
+                    b.Property<string>("turnoCurso")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("turnocurso");
 
-                    b.ToTable("Curso");
+                    b.HasKey("Id");
+
+                    b.ToTable("curso");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
@@ -339,6 +482,78 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("documentoversao");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.InstituicaoEnsinoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Local")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)")
+                        .HasColumnName("local");
+
+                    b.Property<string>("NomeInstituicao")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("nomeinstituicao");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(17)
+                        .HasColumnType("character varying(17)")
+                        .HasColumnName("telefone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("instituicaoensino");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.MatriculaModel", b =>
+                {
+                    b.Property<int>("MatriculaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("matriculaid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MatriculaId"));
+
+                    b.Property<string>("NumeroMatricula")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("numeromatricula");
+
+                    b.HasKey("MatriculaId");
+
+                    b.ToTable("matricula");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
+                {
+                    b.Property<int>("idSupervisor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("supervisorid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
+
+                    b.Property<string>("statusSupervisor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("status");
+
+                    b.HasKey("idSupervisor");
+
+                    b.ToTable("supervisorestagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
                 {
                     b.Property<int>("idTipoDocumento")
@@ -388,12 +603,12 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VagasId"));
 
-                    b.Property<DateTime>("DataLimite")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("DataLimite")
+                        .HasColumnType("date")
                         .HasColumnName("datalimite");
 
-                    b.Property<DateTime>("DataPublicacao")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("DataPublicacao")
+                        .HasColumnType("date")
                         .HasColumnName("datapublicacao");
 
                     b.Property<string>("Descricao")
@@ -452,6 +667,15 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("vagas");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ApontamentoModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                        .WithMany("Apontamento")
+                        .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
+
+                    b.Navigation("CoordenadorEstagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.VagasModel", "Vagas")
@@ -503,6 +727,11 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", b =>
                 {
                     b.Navigation("Vagas");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
+                {
+                    b.Navigation("Apontamento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
