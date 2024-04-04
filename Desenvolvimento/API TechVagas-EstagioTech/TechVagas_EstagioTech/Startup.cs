@@ -12,6 +12,7 @@ using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
+using TechVagas_EstagioTech.Dtos.Entities;
 
 namespace TechVagas_EstagioTech
 {
@@ -30,8 +31,11 @@ namespace TechVagas_EstagioTech
 			services.AddDbContext<DBContext>(options =>
 				options.UseNpgsql(connectionString));
 
-			// Garantir que todos os assemblies do domínio sejam injetados
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            var secret = Configuration["Jwt:Secret"];
+            services.AddSingleton(new JwtAuthenticationManager(secret));
+
+            // Garantir que todos os assemblies do domínio sejam injetados
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			// Injeção de dependência
 			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
