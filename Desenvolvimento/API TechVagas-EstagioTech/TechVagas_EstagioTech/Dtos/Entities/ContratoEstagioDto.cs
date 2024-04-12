@@ -5,7 +5,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     public class ContratoEstagioDto
     {
         [Key]
-        public int contratoestagioId { get; set; }
+        public int idContratoEstagio { get; set; }
 
         [Required(ErrorMessage = "E necessário um Status do Contrato")]
         [MinLength(3)]

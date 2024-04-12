@@ -8,7 +8,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 	public class DocumentoDto
 	{
         [Key]
-        public int DocumentoId { get; set; }
+        public int idDocumento { get; set; }
 
 		[Required(ErrorMessage = "Informe a descrição do documento")]
 		[MinLength(3)]

@@ -32,7 +32,7 @@ namespace TechVagas_EstagioTech.Services.Entities
         {
             var contratoEstagio = _mapper.Map<ContratoEstagioModel>(contratoestagioDto);
             await _contratoEstagioRepositorio.Adicionar(contratoEstagio);
-            contratoestagioDto.contratoestagioId = contratoEstagio.contratoestagioId;
+            contratoestagioDto.idContratoEstagio = contratoEstagio.idContratoEstagio;
         }
         public async Task Atualizar(ContratoEstagioDto contratoestagioDto)
         {

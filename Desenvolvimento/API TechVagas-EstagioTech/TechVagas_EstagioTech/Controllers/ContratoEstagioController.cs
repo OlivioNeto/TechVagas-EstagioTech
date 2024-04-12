@@ -37,7 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         {
             if (contratoestagioDto is null) return BadRequest("Dados inválidos!");
             await _contratoestagioService.Adicionar(contratoestagioDto);
-            return new CreatedAtRouteResult("ObterContratoEstagio", new { id = contratoestagioDto.contratoestagioId }, contratoestagioDto);
+            return new CreatedAtRouteResult("ObterContratoEstagio", new { id = contratoestagioDto.idContratoEstagio }, contratoestagioDto);
         }
 
         [HttpPut("{id:int}")]

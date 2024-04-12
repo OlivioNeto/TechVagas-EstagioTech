@@ -10,7 +10,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Key] //define como chave primaria
 
         [Column("documentoversaoid")]
-        public int DocumentoVersaoId { get; set; }
+        public int idDocumentoVersao { get; set; }
 
         [Column("comentario")]
         public string? Comentario { get; set; }

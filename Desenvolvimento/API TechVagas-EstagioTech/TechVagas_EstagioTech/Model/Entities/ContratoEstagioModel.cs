@@ -6,7 +6,7 @@ namespace TechVagas_EstagioTech.Model.Entities
     public class ContratoEstagioModel
     {
         [Column("ContratoEstagioid")]
-        public int contratoestagioId { get; set; }
+        public int idContratoEstagio { get; set; }
 
 
         [Column("Status do ContratoEstagio")]
