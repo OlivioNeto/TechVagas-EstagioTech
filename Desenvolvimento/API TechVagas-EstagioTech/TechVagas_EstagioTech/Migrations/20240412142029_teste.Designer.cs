@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240401164101_teste")]
+    [Migration("20240412142029_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -164,10 +164,9 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
                         .HasColumnType("integer");
 
-                    b.Property<string>("dataApontamento")
+                    b.Property<DateOnly?>("dataApontamento")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasColumnType("date")
                         .HasColumnName("dataApontamento");
 
                     b.Property<string>("descricaoApontamento")
@@ -257,6 +256,78 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("concedente");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
+                {
+                    b.Property<int>("idContratoEstagio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("ContratoEstagioid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idContratoEstagio"));
+
+                    b.Property<string>("cargaSemanal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("cargasemanal");
+
+                    b.Property<string>("cargaTotal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("cargatotal");
+
+                    b.Property<DateOnly?>("dataFim")
+                        .IsRequired()
+                        .HasColumnType("date")
+                        .HasColumnName("datafim");
+
+                    b.Property<DateOnly?>("dataInicio")
+                        .IsRequired()
+                        .HasColumnType("date")
+                        .HasColumnName("datainicio");
+
+                    b.Property<string>("horarioEntrada")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("Horario de Entrada");
+
+                    b.Property<string>("horarioSaida")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("Horario de Saida");
+
+                    b.Property<string>("notaFinal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("notafinal");
+
+                    b.Property<string>("salario")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("salario");
+
+                    b.Property<string>("situacao")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("situacao");
+
+                    b.Property<string>("statusContratoEstagio")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("Status do ContratoEstagio");
+
+                    b.HasKey("idContratoEstagio");
+
+                    b.ToTable("contratoestagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
                 {
                     b.Property<int>("idCoordenadorEstagio")
@@ -266,14 +337,15 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
 
-                    b.Property<bool>("StatusCoordenadorEstagio")
-                        .HasColumnType("boolean")
+                    b.Property<string>("StatusCoordenadorEstagio")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("statuscoordenador");
 
-                    b.Property<string>("dataCadastro")
+                    b.Property<DateOnly?>("dataCadastro")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasColumnType("date")
                         .HasColumnName("datacadastro");
 
                     b.HasKey("idCoordenadorEstagio");
@@ -283,30 +355,38 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
                 {
-                    b.Property<int>("idCurso")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCurso"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("nomeCurso")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("nomecurso");
 
-                    b.HasKey("idCurso");
+                    b.Property<string>("turnoCurso")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("turnocurso");
 
-                    b.ToTable("Curso");
+                    b.HasKey("Id");
+
+                    b.ToTable("curso");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
                 {
-                    b.Property<int>("DocumentoId")
+                    b.Property<int>("idDocumento")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("documentoid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DocumentoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumento"));
 
                     b.Property<string>("descricaoDocumento")
                         .IsRequired()
@@ -320,19 +400,19 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("situacao");
 
-                    b.HasKey("DocumentoId");
+                    b.HasKey("idDocumento");
 
                     b.ToTable("documento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
                 {
-                    b.Property<int>("DocumentoNecessarioId")
+                    b.Property<int>("idDocumentoNecessario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("documentonecessarioid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DocumentoNecessarioId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumentoNecessario"));
 
                     b.Property<int?>("TipoDocumentosidTipoDocumento")
                         .HasColumnType("integer");
@@ -348,7 +428,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("tipoestagioid");
 
-                    b.HasKey("DocumentoNecessarioId");
+                    b.HasKey("idDocumentoNecessario");
 
                     b.HasIndex("TipoDocumentosidTipoDocumento");
 
@@ -359,12 +439,12 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
                 {
-                    b.Property<int>("DocumentoVersaoId")
+                    b.Property<int>("idDocumentoVersao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("documentoversaoid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DocumentoVersaoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumentoVersao"));
 
                     b.Property<string>("Anexo")
                         .IsRequired()
@@ -378,10 +458,9 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("comentario");
 
-                    b.Property<string>("Data")
+                    b.Property<DateOnly?>("Data")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasColumnType("date")
                         .HasColumnName("data");
 
                     b.Property<int>("DocumentoId")
@@ -394,7 +473,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("situacao");
 
-                    b.HasKey("DocumentoVersaoId");
+                    b.HasKey("idDocumentoVersao");
 
                     b.HasIndex("DocumentoId");
 
@@ -433,6 +512,26 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("instituicaoensino");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.MatriculaModel", b =>
+                {
+                    b.Property<int>("MatriculaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("matriculaid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MatriculaId"));
+
+                    b.Property<string>("NumeroMatricula")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("numeromatricula");
+
+                    b.HasKey("MatriculaId");
+
+                    b.ToTable("matricula");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
                 {
                     b.Property<int>("idSupervisor")
@@ -442,8 +541,10 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
 
-                    b.Property<bool>("statusSupervisor")
-                        .HasColumnType("boolean")
+                    b.Property<string>("statusSupervisor")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("status");
 
                     b.HasKey("idSupervisor");

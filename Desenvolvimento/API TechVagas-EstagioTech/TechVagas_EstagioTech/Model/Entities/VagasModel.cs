@@ -10,7 +10,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         public int VagasId { get; set; }
 
         [Column("quantidade")]
-        public string Quantidade { get; set; }
+        public int Quantidade { get; set; }
 
         [Column("datapublicacao")]
         public DateOnly DataPublicacao { get; set; }

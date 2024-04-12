@@ -14,6 +14,6 @@ namespace TechVagas_EstagioTech.Model.Entities
         public int idSupervisor { get; set; }
 
         [Column("status")]
-        public bool statusSupervisor { get; set; }
+        public string? statusSupervisor { get; set; }
     }
 }

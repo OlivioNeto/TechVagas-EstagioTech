@@ -14,7 +14,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         }
         public async Task<DocumentoNecessarioModel> BuscarPorId(int id)
         {
-            return await _dbContext.DocumentoNecessario.Where(x => x.DocumentoNecessarioId == id).FirstOrDefaultAsync();
+            return await _dbContext.DocumentoNecessario.Where(x => x.idDocumentoNecessario == id).FirstOrDefaultAsync();
         }
         public async Task<List<DocumentoNecessarioModel>> BuscarTodosDocumentosNecessarios()
         {

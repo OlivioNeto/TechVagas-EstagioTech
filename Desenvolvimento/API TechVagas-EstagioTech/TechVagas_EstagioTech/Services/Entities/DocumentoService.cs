@@ -9,6 +9,7 @@ namespace TechVagas_EstagioTech.Services.Entities
 {
 	public class DocumentoService : IDocumentoService
 	{
+		//teste
 		private readonly IDocumentoRepositorio _documentoRepositorio;
 		private readonly IMapper _mapper;
 
@@ -34,7 +35,7 @@ namespace TechVagas_EstagioTech.Services.Entities
         {
             var documento = _mapper.Map<DocumentoModel>(documentoDto);
             await _documentoRepositorio.Adicionar(documento);
-            documentoDto.DocumentoId = documento.DocumentoId;
+            documentoDto.idDocumento = documento.idDocumento;
         }
 
         public async Task Atualizar(DocumentoDto documentoDto)

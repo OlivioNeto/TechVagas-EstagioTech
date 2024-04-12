@@ -41,7 +41,7 @@ namespace TechVagas_EstagioTech.Controllers
 		{
 			if (cursoDto is null) return BadRequest("Dado inválido!");
 			await _cursoService.Adicionar(cursoDto);
-			return new CreatedAtRouteResult("GetCurso", new { id = cursoDto.idCurso }, cursoDto);
+			return new CreatedAtRouteResult("ObterCurso", new { id = cursoDto.Id }, cursoDto);
 		}
 
 
