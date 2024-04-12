@@ -7,7 +7,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     public class DocumentoNecessarioDto
     {
         [Key]
-        public int DocumentoNecessarioId { get; set; }
+        public int idDocumentoNecessario { get; set; }
 
         [JsonIgnore]
         public ICollection<TipoDocumentoModel>? TipoDocumentos { get; set; }

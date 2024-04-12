@@ -8,7 +8,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     public class DocumentoVersaoDto
     {
         [Key]
-        public int DocumentoVersaoId { get; set; }
+        public int idDocumentoVersao { get; set; }
 
 
         [Required(ErrorMessage = "É necessário um comentário")]
@@ -24,9 +24,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
 
         [Required(ErrorMessage = "É necessário uma data")]
-        [MinLength(7)]
-        [MaxLength(12)]
-        public string? Data { get; set; }
+        public DateOnly? Data { get; set; }
 
         [Required(ErrorMessage = "É necessário uma situação")]
         [MinLength(3)]
@@ -37,6 +35,6 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [JsonIgnore]
 		public ICollection<DocumentoModel>? Documentos { get; set; }
 
-		public int DocumentoId { get; set; }
+		public int idDocumento { get; set; }
     }
 }

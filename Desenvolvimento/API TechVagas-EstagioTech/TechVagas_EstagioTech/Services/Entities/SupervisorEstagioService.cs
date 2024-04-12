@@ -36,7 +36,7 @@ namespace TechVagas_EstagioTech.Services.Entities
             await _supervisorEstagioRepositorio.Adicionar(supervisorEstagio);
             supervisorEstagioDto.idSupervisor = supervisorEstagio.idSupervisor;
         }
-        public async Task Adicionar(bool statusSupervisor)
+        public async Task Adicionar(string statusSupervisor)
         {
             var supervisorEstagio = new SupervisorEstagioModel() { statusSupervisor = statusSupervisor }; //mapeamento para converter a dto em model antes
             await _supervisorEstagioRepositorio.Adicionar(supervisorEstagio);
