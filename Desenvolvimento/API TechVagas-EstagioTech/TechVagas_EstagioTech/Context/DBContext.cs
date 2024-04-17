@@ -166,6 +166,15 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: CoordenadorEstagio -> Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
-		}
+
+            //Relacionamento: CoordenadorEstagio -> ContratoEstagio
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+
+            //Relacionamento: SupervisorEstagio -> ContratoEstagio
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+
+            //Relacionamento: TipoEstagio -> ContratoEstagio
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+        }
     }
 }
