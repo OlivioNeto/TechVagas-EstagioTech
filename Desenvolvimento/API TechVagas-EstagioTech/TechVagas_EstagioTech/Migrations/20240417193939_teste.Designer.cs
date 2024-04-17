@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240412142029_teste")]
+    [Migration("20240417193939_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -265,6 +265,15 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idContratoEstagio"));
 
+                    b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SupervisorEstagioidSupervisor")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TipoEstagioidTipoEstagio")
+                        .HasColumnType("integer");
+
                     b.Property<string>("cargaSemanal")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -299,6 +308,18 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(150)")
                         .HasColumnName("Horario de Saida");
 
+                    b.Property<int>("idCoordenadorEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("coordenadorestagioid");
+
+                    b.Property<int>("idSupervisorEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("supervisorestagioid");
+
+                    b.Property<int>("idTipoEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("tipoestagioid");
+
                     b.Property<string>("notaFinal")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -324,6 +345,12 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("Status do ContratoEstagio");
 
                     b.HasKey("idContratoEstagio");
+
+                    b.HasIndex("CoordenadorEstagioidCoordenadorEstagio");
+
+                    b.HasIndex("SupervisorEstagioidSupervisor");
+
+                    b.HasIndex("TipoEstagioidTipoEstagio");
 
                     b.ToTable("contratoestagio");
                 });
@@ -685,6 +712,27 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Vagas");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                        .WithMany("ContratoEstagio")
+                        .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
+
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", "SupervisorEstagio")
+                        .WithMany("ContratoEstagio")
+                        .HasForeignKey("SupervisorEstagioidSupervisor");
+
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", "TipoEstagio")
+                        .WithMany("ContratoEstagio")
+                        .HasForeignKey("TipoEstagioidTipoEstagio");
+
+                    b.Navigation("CoordenadorEstagio");
+
+                    b.Navigation("SupervisorEstagio");
+
+                    b.Navigation("TipoEstagio");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", "TipoDocumentos")
@@ -730,11 +778,18 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
                 {
                     b.Navigation("Apontamento");
+
+                    b.Navigation("ContratoEstagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
                 {
                     b.Navigation("DocumentoVersoes");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
+                {
+                    b.Navigation("ContratoEstagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
@@ -744,6 +799,8 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
                 {
+                    b.Navigation("ContratoEstagio");
+
                     b.Navigation("DocumentosNecessarios");
                 });
 

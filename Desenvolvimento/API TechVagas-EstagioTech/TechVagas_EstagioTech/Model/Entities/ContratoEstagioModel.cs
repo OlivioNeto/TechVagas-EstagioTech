@@ -41,5 +41,19 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         [Column("cargatotal")]
         public string? cargaTotal { get; set; }
+
+        public CoordenadorEstagioModel? CoordenadorEstagio { get; set; }
+        [Column("coordenadorestagioid")]
+        public int idCoordenadorEstagio { get; set; }
+
+        public SupervisorEstagioModel? SupervisorEstagio { get; set; }
+        [Column("supervisorestagioid")]
+        public int idSupervisorEstagio { get; set; }
+
+        public TipoEstagioModel? TipoEstagio { get; set; }
+        [Column("tipoestagioid")]
+        public int idTipoEstagio { get; set; }
+
+
     }
 }

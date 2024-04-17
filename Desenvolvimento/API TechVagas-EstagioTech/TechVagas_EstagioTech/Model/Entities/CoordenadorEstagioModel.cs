@@ -19,5 +19,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? StatusCoordenadorEstagio { get; set; }
 
         public virtual ICollection<ApontamentoModel>? Apontamento { get; set; }
+        public virtual ICollection<ContratoEstagioModel>? ContratoEstagio { get; set; }
+
     }
 }
