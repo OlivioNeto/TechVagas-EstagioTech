@@ -40,13 +40,11 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         public string? horarioSaida { get; set; }
 
         [Required(ErrorMessage = "E necessário uma Data do Inicio")]
-        [MinLength(3)]
-        [MaxLength(50)]
+
         public DateOnly? dataInicio { get; set; }
 
         [Required(ErrorMessage = "E necessário uma Data do Fim")]
-        [MinLength(3)]
-        [MaxLength(50)]
+
         public DateOnly? dataFim { get; set; }
 
         [Required(ErrorMessage = "Quantidade do Salario")]
