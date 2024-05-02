@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-    public partial class Teste : Migration
+    public partial class teste : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -291,24 +291,36 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     documentonecessarioid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoDocumentosidTipoDocumento = table.Column<int>(type: "integer", nullable: true),
                     tipodocumentoid = table.Column<int>(type: "integer", nullable: false),
-                    TipoEstagiosidTipoEstagio = table.Column<int>(type: "integer", nullable: true),
-                    tipoestagioid = table.Column<int>(type: "integer", nullable: false)
+                    tipoestagioid = table.Column<int>(type: "integer", nullable: false),
+                    TipoDocumentoModelidTipoDocumento = table.Column<int>(type: "integer", nullable: true),
+                    TipoEstagioModelidTipoEstagio = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_documentonecessario", x => x.documentonecessarioid);
                     table.ForeignKey(
-                        name: "FK_documentonecessario_tipodocumento_TipoDocumentosidTipoDocum~",
-                        column: x => x.TipoDocumentosidTipoDocumento,
+                        name: "FK_documentonecessario_tipodocumento_TipoDocumentoModelidTipoD~",
+                        column: x => x.TipoDocumentoModelidTipoDocumento,
                         principalTable: "tipodocumento",
                         principalColumn: "tipodocumentoid");
                     table.ForeignKey(
-                        name: "FK_documentonecessario_tipoestagio_TipoEstagiosidTipoEstagio",
-                        column: x => x.TipoEstagiosidTipoEstagio,
+                        name: "FK_documentonecessario_tipodocumento_tipodocumentoid",
+                        column: x => x.tipodocumentoid,
+                        principalTable: "tipodocumento",
+                        principalColumn: "tipodocumentoid",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_documentonecessario_tipoestagio_TipoEstagioModelidTipoEstag~",
+                        column: x => x.TipoEstagioModelidTipoEstagio,
                         principalTable: "tipoestagio",
                         principalColumn: "tipoestagioid");
+                    table.ForeignKey(
+                        name: "FK_documentonecessario_tipoestagio_tipoestagioid",
+                        column: x => x.tipoestagioid,
+                        principalTable: "tipoestagio",
+                        principalColumn: "tipoestagioid",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -358,14 +370,24 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "TipoEstagioidTipoEstagio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_documentonecessario_TipoDocumentosidTipoDocumento",
+                name: "IX_documentonecessario_tipodocumentoid",
                 table: "documentonecessario",
-                column: "TipoDocumentosidTipoDocumento");
+                column: "tipodocumentoid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_documentonecessario_TipoEstagiosidTipoEstagio",
+                name: "IX_documentonecessario_TipoDocumentoModelidTipoDocumento",
                 table: "documentonecessario",
-                column: "TipoEstagiosidTipoEstagio");
+                column: "TipoDocumentoModelidTipoDocumento");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_documentonecessario_tipoestagioid",
+                table: "documentonecessario",
+                column: "tipoestagioid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_documentonecessario_TipoEstagioModelidTipoEstagio",
+                table: "documentonecessario",
+                column: "TipoEstagioModelidTipoEstagio");
 
             migrationBuilder.CreateIndex(
                 name: "IX_documentoversao_documentoid",

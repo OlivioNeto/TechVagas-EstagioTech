@@ -438,10 +438,10 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumentoNecessario"));
 
-                    b.Property<int?>("TipoDocumentosidTipoDocumento")
+                    b.Property<int?>("TipoDocumentoModelidTipoDocumento")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TipoEstagiosidTipoEstagio")
+                    b.Property<int?>("TipoEstagioModelidTipoEstagio")
                         .HasColumnType("integer");
 
                     b.Property<int>("idTipoDocumento")
@@ -454,9 +454,13 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("idDocumentoNecessario");
 
-                    b.HasIndex("TipoDocumentosidTipoDocumento");
+                    b.HasIndex("TipoDocumentoModelidTipoDocumento");
 
-                    b.HasIndex("TipoEstagiosidTipoEstagio");
+                    b.HasIndex("TipoEstagioModelidTipoEstagio");
+
+                    b.HasIndex("idTipoDocumento");
+
+                    b.HasIndex("idTipoEstagio");
 
                     b.ToTable("documentonecessario");
                 });
@@ -732,17 +736,29 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", "TipoDocumentos")
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", null)
                         .WithMany("DocumentosNecessarios")
-                        .HasForeignKey("TipoDocumentosidTipoDocumento");
+                        .HasForeignKey("TipoDocumentoModelidTipoDocumento");
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", "TipoEstagios")
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", null)
                         .WithMany("DocumentosNecessarios")
-                        .HasForeignKey("TipoEstagiosidTipoEstagio");
+                        .HasForeignKey("TipoEstagioModelidTipoEstagio");
 
-                    b.Navigation("TipoDocumentos");
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", "TipoDocumento")
+                        .WithMany()
+                        .HasForeignKey("idTipoDocumento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("TipoEstagios");
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", "TipoEstagio")
+                        .WithMany()
+                        .HasForeignKey("idTipoEstagio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoDocumento");
+
+                    b.Navigation("TipoEstagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>

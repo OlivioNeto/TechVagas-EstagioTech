@@ -106,6 +106,8 @@ namespace TechVagas_EstagioTech.Data
 
             //Documento necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.idDocumentoNecessario);
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasOne(b => b.TipoDocumento).WithMany().HasForeignKey(b => b.idTipoDocumento);
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasOne(b => b.TipoEstagio).WithMany().HasForeignKey(b => b.idTipoEstagio);
 
             //Supervisor Estagio
             modelBuilder.Entity<SupervisorEstagioModel>().HasKey(x => x.idSupervisor);
@@ -157,12 +159,6 @@ namespace TechVagas_EstagioTech.Data
             //Relacionamento: Documento -> Documento Versão
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.idDocumentoVersao);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x=> x.Situacao).IsRequired();
-
-            //Relacionamento: TipoDocumento -> Documento Necessário
-            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.idDocumentoNecessario);
-
-            //Relacionamento: TipoEstagio -> Documento Necessário
-            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.idDocumentoNecessario);
 
             //Relacionamento: CoordenadorEstagio -> Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
