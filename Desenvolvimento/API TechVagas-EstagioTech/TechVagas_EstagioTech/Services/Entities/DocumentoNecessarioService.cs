@@ -26,7 +26,7 @@ namespace TechVagas_EstagioTech.Services.Entities
             var documentoNecessarios = await _documentoNecessarioRepositorio.BuscarTodosDocumentosNecessarios();
             var documentoNecessariosDTO = _mapper.Map<IEnumerable<DocumentoNecessarioDto>>(documentoNecessarios);
 
-            foreach (var documentoDto in documentoNecessariosDTO)
+            /*foreach (var documentoDto in documentoNecessariosDTO)
             {
                 var documento = documentoNecessarios.FirstOrDefault(documentoNecessario => documentoNecessario.idDocumentoNecessario == documentoDto.idDocumentoNecessario);
                 if (documento != null)
@@ -34,7 +34,7 @@ namespace TechVagas_EstagioTech.Services.Entities
                     documentoDto.TipoDocumento = _mapper.Map<TipoDocumentoDto>(documento.TipoDocumento);
                     documentoDto.TipoEstagio = _mapper.Map<TipoEstagioDto>(documento.TipoEstagio);
                 }
-            }
+            }*/
 
             return documentoNecessariosDTO;
         }
