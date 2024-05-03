@@ -9,10 +9,10 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [Key]
         public int idDocumentoNecessario { get; set; }
 
-        //[JsonIgnore]
+        [JsonIgnore]
         public TipoDocumentoDto? TipoDocumento { get; set; }
 
-        //[JsonIgnore]
+        [JsonIgnore]
         public TipoEstagioDto? TipoEstagio { get; set; }
         public int idTipoDocumento { get; set; }
         public int idTipoEstagio { get; set; }
