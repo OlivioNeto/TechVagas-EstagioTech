@@ -27,6 +27,8 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<MatriculaModel> Matricula { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //LIMITANDO O MÁXIMO DE CARACTERES
+
             //Alunos
             modelBuilder.Entity<AlunoModel>().HasKey(x => x.AlunoId);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Nome).IsRequired().HasMaxLength(150);
@@ -76,8 +78,6 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.salario).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaSemanal).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaTotal).IsRequired().HasMaxLength(150);
-            
-
 
             //Concedente
             modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
@@ -144,6 +144,10 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
             modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
 
+
+
+            //RELACIONAMENTOS
+
             //Relacionamento: Cargo -> Vagas
             modelBuilder.Entity<VagasModel>()
 				.HasMany(c => c.Cargos)
@@ -171,6 +175,19 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: TipoEstagio -> ContratoEstagio
             modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+
+
+
+
+
+            //DEIXANDO DADOS PRÉ-CADASTRADOS
+
+            //Tipo Estagio
+            modelBuilder.Entity<TipoEstagioModel>().HasData(
+                new TipoEstagioModel { idTipoEstagio = 1, descricaoTipoEstagio = "Equivalência"},
+                new TipoEstagioModel { idTipoEstagio = 2, descricaoTipoEstagio = "Normal"}
+            );
+
         }
     }
 }

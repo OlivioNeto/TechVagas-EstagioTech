@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
@@ -342,6 +344,15 @@ namespace TechVagas_EstagioTech.Migrations
                         principalTable: "vagas",
                         principalColumn: "vagasid",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "tipoestagio",
+                columns: new[] { "tipoestagioid", "descricao" },
+                values: new object[,]
+                {
+                    { 1, "Equivalência" },
+                    { 2, "Normal" }
                 });
 
             migrationBuilder.CreateIndex(

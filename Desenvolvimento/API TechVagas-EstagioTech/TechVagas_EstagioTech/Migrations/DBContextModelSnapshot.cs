@@ -618,6 +618,18 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("idTipoEstagio");
 
                     b.ToTable("tipoestagio");
+
+                    b.HasData(
+                        new
+                        {
+                            idTipoEstagio = 1,
+                            descricaoTipoEstagio = "Equivalência"
+                        },
+                        new
+                        {
+                            idTipoEstagio = 2,
+                            descricaoTipoEstagio = "Normal"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
