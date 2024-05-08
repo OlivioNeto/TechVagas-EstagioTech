@@ -188,6 +188,13 @@ namespace TechVagas_EstagioTech.Data
                 new TipoEstagioModel { idTipoEstagio = 2, descricaoTipoEstagio = "Normal"}
             );
 
+            //Tipo Documento
+            modelBuilder.Entity<TipoDocumentoModel>().HasData(
+                new TipoDocumentoModel { idTipoDocumento = 1, descricaoTipoDocumento = "Contrato Social"},
+                new TipoDocumentoModel { idTipoDocumento = 2, descricaoTipoDocumento = "CLT"},
+                new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação"},
+                new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais"}
+            );
         }
     }
 }
