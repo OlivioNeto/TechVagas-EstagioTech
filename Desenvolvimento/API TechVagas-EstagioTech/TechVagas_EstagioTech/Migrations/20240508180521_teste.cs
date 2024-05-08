@@ -366,6 +366,18 @@ namespace TechVagas_EstagioTech.Migrations
                     { 2, "Normal" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "documentonecessario",
+                columns: new[] { "documentonecessarioid", "TipoDocumentoModelidTipoDocumento", "TipoEstagioModelidTipoEstagio", "tipodocumentoid", "tipoestagioid" },
+                values: new object[,]
+                {
+                    { 1, null, null, 1, 1 },
+                    { 2, null, null, 2, 1 },
+                    { 3, null, null, 3, 1 },
+                    { 4, null, null, 4, 1 },
+                    { 5, null, null, 4, 2 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
                 table: "apontamento",

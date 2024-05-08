@@ -195,6 +195,15 @@ namespace TechVagas_EstagioTech.Data
                 new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação"},
                 new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais"}
             );
+
+            //Documento Necessário
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasData(
+                new DocumentoNecessarioModel { idDocumentoNecessario = 1, idTipoEstagio = 1, idTipoDocumento = 1 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 2, idTipoEstagio = 1, idTipoDocumento = 2 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 3, idTipoEstagio = 1, idTipoDocumento = 3 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 4, idTipoEstagio = 1, idTipoDocumento = 4 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 5, idTipoEstagio = 2, idTipoDocumento = 4 }
+            );
         }
     }
 }

@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240508143143_teste")]
+    [Migration("20240508180521_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -466,6 +466,38 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasIndex("idTipoEstagio");
 
                     b.ToTable("documentonecessario");
+
+                    b.HasData(
+                        new
+                        {
+                            idDocumentoNecessario = 1,
+                            idTipoDocumento = 1,
+                            idTipoEstagio = 1
+                        },
+                        new
+                        {
+                            idDocumentoNecessario = 2,
+                            idTipoDocumento = 2,
+                            idTipoEstagio = 1
+                        },
+                        new
+                        {
+                            idDocumentoNecessario = 3,
+                            idTipoDocumento = 3,
+                            idTipoEstagio = 1
+                        },
+                        new
+                        {
+                            idDocumentoNecessario = 4,
+                            idTipoDocumento = 4,
+                            idTipoEstagio = 1
+                        },
+                        new
+                        {
+                            idDocumentoNecessario = 5,
+                            idTipoDocumento = 4,
+                            idTipoEstagio = 2
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
