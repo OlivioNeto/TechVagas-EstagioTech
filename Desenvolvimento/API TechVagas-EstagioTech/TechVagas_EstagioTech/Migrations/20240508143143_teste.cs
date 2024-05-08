@@ -347,6 +347,17 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "tipodocumento",
+                columns: new[] { "tipodocumentoid", "descricao" },
+                values: new object[,]
+                {
+                    { 1, "Contrato Social" },
+                    { 2, "CLT" },
+                    { 3, "Especificação" },
+                    { 4, "Seguro de assistentes pessoais" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "tipoestagio",
                 columns: new[] { "tipoestagioid", "descricao" },
                 values: new object[,]

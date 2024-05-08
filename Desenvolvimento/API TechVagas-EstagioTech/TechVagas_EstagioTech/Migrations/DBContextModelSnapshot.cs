@@ -598,6 +598,28 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("idTipoDocumento");
 
                     b.ToTable("tipodocumento");
+
+                    b.HasData(
+                        new
+                        {
+                            idTipoDocumento = 1,
+                            descricaoTipoDocumento = "Contrato Social"
+                        },
+                        new
+                        {
+                            idTipoDocumento = 2,
+                            descricaoTipoDocumento = "CLT"
+                        },
+                        new
+                        {
+                            idTipoDocumento = 3,
+                            descricaoTipoDocumento = "Especificação"
+                        },
+                        new
+                        {
+                            idTipoDocumento = 4,
+                            descricaoTipoDocumento = "Seguro de assistentes pessoais"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
