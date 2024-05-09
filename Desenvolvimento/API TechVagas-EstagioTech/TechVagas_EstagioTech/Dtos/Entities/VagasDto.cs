@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -51,14 +52,16 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MaxLength(20)]        
         public string? TotalHorasSemanis { get; set; }
 
-        [Column("cargos")]
         [JsonIgnore]
-        public ICollection<CargoDto>? CargoDto { get; set; }
-
-        [JsonIgnore]
-        public ConcedenteDto? ConcedenteDto { get; set; }
+        public ConcedenteDto? Concedente { get; set; }
 
         [ForeignKey("concedenteid")]
         public int concedenteId { get; set; }
+
+        [JsonIgnore]
+        public CargoDto? Cargo { get; set; }
+
+        [ForeignKey("cargoid")]
+        public int CargoId { get; set; }
     }
 }

@@ -148,11 +148,13 @@ namespace TechVagas_EstagioTech.Data
 
             //RELACIONAMENTOS
 
-            //Relacionamento: Cargo -> Vagas
+            //Relacionamento: Vagas -> Cargo
             modelBuilder.Entity<VagasModel>()
-				.HasMany(c => c.Cargos)
-				.WithOne(v => v.Vagas)
-				.IsRequired().OnDelete(DeleteBehavior.Cascade);
+                .HasOne(v => v.Cargo)
+                .WithMany() 
+                .HasForeignKey(v => v.CargoId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             //Relacionamento: Concedente -> Vagas
             modelBuilder.Entity<ConcedenteModel>()
