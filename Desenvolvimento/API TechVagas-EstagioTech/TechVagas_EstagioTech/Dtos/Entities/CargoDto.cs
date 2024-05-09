@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
-    
     public class CargoDto
 	{
         [Key]
@@ -21,10 +21,5 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MaxLength(50)]
         public string? Tipo { get; set; }
 
-        [JsonIgnore]
-        public VagasDto? VagasDto { get; set; }
-
-		[ForeignKey("vagasid")]
-		public int VagasId { get; set; }
-	}
+    }
 }

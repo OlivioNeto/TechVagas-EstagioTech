@@ -204,13 +204,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("tipo");
 
-                    b.Property<int>("VagasId")
-                        .HasColumnType("integer")
-                        .HasColumnName("vagasid");
-
                     b.HasKey("CargoId");
-
-                    b.HasIndex("VagasId");
 
                     b.ToTable("cargo");
                 });
@@ -695,6 +689,9 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VagasId"));
 
+                    b.Property<int>("CargoId")
+                        .HasColumnType("integer");
+
                     b.Property<DateOnly>("DataLimite")
                         .HasColumnType("date")
                         .HasColumnName("datalimite");
@@ -754,6 +751,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("VagasId");
 
+                    b.HasIndex("CargoId");
+
                     b.HasIndex("concedenteId");
 
                     b.ToTable("vagas");
@@ -766,17 +765,6 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
 
                     b.Navigation("CoordenadorEstagio");
-                });
-
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
-                {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.VagasModel", "Vagas")
-                        .WithMany("Cargos")
-                        .HasForeignKey("VagasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vagas");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
@@ -840,11 +828,19 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
                 {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CargoModel", "Cargo")
+                        .WithMany()
+                        .HasForeignKey("CargoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", "Concedente")
                         .WithMany("Vagas")
                         .HasForeignKey("concedenteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cargo");
 
                     b.Navigation("Concedente");
                 });
@@ -881,11 +877,6 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("ContratoEstagio");
 
                     b.Navigation("DocumentosNecessarios");
-                });
-
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
-                {
-                    b.Navigation("Cargos");
                 });
 #pragma warning restore 612, 618
         }

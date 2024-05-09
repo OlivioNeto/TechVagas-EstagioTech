@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-    public partial class teste : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,6 +44,20 @@ namespace TechVagas_EstagioTech.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_aluno", x => x.alunoid);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "cargo",
+                columns: table => new
+                {
+                    cargoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    tipo = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cargo", x => x.cargoid);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,11 +201,18 @@ namespace TechVagas_EstagioTech.Migrations
                     horarioentrada = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     horariosaida = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     totalhorassemanais = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    concedenteId = table.Column<int>(type: "integer", nullable: false)
+                    concedenteId = table.Column<int>(type: "integer", nullable: false),
+                    CargoId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_vagas", x => x.vagasid);
+                    table.ForeignKey(
+                        name: "FK_vagas_cargo_CargoId",
+                        column: x => x.CargoId,
+                        principalTable: "cargo",
+                        principalColumn: "cargoid",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_vagas_concedente_concedenteId",
                         column: x => x.concedenteId,
@@ -325,27 +346,6 @@ namespace TechVagas_EstagioTech.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "cargo",
-                columns: table => new
-                {
-                    cargoid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    tipo = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    vagasid = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_cargo", x => x.cargoid);
-                    table.ForeignKey(
-                        name: "FK_cargo_vagas_vagasid",
-                        column: x => x.vagasid,
-                        principalTable: "vagas",
-                        principalColumn: "vagasid",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "tipodocumento",
                 columns: new[] { "tipodocumentoid", "descricao" },
@@ -382,11 +382,6 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
                 table: "apontamento",
                 column: "CoordenadorEstagioidCoordenadorEstagio");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_cargo_vagasid",
-                table: "cargo",
-                column: "vagasid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_contratoestagio_CoordenadorEstagioidCoordenadorEstagio",
@@ -429,6 +424,11 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "documentoid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_vagas_CargoId",
+                table: "vagas",
+                column: "CargoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_vagas_concedenteId",
                 table: "vagas",
                 column: "concedenteId");
@@ -442,9 +442,6 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "apontamento");
-
-            migrationBuilder.DropTable(
-                name: "cargo");
 
             migrationBuilder.DropTable(
                 name: "contratoestagio");
@@ -481,6 +478,9 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "documento");
+
+            migrationBuilder.DropTable(
+                name: "cargo");
 
             migrationBuilder.DropTable(
                 name: "concedente");

@@ -42,7 +42,8 @@ namespace TechVagas_EstagioTech.Model.Entities
         public ConcedenteModel? Concedente { get; set; }
 		public int concedenteId { get; set; }
 
-		public ICollection<CargoModel>? Cargos { get; set; }
+        public CargoModel? Cargo { get; set; }
+        public int CargoId { get; set; }
 
 		
 	}
