@@ -15,6 +15,8 @@ namespace TechVagas_EstagioTech.Model.Entities
 
         [Column("senha")]
         public string Senha { get; set; }
+
+        [Column("usertype")]
         public UserType Type { get; set; }
     }
 
