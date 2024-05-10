@@ -7,8 +7,8 @@ namespace TechVagas_EstagioTech.Model.Entities
     public class UsuarioModel
     {
         [Key]
-        [Column("id")]
-        public int Id { get; set; }
+        [Column("usuarioid")]
+        public int UsuarioId { get; set; }
 
         [Column("nome")]
         public string Nome { get; set; }
@@ -20,10 +20,10 @@ namespace TechVagas_EstagioTech.Model.Entities
 
     public enum UserType
     {
-        Administrador,
-        Aluno,
-        Coordenador,
-        Empresa
+        Administrador = 1,
+        Aluno = 2,
+        Coordenador = 3,
+        Empresa = 4
     }
 }
 
