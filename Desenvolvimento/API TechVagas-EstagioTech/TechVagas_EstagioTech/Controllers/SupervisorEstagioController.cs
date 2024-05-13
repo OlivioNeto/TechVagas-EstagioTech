@@ -37,12 +37,17 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string statusSupervisor)
+        public async Task<ActionResult> Post([FromBody] bool? statusSupervisor)
         {
-            if (statusSupervisor is null) return BadRequest("Dado inválido!");
-            await _supervisorEstagioService.Adicionar(statusSupervisor);
+            if (!statusSupervisor.HasValue)
+            {
+                return BadRequest("Status do supervisor não pode ser nulo.");
+            }
+
+            await _supervisorEstagioService.Adicionar(statusSupervisor.Value);
             return Ok("Supervisor registrado com sucesso");
         }
+
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put([FromBody] SupervisorEstagioDto supervisorEstagioDto)

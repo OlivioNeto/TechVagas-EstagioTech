@@ -64,11 +64,11 @@ namespace TechVagas_EstagioTech.Data
             //Coordenador Estágio
             modelBuilder.Entity<CoordenadorEstagioModel>().HasKey(x => x.idCoordenadorEstagio);
             modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired();
-            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.StatusCoordenadorEstagio).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.StatusCoordenadorEstagio).IsRequired();
 
             //Contrato Estagio 
             modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
-            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.statusContratoEstagio).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.statusContratoEstagio).IsRequired();
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.notaFinal).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.situacao).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.horarioEntrada).IsRequired().HasMaxLength(150);
@@ -111,7 +111,7 @@ namespace TechVagas_EstagioTech.Data
 
             //Supervisor Estagio
             modelBuilder.Entity<SupervisorEstagioModel>().HasKey(x => x.idSupervisor);
-            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.statusSupervisor).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.statusSupervisor).IsRequired();
 
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
@@ -141,13 +141,12 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(17);
 
             //Matricula
-            modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
-            modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
+           // modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
+            //modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
 
 
 
             //RELACIONAMENTOS
-
             //Relacionamento: Vagas -> Cargo
             modelBuilder.Entity<VagasModel>()
                 .HasOne(v => v.Cargo)
@@ -186,6 +185,7 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: Curso -> Matricula
             modelBuilder.Entity<CursoModel>().HasKey(x => x.Matriculas);
+
 
             //DEIXANDO DADOS PRÉ-CADASTRADOS
 

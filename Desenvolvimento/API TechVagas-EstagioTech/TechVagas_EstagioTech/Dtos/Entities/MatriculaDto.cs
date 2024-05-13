@@ -14,7 +14,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MinLength(11)]
         [MaxLength(15)]
         public string NumeroMatricula { get; set; }
-
+      
         [JsonIgnore]
         [Column("alunos")]
         public ICollection<AlunoModel>?Alunos{ get; set; }
