@@ -18,6 +18,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         }
         public async Task<List<DocumentoNecessarioModel>> BuscarTodosDocumentosNecessarios()
         {
+            //return await _dbContext.DocumentoNecessario.Include(documentoNecessario => documentoNecessario.TipoDocumento).Include(documentoNecessario => documentoNecessario.TipoEstagio).ToListAsync();
             return await _dbContext.DocumentoNecessario.ToListAsync();
         }
 

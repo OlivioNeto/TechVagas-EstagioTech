@@ -11,14 +11,12 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         public int idContratoEstagio { get; set; }
 
         [Required(ErrorMessage = "E necessário um Status do Contrato")]
-        [MinLength(3)]
-        [MaxLength(80)]
-        public string? statusContratoEstagio { get; set; }
+
+        public bool statusContratoEstagio { get; set; }
 
 
         [Required(ErrorMessage = "E necessário uma Nota Final")]
-        [MinLength(3)]
-        [MaxLength(50)]
+
         public string? notaFinal { get; set; }
 
 

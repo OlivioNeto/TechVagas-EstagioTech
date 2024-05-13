@@ -10,7 +10,7 @@ namespace TechVagas_EstagioTech.Model.Entities
 
 
         [Column("Status do ContratoEstagio")]
-        public string? statusContratoEstagio { get; set; }
+        public bool statusContratoEstagio { get; set; }
 
 
         [Column("notafinal")]

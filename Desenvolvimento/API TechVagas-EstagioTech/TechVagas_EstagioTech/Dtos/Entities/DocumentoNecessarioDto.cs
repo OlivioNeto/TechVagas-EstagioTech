@@ -10,10 +10,10 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         public int idDocumentoNecessario { get; set; }
 
         [JsonIgnore]
-        public ICollection<TipoDocumentoModel>? TipoDocumentos { get; set; }
+        public TipoDocumentoDto? TipoDocumento { get; set; }
 
         [JsonIgnore]
-        public ICollection<TipoEstagioModel>? TipoEstagios { get; set; }
+        public TipoEstagioDto? TipoEstagio { get; set; }
         public int idTipoDocumento { get; set; }
         public int idTipoEstagio { get; set; }
     }
