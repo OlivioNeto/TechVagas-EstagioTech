@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -104,5 +105,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		[MinLength(8)]
 		[MaxLength(9)]
 		public string? Cep { get; set; }
+
+        [Column("matricula")]
+        public ICollection<MatriculaModel>? Matricula { get; set; }
     }
 }
