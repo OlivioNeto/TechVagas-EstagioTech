@@ -6,7 +6,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
     public class InstituicaoEnsinoDto
     {
         [Key]
-        public int Id { get; set; }
+        public int idInstituicaoEnsino { get; set; }
 
         [Required(ErrorMessage = "E necessário o nome da Institução")]
         [MinLength(3)]
@@ -16,11 +16,11 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [Required(ErrorMessage = "E necessário um local")]
         [MinLength(3)]
         [MaxLength(120)]
-        public string Local { get; set; }
+        public string LocalInstituicao { get; set; }
 
         [Required(ErrorMessage = "E necessário um telefone")]
         [MinLength(15)]
         [MaxLength(17)]
-        public string Telefone { get; set; }
+        public string TelefoneInstituicao { get; set; }
     }
 }

@@ -532,14 +532,14 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.InstituicaoEnsinoModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("idInstituicaoEnsino")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idInstituicaoEnsino"));
 
-                    b.Property<string>("Local")
+                    b.Property<string>("LocalInstituicao")
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("character varying(120)")
@@ -551,13 +551,13 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("nomeinstituicao");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("TelefoneInstituicao")
                         .IsRequired()
                         .HasMaxLength(17)
                         .HasColumnType("character varying(17)")
                         .HasColumnName("telefone");
 
-                    b.HasKey("Id");
+                    b.HasKey("idInstituicaoEnsino");
 
                     b.ToTable("instituicaoensino");
                 });
