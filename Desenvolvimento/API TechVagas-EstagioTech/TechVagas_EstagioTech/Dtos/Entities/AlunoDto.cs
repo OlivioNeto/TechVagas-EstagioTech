@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using TechVagas_EstagioTech.Model.Entities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
@@ -106,7 +107,10 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		[MaxLength(9)]
 		public string? Cep { get; set; }
 
-        //[Column("matricula")]
-        //public ICollection<MatriculaModel>? Matricula { get; set; }
+
+        [JsonIgnore]
+        [Column("alunoid")]
+        public ICollection<AlunoModel>? Alunos { get; set; }
+
     }
 }

@@ -39,11 +39,17 @@ namespace TechVagas_EstagioTech.Migrations
                     endereco = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     genero = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     bairro = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    cep = table.Column<string>(type: "character varying(9)", maxLength: 9, nullable: false)
+                    cep = table.Column<string>(type: "character varying(9)", maxLength: 9, nullable: false),
+                    AlunoModelAlunoId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_aluno", x => x.alunoid);
+                    table.ForeignKey(
+                        name: "FK_aluno_aluno_AlunoModelAlunoId",
+                        column: x => x.AlunoModelAlunoId,
+                        principalTable: "aluno",
+                        principalColumn: "alunoid");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,14 +100,14 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "curso",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
+                    cursoid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nomecurso = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     turnocurso = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_curso", x => x.id);
+                    table.PrimaryKey("PK_curso", x => x.cursoid);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,16 +242,24 @@ namespace TechVagas_EstagioTech.Migrations
                     matriculaid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     numeromatricula = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
-                    CursoModelId = table.Column<int>(type: "integer", nullable: true)
+                    AlunosAlunoId = table.Column<int>(type: "integer", nullable: true),
+                    alunoid = table.Column<int>(type: "integer", nullable: false),
+                    cursoid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_matricula", x => x.matriculaid);
                     table.ForeignKey(
-                        name: "FK_matricula_curso_CursoModelId",
-                        column: x => x.CursoModelId,
+                        name: "FK_matricula_aluno_AlunosAlunoId",
+                        column: x => x.AlunosAlunoId,
+                        principalTable: "aluno",
+                        principalColumn: "alunoid");
+                    table.ForeignKey(
+                        name: "FK_matricula_curso_cursoid",
+                        column: x => x.cursoid,
                         principalTable: "curso",
-                        principalColumn: "id");
+                        principalColumn: "cursoid",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -385,6 +399,11 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_aluno_AlunoModelAlunoId",
+                table: "aluno",
+                column: "AlunoModelAlunoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
                 table: "apontamento",
                 column: "CoordenadorEstagioidCoordenadorEstagio");
@@ -430,9 +449,14 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "documentoid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_matricula_CursoModelId",
+                name: "IX_matricula_AlunosAlunoId",
                 table: "matricula",
-                column: "CursoModelId");
+                column: "AlunosAlunoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_matricula_cursoid",
+                table: "matricula",
+                column: "cursoid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_vagas_CargoId",
@@ -448,9 +472,6 @@ namespace TechVagas_EstagioTech.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "aluno");
-
             migrationBuilder.DropTable(
                 name: "apontamento");
 
@@ -486,6 +507,9 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "documento");
+
+            migrationBuilder.DropTable(
+                name: "aluno");
 
             migrationBuilder.DropTable(
                 name: "curso");
