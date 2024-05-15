@@ -34,7 +34,7 @@ namespace TechVagas_EstagioTech.Services.Entities
 		{
 			var curso = _mapper.Map<CursoModel>(cursoDto);
 			await _cursoRepositorio.Adicionar(curso);
-			cursoDto.Id = curso.Id;
+			cursoDto.cursoid = curso.cursoid;
 		}
 
 		public async Task Atualizar(CursoDto cursoDto)

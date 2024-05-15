@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TechVagas_EstagioTech.Data;
@@ -11,9 +12,11 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240515195811_teste")]
+    partial class teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -537,14 +540,14 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.InstituicaoEnsinoModel", b =>
                 {
-                    b.Property<int>("idInstituicaoEnsino")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idInstituicaoEnsino"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("LocalInstituicao")
+                    b.Property<string>("Local")
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("character varying(120)")
@@ -556,13 +559,13 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("nomeinstituicao");
 
-                    b.Property<string>("TelefoneInstituicao")
+                    b.Property<string>("Telefone")
                         .IsRequired()
                         .HasMaxLength(17)
                         .HasColumnType("character varying(17)")
                         .HasColumnName("telefone");
 
-                    b.HasKey("idInstituicaoEnsino");
+                    b.HasKey("Id");
 
                     b.ToTable("instituicaoensino");
                 });

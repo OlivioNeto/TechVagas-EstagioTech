@@ -15,7 +15,7 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<CursoModel> BuscarPorId(int id)
         {
-			return await _dbContext.Curso.Where(x => x.Id == id).FirstOrDefaultAsync();
+			return await _dbContext.Curso.Where(x => x.cursoid == id).FirstOrDefaultAsync();
 		}
 
         public async Task<List<CursoModel>> BuscarTodosCursos()

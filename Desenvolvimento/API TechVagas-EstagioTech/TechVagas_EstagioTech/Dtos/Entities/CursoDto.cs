@@ -8,7 +8,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 	public class CursoDto
 	{
         [Key]
-        public int Id { get; set; }
+        public int cursoid { get; set; }
 
 		[Required(ErrorMessage = "E necessário o nome do curso")]
 		[MinLength(3)]
@@ -22,8 +22,9 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         public string? StatusCoordenadorEstagio { get; set; }
 
-        //[JsonIgnore]
-        //[Column("matriculas")]
-        //public ICollection<MatriculaModel>? Matriculas { get; set; }
+        [JsonIgnore]
+        [Column("cursoid")]
+        public ICollection<CursoModel>? Curso { get; set; }
+
     }
 }

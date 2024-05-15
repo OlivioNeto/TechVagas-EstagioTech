@@ -14,13 +14,16 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [MinLength(11)]
         [MaxLength(15)]
         public string NumeroMatricula { get; set; }
-      
-        //[JsonIgnore]
-        //[Column("alunos")]
-        //public ICollection<AlunoModel>?Alunos{ get; set; }
 
-        //[JsonIgnore]
-        //[Column("cursos")]
-        //public ICollection<CursoModel>? Cursos { get; set; }
+
+        [JsonIgnore]
+        public AlunoDto? Alunos { get; set; }
+        public int AlunoId { get; set; }
+
+        [JsonIgnore]
+        public CursoDto? Curso { get; set; }
+        public int cursoid { get; set; }
+
+
     }
 }
