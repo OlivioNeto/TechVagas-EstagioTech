@@ -8,16 +8,16 @@ namespace TechVagas_EstagioTech.Model.Entities
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int idInstituicaoEnsino { get; set; }
 
         [Column("nomeinstituicao")]
         public string NomeInstituicao { get; set; }
 
         [Column("local")]
-        public string Local {  get; set; }
+        public string LocalInstituicao {  get; set; }
 
         [Column("telefone")]
-        public string Telefone { get; set; }
+        public string TelefoneInstituicao { get; set; }
 
     }
 }

@@ -38,7 +38,7 @@ namespace TechVagas_EstagioTech.Controllers
         {
             if (instituicaoEnsinoDto is null) return BadRequest("Dado inválido!");
             await _instituicaoEnsinoService.Adicionar(instituicaoEnsinoDto);
-            return new CreatedAtRouteResult("ObterInstituicao", new { id = instituicaoEnsinoDto.Id }, instituicaoEnsinoDto);
+            return new CreatedAtRouteResult("ObterInstituicao", new { id = instituicaoEnsinoDto.idInstituicaoEnsino }, instituicaoEnsinoDto);
         }
 
         [HttpPut("{id:int}")]

@@ -33,7 +33,7 @@ namespace TechVagas_EstagioTech.Services.Entities
         {
             var instituicao = _mapper.Map<InstituicaoEnsinoModel>(instituicaoEnsinoDto);
             await _instituicaoEnsinoRepositorio.Adicionar(instituicao);
-            instituicaoEnsinoDto.Id = instituicao.Id;
+            instituicaoEnsinoDto.idInstituicaoEnsino = instituicao.idInstituicaoEnsino;
         }
 
         public async Task Atualizar(InstituicaoEnsinoDto instituicaoEnsinoDto)
