@@ -5,8 +5,8 @@ namespace TechVagas_EstagioTech.Model.Entities
     [Table("curso")]
     public class CursoModel
     {
-        [Column("id")]
-        public int Id { get; set; }
+        [Column("cursoid")]
+        public int cursoid { get; set; }
 
         [Column("nomecurso")]
         public string? nomeCurso { get; set; }
@@ -15,7 +15,9 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("turnocurso")]
         public string? turnoCurso { get; set; }
 
-        [Column("matriculas")]
-        public ICollection<MatriculaModel>? Matriculas { get; set; }
+        [Column("matriculaid")]
+        public ICollection<MatriculaModel>? Matricula { get; set; }
+
+
     }
 }

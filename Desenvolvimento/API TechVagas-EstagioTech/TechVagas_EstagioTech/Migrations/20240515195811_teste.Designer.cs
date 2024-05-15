@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240515125504_teste")]
+    [Migration("20240515195811_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -33,6 +33,9 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("alunoid");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AlunoId"));
+
+                    b.Property<int?>("AlunoModelAlunoId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("AreaInteresse")
                         .IsRequired()
@@ -148,6 +151,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("telefone");
 
                     b.HasKey("AlunoId");
+
+                    b.HasIndex("AlunoModelAlunoId");
 
                     b.ToTable("aluno");
                 });
@@ -372,12 +377,12 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("cursoid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnName("cursoid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("cursoid"));
 
                     b.Property<string>("nomeCurso")
                         .IsRequired()
@@ -391,7 +396,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("turnocurso");
 
-                    b.HasKey("Id");
+                    b.HasKey("cursoid");
 
                     b.ToTable("curso");
                 });
@@ -574,7 +579,11 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MatriculaId"));
 
-                    b.Property<int?>("CursoModelId")
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("integer")
+                        .HasColumnName("alunoid");
+
+                    b.Property<int?>("AlunosAlunoId")
                         .HasColumnType("integer");
 
                     b.Property<string>("NumeroMatricula")
@@ -583,9 +592,15 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(15)")
                         .HasColumnName("numeromatricula");
 
+                    b.Property<int>("cursoid")
+                        .HasColumnType("integer")
+                        .HasColumnName("cursoid");
+
                     b.HasKey("MatriculaId");
 
-                    b.HasIndex("CursoModelId");
+                    b.HasIndex("AlunosAlunoId");
+
+                    b.HasIndex("cursoid");
 
                     b.ToTable("matricula");
                 });
@@ -760,6 +775,13 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("vagas");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.AlunoModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.AlunoModel", null)
+                        .WithMany("Alunos")
+                        .HasForeignKey("AlunoModelAlunoId");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ApontamentoModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
@@ -830,9 +852,19 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.MatriculaModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CursoModel", null)
-                        .WithMany("Matriculas")
-                        .HasForeignKey("CursoModelId");
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.AlunoModel", "Alunos")
+                        .WithMany()
+                        .HasForeignKey("AlunosAlunoId");
+
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CursoModel", "Curso")
+                        .WithMany("Matricula")
+                        .HasForeignKey("cursoid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Alunos");
+
+                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
@@ -854,6 +886,11 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Concedente");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.AlunoModel", b =>
+                {
+                    b.Navigation("Alunos");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", b =>
                 {
                     b.Navigation("Vagas");
@@ -868,7 +905,7 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
                 {
-                    b.Navigation("Matriculas");
+                    b.Navigation("Matricula");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
