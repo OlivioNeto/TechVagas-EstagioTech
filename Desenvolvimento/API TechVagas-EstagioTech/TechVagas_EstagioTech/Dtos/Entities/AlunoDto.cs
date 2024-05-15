@@ -106,7 +106,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 		[MaxLength(9)]
 		public string? Cep { get; set; }
 
-        [Column("matricula")]
-        public ICollection<MatriculaModel>? Matricula { get; set; }
+        //[Column("matricula")]
+        //public ICollection<MatriculaModel>? Matricula { get; set; }
     }
 }

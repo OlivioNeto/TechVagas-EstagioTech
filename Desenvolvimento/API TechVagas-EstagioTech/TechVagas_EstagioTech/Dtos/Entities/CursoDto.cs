@@ -22,8 +22,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         public string? StatusCoordenadorEstagio { get; set; }
 
-        [JsonIgnore]
-        [Column("matriculas")]
-        public ICollection<MatriculaModel>? Matriculas { get; set; }
+        //[JsonIgnore]
+        //[Column("matriculas")]
+        //public ICollection<MatriculaModel>? Matriculas { get; set; }
     }
 }

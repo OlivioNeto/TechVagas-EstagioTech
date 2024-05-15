@@ -70,8 +70,8 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string? Cep { get; set; }
 
 
-        [Column("matricula")]
-        public ICollection<MatriculaModel>? Matricula { get; set; }
+        //[Column("matricula")]
+        //public ICollection<MatriculaModel>? Matricula { get; set; }
 
     }
 }

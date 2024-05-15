@@ -12,8 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240509163427_inicial")]
-    partial class inicial
+    [Migration("20240515125504_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -332,10 +332,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(150)")
                         .HasColumnName("situacao");
 
-                    b.Property<string>("statusContratoEstagio")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                    b.Property<bool>("statusContratoEstagio")
+                        .HasColumnType("boolean")
                         .HasColumnName("Status do ContratoEstagio");
 
                     b.HasKey("idContratoEstagio");
@@ -358,10 +356,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
 
-                    b.Property<string>("StatusCoordenadorEstagio")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
+                    b.Property<bool>("StatusCoordenadorEstagio")
+                        .HasColumnType("boolean")
                         .HasColumnName("statuscoordenador");
 
                     b.Property<DateOnly?>("dataCadastro")
@@ -578,6 +574,9 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MatriculaId"));
 
+                    b.Property<int?>("CursoModelId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("NumeroMatricula")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -585,6 +584,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnName("numeromatricula");
 
                     b.HasKey("MatriculaId");
+
+                    b.HasIndex("CursoModelId");
 
                     b.ToTable("matricula");
                 });
@@ -598,10 +599,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
 
-                    b.Property<string>("statusSupervisor")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                    b.Property<bool>("statusSupervisor")
+                        .HasColumnType("boolean")
                         .HasColumnName("status");
 
                     b.HasKey("idSupervisor");
@@ -829,6 +828,13 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Documento");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.MatriculaModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CursoModel", null)
+                        .WithMany("Matriculas")
+                        .HasForeignKey("CursoModelId");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Model.Entities.CargoModel", "Cargo")
@@ -858,6 +864,11 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Apontamento");
 
                     b.Navigation("ContratoEstagio");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
+                {
+                    b.Navigation("Matriculas");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>

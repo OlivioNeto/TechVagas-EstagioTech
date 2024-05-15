@@ -12,11 +12,11 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("numeromatricula")]
         public string NumeroMatricula { get; set; }
 
-        [Column("alunos")]
-        public ICollection<AlunoModel>? Alunos { get; set; }
+        //[Column("alunos")]
+        //public ICollection<AlunoModel>? Alunos { get; set; }
 
-        [Column("cursos")]
-        public ICollection<CursoModel>? Cursos { get; set; }
+        //[Column("cursos")]
+        //public ICollection<CursoModel>? Cursos { get; set; }
 
 
     }
