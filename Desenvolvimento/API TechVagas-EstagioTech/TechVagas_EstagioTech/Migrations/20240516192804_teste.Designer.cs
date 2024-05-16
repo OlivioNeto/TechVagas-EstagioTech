@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240516161743_teste")]
+    [Migration("20240516192804_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace TechVagas_EstagioTech.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.AlunoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", b =>
                 {
                     b.Property<int>("AlunoId")
                         .ValueGeneratedOnAdd()
@@ -157,7 +157,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("aluno");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ApontamentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ApontamentoModel", b =>
                 {
                     b.Property<int>("idApontamento")
                         .ValueGeneratedOnAdd()
@@ -166,7 +166,7 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idApontamento"));
 
-                    b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
+                    b.Property<int?>("CoordenadorEstagioModelidCoordenadorEstagio")
                         .HasColumnType("integer");
 
                     b.Property<DateOnly?>("dataApontamento")
@@ -186,12 +186,14 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("idApontamento");
 
-                    b.HasIndex("CoordenadorEstagioidCoordenadorEstagio");
+                    b.HasIndex("CoordenadorEstagioModelidCoordenadorEstagio");
+
+                    b.HasIndex("idCoordenadorEstagio");
 
                     b.ToTable("apontamento");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CargoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CargoModel", b =>
                 {
                     b.Property<int>("CargoId")
                         .ValueGeneratedOnAdd()
@@ -217,7 +219,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("cargo");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", b =>
                 {
                     b.Property<int>("concedenteId")
                         .ValueGeneratedOnAdd()
@@ -255,7 +257,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("concedente");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ContratoEstagioModel", b =>
                 {
                     b.Property<int>("idContratoEstagio")
                         .ValueGeneratedOnAdd()
@@ -352,7 +354,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("contratoestagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", b =>
                 {
                     b.Property<int>("idCoordenadorEstagio")
                         .ValueGeneratedOnAdd()
@@ -375,7 +377,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("coordenadorestagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", b =>
                 {
                     b.Property<int>("cursoid")
                         .ValueGeneratedOnAdd()
@@ -401,7 +403,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("curso");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", b =>
                 {
                     b.Property<int>("idDocumento")
                         .ValueGeneratedOnAdd()
@@ -427,7 +429,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("documento");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoNecessarioModel", b =>
                 {
                     b.Property<int>("idDocumentoNecessario")
                         .ValueGeneratedOnAdd()
@@ -495,7 +497,7 @@ namespace TechVagas_EstagioTech.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoVersaoModel", b =>
                 {
                     b.Property<int>("idDocumentoVersao")
                         .ValueGeneratedOnAdd()
@@ -538,7 +540,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("documentoversao");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.InstituicaoEnsinoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.InstituicaoEnsinoModel", b =>
                 {
                     b.Property<int>("idInstituicaoEnsino")
                         .ValueGeneratedOnAdd()
@@ -570,7 +572,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("instituicaoensino");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.MatriculaModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.MatriculaModel", b =>
                 {
                     b.Property<int>("MatriculaId")
                         .ValueGeneratedOnAdd()
@@ -605,7 +607,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("matricula");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>
                 {
                     b.Property<int>("idSupervisor")
                         .ValueGeneratedOnAdd()
@@ -623,7 +625,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("supervisorestagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", b =>
                 {
                     b.Property<int>("idTipoDocumento")
                         .ValueGeneratedOnAdd()
@@ -665,7 +667,7 @@ namespace TechVagas_EstagioTech.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.TipoEstagioModel", b =>
                 {
                     b.Property<int>("idTipoEstagio")
                         .ValueGeneratedOnAdd()
@@ -697,7 +699,7 @@ namespace TechVagas_EstagioTech.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.VagasModel", b =>
                 {
                     b.Property<int>("VagasId")
                         .ValueGeneratedOnAdd()
@@ -775,33 +777,39 @@ namespace TechVagas_EstagioTech.Migrations
                     b.ToTable("vagas");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.AlunoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.AlunoModel", null)
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", null)
                         .WithMany("Alunos")
                         .HasForeignKey("AlunoModelAlunoId");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ApontamentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ApontamentoModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", null)
                         .WithMany("Apontamento")
-                        .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
+                        .HasForeignKey("CoordenadorEstagioModelidCoordenadorEstagio");
+
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                        .WithMany()
+                        .HasForeignKey("idCoordenadorEstagio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CoordenadorEstagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ContratoEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ContratoEstagioModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", "SupervisorEstagio")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", "SupervisorEstagio")
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("SupervisorEstagioidSupervisor");
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", "TipoEstagio")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoEstagioModel", "TipoEstagio")
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("TipoEstagioidTipoEstagio");
 
@@ -812,23 +820,23 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("TipoEstagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoNecessarioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoNecessarioModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", null)
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", null)
                         .WithMany("DocumentosNecessarios")
                         .HasForeignKey("TipoDocumentoModelidTipoDocumento");
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", null)
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoEstagioModel", null)
                         .WithMany("DocumentosNecessarios")
                         .HasForeignKey("TipoEstagioModelidTipoEstagio");
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", "TipoDocumento")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", "TipoDocumento")
                         .WithMany()
                         .HasForeignKey("idTipoDocumento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", "TipoEstagio")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoEstagioModel", "TipoEstagio")
                         .WithMany()
                         .HasForeignKey("idTipoEstagio")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -839,9 +847,9 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("TipoEstagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoVersaoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoVersaoModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.DocumentoModel", "Documento")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", "Documento")
                         .WithMany("DocumentoVersoes")
                         .HasForeignKey("DocumentoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -850,13 +858,13 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Documento");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.MatriculaModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.MatriculaModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.AlunoModel", "Alunos")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", "Alunos")
                         .WithMany()
                         .HasForeignKey("AlunosAlunoId");
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CursoModel", "Curso")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", "Curso")
                         .WithMany("Matricula")
                         .HasForeignKey("cursoid")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -867,15 +875,15 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Curso");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.VagasModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.CargoModel", "Cargo")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CargoModel", "Cargo")
                         .WithMany()
                         .HasForeignKey("CargoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", "Concedente")
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", "Concedente")
                         .WithMany("Vagas")
                         .HasForeignKey("concedenteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -886,44 +894,44 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Concedente");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.AlunoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", b =>
                 {
                     b.Navigation("Alunos");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.ConcedenteModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", b =>
                 {
                     b.Navigation("Vagas");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CoordenadorEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", b =>
                 {
                     b.Navigation("Apontamento");
 
                     b.Navigation("ContratoEstagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.CursoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", b =>
                 {
                     b.Navigation("Matricula");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.DocumentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", b =>
                 {
                     b.Navigation("DocumentoVersoes");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SupervisorEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>
                 {
                     b.Navigation("ContratoEstagio");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoDocumentoModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", b =>
                 {
                     b.Navigation("DocumentosNecessarios");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.TipoEstagioModel", b =>
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.TipoEstagioModel", b =>
                 {
                     b.Navigation("ContratoEstagio");
 

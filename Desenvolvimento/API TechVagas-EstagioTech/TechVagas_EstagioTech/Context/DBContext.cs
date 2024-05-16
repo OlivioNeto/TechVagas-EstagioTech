@@ -118,6 +118,7 @@ namespace TechVagas_EstagioTech.Data
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
 			modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.Status).IsRequired();
 
 			//TipoEstagio
 			modelBuilder.Entity<TipoEstagioModel>().HasKey(x => x.idTipoEstagio);

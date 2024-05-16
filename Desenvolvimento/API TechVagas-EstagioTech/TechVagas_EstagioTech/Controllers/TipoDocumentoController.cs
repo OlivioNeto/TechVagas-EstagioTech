@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
@@ -9,11 +10,14 @@ namespace TechVagas_EstagioTech.Controllers
     public class TipoDocumentoController : ControllerBase
     {
 		private readonly ITipoDocumentoService _tipoDocumentoService;
+        private Response _response;
 
-		public TipoDocumentoController(ITipoDocumentoService tipoDocumentoService)
+        public TipoDocumentoController(ITipoDocumentoService tipoDocumentoService)
 		{
 			_tipoDocumentoService = tipoDocumentoService;
-		}
+
+            _response = new Response();
+        }
 
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<TipoDocumentoDto>>> Get()
@@ -47,7 +51,47 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(tipoDocumentoDto);
 		}
 
-		[HttpDelete("{id:int}")]
+        [HttpPut("{id}/Ativar")]
+        public async Task<ActionResult<TipoDocumentoDto>> Activity(int id)
+        {
+            var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);
+            if (tipoDocumentoDto == null)
+            {
+                _response.Status = false; _response.Message = "Tipo Documento não encontrado!"; _response.Data = tipoDocumentoDto;
+                return NotFound(_response);
+            }
+
+            if (!tipoDocumentoDto.Status)
+            {
+                tipoDocumentoDto.EnableAllOperations();
+                await _tipoDocumentoService.Atualizar(tipoDocumentoDto);
+            }
+
+            _response.Status = true; _response.Message = "Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + " ativado com sucesso."; _response.Data = tipoDocumentoDto;
+            return Ok(_response);
+        }
+
+        [HttpPut("{id}/Desativar")]
+        public async Task<ActionResult<TipoDocumentoDto>> Desactivity(int id)
+        {
+            var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);
+            if (tipoDocumentoDto == null)
+            {
+                _response.Status = false; _response.Message = "Tipo Documento não encontrado!"; _response.Data = tipoDocumentoDto;
+                return NotFound(_response);
+            }
+
+            if (tipoDocumentoDto.Status)
+            {
+                tipoDocumentoDto.DisableAllOperations();
+                await _tipoDocumentoService.Atualizar(tipoDocumentoDto);
+            }
+
+            _response.Status = true; _response.Message = "Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + " desativado com sucesso."; _response.Data = tipoDocumentoDto;
+            return Ok(_response);
+        }
+
+        [HttpDelete("{id:int}")]
 		public async Task<ActionResult<TipoDocumentoDto>> Delete(int id)
 		{
 			var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(id);

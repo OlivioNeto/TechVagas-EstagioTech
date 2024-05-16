@@ -222,17 +222,23 @@ namespace TechVagas_EstagioTech.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     descricaoApontamento = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     dataApontamento = table.Column<DateOnly>(type: "date", nullable: false),
-                    CoordenadorEstagioidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true),
-                    coordenadorestagioid = table.Column<int>(type: "integer", nullable: false)
+                    coordenadorestagioid = table.Column<int>(type: "integer", nullable: false),
+                    CoordenadorEstagioModelidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_apontamento", x => x.apontamentoid);
                     table.ForeignKey(
-                        name: "FK_apontamento_coordenadorestagio_CoordenadorEstagioidCoordena~",
-                        column: x => x.CoordenadorEstagioidCoordenadorEstagio,
+                        name: "FK_apontamento_coordenadorestagio_CoordenadorEstagioModelidCoo~",
+                        column: x => x.CoordenadorEstagioModelidCoordenadorEstagio,
                         principalTable: "coordenadorestagio",
                         principalColumn: "coordenadorestagioid");
+                    table.ForeignKey(
+                        name: "FK_apontamento_coordenadorestagio_coordenadorestagioid",
+                        column: x => x.coordenadorestagioid,
+                        principalTable: "coordenadorestagio",
+                        principalColumn: "coordenadorestagioid",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -404,9 +410,14 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "AlunoModelAlunoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
+                name: "IX_apontamento_coordenadorestagioid",
                 table: "apontamento",
-                column: "CoordenadorEstagioidCoordenadorEstagio");
+                column: "coordenadorestagioid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_apontamento_CoordenadorEstagioModelidCoordenadorEstagio",
+                table: "apontamento",
+                column: "CoordenadorEstagioModelidCoordenadorEstagio");
 
             migrationBuilder.CreateIndex(
                 name: "IX_contratoestagio_CoordenadorEstagioidCoordenadorEstagio",

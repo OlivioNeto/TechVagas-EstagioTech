@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
@@ -11,6 +12,8 @@ namespace TechVagas_EstagioTech.Controllers
     public class DocumentoNecessarioController : ControllerBase
     {
         private readonly IDocumentoNecessarioService _documentoNecessarioService;
+        private readonly ITipoDocumentoService _tipoDocumentoService;
+        private Response _response;
 
         public DocumentoNecessarioController(IDocumentoNecessarioService documentoNecessarioService)
         {
@@ -44,9 +47,52 @@ namespace TechVagas_EstagioTech.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put([FromBody] DocumentoNecessarioDto documentoNecessarioDto)
         {
-            if (documentoNecessarioDto is null) return BadRequest("Dado invalido!");
+            if (documentoNecessarioDto == null)
+            {
+                _response.Status = false; _response.Message = "Dado Inválido!"; _response.Data = documentoNecessarioDto;
+                return BadRequest(_response);
+            }
+
+            var existingDocumentoNecessario = await _documentoNecessarioService.BuscarPorId(documentoNecessarioDto.idDocumentoNecessario);
+            if (existingDocumentoNecessario == null)
+            {
+                _response.Status = false; _response.Message = "Não existe o Documento Necessário informado!"; _response.Data = documentoNecessarioDto;
+                return BadRequest(_response);
+            }
+            else if (!existingDocumentoNecessario.Status)
+            {
+                _response.Status = false; _response.Message = "O Documento Necessário " + existingDocumentoNecessario.idDocumentoNecessario + " está desabilitado para alteração!"; _response.Data = documentoNecessarioDto;
+                return BadRequest(_response);
+            }
+
+            var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(documentoNecessarioDto.idTipoDocumento);
+
+            if (tipoDocumentoDto == null)
+            {
+                _response.Status = false; _response.Message = "O Tipo Documento não existe!"; _response.Data = documentoNecessarioDto;
+                return BadRequest(_response);
+            }
+            else if (!tipoDocumentoDto.Status)
+            {
+                _response.Status = false; _response.Message = "O Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + " está desabilitado para adicionar novos documentos necessarios!"; _response.Data = documentoNecessarioDto;
+                return BadRequest(_response);
+            }
+
+            var documentoNecessarioDto = await _documentoNecessarioService.GetStagesRelatedToTypeProcess(tipoDocumentoDto.idTipoDocumento);
+            if (documentoNecessarioDto.FirstOrDefault(documentoNecessario => documentoNecessario.idDocumentoNecessario == documentoNecessarioDto.idDocumentoNecessario) != null)
+            {
+                _response.Status = false; _response.Message = "Já existe o Documento Necessario " + documentoNecessarioDto.idDocumentoNecessario + " no Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + "!"; _response.Data = documentoNecessarioDTO;
+                return BadRequest(_response);
+            }
+            documentoNecessarioDto.Posicao = existingDocumentoNecessario.Posicao;
+            documentoNecessarioDto.EnableAllOperations();
             await _documentoNecessarioService.Atualizar(documentoNecessarioDto);
-            return Ok(documentoNecessarioDto);
+
+            _response.Status = true; _response.Message = "Documento Necessario " + documentoNecessarioDto.idDocumentoNecessario + " alterado com sucesso."; _response.Data = documentoNecessarioDTO;
+            return Ok(_response);
+            //if (documentoNecessarioDto is null) return BadRequest("Dado invalido!");
+            //await _documentoNecessarioService.Atualizar(documentoNecessarioDto);
+            //return Ok(documentoNecessarioDto);
         }
 
         [HttpDelete("{id:int}")]

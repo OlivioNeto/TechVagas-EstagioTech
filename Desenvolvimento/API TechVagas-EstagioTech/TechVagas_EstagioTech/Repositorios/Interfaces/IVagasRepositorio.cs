@@ -1,4 +1,4 @@
-﻿using TechVagas_EstagioTech.Dtos.Entities;
+﻿using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces

@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TechVagas_EstagioTech.Objects.Interface;
 
 namespace TechVagas_EstagioTech.Objects.Model.Entities
 {
     [Table("tipodocumento")]
-    public class TipoDocumentoModel
+    public class TipoDocumentoModel : IStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //coluna de id gerada automitacamente
         [Key] //define como chave primaria
@@ -14,6 +15,9 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
 
         [Column("descricao")]
         public string? descricaoTipoDocumento { get; set; }
+
+        [Column("statustipodocumento")]
+        public bool Status { get; set; }
 
         public virtual ICollection<DocumentoNecessarioModel>? DocumentosNecessarios { get; set; }
     }
