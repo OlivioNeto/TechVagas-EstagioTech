@@ -15,7 +15,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         }
         public async Task<InstituicaoEnsinoModel> BuscarPorId(int id)
         {
-            return await _dbContext.InstituicaoEnsino.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _dbContext.InstituicaoEnsino.Where(x => x.idInstituicaoEnsino == id).FirstOrDefaultAsync();
         }
         public async Task<List<InstituicaoEnsinoModel>> BuscarTodasInstituicoes()
         {

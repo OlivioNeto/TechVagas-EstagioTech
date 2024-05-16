@@ -135,10 +135,10 @@ namespace TechVagas_EstagioTech.Data
 			modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(20);
 
             //Instituicao Ensino
-            modelBuilder.Entity<InstituicaoEnsinoModel>().HasKey(x => x.Id);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().HasKey(x => x.idInstituicaoEnsino);
             modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.NomeInstituicao).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Local).IsRequired().HasMaxLength(120);
-            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(17);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.LocalInstituicao).IsRequired().HasMaxLength(120);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.TelefoneInstituicao).IsRequired().HasMaxLength(17);
 
             //Matricula
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
