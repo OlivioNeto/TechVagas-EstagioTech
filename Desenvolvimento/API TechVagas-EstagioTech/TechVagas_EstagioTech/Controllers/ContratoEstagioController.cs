@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers

@@ -1,9 +1,9 @@
 ﻿using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
-	public interface ICargoRepositorio
+    public interface ICargoRepositorio
 	{
 		Task<List<CargoModel>> BuscarTodosCargos();
 

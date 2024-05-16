@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data
 {
@@ -56,6 +56,8 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
             modelBuilder.Entity<ApontamentoModel>().Property(x => x.descricaoApontamento).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired();
+            modelBuilder.Entity<ApontamentoModel>().HasOne(b => b.CoordenadorEstagio).WithMany().HasForeignKey(b => b.idCoordenadorEstagio);
+
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
