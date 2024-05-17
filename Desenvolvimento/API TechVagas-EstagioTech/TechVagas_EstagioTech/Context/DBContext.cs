@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data
 {
@@ -56,6 +56,8 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
             modelBuilder.Entity<ApontamentoModel>().Property(x => x.descricaoApontamento).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired();
+            modelBuilder.Entity<ApontamentoModel>().HasOne(b => b.CoordenadorEstagio).WithMany().HasForeignKey(b => b.idCoordenadorEstagio);
+
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
@@ -116,6 +118,7 @@ namespace TechVagas_EstagioTech.Data
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
 			modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.Status).IsRequired();
 
 			//TipoEstagio
 			modelBuilder.Entity<TipoEstagioModel>().HasKey(x => x.idTipoEstagio);
@@ -194,10 +197,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Tipo Documento
             modelBuilder.Entity<TipoDocumentoModel>().HasData(
-                new TipoDocumentoModel { idTipoDocumento = 1, descricaoTipoDocumento = "Contrato Social"},
-                new TipoDocumentoModel { idTipoDocumento = 2, descricaoTipoDocumento = "CLT"},
-                new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação"},
-                new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais"}
+                new TipoDocumentoModel { idTipoDocumento = 1, descricaoTipoDocumento = "Contrato Social", Status = true},
+                new TipoDocumentoModel { idTipoDocumento = 2, descricaoTipoDocumento = "CLT", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais",Status = true }
             );
 
             //Documento Necessário

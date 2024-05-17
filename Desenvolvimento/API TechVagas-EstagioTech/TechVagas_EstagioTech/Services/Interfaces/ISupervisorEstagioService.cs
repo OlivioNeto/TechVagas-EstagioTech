@@ -1,5 +1,5 @@
-﻿using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+﻿using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 
 namespace TechVagas_EstagioTech.Services.Interfaces
 {
