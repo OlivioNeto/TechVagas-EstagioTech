@@ -13,6 +13,9 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("nome")]
         public string Nome { get; set; }
 
+        [Column("email")]
+        public string Email { get; set; }
+
         [Column("senha")]
         public string Senha { get; set; }
 

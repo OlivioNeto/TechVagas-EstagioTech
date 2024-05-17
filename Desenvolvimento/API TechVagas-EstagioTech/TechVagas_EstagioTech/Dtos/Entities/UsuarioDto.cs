@@ -3,17 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
-    [Table("usuario")]
     public class UsuarioDto
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("nome")]
         public string Nome { get; set; }
 
-        [Column("senha")]
+        public string Email { get; set; }
+
         public string Senha { get; set; }
         public UserType Type { get; set; }
     }
