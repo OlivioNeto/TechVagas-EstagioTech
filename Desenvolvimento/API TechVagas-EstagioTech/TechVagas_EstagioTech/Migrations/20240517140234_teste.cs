@@ -378,10 +378,10 @@ namespace TechVagas_EstagioTech.Migrations
                 columns: new[] { "tipodocumentoid", "statustipodocumento", "descricao" },
                 values: new object[,]
                 {
-                    { 1, false, "Contrato Social" },
-                    { 2, false, "CLT" },
-                    { 3, false, "Especificação" },
-                    { 4, false, "Seguro de assistentes pessoais" }
+                    { 1, true, "Contrato Social" },
+                    { 2, true, "CLT" },
+                    { 3, true, "Especificação" },
+                    { 4, true, "Seguro de assistentes pessoais" }
                 });
 
             migrationBuilder.InsertData(

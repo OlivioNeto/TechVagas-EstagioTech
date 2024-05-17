@@ -18,6 +18,8 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
 
         [Column("statustipodocumento")]
         public bool Status { get; set; }
+        public void DisableAllOperations() => IStatusExtensions.DisableAllOperations(this);
+        public void EnableAllOperations() => IStatusExtensions.EnableAllOperations(this);
 
         public virtual ICollection<DocumentoNecessarioModel>? DocumentosNecessarios { get; set; }
     }

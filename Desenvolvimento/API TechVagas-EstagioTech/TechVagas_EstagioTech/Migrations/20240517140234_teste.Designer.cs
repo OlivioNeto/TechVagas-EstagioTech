@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240517114657_teste")]
+    [Migration("20240517140234_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -652,25 +652,25 @@ namespace TechVagas_EstagioTech.Migrations
                         new
                         {
                             idTipoDocumento = 1,
-                            Status = false,
+                            Status = true,
                             descricaoTipoDocumento = "Contrato Social"
                         },
                         new
                         {
                             idTipoDocumento = 2,
-                            Status = false,
+                            Status = true,
                             descricaoTipoDocumento = "CLT"
                         },
                         new
                         {
                             idTipoDocumento = 3,
-                            Status = false,
+                            Status = true,
                             descricaoTipoDocumento = "Especificação"
                         },
                         new
                         {
                             idTipoDocumento = 4,
-                            Status = false,
+                            Status = true,
                             descricaoTipoDocumento = "Seguro de assistentes pessoais"
                         });
                 });

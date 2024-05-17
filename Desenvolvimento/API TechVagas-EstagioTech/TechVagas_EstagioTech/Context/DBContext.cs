@@ -197,10 +197,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Tipo Documento
             modelBuilder.Entity<TipoDocumentoModel>().HasData(
-                new TipoDocumentoModel { idTipoDocumento = 1, descricaoTipoDocumento = "Contrato Social"},
-                new TipoDocumentoModel { idTipoDocumento = 2, descricaoTipoDocumento = "CLT"},
-                new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação"},
-                new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais"}
+                new TipoDocumentoModel { idTipoDocumento = 1, descricaoTipoDocumento = "Contrato Social", Status = true},
+                new TipoDocumentoModel { idTipoDocumento = 2, descricaoTipoDocumento = "CLT", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais",Status = true }
             );
 
             //Documento Necessário

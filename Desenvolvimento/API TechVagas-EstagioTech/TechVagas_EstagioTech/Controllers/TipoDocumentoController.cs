@@ -39,6 +39,8 @@ namespace TechVagas_EstagioTech.Controllers
 		public async Task<ActionResult> Post([FromBody] string descricaoTipoDocumento)
 		{	
 			if (string.IsNullOrEmpty(descricaoTipoDocumento)) return BadRequest("Dado inválido!");
+
+
 			await _tipoDocumentoService.Adicionar(descricaoTipoDocumento);
 			return Ok("Documento registrado com sucesso");
 		}

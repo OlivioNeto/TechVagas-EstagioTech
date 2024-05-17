@@ -32,7 +32,8 @@ namespace TechVagas_EstagioTech.Services.Entities
 
 		public async Task Adicionar(string descricaoTipoDocumento)
 		{
-			var tipoDocumento = new TipoDocumentoModel() {descricaoTipoDocumento=descricaoTipoDocumento}; //mapeamento para converter a dto em model antes
+			var tipoDocumento = new TipoDocumentoModel() {descricaoTipoDocumento=descricaoTipoDocumento};
+			tipoDocumento.EnableAllOperations();
             await _tipoDocumentoRepositorio.Adicionar(tipoDocumento);
 		}
 
