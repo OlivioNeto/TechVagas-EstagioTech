@@ -25,6 +25,9 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<SupervisorEstagioModel> SupervisorEstagio {get; set;}
         public DbSet<ContratoEstagioModel> ContratoEstagio { get; set; }
         public DbSet<MatriculaModel> Matricula { get; set; }
+        public DbSet<UsuarioModel> Usuario { get; set; }
+        public DbSet<SessaoModel> Sessao { get; set; }
+        public DbSet<LoginModel> Login { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Alunos

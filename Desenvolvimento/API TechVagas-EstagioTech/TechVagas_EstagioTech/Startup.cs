@@ -12,6 +12,9 @@ using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
+using TechVagas_EstagioTech.Dtos.Entities;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace TechVagas_EstagioTech
 {
@@ -30,8 +33,62 @@ namespace TechVagas_EstagioTech
 			services.AddDbContext<DBContext>(options =>
 				options.UseNpgsql(connectionString));
 
-			// Garantir que todos os assemblies do domínio sejam injetados
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechVagas_EstagioTech", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"Enter 'Bearer' [space] your token",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new List<string>()
+            }
+            });
+            });
+
+            // Configuração da autenticação JWT
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    EntitySecurity entitySecurity = new();
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = entitySecurity.Issuer,
+                        ValidAudience = entitySecurity.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(entitySecurity.Key)),
+                    };
+                });
+
+
+            var secret = Configuration["Jwt:Secret"];
+            services.AddSingleton(new JwtAuthenticationManager(secret));
+
+            // Garantir que todos os assemblies do domínio sejam injetados
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			// Injeção de dependência
 			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
@@ -87,7 +144,7 @@ namespace TechVagas_EstagioTech
                     .AllowCredentials();
             }));
 
-			services.AddAuthentication("Bearer").AddJwtBearer();
+			
 
             services.AddAuthorization(options =>
             {
@@ -99,11 +156,6 @@ namespace TechVagas_EstagioTech
 
 
             services.AddAuthorization(); // Configuração do serviço de autorização
-
-			services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sua API", Version = "v1" });
-			});
 
 			services.AddMvc(); // Certifique-se de adicionar isto se ainda não estiver adicionado
 		}
