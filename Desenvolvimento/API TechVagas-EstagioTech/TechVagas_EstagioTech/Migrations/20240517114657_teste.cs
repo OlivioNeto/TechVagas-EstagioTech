@@ -158,7 +158,8 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     tipodocumentoid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    statustipodocumento = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -374,13 +375,13 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.InsertData(
                 table: "tipodocumento",
-                columns: new[] { "tipodocumentoid", "descricao" },
+                columns: new[] { "tipodocumentoid", "statustipodocumento", "descricao" },
                 values: new object[,]
                 {
-                    { 1, "Contrato Social" },
-                    { 2, "CLT" },
-                    { 3, "Especificação" },
-                    { 4, "Seguro de assistentes pessoais" }
+                    { 1, false, "Contrato Social" },
+                    { 2, false, "CLT" },
+                    { 3, false, "Especificação" },
+                    { 4, false, "Seguro de assistentes pessoais" }
                 });
 
             migrationBuilder.InsertData(

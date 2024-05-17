@@ -21,7 +21,7 @@ namespace TechVagas_EstagioTech.Services.Entities
 		public async Task<TipoDocumentoDto> BuscarPorId(int id)
 		{
 			var tipoDocumento = await _tipoDocumentoRepositorio.BuscarPorId(id);
-			return _mapper.Map<TipoDocumentoDto>(tipoDocumento);
+            return _mapper.Map<TipoDocumentoDto>(tipoDocumento);
 		}
 
 		public async Task<IEnumerable<TipoDocumentoDto>> BuscarTodosTipoDocumentos()

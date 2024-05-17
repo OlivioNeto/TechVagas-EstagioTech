@@ -14,7 +14,7 @@ namespace TechVagas_EstagioTech.Repositorios
         }
         public async Task<TipoDocumentoModel> BuscarPorId(int id)
         {
-			return await _dbContext.TipoDocumento.Where(x => x.idTipoDocumento == id).FirstOrDefaultAsync();
+            return await _dbContext.TipoDocumento.Where(x => x.idTipoDocumento == id).FirstOrDefaultAsync();
 		}
 
         public async Task<List<TipoDocumentoModel>> BuscarTodosTipoDocumentos()
@@ -31,12 +31,30 @@ namespace TechVagas_EstagioTech.Repositorios
 			return tipoDocumentoModel;
 		}
 
+        //      public async Task<TipoDocumentoModel> Atualizar(TipoDocumentoModel tipoDocumentoModel)
+        //      {
+        //	_dbContext.Entry(tipoDocumentoModel).State = EntityState.Modified;
+        //	await _dbContext.SaveChangesAsync();
+        //	return tipoDocumentoModel;
+        //}
+
         public async Task<TipoDocumentoModel> Atualizar(TipoDocumentoModel tipoDocumentoModel)
         {
-			_dbContext.Entry(tipoDocumentoModel).State = EntityState.Modified;
-			await _dbContext.SaveChangesAsync();
-			return tipoDocumentoModel;
-		}
+            var local = _dbContext.Set<TipoDocumentoModel>()
+                                  .Local
+                                  .FirstOrDefault(entry => entry.idTipoDocumento == tipoDocumentoModel.idTipoDocumento);
+
+            if (local != null)
+            {
+                _dbContext.Entry(local).State = EntityState.Detached;
+            }
+
+            _dbContext.Entry(tipoDocumentoModel).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return tipoDocumentoModel;
+        }
+
+
 
         public async Task<bool> Apagar(int id)
         {

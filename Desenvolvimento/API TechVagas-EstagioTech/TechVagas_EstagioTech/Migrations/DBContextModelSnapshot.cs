@@ -631,6 +631,10 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idTipoDocumento"));
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean")
+                        .HasColumnName("statustipodocumento");
+
                     b.Property<string>("descricaoTipoDocumento")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -645,21 +649,25 @@ namespace TechVagas_EstagioTech.Migrations
                         new
                         {
                             idTipoDocumento = 1,
+                            Status = false,
                             descricaoTipoDocumento = "Contrato Social"
                         },
                         new
                         {
                             idTipoDocumento = 2,
+                            Status = false,
                             descricaoTipoDocumento = "CLT"
                         },
                         new
                         {
                             idTipoDocumento = 3,
+                            Status = false,
                             descricaoTipoDocumento = "Especificação"
                         },
                         new
                         {
                             idTipoDocumento = 4,
+                            Status = false,
                             descricaoTipoDocumento = "Seguro de assistentes pessoais"
                         });
                 });
