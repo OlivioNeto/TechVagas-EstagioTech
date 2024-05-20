@@ -10,6 +10,8 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         [Key]
         public int idSupervisor { get; set; }
 
+        public int ConcedenteId { get; set; }
+
         [Required(ErrorMessage = "Informe o Status do SupervisorEstagio")]
 
         public bool statusSupervisor { get; set; }

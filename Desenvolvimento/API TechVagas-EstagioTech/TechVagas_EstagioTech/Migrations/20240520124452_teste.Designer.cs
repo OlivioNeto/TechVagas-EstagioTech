@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240520112241_teste")]
+    [Migration("20240520124452_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -616,11 +616,17 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
 
+                    b.Property<int>("ConcedenteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
                     b.Property<bool>("statusSupervisor")
                         .HasColumnType("boolean")
                         .HasColumnName("status");
 
                     b.HasKey("idSupervisor");
+
+                    b.HasIndex("ConcedenteId");
 
                     b.ToTable("supervisorestagio");
                 });
@@ -881,6 +887,17 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Alunos");
 
                     b.Navigation("Curso");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", "Concedente")
+                        .WithMany()
+                        .HasForeignKey("ConcedenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Concedente");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.VagasModel", b =>
