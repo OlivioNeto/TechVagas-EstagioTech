@@ -44,7 +44,7 @@ namespace TechVagas_EstagioTech.Controllers
                 return BadRequest("Status do supervisor não pode ser nulo.");
             }
 
-            await _supervisorEstagioService.Adicionar(supervisorEstagioDto.statusSupervisor);
+            await _supervisorEstagioService.Adicionar(supervisorEstagioDto.statusSupervisor,supervisorEstagioDto.ConcedenteId);
             return Ok("Supervisor registrado com sucesso");
         }
 
