@@ -20,15 +20,10 @@ namespace TechVagas_EstagioTech.Model.Entities
         public string Senha { get; set; }
 
         [Column("usertype")]
-        public UserType Type { get; set; }
+        [EnumDataType(typeof(UserTypeModel))]
+        public UserTypeModel UserTypeModel { get; set; }
+
     }
 
-    public enum UserType
-    {
-        Administrador = 1,
-        Aluno = 2,
-        Coordenador = 3,
-        Empresa = 4
-    }
 }
 

@@ -20,21 +20,19 @@ namespace TechVagas_EstagioTech.Services.Entities
         public async Task<IEnumerable<UsuarioDto>> BuscarTodosUsuarios()
         {
             var usuarios = await _usuarioRepositorio.BuscarTodosUsuarios();
-            return _mapper.Map<IEnumerable<UsuarioDto>>(usuarios);
-
-            /* IEnumerable<UsuarioDto> usuariosDto = _mapper.Map<IEnumerable<UsuarioDto>>(usuarios);
+            IEnumerable<UsuarioDto> usuariosDto = _mapper.Map<IEnumerable<UsuarioDto>>(usuarios);
 
             foreach (var usuarioDTO in usuariosDto)
             {
-                var usuario = usuarios.FirstOrDefault(u => u.UsuarioId == usuarioDTO.Id);
+                var usuario = usuarios.FirstOrDefault(u => u.UsuarioId == usuarioDTO.UsuarioId);
                 if (usuario != null)
                 {
-                    Type tipoUsuarioDTO = _mapper.Map<Type>(usuario.Type);
-                    usuarioDTO.Type = UserType;
+                    UserTypeDto userTypeDto = _mapper.Map<UserTypeDto>(usuario.UserTypeModel);
+                    usuarioDTO.UserTypeDto = userTypeDto;
                 }
             }
 
-            return usuariosDTO; */
+            return usuariosDto;
         }
 
         public async Task<UsuarioDto> BuscarPorId(int id)
@@ -42,12 +40,47 @@ namespace TechVagas_EstagioTech.Services.Entities
             var usuario = await _usuarioRepositorio.BuscarPorId(id);
 
             UsuarioDto usuarioDTO = _mapper.Map<UsuarioDto>(usuario);
-           // usuarioDTO.Type = _mapper.Map<UserType>(usuario.Type);
+            usuarioDTO.UserTypeDto = _mapper.Map<UserTypeDto>(usuario.UserTypeModel);
 
             return usuarioDTO;
         }
 
+       /* public async Task<IEnumerable<string>> BuscarPorEmail(int id, string email)
+        {
+            var usuarios = await _usuarioRepositorio.BuscarPorEmail(id, email);
+            var emails = new List<string>();
 
+            foreach (var usuario in usuarios)
+            {
+                emails.Add(usuario.Email);
+            }
+
+            return emails;
+        } */
+
+        public async Task<UsuarioDto> Login(LoginDto loginDto)
+        {
+            var login = _mapper.Map<LoginModel>(loginDto);
+            var usuario = await _usuarioRepositorio.Login(login);
+
+            UsuarioDto usuarioDto = _mapper.Map<UsuarioDto>(usuario);
+            if (usuarioDto != null) { usuarioDto.UserTypeDto = _mapper.Map<UserTypeDto>(usuario.UserTypeModel); }
+
+            return usuarioDto;
+        }
+
+        public async Task Adicionar(UsuarioDto usuarioDto)
+        {
+            var usuario = _mapper.Map<UsuarioModel>(usuarioDto);
+            await _usuarioRepositorio.Adicionar(usuario);
+            usuarioDto.UsuarioId = usuario.UsuarioId;
+        }
+
+        public async Task Atualizar(UsuarioDto usuarioDto)
+        {
+            var usuario = _mapper.Map<UsuarioModel>(usuarioDto);
+            await _usuarioRepositorio.Atualizar(usuario);
+        }
 
         public async Task Apagar(int id)
         {
