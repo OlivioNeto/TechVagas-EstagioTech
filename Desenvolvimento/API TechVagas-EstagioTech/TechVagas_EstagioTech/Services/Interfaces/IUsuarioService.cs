@@ -6,7 +6,6 @@ namespace TechVagas_EstagioTech.Services.Interfaces
     {
         Task<IEnumerable<UsuarioDto>> BuscarTodosUsuarios();
         Task<UsuarioDto> BuscarPorId(int id);
-        //Task<IEnumerable<string>> GetByEmail(int id, string email);
         Task<UsuarioDto> Login(LoginDto loginDto);
         Task Adicionar(UsuarioDto usuarioDto);
         Task Atualizar(UsuarioDto usuarioDto);

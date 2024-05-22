@@ -27,10 +27,6 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
             return await _dbContext.Usuario.Where(objeto => objeto.UsuarioId == id && objeto.UsuarioId != 1).Include(objeto => objeto.UserTypeModel).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<UsuarioModel>> BuscarPorEmail(int id, string email)
-        {
-            return await _dbContext.Usuario.Where(objeto => objeto.UsuarioId != id && objeto.Email.Contains(email) && objeto.UsuarioId != 1).ToListAsync();
-        }
         public async Task<UsuarioModel> Adicionar(UsuarioModel usuarioModel)
         {
             _dbContext.Usuario.Add(usuarioModel);

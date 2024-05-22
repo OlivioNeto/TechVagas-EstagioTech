@@ -45,19 +45,6 @@ namespace TechVagas_EstagioTech.Services.Entities
             return usuarioDTO;
         }
 
-       /* public async Task<IEnumerable<string>> BuscarPorEmail(int id, string email)
-        {
-            var usuarios = await _usuarioRepositorio.BuscarPorEmail(id, email);
-            var emails = new List<string>();
-
-            foreach (var usuario in usuarios)
-            {
-                emails.Add(usuario.Email);
-            }
-
-            return emails;
-        } */
-
         public async Task<UsuarioDto> Login(LoginDto loginDto)
         {
             var login = _mapper.Map<LoginModel>(loginDto);
