@@ -103,7 +103,7 @@ namespace TechVagas_EstagioTech
 
 			services.AddSwaggerGen(c =>
 			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sua API", Version = "v1" });
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tech Vagas - Estagio Tech", Version = "v1" });
 			});
 
 			services.AddMvc(); // Certifique-se de adicionar isto se ainda não estiver adicionado
