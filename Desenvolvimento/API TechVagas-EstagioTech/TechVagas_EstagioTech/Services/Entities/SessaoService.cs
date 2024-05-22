@@ -46,10 +46,10 @@ namespace TechVagas_EstagioTech.Services.Entities
             return _mapper.Map<SessaoDto>(sessao);
         }
 
-        public async Task<SessaoDto> GetUser(string token)
+        public async Task<UsuarioDto> GetUser(string token)
         {
             var usuario = await _sessaoRepositorio.GetUser(token);
-            return _mapper.Map<SessaoDto>(usuario);
+            return _mapper.Map<UsuarioDto>(usuario);
         }
 
         public async Task Create(SessaoDto sessaoDto)
