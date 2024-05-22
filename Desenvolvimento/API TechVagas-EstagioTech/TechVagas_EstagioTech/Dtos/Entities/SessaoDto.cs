@@ -1,33 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Jose;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using TechVagas_EstagioTech.Dtos.Utilities;
-using Jose;
-using Newtonsoft.Json;
+using TechVagas_EstagioTech.Model.Entities;
 
-namespace TechVagas_EstagioTech.Model.Entities
+namespace TechVagas_EstagioTech.Dtos.Entities
 {
-    [Table("sessao")]
-    public class SessaoModel
+    public class SessaoDto
     {
-        [Column("idsessao")]
         public int SessaoId { get; set; }
 
-        [Column("datahoraabertura")]
+        [Required(ErrorMessage = "A dade e hora de abertura é requerida!")]
         public string DataHoraInicio { get; set; }
 
-        [Column("datahorafechamento")]
         public string? DataHoraEncerramento { get; set; }
 
-        [Column("tokensessao")]
         public string TokenSessao { get; set; }
 
-        [Column("statussessao")]
+        [Required(ErrorMessage = "O status é requerido!")]
         public bool StatusSessao { get; set; }
 
-        [Column("emailpessoa")]
         public string EmailPessoa { get; set; }
 
-        [Column("nivelacesso")]
         public string NivelAcesso { get; set; }
 
         public UsuarioModel? UsuarioModel { get; set; }
