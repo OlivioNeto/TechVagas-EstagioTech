@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using TechVagas_EstagioTech.Model.Entities;
@@ -144,6 +145,22 @@ namespace TechVagas_EstagioTech.Data
             //Matricula
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
             modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
+
+            //Login
+            modelBuilder.Entity<LoginModel>().HasNoKey();
+
+            //SessaoModel
+            modelBuilder.Entity<SessaoModel>().HasKey(b => b.SessaoId);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.DataHoraInicio).IsRequired();
+            modelBuilder.Entity<SessaoModel>().Property(b => b.DataHoraEncerramento);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.TokenSessao);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.StatusSessao).IsRequired();
+            modelBuilder.Entity<SessaoModel>().Property(b => b.EmailPessoa);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.NivelAcesso);
+            modelBuilder.Entity<SessaoModel>().HasOne(b => b.UsuarioModel).WithMany().HasForeignKey(b => b.UsuarioId);
+
+            // Relacionamento: Usuario -> Sessao
+            modelBuilder.Entity<UsuarioModel>().HasMany(p => p.Sessoes).WithOne(b => b.UsuarioModel).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             //Relacionamento: Cargo -> Vagas
             modelBuilder.Entity<VagasModel>()
