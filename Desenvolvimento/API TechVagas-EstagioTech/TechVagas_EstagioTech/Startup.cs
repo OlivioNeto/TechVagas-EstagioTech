@@ -15,6 +15,7 @@ using System;
 using TechVagas_EstagioTech.Dtos.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TechVagas_EstagioTech.Dtos.Utilities;
 
 namespace TechVagas_EstagioTech
 {
@@ -70,7 +71,7 @@ namespace TechVagas_EstagioTech
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    EntitySecurity entitySecurity = new();
+                    SecurityEntity entitySecurity = new();
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -82,10 +83,6 @@ namespace TechVagas_EstagioTech
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(entitySecurity.Key)),
                     };
                 });
-
-
-            var secret = Configuration["Jwt:Secret"];
-            services.AddSingleton(new JwtAuthenticationManager(secret));
 
             // Garantir que todos os assemblies do domínio sejam injetados
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -135,6 +132,12 @@ namespace TechVagas_EstagioTech
 
             services.AddScoped<IMatriculaRepositorio, MatriculaRepositorio>();
             services.AddScoped<IMatriculaService, MatriculaService>();
+
+            services.AddScoped<ISessaoRepositorio, SessaoRepositorio>();
+            services.AddScoped<ISessaoService, SessaoService>();
+
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

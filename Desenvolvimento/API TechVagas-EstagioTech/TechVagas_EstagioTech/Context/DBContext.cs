@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using TechVagas_EstagioTech.Model.Entities;
@@ -144,6 +145,8 @@ namespace TechVagas_EstagioTech.Data
             //Matricula
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
             modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
+
+            //
 
             //Relacionamento: Cargo -> Vagas
             modelBuilder.Entity<VagasModel>()
