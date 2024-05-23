@@ -146,7 +146,8 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
             modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
 
-            //
+            //Login
+            modelBuilder.Entity<LoginModel>().HasNoKey();
 
             //Relacionamento: Cargo -> Vagas
             modelBuilder.Entity<VagasModel>()
