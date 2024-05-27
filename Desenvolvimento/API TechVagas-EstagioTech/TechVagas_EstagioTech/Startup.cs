@@ -12,6 +12,10 @@ using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
+using TechVagas_EstagioTech.Dtos.Entities;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using TechVagas_EstagioTech.Dtos.Utilities;
 
 namespace TechVagas_EstagioTech
 {
@@ -30,8 +34,58 @@ namespace TechVagas_EstagioTech
 			services.AddDbContext<DBContext>(options =>
 				options.UseNpgsql(connectionString));
 
-			// Garantir que todos os assemblies do domínio sejam injetados
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechVagas_EstagioTech", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"Enter 'Bearer' [space] your token",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new List<string>()
+            }
+            });
+            });
+
+            // Configuração da autenticação JWT
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    SecurityEntity entitySecurity = new();
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = entitySecurity.Issuer,
+                        ValidAudience = entitySecurity.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(entitySecurity.Key)),
+                    };
+                });
+
+            // Garantir que todos os assemblies do domínio sejam injetados
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			// Injeção de dependência
 			services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
@@ -82,6 +136,12 @@ namespace TechVagas_EstagioTech
             services.AddScoped<IMatriculaRepositorio, MatriculaRepositorio>();
             services.AddScoped<IMatriculaService, MatriculaService>();
 
+            services.AddScoped<ISessaoRepositorio, SessaoRepositorio>();
+            services.AddScoped<ISessaoService, SessaoService>();
+
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.WithOrigins("http://localhost:3000", "http://localhost:5173")
@@ -89,6 +149,8 @@ namespace TechVagas_EstagioTech
                     .AllowAnyHeader()
                     .AllowCredentials();
             }));
+
+			
 
             services.AddAuthorization(options =>
             {
@@ -101,11 +163,10 @@ namespace TechVagas_EstagioTech
 
             services.AddAuthorization(); // Configuração do serviço de autorização
 
-			services.AddSwaggerGen(c =>
+			/*services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tech Vagas - Estagio Tech", Version = "v1" });
-			});
-
+			});*/
 			services.AddMvc(); // Certifique-se de adicionar isto se ainda não estiver adicionado
 		}
 

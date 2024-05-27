@@ -24,7 +24,7 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
 
         [Required(ErrorMessage = "E necessário uma descrição")]
         [MinLength(3)]
-        [MaxLength(200)]
+        [MaxLength(800)]
         public string? Descricao { get; set; }
 
         [Required(ErrorMessage = "E necessário um Titulo")]
@@ -48,8 +48,8 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         public string? HorarioSaida { get; set; }
 
         [Required(ErrorMessage = "E necessário um Total de Horas Semanais")]
-        [MinLength(3)]
-        [MaxLength(20)]
+        [MinLength(1)]
+        [MaxLength(6)]
         public string? TotalHorasSemanis { get; set; }
 
         [JsonIgnore]
