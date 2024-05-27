@@ -22,7 +22,7 @@ namespace TechVagas_EstagioTech.Model.Entities
         [Column("senha")]
         public string Senha { get; set; }
 
-        public ICollection<SessaoModel> Sessoes { get; set; }
+        public ICollection<SessaoModel>? Sessoes { get; set; }
 
         [Column("usertype")]
         [EnumDataType(typeof(UserTypeModel))]

@@ -12,8 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240523184705_inici")]
-    partial class inici
+    [Migration("20240527173539_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -695,6 +695,17 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioId = 1,
+                            CpfCnpj = "000.000.000-00",
+                            Email = "techvdev@development.com",
+                            Nome = "Admin",
+                            Senha = "123456",
+                            UserTypeModel = 1
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.VagasModel", b =>

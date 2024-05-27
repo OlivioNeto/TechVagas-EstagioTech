@@ -186,6 +186,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: CoordenadorEstagio -> Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
-		}
+
+            modelBuilder.Entity<UsuarioModel>().HasData(
+               new UsuarioModel { UsuarioId = 1, Nome = "Admin", Email = "techvdev@development.com", Senha = "123456", CpfCnpj = "000.000.000-00", UserTypeModel = UserTypeModel.Administrador }
+           );
+        }
     }
 }
