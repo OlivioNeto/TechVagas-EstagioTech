@@ -26,6 +26,7 @@ namespace TechVagas_EstagioTech.Dtos.Mappings
 			CreateMap<MatriculaDto, MatriculaModel>().ReverseMap();
             CreateMap<UsuarioDto, UsuarioModel>().ReverseMap();
             CreateMap<SessaoDto, SessaoModel>().ReverseMap();
+            CreateMap<LoginDto, LoginModel>().ReverseMap();
         }
 	}
 }

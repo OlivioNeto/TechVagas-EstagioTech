@@ -24,7 +24,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
 
         public async Task<UsuarioModel> BuscarPorId(int id)
         {
-            return await _dbContext.Usuario.Where(objeto => objeto.UsuarioId == id && objeto.UsuarioId != 1).Include(objeto => objeto.UserTypeModel).FirstOrDefaultAsync();
+            return await _dbContext.Usuario.Where(objeto => objeto.UsuarioId == id && objeto.UsuarioId != 1).FirstOrDefaultAsync();
         }
 
         public async Task<UsuarioModel> Adicionar(UsuarioModel usuarioModel)
@@ -43,7 +43,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
 
         public async Task<UsuarioModel> Login(LoginModel loginModel)
         {
-            return await _dbContext.Usuario.Where(objeto => objeto.Email == loginModel.Email && objeto.Senha == loginModel.Senha).Include(objeto => objeto.UserTypeModel).FirstOrDefaultAsync();
+            return await _dbContext.Usuario.Where(objeto => objeto.Email == loginModel.Email && objeto.Senha == loginModel.Senha).FirstOrDefaultAsync();
         }
 
         public async Task<UsuarioModel> Apagar(int id)
