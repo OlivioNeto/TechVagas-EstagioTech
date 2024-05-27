@@ -19,7 +19,7 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         public string Senha { get; set; }
 
         [JsonIgnore]
-        public ICollection<SessaoDto> Sessoes { get; set; }
+        public ICollection<SessaoDto>? Sessoes { get; set; }
 
         [EnumDataType(typeof(UserTypeDto))]
         public UserTypeDto UserTypeDto { get; set; }

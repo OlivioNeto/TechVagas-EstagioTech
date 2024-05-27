@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-    public partial class inici : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -363,6 +363,11 @@ namespace TechVagas_EstagioTech.Migrations
                         principalColumn: "vagasid",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "usuario",
+                columns: new[] { "usuarioid", "cpfcnpjpessoa", "email", "nome", "senha", "usertype" },
+                values: new object[] { 1, "000.000.000-00", "techvdev@development.com", "Admin", "123456", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_apontamento_CoordenadorEstagioidCoordenadorEstagio",
