@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -36,9 +36,10 @@ namespace TechVagas_EstagioTech.Services.Entities
             await _supervisorEstagioRepositorio.Adicionar(supervisorEstagio);
             supervisorEstagioDto.idSupervisor = supervisorEstagio.idSupervisor;
         }
-        public async Task Adicionar(string statusSupervisor)
+        public async Task Adicionar(bool statusSupervisor,int concedenteId)
+
         {
-            var supervisorEstagio = new SupervisorEstagioModel() { statusSupervisor = statusSupervisor }; //mapeamento para converter a dto em model antes
+            var supervisorEstagio = new SupervisorEstagioModel() { statusSupervisor = statusSupervisor, ConcedenteId = concedenteId }; //mapeamento para converter a dto em model antes
             await _supervisorEstagioRepositorio.Adicionar(supervisorEstagio);
         }
 

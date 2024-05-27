@@ -1,8 +1,8 @@
-﻿using TechVagas_EstagioTech.Dtos.Entities;
+﻿using TechVagas_EstagioTech.Objects.Dtos.Entities;
 
 namespace TechVagas_EstagioTech.Services.Interfaces
 {
-	public interface IAlunoService
+    public interface IAlunoService
 	{
 		Task<IEnumerable<AlunoDto>> BuscarTodosAlunos();
 		Task<AlunoDto> BuscarPorId(int id);

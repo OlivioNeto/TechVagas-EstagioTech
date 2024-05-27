@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios.Entities
 {
-    public class ContratoEstagioRepositorio
+    public class ContratoEstagioRepositorio : IContratoEstagioRepositorio
     {
         private readonly DBContext _dbContext;
 
@@ -15,7 +16,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
 
         public async Task<ContratoEstagioModel> BuscarPorId(int id)
         {
-            return await _dbContext.ContratoEstagio.Where(x => x.contratoestagioId == id).FirstOrDefaultAsync();
+            return await _dbContext.ContratoEstagio.Where(x => x.idContratoEstagio == id).FirstOrDefaultAsync();
         }
 
         public async Task<List<ContratoEstagioModel>> BuscarTodosContratoEstagios()

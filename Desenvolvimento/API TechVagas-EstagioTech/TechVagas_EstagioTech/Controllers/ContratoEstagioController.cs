@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
@@ -37,7 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         {
             if (contratoestagioDto is null) return BadRequest("Dados inválidos!");
             await _contratoestagioService.Adicionar(contratoestagioDto);
-            return new CreatedAtRouteResult("ObterContratoEstagio", new { id = contratoestagioDto.contratoestagioId }, contratoestagioDto);
+            return new CreatedAtRouteResult("ObterContratoEstagio", new { id = contratoestagioDto.idContratoEstagio }, contratoestagioDto);
         }
 
         [HttpPut("{id:int}")]

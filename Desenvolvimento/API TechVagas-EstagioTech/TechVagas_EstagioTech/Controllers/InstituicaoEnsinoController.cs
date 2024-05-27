@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
@@ -38,7 +38,7 @@ namespace TechVagas_EstagioTech.Controllers
         {
             if (instituicaoEnsinoDto is null) return BadRequest("Dado inválido!");
             await _instituicaoEnsinoService.Adicionar(instituicaoEnsinoDto);
-            return new CreatedAtRouteResult("ObterInstituicao", new { id = instituicaoEnsinoDto.Id }, instituicaoEnsinoDto);
+            return new CreatedAtRouteResult("ObterInstituicao", new { id = instituicaoEnsinoDto.idInstituicaoEnsino }, instituicaoEnsinoDto);
         }
 
         [HttpPut("{id:int}")]

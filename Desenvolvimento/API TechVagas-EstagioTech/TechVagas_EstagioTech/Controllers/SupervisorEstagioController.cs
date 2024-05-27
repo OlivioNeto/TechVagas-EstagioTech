@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -37,12 +37,17 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string statusSupervisor)
+        public async Task<ActionResult> Post([FromBody] SupervisorEstagioDto supervisorEstagioDto)
         {
-            if (statusSupervisor is null) return BadRequest("Dado inválido!");
-            await _supervisorEstagioService.Adicionar(statusSupervisor);
+            if (supervisorEstagioDto == null)
+            {
+                return BadRequest("Status do supervisor não pode ser nulo.");
+            }
+
+            await _supervisorEstagioService.Adicionar(supervisorEstagioDto.statusSupervisor,supervisorEstagioDto.ConcedenteId);
             return Ok("Supervisor registrado com sucesso");
         }
+
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put([FromBody] SupervisorEstagioDto supervisorEstagioDto)
