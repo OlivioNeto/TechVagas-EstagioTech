@@ -15,6 +15,9 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("datacadastro")]
         public DateOnly? dataCadastro { get; set; }
 
+        [Column("nomecoordenador")]
+        public string nomeCoordenador { get; set; }
+
         [Column("statuscoordenador")]
         public bool StatusCoordenadorEstagio { get; set; }
 

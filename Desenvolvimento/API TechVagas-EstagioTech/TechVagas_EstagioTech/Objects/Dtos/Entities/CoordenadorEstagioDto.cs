@@ -13,6 +13,9 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         [Required(ErrorMessage = "Informe a data de cadastro do Coordenador")]
         public DateOnly? dataCadastro { get; set; }
 
+        [Required(ErrorMessage = "Informe o nome do Coordenador")]
+        public string nomeCoordenador { get; set; }
+
         public bool StatusCoordenadorEstagio { get; set; }
 
         [JsonIgnore]
