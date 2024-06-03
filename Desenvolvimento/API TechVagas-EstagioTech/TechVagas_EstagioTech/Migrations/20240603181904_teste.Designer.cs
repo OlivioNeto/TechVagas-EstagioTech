@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240531113655_teste")]
+    [Migration("20240603181904_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -116,7 +116,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("text")
                         .HasColumnName("senha");
 
-                    b.Property<int>("UserTypeModel")
+                    b.Property<int>("UserType")
                         .HasColumnType("integer")
                         .HasColumnName("usertype");
 
@@ -132,7 +132,7 @@ namespace TechVagas_EstagioTech.Migrations
                             Email = "techvdev@development.com",
                             Nome = "Admin",
                             Senha = "123456",
-                            UserTypeModel = 1
+                            UserType = 1
                         });
                 });
 

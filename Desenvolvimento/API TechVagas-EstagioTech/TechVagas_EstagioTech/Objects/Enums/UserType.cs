@@ -1,6 +1,6 @@
-﻿namespace TechVagas_EstagioTech.Dtos.Entities
+﻿namespace TechVagas_EstagioTech.Objects.Enums
 {
-    public enum UserTypeDto : int
+    public enum UserType : int
     {
         Administrador = 1,
         Aluno = 2,

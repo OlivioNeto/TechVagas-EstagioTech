@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Enums;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
@@ -21,8 +22,8 @@ namespace TechVagas_EstagioTech.Dtos.Entities
         [JsonIgnore]
         public ICollection<SessaoDto>? Sessoes { get; set; }
 
-        [EnumDataType(typeof(UserTypeDto))]
-        public UserTypeDto UserTypeDto { get; set; }
+        [EnumDataType(typeof(UserType))]
+        public UserType UserType { get; set; }
     }
 
 

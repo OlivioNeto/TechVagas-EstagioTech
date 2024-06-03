@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using TechVagas_EstagioTech.Dtos.Utilities;
 using Jose;
 using Newtonsoft.Json;
+using TechVagas_EstagioTech.Objects.Utilities;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {

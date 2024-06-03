@@ -54,7 +54,6 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         {
             var sessao = await _dbContext.Sessao
                 .Include(s => s.UsuarioModel)
-                    .ThenInclude(u => u.UserTypeModel)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(s => s.TokenSessao == token);
 

@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using TechVagas_EstagioTech.Dtos.Utilities;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Utilities;
 
 namespace TechVagas_EstagioTech.Dtos.Entities
 {
