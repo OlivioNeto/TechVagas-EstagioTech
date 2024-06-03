@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Enums;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
 
@@ -27,8 +28,8 @@ namespace TechVagas_EstagioTech.Services.Entities
                 var usuario = usuarios.FirstOrDefault(u => u.UsuarioId == usuarioDTO.UsuarioId);
                 if (usuario != null)
                 {
-                    UserTypeDto userTypeDto = _mapper.Map<UserTypeDto>(usuario.UserTypeModel);
-                    usuarioDTO.UserTypeDto = userTypeDto;
+                    UserType UserType = _mapper.Map<UserType>(usuario.UserType);
+                    usuarioDTO.UserType = UserType;
                 }
             }
 
@@ -40,7 +41,7 @@ namespace TechVagas_EstagioTech.Services.Entities
             var usuario = await _usuarioRepositorio.BuscarPorId(id);
 
             UsuarioDto usuarioDTO = _mapper.Map<UsuarioDto>(usuario);
-            usuarioDTO.UserTypeDto = _mapper.Map<UserTypeDto>(usuario.UserTypeModel);
+            usuarioDTO.UserType = _mapper.Map<UserType>(usuario.UserType);
 
             return usuarioDTO;
         }
@@ -51,7 +52,7 @@ namespace TechVagas_EstagioTech.Services.Entities
             var usuario = await _usuarioRepositorio.Login(login);
 
             UsuarioDto usuarioDto = _mapper.Map<UsuarioDto>(usuario);
-            if (usuarioDto != null) { usuarioDto.UserTypeDto = _mapper.Map<UserTypeDto>(usuario.UserTypeModel); }
+            if (usuarioDto != null) { usuarioDto.UserType = _mapper.Map<UserType>(usuario.UserType); }
 
             return usuarioDto;
         }

@@ -1,4 +1,4 @@
-﻿namespace TechVagas_EstagioTech.Dtos.Utilities
+﻿namespace TechVagas_EstagioTech.Objects.Utilities
 {
     public class TokenAcess
     {

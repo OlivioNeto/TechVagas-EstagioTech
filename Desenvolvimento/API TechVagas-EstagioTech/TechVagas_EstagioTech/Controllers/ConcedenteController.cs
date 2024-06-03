@@ -19,7 +19,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<ConcedenteDto>>> Get()
         {
             var concedenteDto = await _concedenteService.BuscarTodosConcedentes();

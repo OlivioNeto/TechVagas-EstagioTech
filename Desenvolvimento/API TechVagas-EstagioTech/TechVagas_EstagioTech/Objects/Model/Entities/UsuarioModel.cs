@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TechVagas_EstagioTech.Objects.Enums;
 
 namespace TechVagas_EstagioTech.Model.Entities
 {
@@ -25,8 +26,8 @@ namespace TechVagas_EstagioTech.Model.Entities
         public ICollection<SessaoModel>? Sessoes { get; set; }
 
         [Column("usertype")]
-        [EnumDataType(typeof(UserTypeModel))]
-        public UserTypeModel UserTypeModel { get; set; }
+        [EnumDataType(typeof(UserType))]
+        public UserType UserType { get; set; }
 
     }
 
