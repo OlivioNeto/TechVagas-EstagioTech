@@ -119,8 +119,9 @@ namespace TechVagas_EstagioTech.Data
 
             //Supervisor Estagio
             modelBuilder.Entity<SupervisorEstagioModel>().HasKey(x => x.idSupervisor);
+            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.nomeSupervisor).IsRequired();
             modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.statusSupervisor).IsRequired();
-
+            
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
             modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
