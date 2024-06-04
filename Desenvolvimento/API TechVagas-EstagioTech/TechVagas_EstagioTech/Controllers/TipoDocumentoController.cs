@@ -53,26 +53,6 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(tipoDocumentoDto);
 		}
 
-        //[HttpPut("{id}/Ativar")]
-        //public async Task<ActionResult<TipoDocumentoDto>> Activity(int id)
-        //{
-        //    var tipoDocumentoDto = await _tipoDocumentoService.BuscarPorId(documentoNecessarioDto.idTipoDocumento).AsNoTracking();
-        //    if (tipoDocumentoDto == null)
-        //    {
-        //        _response.Status = false; _response.Message = "Tipo Documento não encontrado!"; _response.Data = tipoDocumentoDto;
-        //        return NotFound(_response);
-        //    }
-
-        //    if (!tipoDocumentoDto.Status)
-        //    {
-        //        tipoDocumentoDto.EnableAllOperations();
-        //        await _tipoDocumentoService.Atualizar(tipoDocumentoDto);
-        //    }
-
-        //    _response.Status = true; _response.Message = "Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + " ativado com sucesso."; _response.Data = tipoDocumentoDto;
-        //    return Ok(_response);
-        //}
-
         [HttpPut("{id}/Ativar")]
         public async Task<ActionResult<TipoDocumentoDto>> Activity(int id)
         {
@@ -96,7 +76,6 @@ namespace TechVagas_EstagioTech.Controllers
             _response.Data = tipoDocumentoDto;
             return Ok(_response);
         }
-
 
 
         [HttpPut("{id}/Desativar")]

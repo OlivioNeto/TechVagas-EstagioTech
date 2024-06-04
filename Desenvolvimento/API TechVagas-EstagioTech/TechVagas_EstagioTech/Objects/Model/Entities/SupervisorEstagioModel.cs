@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TechVagas_EstagioTech.Objects.Interface;
 
 namespace TechVagas_EstagioTech.Objects.Model.Entities
 {
     [Table("supervisorestagio")]
-    public class SupervisorEstagioModel
+    public class SupervisorEstagioModel : IStatus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //coluna de id gerada automitacamente
         [Key] //define como chave primaria
@@ -15,8 +16,13 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("nomesupervisor")]
         public string nomeSupervisor { get; set; }
 
-        [Column("status")]
-        public string statusSupervisor { get; set; }      
+        [Column("statussupervisorestagio")]
+        public bool Status { get; set; }
+        public void DisableAllOperations() => IStatusExtensions.DisableAllOperations(this);
+        public void EnableAllOperations() => IStatusExtensions.EnableAllOperations(this);
+
+
+        //Chaves estrangeiras
 
         public virtual ICollection<ContratoEstagioModel>? ContratoEstagio { get; set; }
 

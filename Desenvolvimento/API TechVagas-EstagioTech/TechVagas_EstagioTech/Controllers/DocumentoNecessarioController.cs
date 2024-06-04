@@ -90,12 +90,6 @@ namespace TechVagas_EstagioTech.Controllers
                 return BadRequest(_response);
             }
 
-            //var documentoNecessarioDto = await _documentoNecessarioService.GetStagesRelatedToTypeProcess(tipoDocumentoDto.idTipoDocumento);
-            //if (documentoNecessarioDto.FirstOrDefault(documentoNecessario => documentoNecessario.idDocumentoNecessario == documentoNecessarioDto.idDocumentoNecessario) != null)
-            //{
-            //    _response.Status = false; _response.Message = "Já existe o Documento Necessario " + documentoNecessarioDto.idDocumentoNecessario + " no Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + "!"; _response.Data = documentoNecessarioDTO;
-            //    return BadRequest(_response);
-            //}
             var documentosRelacionados = await _documentoNecessarioService.BuscarPorId(tipoDocumentoDto.idTipoDocumento);
             if (documentosRelacionados != null)
             {
@@ -111,16 +105,6 @@ namespace TechVagas_EstagioTech.Controllers
             _response.Message = "Documento Necessario " + documentoNecessarioDto.idDocumentoNecessario + " alterado com sucesso.";
             _response.Data = existingDocumentoNecessario;
             return Ok(_response);
-
-
-            //documentoNecessarioDto.Posicao = existingDocumentoNecessario.Posicao;
-            //documentoNecessarioDto.EnableAllOperations();
-            //await _documentoNecessarioService.Atualizar(documentoNecessarioDto);
-            //_response.Status = true; _response.Message = "Documento Necessario " + documentoNecessarioDto.idDocumentoNecessario + " alterado com sucesso."; _response.Data = documentoNecessarioDTO;
-            //return Ok(_response);
-            //if (documentoNecessarioDto is null) return BadRequest("Dado invalido!");
-            //await _documentoNecessarioService.Atualizar(documentoNecessarioDto);
-            //return Ok(documentoNecessarioDto);
         }
 
         [HttpDelete("{id:int}")]

@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240604123335_teste")]
+    [Migration("20240604135529_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -737,6 +737,10 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Property<int?>("ConcedenteModelconcedenteId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean")
+                        .HasColumnName("statussupervisorestagio");
+
                     b.Property<int>("concedenteId")
                         .HasColumnType("integer")
                         .HasColumnName("concedenteid");
@@ -745,11 +749,6 @@ namespace TechVagas_EstagioTech.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("nomesupervisor");
-
-                    b.Property<string>("statusSupervisor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("status");
 
                     b.HasKey("idSupervisor");
 

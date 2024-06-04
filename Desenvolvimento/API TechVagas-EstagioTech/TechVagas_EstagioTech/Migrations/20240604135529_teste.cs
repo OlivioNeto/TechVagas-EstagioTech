@@ -202,7 +202,7 @@ namespace TechVagas_EstagioTech.Migrations
                     supervisorid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nomesupervisor = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false),
+                    statussupervisorestagio = table.Column<bool>(type: "boolean", nullable: false),
                     concedenteid = table.Column<int>(type: "integer", nullable: false),
                     ConcedenteModelconcedenteId = table.Column<int>(type: "integer", nullable: true)
                 },
