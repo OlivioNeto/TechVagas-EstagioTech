@@ -19,5 +19,9 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         public string statusSupervisor { get; set; }      
 
         public virtual ICollection<ContratoEstagioModel>? ContratoEstagio { get; set; }
+
+        public ConcedenteModel? Concedente { get; set; }
+        [Column("concedenteid")]
+        public int concedenteId { get; set; }
     }
 }

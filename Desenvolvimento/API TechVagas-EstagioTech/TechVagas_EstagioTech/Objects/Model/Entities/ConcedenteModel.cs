@@ -27,5 +27,7 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         public string? Localidade { get; set; }
 
         public ICollection<VagasModel>? Vagas { get; set; }
+
+        public virtual ICollection<SupervisorEstagioModel>? SupervisorEstagios { get; set; }
     }
 }

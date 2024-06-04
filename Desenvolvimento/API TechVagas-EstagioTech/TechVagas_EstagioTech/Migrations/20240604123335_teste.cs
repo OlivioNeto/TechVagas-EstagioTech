@@ -201,15 +201,22 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     supervisorid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ConcedenteId = table.Column<int>(type: "integer", nullable: false),
-                    status = table.Column<bool>(type: "boolean", nullable: false)
+                    nomesupervisor = table.Column<string>(type: "text", nullable: false),
+                    status = table.Column<string>(type: "text", nullable: false),
+                    concedenteid = table.Column<int>(type: "integer", nullable: false),
+                    ConcedenteModelconcedenteId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_supervisorestagio", x => x.supervisorid);
                     table.ForeignKey(
-                        name: "FK_supervisorestagio_concedente_ConcedenteId",
-                        column: x => x.ConcedenteId,
+                        name: "FK_supervisorestagio_concedente_ConcedenteModelconcedenteId",
+                        column: x => x.ConcedenteModelconcedenteId,
+                        principalTable: "concedente",
+                        principalColumn: "concedenteid");
+                    table.ForeignKey(
+                        name: "FK_supervisorestagio_concedente_concedenteid",
+                        column: x => x.concedenteid,
                         principalTable: "concedente",
                         principalColumn: "concedenteid",
                         onDelete: ReferentialAction.Cascade);
@@ -409,10 +416,10 @@ namespace TechVagas_EstagioTech.Migrations
                     cargatotal = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     CoordenadorEstagioidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true),
                     coordenadorestagioid = table.Column<int>(type: "integer", nullable: false),
-                    SupervisorEstagioidSupervisor = table.Column<int>(type: "integer", nullable: true),
                     supervisorestagioid = table.Column<int>(type: "integer", nullable: false),
                     TipoEstagioidTipoEstagio = table.Column<int>(type: "integer", nullable: true),
-                    tipoestagioid = table.Column<int>(type: "integer", nullable: false)
+                    tipoestagioid = table.Column<int>(type: "integer", nullable: false),
+                    SupervisorEstagioModelidSupervisor = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -423,10 +430,16 @@ namespace TechVagas_EstagioTech.Migrations
                         principalTable: "coordenadorestagio",
                         principalColumn: "coordenadorestagioid");
                     table.ForeignKey(
-                        name: "FK_contratoestagio_supervisorestagio_SupervisorEstagioidSuperv~",
-                        column: x => x.SupervisorEstagioidSupervisor,
+                        name: "FK_contratoestagio_supervisorestagio_SupervisorEstagioModelidS~",
+                        column: x => x.SupervisorEstagioModelidSupervisor,
                         principalTable: "supervisorestagio",
                         principalColumn: "supervisorid");
+                    table.ForeignKey(
+                        name: "FK_contratoestagio_supervisorestagio_supervisorestagioid",
+                        column: x => x.supervisorestagioid,
+                        principalTable: "supervisorestagio",
+                        principalColumn: "supervisorid",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_contratoestagio_tipoestagio_TipoEstagioidTipoEstagio",
                         column: x => x.TipoEstagioidTipoEstagio,
@@ -492,9 +505,14 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "CoordenadorEstagioidCoordenadorEstagio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_contratoestagio_SupervisorEstagioidSupervisor",
+                name: "IX_contratoestagio_supervisorestagioid",
                 table: "contratoestagio",
-                column: "SupervisorEstagioidSupervisor");
+                column: "supervisorestagioid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_contratoestagio_SupervisorEstagioModelidSupervisor",
+                table: "contratoestagio",
+                column: "SupervisorEstagioModelidSupervisor");
 
             migrationBuilder.CreateIndex(
                 name: "IX_contratoestagio_TipoEstagioidTipoEstagio",
@@ -542,9 +560,14 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_supervisorestagio_ConcedenteId",
+                name: "IX_supervisorestagio_concedenteid",
                 table: "supervisorestagio",
-                column: "ConcedenteId");
+                column: "concedenteid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_supervisorestagio_ConcedenteModelconcedenteId",
+                table: "supervisorestagio",
+                column: "ConcedenteModelconcedenteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_vagas_CargoId",

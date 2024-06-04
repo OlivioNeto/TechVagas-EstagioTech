@@ -8,7 +8,7 @@ namespace TechVagas_EstagioTech.Services.Interfaces
     {
         Task<IEnumerable<SupervisorEstagioDto>> BuscarTodosSupervisorEstagio();
         Task<SupervisorEstagioDto> BuscarPorId(int id);
-        Task Adicionar(string nomeSupervisor,string statusSupervisor);
+        Task Adicionar(SupervisorEstagioDto supervisorEstagioDto);
         Task Atualizar(SupervisorEstagioDto supervisorEstagioDto);
         Task Apagar(int id);
     }

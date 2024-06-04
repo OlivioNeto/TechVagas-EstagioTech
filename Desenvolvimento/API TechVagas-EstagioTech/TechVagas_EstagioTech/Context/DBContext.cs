@@ -87,6 +87,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.salario).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaSemanal).IsRequired().HasMaxLength(150);
             modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaTotal).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().HasOne(x => x.SupervisorEstagio).WithMany().HasForeignKey(x => x.idSupervisorEstagio);
 
             //Concedente
             modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
@@ -122,6 +123,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<SupervisorEstagioModel>().HasKey(x => x.idSupervisor);
             modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.nomeSupervisor).IsRequired();
             modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.statusSupervisor).IsRequired();
+            modelBuilder.Entity<SupervisorEstagioModel>().HasOne(b => b.Concedente).WithMany().HasForeignKey(b => b.concedenteId);
             
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);

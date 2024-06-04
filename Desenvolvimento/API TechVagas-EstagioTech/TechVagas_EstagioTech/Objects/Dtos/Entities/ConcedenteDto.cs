@@ -37,5 +37,9 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
 
         [Column("vagas")]
         public ICollection<VagasModel>? Vagas { get; set; }
+
+        [JsonIgnore]
+        [Column("concedente")]
+        public ICollection<ConcedenteModel>? Concedentes { get; set; }
     }
 }

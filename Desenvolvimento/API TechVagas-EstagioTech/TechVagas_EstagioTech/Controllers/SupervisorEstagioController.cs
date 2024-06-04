@@ -39,7 +39,8 @@ namespace TechVagas_EstagioTech.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] SupervisorEstagioDto supervisorEstagioDto)
         {
-            await _supervisorEstagioService.Adicionar(supervisorEstagioDto.statusSupervisor, supervisorEstagioDto.nomeSupervisor);
+            if (supervisorEstagioDto is null) return BadRequest("Dado inválido!");
+            await  _supervisorEstagioService.Adicionar(supervisorEstagioDto);
             return Ok("Supervisor registrado com sucesso");
         }
 
