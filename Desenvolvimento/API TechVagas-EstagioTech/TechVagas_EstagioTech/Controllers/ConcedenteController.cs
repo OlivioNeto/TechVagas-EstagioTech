@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
@@ -12,10 +13,14 @@ namespace TechVagas_EstagioTech.Controllers
     public class ConcedenteController : ControllerBase
     {
         private readonly IConcedenteService _concedenteService;
+        private readonly ISupervisorEstagioService _supervisorEstagioService;
+        private Response _response;
 
-        public ConcedenteController(IConcedenteService concedenteService)
+        public ConcedenteController(IConcedenteService concedenteService, ISupervisorEstagioService supervisorEstagioService)
         {
             _concedenteService = concedenteService;
+            _supervisorEstagioService = supervisorEstagioService;
+            _response = new Response();
         }
 
         [HttpGet]
@@ -46,7 +51,48 @@ namespace TechVagas_EstagioTech.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put([FromBody] ConcedenteDto concedenteDto)
         {
-            if (concedenteDto is null) return BadRequest("Dado invalido!");
+            //if (concedentedto == null)
+            //{
+            //    _response.status = false;
+            //    _response.message = "dado inválido!";
+            //    _response.data = concedentedto;
+            //    return badrequest(_response);
+            //}
+
+            //var existingconcedente = await _concedenteservice.buscarporid(concedentedto.concedenteid);
+            //if (existingconcedente == null)
+            //{
+            //    _response.status = false;
+            //    _response.message = "não existe o concedente informado!";
+            //    _response.data = concedentedto;
+            //    return badrequest(_response);
+            //}
+            //else if (!existingconcedente.status)
+            //{
+            //    _response.status = false;
+            //    _response.message = "o concedente " + existingconcedente.concedenteid + " está desabilitado para alteração!";
+            //    _response.data = concedentedto;
+            //    return badrequest(_response);
+            //}
+
+                //var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(concedenteDto.concedenteId);
+
+                //if (tipoDocumentoDto == null)
+                //{
+                //    _response.Status = false;
+                //    _response.Message = "O Tipo Documento não existe!";
+                //    _response.Data = documentoNecessarioDto;
+                //    return BadRequest(_response);
+                //}
+                //else if (!tipoDocumentoDto.Status)
+                //{
+                //    _response.Status = false;
+                //    _response.Message = "O Tipo Documento " + tipoDocumentoDto.descricaoTipoDocumento + " está desabilitado para adicionar novos documentos necessarios!";
+                //    _response.Data = documentoNecessarioDto;
+                //    return BadRequest(_response);
+                //}
+
+                if (concedenteDto is null) return BadRequest("Dado invalido!");
             await _concedenteService.Atualizar(concedenteDto);
             return Ok(concedenteDto);
         }

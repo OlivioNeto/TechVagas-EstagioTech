@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240604135529_teste")]
+    [Migration("20240604173855_teste")]
     partial class teste
     {
         /// <inheritdoc />
