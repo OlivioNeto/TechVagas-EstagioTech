@@ -16,7 +16,7 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         public string nomeSupervisor { get; set; }
 
         [Column("status")]
-        public bool statusSupervisor { get; set; }      
+        public string statusSupervisor { get; set; }      
 
         public virtual ICollection<ContratoEstagioModel>? ContratoEstagio { get; set; }
     }

@@ -12,6 +12,6 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
 
         public string nomeSupervisor { get; set; }
 
-        public bool statusSupervisor { get; set; }
+        public string statusSupervisor { get; set; }
     }
 }
