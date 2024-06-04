@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TechVagas_EstagioTech.Data;
@@ -11,9 +12,11 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240603181904_teste")]
+    partial class teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -729,17 +732,17 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
 
-                    b.Property<string>("nomeSupervisor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("nomesupervisor");
+                    b.Property<int>("ConcedenteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<string>("statusSupervisor")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<bool>("statusSupervisor")
+                        .HasColumnType("boolean")
                         .HasColumnName("status");
 
                     b.HasKey("idSupervisor");
+
+                    b.HasIndex("ConcedenteId");
 
                     b.ToTable("supervisorestagio");
                 });
@@ -1011,6 +1014,17 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Alunos");
 
                     b.Navigation("Curso");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", "Concedente")
+                        .WithMany()
+                        .HasForeignKey("ConcedenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Concedente");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.VagasModel", b =>

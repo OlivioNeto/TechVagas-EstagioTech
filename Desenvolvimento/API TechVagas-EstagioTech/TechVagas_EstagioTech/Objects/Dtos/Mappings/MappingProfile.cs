@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Objects.Model.Entities;
 
@@ -24,6 +26,9 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Mappings
             CreateMap<SupervisorEstagioDto, SupervisorEstagioModel>().ReverseMap();
             CreateMap<ContratoEstagioDto, ContratoEstagioModel>().ReverseMap();
             CreateMap<MatriculaDto, MatriculaModel>().ReverseMap();
+            CreateMap<UsuarioDto, UsuarioModel>().ReverseMap();
+            CreateMap<SessaoDto, SessaoModel>().ReverseMap();
+            CreateMap<LoginDto, LoginModel>().ReverseMap();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Dtos.Utilities;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Utilities;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Controllers
@@ -96,7 +96,7 @@ namespace TechVagas_EstagioTech.Controllers
                     StatusSessao = true,
 
                     EmailPessoa = usuarioDTO.Email,
-                    NivelAcesso = usuarioDTO.UserTypeDto.ToString(),
+                    NivelAcesso = usuarioDTO.UserType.ToString(),
                 };
                 sessaoDTO.GenerateToken();
                 

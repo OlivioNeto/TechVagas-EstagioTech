@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Enums;
 using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data
@@ -154,6 +155,14 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
             modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
 
+            //SessaoModel
+            modelBuilder.Entity<UsuarioModel>().HasKey(b => b.UsuarioId);
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.Nome).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.CpfCnpj).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.Email).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.Senha).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.UserType).IsRequired();
+
             //Login
             modelBuilder.Entity<LoginModel>().HasNoKey();
 
@@ -193,7 +202,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
 
             modelBuilder.Entity<UsuarioModel>().HasData(
-               new UsuarioModel { UsuarioId = 1, Nome = "Admin", Email = "techvdev@development.com", Senha = "123456", CpfCnpj = "000.000.000-00", UserTypeModel = UserTypeModel.Administrador }
+               new UsuarioModel { UsuarioId = 1, Nome = "Admin", Email = "techvdev@development.com", Senha = "123456", CpfCnpj = "000.000.000-00", UserType = UserType.Administrador }
            );
 
             //Relacionamento: CoordenadorEstagio -> ContratoEstagio

@@ -15,11 +15,11 @@ using System;
 using TechVagas_EstagioTech.Dtos.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TechVagas_EstagioTech.Dtos.Utilities;
+using TechVagas_EstagioTech.Objects.Utilities;
 
 namespace TechVagas_EstagioTech
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
