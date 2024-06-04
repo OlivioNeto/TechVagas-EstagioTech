@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TechVagas_EstagioTech.Data;
@@ -11,9 +12,11 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240604111614_teste")]
+    partial class teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,7 +116,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("text")
                         .HasColumnName("senha");
 
-                    b.Property<int>("UserType")
+                    b.Property<int>("UserTypeModel")
                         .HasColumnType("integer")
                         .HasColumnName("usertype");
 
@@ -129,7 +132,7 @@ namespace TechVagas_EstagioTech.Migrations
                             Email = "techvdev@development.com",
                             Nome = "Admin",
                             Senha = "123456",
-                            UserType = 1
+                            UserTypeModel = 1
                         });
                 });
 

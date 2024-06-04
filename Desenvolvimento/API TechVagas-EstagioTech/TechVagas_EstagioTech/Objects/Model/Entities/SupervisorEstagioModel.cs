@@ -9,15 +9,14 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //coluna de id gerada automitacamente
         [Key] //define como chave primaria
 
-        public int ConcedenteId { get; set; }
-        public ConcedenteModel Concedente { get; set; }
-
-
         [Column("supervisorid")]
         public int idSupervisor { get; set; }
 
+        [Column("nomesupervisor")]
+        public string nomeSupervisor { get; set; }
+
         [Column("status")]
-        public bool statusSupervisor { get; set; }
+        public string statusSupervisor { get; set; }      
 
         public virtual ICollection<ContratoEstagioModel>? ContratoEstagio { get; set; }
     }
