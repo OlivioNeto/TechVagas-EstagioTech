@@ -138,7 +138,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<VagasModel>().Property(x => x.DataPublicacao).IsRequired();
             modelBuilder.Entity<VagasModel>().Property(x => x.DataLimite).IsRequired();
             modelBuilder.Entity<VagasModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(80);
-            modelBuilder.Entity<VagasModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<VagasModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(800);
             modelBuilder.Entity<VagasModel>().Property(x => x.Titulo).IsRequired().HasMaxLength(80);
             modelBuilder.Entity<VagasModel>().Property(x => x.LocalidadeTrabalho).IsRequired().HasMaxLength(20);
             modelBuilder.Entity<VagasModel>().Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);

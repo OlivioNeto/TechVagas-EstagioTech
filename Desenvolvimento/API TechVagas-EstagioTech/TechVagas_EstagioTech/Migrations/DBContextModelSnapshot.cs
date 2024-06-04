@@ -848,8 +848,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(800)
+                        .HasColumnType("character varying(800)")
                         .HasColumnName("descricao");
 
                     b.Property<string>("HorarioEntrada")
@@ -876,8 +876,9 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("localidadetrabalho");
 
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("integer")
+                    b.Property<string>("Quantidade")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("quantidade");
 
                     b.Property<string>("Titulo")
