@@ -228,11 +228,11 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     vagasid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    quantidade = table.Column<int>(type: "integer", nullable: false),
+                    quantidade = table.Column<string>(type: "text", nullable: false),
                     datapublicacao = table.Column<DateOnly>(type: "date", nullable: false),
                     datalimite = table.Column<DateOnly>(type: "date", nullable: false),
                     localidade = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
-                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    descricao = table.Column<string>(type: "character varying(800)", maxLength: 800, nullable: false),
                     titulo = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     localidadetrabalho = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     horarioentrada = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),

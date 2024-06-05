@@ -40,6 +40,7 @@ namespace TechVagas_EstagioTech.Controllers
         public async Task<ActionResult> Post([FromBody] CoordenadorEstagioDto coordenadorEstagioDto)
         {
             if (coordenadorEstagioDto is null) return BadRequest("Dado inválido!");
+            coordenadorEstagioDto.Status = true;
             await _coordenadorEstagioService.Adicionar(coordenadorEstagioDto);
             return Ok("Coordenador cadastrado com sucesso");
         }
