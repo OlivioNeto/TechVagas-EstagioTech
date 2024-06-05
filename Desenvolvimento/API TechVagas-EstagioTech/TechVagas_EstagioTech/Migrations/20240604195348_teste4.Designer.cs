@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TechVagas_EstagioTech.Data;
@@ -11,9 +12,11 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240604195348_teste4")]
+    partial class teste4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -377,7 +380,7 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("SupervisorEstagioModelidSupervisor")
+                    b.Property<int?>("SupervisorEstagioidSupervisor")
                         .HasColumnType("integer");
 
                     b.Property<int?>("TipoEstagioidTipoEstagio")
@@ -455,11 +458,9 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasIndex("CoordenadorEstagioidCoordenadorEstagio");
 
-                    b.HasIndex("SupervisorEstagioModelidSupervisor");
+                    b.HasIndex("SupervisorEstagioidSupervisor");
 
                     b.HasIndex("TipoEstagioidTipoEstagio");
-
-                    b.HasIndex("idSupervisorEstagio");
 
                     b.ToTable("contratoestagio");
                 });
@@ -473,9 +474,9 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
 
-                    b.Property<bool>("Status")
+                    b.Property<bool>("StatusCoordenadorEstagio")
                         .HasColumnType("boolean")
-                        .HasColumnName("statuscoordenadorestagio");
+                        .HasColumnName("statuscoordenador");
 
                     b.Property<DateOnly?>("dataCadastro")
                         .IsRequired()
@@ -731,27 +732,17 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idSupervisor"));
 
-                    b.Property<int?>("ConcedenteModelconcedenteId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean")
-                        .HasColumnName("statussupervisorestagio");
-
-                    b.Property<int>("concedenteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("concedenteid");
-
                     b.Property<string>("nomeSupervisor")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("nomesupervisor");
 
+                    b.Property<string>("statusSupervisor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("status");
+
                     b.HasKey("idSupervisor");
-
-                    b.HasIndex("ConcedenteModelconcedenteId");
-
-                    b.HasIndex("concedenteId");
 
                     b.ToTable("supervisorestagio");
                 });
@@ -956,19 +947,13 @@ namespace TechVagas_EstagioTech.Migrations
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
 
-                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", null)
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", "SupervisorEstagio")
                         .WithMany("ContratoEstagio")
-                        .HasForeignKey("SupervisorEstagioModelidSupervisor");
+                        .HasForeignKey("SupervisorEstagioidSupervisor");
 
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoEstagioModel", "TipoEstagio")
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("TipoEstagioidTipoEstagio");
-
-                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", "SupervisorEstagio")
-                        .WithMany()
-                        .HasForeignKey("idSupervisorEstagio")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("CoordenadorEstagio");
 
@@ -1032,21 +1017,6 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Curso");
                 });
 
-            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>
-                {
-                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", null)
-                        .WithMany("SupervisorEstagios")
-                        .HasForeignKey("ConcedenteModelconcedenteId");
-
-                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", "Concedente")
-                        .WithMany()
-                        .HasForeignKey("concedenteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Concedente");
-                });
-
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.VagasModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CargoModel", "Cargo")
@@ -1078,8 +1048,6 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", b =>
                 {
-                    b.Navigation("SupervisorEstagios");
-
                     b.Navigation("Vagas");
                 });
 
