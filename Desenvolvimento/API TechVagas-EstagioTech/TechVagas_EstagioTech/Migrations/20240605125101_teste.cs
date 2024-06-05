@@ -90,7 +90,7 @@ namespace TechVagas_EstagioTech.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     datacadastro = table.Column<DateOnly>(type: "date", nullable: false),
                     nomecoordenador = table.Column<string>(type: "text", nullable: false),
-                    statuscoordenador = table.Column<bool>(type: "boolean", nullable: false)
+                    statuscoordenadorestagio = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -73,7 +73,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<CoordenadorEstagioModel>().HasKey(x => x.idCoordenadorEstagio);
             modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired();
             modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.nomeCoordenador).IsRequired();
-            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.StatusCoordenadorEstagio).IsRequired();
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.Status).IsRequired();
 
             //Contrato Estagio 
             modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);

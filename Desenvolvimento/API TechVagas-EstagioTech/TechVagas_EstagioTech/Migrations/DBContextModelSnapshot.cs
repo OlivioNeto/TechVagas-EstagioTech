@@ -473,9 +473,9 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
 
-                    b.Property<bool>("StatusCoordenadorEstagio")
+                    b.Property<bool>("Status")
                         .HasColumnType("boolean")
-                        .HasColumnName("statuscoordenador");
+                        .HasColumnName("statuscoordenadorestagio");
 
                     b.Property<DateOnly?>("dataCadastro")
                         .IsRequired()

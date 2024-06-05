@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240604173855_teste")]
+    [Migration("20240605125101_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -476,9 +476,9 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCoordenadorEstagio"));
 
-                    b.Property<bool>("StatusCoordenadorEstagio")
+                    b.Property<bool>("Status")
                         .HasColumnType("boolean")
-                        .HasColumnName("statuscoordenador");
+                        .HasColumnName("statuscoordenadorestagio");
 
                     b.Property<DateOnly?>("dataCadastro")
                         .IsRequired()
