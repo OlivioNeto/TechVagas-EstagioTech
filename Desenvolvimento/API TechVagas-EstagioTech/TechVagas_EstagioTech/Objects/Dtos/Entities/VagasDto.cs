@@ -11,7 +11,7 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         [Key]
         public int VagasId { get; set; }
 
-        public int Quantidade { get; set; }
+        public string Quantidade { get; set; }
 
         public DateOnly DataPublicacao { get; set; }
 
