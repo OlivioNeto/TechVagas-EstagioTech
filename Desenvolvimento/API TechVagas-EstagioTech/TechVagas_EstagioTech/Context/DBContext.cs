@@ -280,6 +280,17 @@ namespace TechVagas_EstagioTech.Data
                 new TipoEstagioModel { idTipoEstagio = 2, descricaoTipoEstagio = "Normal" }
             );
 
+            //Supervisor de Estagio
+            modelBuilder.Entity<SupervisorEstagioModel>().HasData(
+                new SupervisorEstagioModel { idSupervisor = 1, nomeSupervisor = "Jorge Gregório", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 2, nomeSupervisor = "Tiago Ribeiro", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 3, nomeSupervisor = "Luciana Matsunaga", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 4, nomeSupervisor = "Fellipe Ricardo", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 5, nomeSupervisor = "Vivian Basilio", Status = true, concedenteId = 1 },
+                new SupervisorEstagioModel { idSupervisor = 6, nomeSupervisor = "Augusto Formentão", Status = true, concedenteId=1 },
+                new SupervisorEstagioModel { idSupervisor = 7, nomeSupervisor = "Lidia de Haro", Status =  true, concedenteId = 2}
+                );
+
             //Usuario
             modelBuilder.Entity<UsuarioModel>().HasData(
                new UsuarioModel

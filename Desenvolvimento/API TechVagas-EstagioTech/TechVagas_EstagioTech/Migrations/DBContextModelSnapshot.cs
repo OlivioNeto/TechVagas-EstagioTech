@@ -901,6 +901,57 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasIndex("concedenteId");
 
                     b.ToTable("supervisorestagio");
+
+                    b.HasData(
+                        new
+                        {
+                            idSupervisor = 1,
+                            Status = true,
+                            concedenteId = 4,
+                            nomeSupervisor = "Jorge Gregório"
+                        },
+                        new
+                        {
+                            idSupervisor = 2,
+                            Status = true,
+                            concedenteId = 4,
+                            nomeSupervisor = "Tiago Ribeiro"
+                        },
+                        new
+                        {
+                            idSupervisor = 3,
+                            Status = true,
+                            concedenteId = 4,
+                            nomeSupervisor = "Luciana Matsunaga"
+                        },
+                        new
+                        {
+                            idSupervisor = 4,
+                            Status = true,
+                            concedenteId = 4,
+                            nomeSupervisor = "Fellipe Ricardo"
+                        },
+                        new
+                        {
+                            idSupervisor = 5,
+                            Status = true,
+                            concedenteId = 1,
+                            nomeSupervisor = "Vivian Basilio"
+                        },
+                        new
+                        {
+                            idSupervisor = 6,
+                            Status = true,
+                            concedenteId = 1,
+                            nomeSupervisor = "Augusto Formentão"
+                        },
+                        new
+                        {
+                            idSupervisor = 7,
+                            Status = true,
+                            concedenteId = 2,
+                            nomeSupervisor = "Lidia de Haro"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", b =>

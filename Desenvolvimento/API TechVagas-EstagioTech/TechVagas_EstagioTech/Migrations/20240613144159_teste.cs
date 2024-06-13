@@ -532,6 +532,20 @@ namespace TechVagas_EstagioTech.Migrations
                     { 5, null, null, 4, 2 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "supervisorestagio",
+                columns: new[] { "supervisorid", "ConcedenteModelconcedenteId", "statussupervisorestagio", "concedenteid", "nomesupervisor" },
+                values: new object[,]
+                {
+                    { 1, null, true, 4, "Jorge Gregório" },
+                    { 2, null, true, 4, "Tiago Ribeiro" },
+                    { 3, null, true, 4, "Luciana Matsunaga" },
+                    { 4, null, true, 4, "Fellipe Ricardo" },
+                    { 5, null, true, 1, "Vivian Basilio" },
+                    { 6, null, true, 1, "Augusto Formentão" },
+                    { 7, null, true, 2, "Lidia de Haro" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_aluno_AlunoModelAlunoId",
                 table: "aluno",
