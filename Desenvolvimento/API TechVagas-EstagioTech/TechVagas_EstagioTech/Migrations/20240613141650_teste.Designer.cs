@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240613120910_teste")]
+    [Migration("20240613141650_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -366,6 +366,40 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("concedenteId");
 
                     b.ToTable("concedente");
+
+                    b.HasData(
+                        new
+                        {
+                            concedenteId = 1,
+                            Cnpj = "02433981000196",
+                            Localidade = "Jales - SP",
+                            RazaoSocial = "PRECISAO SISTEMAS LTDA",
+                            ResponsavelEstagio = "Ailton Reynaldo"
+                        },
+                        new
+                        {
+                            concedenteId = 2,
+                            Cnpj = "07468363000103",
+                            Localidade = "Jales - SP",
+                            RazaoSocial = "SISTEMASBR SOLUCOES EM TECNOLOGIA LTDA",
+                            ResponsavelEstagio = "Fernando Nogarini"
+                        },
+                        new
+                        {
+                            concedenteId = 3,
+                            Cnpj = "03997115000190",
+                            Localidade = "Jales - SP",
+                            RazaoSocial = "SISCOMP TECNOLOGIA EM SISTEMAS LTDA",
+                            ResponsavelEstagio = "Silvio"
+                        },
+                        new
+                        {
+                            concedenteId = 4,
+                            Cnpj = "00000000000000",
+                            Localidade = "Jales - SP",
+                            RazaoSocial = "Fatec Jales",
+                            ResponsavelEstagio = "Evanivaldo Castro"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ContratoEstagioModel", b =>
@@ -493,6 +527,57 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("idCoordenadorEstagio");
 
                     b.ToTable("coordenadorestagio");
+
+                    b.HasData(
+                        new
+                        {
+                            idCoordenadorEstagio = 1,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Jorge Gregório"
+                        },
+                        new
+                        {
+                            idCoordenadorEstagio = 2,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Tiago Ribeiro"
+                        },
+                        new
+                        {
+                            idCoordenadorEstagio = 3,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Emerson Mouco"
+                        },
+                        new
+                        {
+                            idCoordenadorEstagio = 4,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Vitor Boldrin"
+                        },
+                        new
+                        {
+                            idCoordenadorEstagio = 5,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Adriana de Souza"
+                        },
+                        new
+                        {
+                            idCoordenadorEstagio = 6,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Gláucia Alvarez"
+                        },
+                        new
+                        {
+                            idCoordenadorEstagio = 7,
+                            Status = true,
+                            dataCadastro = new DateOnly(2024, 6, 13),
+                            nomeCoordenador = "Fellipe Ricardo"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", b =>
@@ -545,6 +630,38 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("idDocumento");
 
                     b.ToTable("documento");
+
+                    b.HasData(
+                        new
+                        {
+                            idDocumento = 1,
+                            descricaoDocumento = "RG",
+                            situacaoDocumento = "Ativo"
+                        },
+                        new
+                        {
+                            idDocumento = 2,
+                            descricaoDocumento = "CPF",
+                            situacaoDocumento = "Ativo"
+                        },
+                        new
+                        {
+                            idDocumento = 3,
+                            descricaoDocumento = "CNH",
+                            situacaoDocumento = "Ativo"
+                        },
+                        new
+                        {
+                            idDocumento = 4,
+                            descricaoDocumento = "Título de Eleitor",
+                            situacaoDocumento = "Ativo"
+                        },
+                        new
+                        {
+                            idDocumento = 5,
+                            descricaoDocumento = "Certificado de Dispensa",
+                            situacaoDocumento = "Ativo"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoNecessarioModel", b =>
@@ -688,6 +805,36 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("idInstituicaoEnsino");
 
                     b.ToTable("instituicaoensino");
+
+                    b.HasData(
+                        new
+                        {
+                            idInstituicaoEnsino = 1,
+                            LocalInstituicao = "Jales - SP",
+                            NomeInstituicao = "Fatec Professor José Camargo",
+                            TelefoneInstituicao = "17996762867"
+                        },
+                        new
+                        {
+                            idInstituicaoEnsino = 2,
+                            LocalInstituicao = "Jales - SP",
+                            NomeInstituicao = "UniJales",
+                            TelefoneInstituicao = "17996651620"
+                        },
+                        new
+                        {
+                            idInstituicaoEnsino = 3,
+                            LocalInstituicao = "Fernandópolis - SP",
+                            NomeInstituicao = "Fundação Educacional de Fernandópolis",
+                            TelefoneInstituicao = "17981840110"
+                        },
+                        new
+                        {
+                            idInstituicaoEnsino = 4,
+                            LocalInstituicao = "Santa Fé do Sul - SP",
+                            NomeInstituicao = "UniFunec",
+                            TelefoneInstituicao = "17996324602"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.MatriculaModel", b =>

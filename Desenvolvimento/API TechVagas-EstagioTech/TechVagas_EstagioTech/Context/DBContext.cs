@@ -203,10 +203,6 @@ namespace TechVagas_EstagioTech.Data
             //Relacionamento: CoordenadorEstagio -> Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
 
-            modelBuilder.Entity<UsuarioModel>().HasData(
-               new UsuarioModel { UsuarioId = 1, Nome = "Admin", Email = "techvdev@development.com", Senha = "123456", CpfCnpj = "000.000.000-00", UserType = UserType.Administrador }
-           );
-
             //Relacionamento: CoordenadorEstagio -> ContratoEstagio
             modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
 
@@ -225,11 +221,50 @@ namespace TechVagas_EstagioTech.Data
 
             //DEIXANDO DADOS PRÉ-CADASTRADOS
 
-            //Tipo Estagio
-            modelBuilder.Entity<TipoEstagioModel>().HasData(
-                new TipoEstagioModel { idTipoEstagio = 1, descricaoTipoEstagio = "Equivalência" },
-                new TipoEstagioModel { idTipoEstagio = 2, descricaoTipoEstagio = "Normal" }
+            //Concedente
+            modelBuilder.Entity<ConcedenteModel>().HasData(
+                new ConcedenteModel { concedenteId = 1, RazaoSocial = "PRECISAO SISTEMAS LTDA", ResponsavelEstagio = "Ailton Reynaldo", Cnpj = "02433981000196", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 2, RazaoSocial = "SISTEMASBR SOLUCOES EM TECNOLOGIA LTDA", ResponsavelEstagio = "Fernando Nogarini", Cnpj = "07468363000103", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 3, RazaoSocial = "SISCOMP TECNOLOGIA EM SISTEMAS LTDA", ResponsavelEstagio = "Silvio", Cnpj = "03997115000190", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 4, RazaoSocial = "Fatec Jales", ResponsavelEstagio = "Evanivaldo Castro", Cnpj = "00000000000000", Localidade = "Jales - SP" }
+                );
+
+            //Coordenador Estágio 
+            modelBuilder.Entity<CoordenadorEstagioModel>().HasData(
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 1, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Jorge Gregório", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 2, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Tiago Ribeiro", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 3, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Emerson Mouco", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 4, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Vitor Boldrin", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 5, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Adriana de Souza", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 6, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Gláucia Alvarez", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 7, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Fellipe Ricardo", Status = true }
+                );
+
+            //Documento
+            modelBuilder.Entity<DocumentoModel>().HasData(
+                new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Ativo" },
+                new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Ativo" },
+                new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Ativo" },
+                new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Ativo" },
+                new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Ativo" }
+                );
+
+            //Documento Necessário
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasData(
+                new DocumentoNecessarioModel { idDocumentoNecessario = 1, idTipoEstagio = 1, idTipoDocumento = 1 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 2, idTipoEstagio = 1, idTipoDocumento = 2 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 3, idTipoEstagio = 1, idTipoDocumento = 3 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 4, idTipoEstagio = 1, idTipoDocumento = 4 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 5, idTipoEstagio = 2, idTipoDocumento = 4 }
             );
+
+            //Instituição de Ensino
+            modelBuilder.Entity<InstituicaoEnsinoModel>().HasData(
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 1, NomeInstituicao = "Fatec Professor José Camargo", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "17996762867" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 2, NomeInstituicao = "UniJales", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "17996651620" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 3, NomeInstituicao = "Fundação Educacional de Fernandópolis", LocalInstituicao = "Fernandópolis - SP", TelefoneInstituicao = "17981840110" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 4, NomeInstituicao = "UniFunec", LocalInstituicao = "Santa Fé do Sul - SP", TelefoneInstituicao = "17996324602" }
+                );
 
             //Tipo Documento
             modelBuilder.Entity<TipoDocumentoModel>().HasData(
@@ -239,13 +274,23 @@ namespace TechVagas_EstagioTech.Data
                 new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais", Status = true }
             );
 
-            //Documento Necessário
-            modelBuilder.Entity<DocumentoNecessarioModel>().HasData(
-                new DocumentoNecessarioModel { idDocumentoNecessario = 1, idTipoEstagio = 1, idTipoDocumento = 1 },
-                new DocumentoNecessarioModel { idDocumentoNecessario = 2, idTipoEstagio = 1, idTipoDocumento = 2 },
-                new DocumentoNecessarioModel { idDocumentoNecessario = 3, idTipoEstagio = 1, idTipoDocumento = 3 },
-                new DocumentoNecessarioModel { idDocumentoNecessario = 4, idTipoEstagio = 1, idTipoDocumento = 4 },
-                new DocumentoNecessarioModel { idDocumentoNecessario = 5, idTipoEstagio = 2, idTipoDocumento = 4 }
+            //Tipo Estagio
+            modelBuilder.Entity<TipoEstagioModel>().HasData(
+                new TipoEstagioModel { idTipoEstagio = 1, descricaoTipoEstagio = "Equivalência" },
+                new TipoEstagioModel { idTipoEstagio = 2, descricaoTipoEstagio = "Normal" }
+            );
+
+            //Usuario
+            modelBuilder.Entity<UsuarioModel>().HasData(
+               new UsuarioModel
+               {
+                   UsuarioId = 1,
+                   Nome = "Admin",
+                   Email = "techvdev@development.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Administrador
+               }
             );
         }
     }

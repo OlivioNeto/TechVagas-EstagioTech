@@ -448,6 +448,54 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "concedente",
+                columns: new[] { "concedenteid", "cnpj", "localidade", "razaosocial", "responsavelestagio" },
+                values: new object[,]
+                {
+                    { 1, "02433981000196", "Jales - SP", "PRECISAO SISTEMAS LTDA", "Ailton Reynaldo" },
+                    { 2, "07468363000103", "Jales - SP", "SISTEMASBR SOLUCOES EM TECNOLOGIA LTDA", "Fernando Nogarini" },
+                    { 3, "03997115000190", "Jales - SP", "SISCOMP TECNOLOGIA EM SISTEMAS LTDA", "Silvio" },
+                    { 4, "00000000000000", "Jales - SP", "Fatec Jales", "Evanivaldo Castro" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "coordenadorestagio",
+                columns: new[] { "coordenadorestagioid", "statuscoordenadorestagio", "datacadastro", "nomecoordenador" },
+                values: new object[,]
+                {
+                    { 1, true, new DateOnly(2024, 6, 13), "Jorge Gregório" },
+                    { 2, true, new DateOnly(2024, 6, 13), "Tiago Ribeiro" },
+                    { 3, true, new DateOnly(2024, 6, 13), "Emerson Mouco" },
+                    { 4, true, new DateOnly(2024, 6, 13), "Vitor Boldrin" },
+                    { 5, true, new DateOnly(2024, 6, 13), "Adriana de Souza" },
+                    { 6, true, new DateOnly(2024, 6, 13), "Gláucia Alvarez" },
+                    { 7, true, new DateOnly(2024, 6, 13), "Fellipe Ricardo" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "documento",
+                columns: new[] { "documentoid", "descricao", "situacao" },
+                values: new object[,]
+                {
+                    { 1, "RG", "Ativo" },
+                    { 2, "CPF", "Ativo" },
+                    { 3, "CNH", "Ativo" },
+                    { 4, "Título de Eleitor", "Ativo" },
+                    { 5, "Certificado de Dispensa", "Ativo" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "instituicaoensino",
+                columns: new[] { "id", "local", "nomeinstituicao", "telefone" },
+                values: new object[,]
+                {
+                    { 1, "Jales - SP", "Fatec Professor José Camargo", "17996762867" },
+                    { 2, "Jales - SP", "UniJales", "17996651620" },
+                    { 3, "Fernandópolis - SP", "Fundação Educacional de Fernandópolis", "17981840110" },
+                    { 4, "Santa Fé do Sul - SP", "UniFunec", "17996324602" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "tipodocumento",
                 columns: new[] { "tipodocumentoid", "statustipodocumento", "descricao" },
                 values: new object[,]
