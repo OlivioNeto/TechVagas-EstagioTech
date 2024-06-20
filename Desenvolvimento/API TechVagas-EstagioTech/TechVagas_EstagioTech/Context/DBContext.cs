@@ -249,13 +249,13 @@ namespace TechVagas_EstagioTech.Data
                 );
 
             //Documento
-            //modelBuilder.Entity<DocumentoModel>().HasData(
-            //    new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Ativo" },
-            //    new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Ativo" },
-            //    new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Ativo" },
-            //    new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Ativo" },
-            //    new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Ativo" }
-            //    );
+            modelBuilder.Entity<DocumentoModel>().HasData(
+                new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Ativo", idCoordenadorEstagio = 1, idTipoDocumento = 4 },
+                new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Ativo", idCoordenadorEstagio = 2, idTipoDocumento = 2 },
+                new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Ativo", idCoordenadorEstagio = 3, idTipoDocumento = 3 },
+                new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Ativo", idCoordenadorEstagio = 7, idTipoDocumento = 1 },
+                new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Ativo", idCoordenadorEstagio = 6, idTipoDocumento = 2 }
+                );
 
             //Documento Necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasData(
