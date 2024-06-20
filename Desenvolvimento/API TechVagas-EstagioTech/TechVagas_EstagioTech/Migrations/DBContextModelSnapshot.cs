@@ -325,6 +325,20 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("CargoId");
 
                     b.ToTable("cargo");
+
+                    b.HasData(
+                        new
+                        {
+                            CargoId = 1,
+                            Descricao = "O Desenvolvedor de Software será responsável por projetar, desenvolver, testar e manter aplicações de software. Este profissional trabalhará em estreita colaboração com outros desenvolvedor",
+                            Tipo = "Desenvolvedor"
+                        },
+                        new
+                        {
+                            CargoId = 2,
+                            Descricao = "O Auxiliar de Manutenção será responsável por auxiliar na execução de tarefas de manutenção preventiva e corretiva nas instalações e equipamentos da empresa. Este profissional",
+                            Tipo = "Auxiliar de Manutenção"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", b =>
@@ -1113,6 +1127,40 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasIndex("concedenteId");
 
                     b.ToTable("vagas");
+
+                    b.HasData(
+                        new
+                        {
+                            VagasId = 1,
+                            CargoId = 1,
+                            DataLimite = new DateOnly(2024, 7, 31),
+                            DataPublicacao = new DateOnly(2024, 7, 20),
+                            Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.",
+                            HorarioEntrada = "08:00",
+                            HorarioSaida = "12:00",
+                            Localidade = "Jales / SP",
+                            LocalidadeTrabalho = "Home Office",
+                            Quantidade = "22",
+                            Titulo = "Desenvolvimento de Software",
+                            TotalHorasSemanis = "40",
+                            concedenteId = 1
+                        },
+                        new
+                        {
+                            VagasId = 2,
+                            CargoId = 2,
+                            DataLimite = new DateOnly(2024, 8, 31),
+                            DataPublicacao = new DateOnly(2024, 7, 20),
+                            Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.",
+                            HorarioEntrada = "08:00",
+                            HorarioSaida = "12:00",
+                            Localidade = "Jales / SP",
+                            LocalidadeTrabalho = "Home Office",
+                            Quantidade = "12",
+                            Titulo = "Desenvolvimento de Software",
+                            TotalHorasSemanis = "40",
+                            concedenteId = 2
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Model.Entities.SessaoModel", b =>
