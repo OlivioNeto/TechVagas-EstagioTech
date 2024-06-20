@@ -612,11 +612,25 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumento"));
 
+                    b.Property<int?>("CoordenadorEstagioModelidCoordenadorEstagio")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TipoDocumentoModelidTipoDocumento")
+                        .HasColumnType("integer");
+
                     b.Property<string>("descricaoDocumento")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("descricao");
+
+                    b.Property<int>("idCoordenadorEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("coordenadorestagioid");
+
+                    b.Property<int>("idTipoDocumento")
+                        .HasColumnType("integer")
+                        .HasColumnName("tipodocumentoid");
 
                     b.Property<string>("situacaoDocumento")
                         .IsRequired()
@@ -626,39 +640,15 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("idDocumento");
 
-                    b.ToTable("documento");
+                    b.HasIndex("CoordenadorEstagioModelidCoordenadorEstagio");
 
-                    b.HasData(
-                        new
-                        {
-                            idDocumento = 1,
-                            descricaoDocumento = "RG",
-                            situacaoDocumento = "Ativo"
-                        },
-                        new
-                        {
-                            idDocumento = 2,
-                            descricaoDocumento = "CPF",
-                            situacaoDocumento = "Ativo"
-                        },
-                        new
-                        {
-                            idDocumento = 3,
-                            descricaoDocumento = "CNH",
-                            situacaoDocumento = "Ativo"
-                        },
-                        new
-                        {
-                            idDocumento = 4,
-                            descricaoDocumento = "Título de Eleitor",
-                            situacaoDocumento = "Ativo"
-                        },
-                        new
-                        {
-                            idDocumento = 5,
-                            descricaoDocumento = "Certificado de Dispensa",
-                            situacaoDocumento = "Ativo"
-                        });
+                    b.HasIndex("TipoDocumentoModelidTipoDocumento");
+
+                    b.HasIndex("idCoordenadorEstagio");
+
+                    b.HasIndex("idTipoDocumento");
+
+                    b.ToTable("documento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoNecessarioModel", b =>
@@ -1175,6 +1165,33 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("TipoEstagio");
                 });
 
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", b =>
+                {
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", null)
+                        .WithMany("Documento")
+                        .HasForeignKey("CoordenadorEstagioModelidCoordenadorEstagio");
+
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", null)
+                        .WithMany("Documento")
+                        .HasForeignKey("TipoDocumentoModelidTipoDocumento");
+
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
+                        .WithMany()
+                        .HasForeignKey("idCoordenadorEstagio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", "TipoDocumento")
+                        .WithMany()
+                        .HasForeignKey("idTipoDocumento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CoordenadorEstagio");
+
+                    b.Navigation("TipoDocumento");
+                });
+
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoNecessarioModel", b =>
                 {
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", null)
@@ -1286,6 +1303,8 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("Apontamento");
 
                     b.Navigation("ContratoEstagio");
+
+                    b.Navigation("Documento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", b =>
@@ -1305,6 +1324,8 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.TipoDocumentoModel", b =>
                 {
+                    b.Navigation("Documento");
+
                     b.Navigation("DocumentosNecessarios");
                 });
 

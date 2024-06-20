@@ -22,5 +22,7 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         public void EnableAllOperations() => IStatusExtensions.EnableAllOperations(this);
 
         public virtual ICollection<DocumentoNecessarioModel>? DocumentosNecessarios { get; set; }
+
+        public virtual ICollection<DocumentoModel>? Documento { get; set; }
     }
 }

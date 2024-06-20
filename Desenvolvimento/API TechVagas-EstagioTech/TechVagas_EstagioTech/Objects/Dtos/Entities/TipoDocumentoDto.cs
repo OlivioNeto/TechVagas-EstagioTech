@@ -22,6 +22,9 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         public void DisableAllOperations() => IStatusExtensions.DisableAllOperations(this);
         public void EnableAllOperations() => IStatusExtensions.EnableAllOperations(this);
 
+        [JsonIgnore]
+        public DocumentoModel? Documento { get; set; }
+        public int idDocumento { get; set; }
 
         [JsonIgnore]
         [Column("tipodocumento")]

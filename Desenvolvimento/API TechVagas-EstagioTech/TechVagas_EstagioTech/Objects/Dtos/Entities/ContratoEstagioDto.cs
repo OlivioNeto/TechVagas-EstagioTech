@@ -61,6 +61,10 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         public string? cargaTotal { get; set; }
 
         [JsonIgnore]
+        [Column("documento")]
+        public ICollection<DocumentoModel>? Documento { get; set; }
+
+        [JsonIgnore]
         public ICollection<CoordenadorEstagioModel>? CoordenadorEstagio { get; set; }
 
         [JsonIgnore]

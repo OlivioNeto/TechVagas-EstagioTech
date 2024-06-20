@@ -112,20 +112,6 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "documento",
-                columns: table => new
-                {
-                    documentoid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_documento", x => x.documentoid);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "instituicaoensino",
                 columns: table => new
                 {
@@ -313,25 +299,42 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "documentoversao",
+                name: "documento",
                 columns: table => new
                 {
-                    documentoversaoid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    comentario = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    anexo = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    data = table.Column<DateOnly>(type: "date", nullable: false),
-                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     documentoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    descricao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    tipodocumentoid = table.Column<int>(type: "integer", nullable: false),
+                    coordenadorestagioid = table.Column<int>(type: "integer", nullable: false),
+                    CoordenadorEstagioModelidCoordenadorEstagio = table.Column<int>(type: "integer", nullable: true),
+                    TipoDocumentoModelidTipoDocumento = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_documentoversao", x => x.documentoversaoid);
+                    table.PrimaryKey("PK_documento", x => x.documentoid);
                     table.ForeignKey(
-                        name: "FK_documentoversao_documento_documentoid",
-                        column: x => x.documentoid,
-                        principalTable: "documento",
-                        principalColumn: "documentoid",
+                        name: "FK_documento_coordenadorestagio_CoordenadorEstagioModelidCoord~",
+                        column: x => x.CoordenadorEstagioModelidCoordenadorEstagio,
+                        principalTable: "coordenadorestagio",
+                        principalColumn: "coordenadorestagioid");
+                    table.ForeignKey(
+                        name: "FK_documento_coordenadorestagio_coordenadorestagioid",
+                        column: x => x.coordenadorestagioid,
+                        principalTable: "coordenadorestagio",
+                        principalColumn: "coordenadorestagioid",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_documento_tipodocumento_TipoDocumentoModelidTipoDocumento",
+                        column: x => x.TipoDocumentoModelidTipoDocumento,
+                        principalTable: "tipodocumento",
+                        principalColumn: "tipodocumentoid");
+                    table.ForeignKey(
+                        name: "FK_documento_tipodocumento_tipodocumentoid",
+                        column: x => x.tipodocumentoid,
+                        principalTable: "tipodocumento",
+                        principalColumn: "tipodocumentoid",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -447,6 +450,29 @@ namespace TechVagas_EstagioTech.Migrations
                         principalColumn: "tipoestagioid");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "documentoversao",
+                columns: table => new
+                {
+                    documentoversaoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    comentario = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    anexo = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    data = table.Column<DateOnly>(type: "date", nullable: false),
+                    situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    documentoid = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_documentoversao", x => x.documentoversaoid);
+                    table.ForeignKey(
+                        name: "FK_documentoversao_documento_documentoid",
+                        column: x => x.documentoid,
+                        principalTable: "documento",
+                        principalColumn: "documentoid",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "concedente",
                 columns: new[] { "concedenteid", "cnpj", "localidade", "razaosocial", "responsavelestagio" },
@@ -470,18 +496,6 @@ namespace TechVagas_EstagioTech.Migrations
                     { 5, true, new DateOnly(2024, 6, 13), "Adriana de Souza" },
                     { 6, true, new DateOnly(2024, 6, 13), "Gláucia Alvarez" },
                     { 7, true, new DateOnly(2024, 6, 13), "Fellipe Ricardo" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "documento",
-                columns: new[] { "documentoid", "descricao", "situacao" },
-                values: new object[,]
-                {
-                    { 1, "RG", "Ativo" },
-                    { 2, "CPF", "Ativo" },
-                    { 3, "CNH", "Ativo" },
-                    { 4, "Título de Eleitor", "Ativo" },
-                    { 5, "Certificado de Dispensa", "Ativo" }
                 });
 
             migrationBuilder.InsertData(
@@ -582,6 +596,26 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "TipoEstagioidTipoEstagio");
 
             migrationBuilder.CreateIndex(
+                name: "IX_documento_coordenadorestagioid",
+                table: "documento",
+                column: "coordenadorestagioid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_documento_CoordenadorEstagioModelidCoordenadorEstagio",
+                table: "documento",
+                column: "CoordenadorEstagioModelidCoordenadorEstagio");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_documento_tipodocumentoid",
+                table: "documento",
+                column: "tipodocumentoid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_documento_TipoDocumentoModelidTipoDocumento",
+                table: "documento",
+                column: "TipoDocumentoModelidTipoDocumento");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_documentonecessario_tipodocumentoid",
                 table: "documentonecessario",
                 column: "tipodocumentoid");
@@ -673,13 +707,7 @@ namespace TechVagas_EstagioTech.Migrations
                 name: "vagas");
 
             migrationBuilder.DropTable(
-                name: "coordenadorestagio");
-
-            migrationBuilder.DropTable(
                 name: "supervisorestagio");
-
-            migrationBuilder.DropTable(
-                name: "tipodocumento");
 
             migrationBuilder.DropTable(
                 name: "tipoestagio");
@@ -701,6 +729,12 @@ namespace TechVagas_EstagioTech.Migrations
 
             migrationBuilder.DropTable(
                 name: "concedente");
+
+            migrationBuilder.DropTable(
+                name: "coordenadorestagio");
+
+            migrationBuilder.DropTable(
+                name: "tipodocumento");
         }
     }
 }

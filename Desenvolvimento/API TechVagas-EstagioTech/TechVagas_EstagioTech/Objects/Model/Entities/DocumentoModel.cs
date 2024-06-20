@@ -18,6 +18,14 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("situacao")]
         public string? situacaoDocumento { get; set; }
 
+        public TipoDocumentoModel? TipoDocumento { get; set; }
+        [Column("tipodocumentoid")]
+        public int idTipoDocumento { get; set; }
+
+        public CoordenadorEstagioModel? CoordenadorEstagio { get; set; }
+        [Column("coordenadorestagioid")]
+        public int idCoordenadorEstagio { get; set; }
+
         public virtual ICollection<DocumentoVersaoModel>? DocumentoVersoes { get; set; }
     }
 }

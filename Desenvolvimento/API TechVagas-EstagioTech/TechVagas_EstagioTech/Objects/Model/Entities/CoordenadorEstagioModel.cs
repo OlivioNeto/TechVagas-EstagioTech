@@ -26,6 +26,7 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
 
         public virtual ICollection<ApontamentoModel>? Apontamento { get; set; }
         public virtual ICollection<ContratoEstagioModel>? ContratoEstagio { get; set; }
+        public virtual ICollection<DocumentoModel>? Documento { get; set; }
 
     }
 }
