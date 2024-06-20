@@ -448,6 +448,15 @@ namespace TechVagas_EstagioTech.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "cargo",
+                columns: new[] { "cargoid", "descricao", "tipo" },
+                values: new object[,]
+                {
+                    { 1, "O Desenvolvedor de Software será responsável por projetar, desenvolver, testar e manter aplicações de software. Este profissional trabalhará em estreita colaboração com outros desenvolvedor", "Desenvolvedor" },
+                    { 2, "O Auxiliar de Manutenção será responsável por auxiliar na execução de tarefas de manutenção preventiva e corretiva nas instalações e equipamentos da empresa. Este profissional", "Auxiliar de Manutenção" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "concedente",
                 columns: new[] { "concedenteid", "cnpj", "localidade", "razaosocial", "responsavelestagio" },
                 values: new object[,]
@@ -544,6 +553,15 @@ namespace TechVagas_EstagioTech.Migrations
                     { 5, null, true, 1, "Vivian Basilio" },
                     { 6, null, true, 1, "Augusto Formentão" },
                     { 7, null, true, 2, "Lidia de Haro" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "vagas",
+                columns: new[] { "vagasid", "CargoId", "datalimite", "datapublicacao", "descricao", "horarioentrada", "horariosaida", "localidade", "localidadetrabalho", "quantidade", "titulo", "totalhorassemanais", "concedenteId" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateOnly(2024, 7, 31), new DateOnly(2024, 7, 20), "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", "08:00", "12:00", "Jales / SP", "Home Office", "22", "Desenvolvimento de Software", "40", 1 },
+                    { 2, 2, new DateOnly(2024, 8, 31), new DateOnly(2024, 7, 20), "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", "08:00", "12:00", "Jales / SP", "Home Office", "12", "Desenvolvimento de Software", "40", 2 }
                 });
 
             migrationBuilder.CreateIndex(
