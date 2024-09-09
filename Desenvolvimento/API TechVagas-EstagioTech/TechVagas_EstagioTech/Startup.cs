@@ -84,6 +84,13 @@ namespace TechVagas_EstagioTech
                     };
                 });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Administrador"));
+                options.AddPolicy("AlunoPolicy", policy => policy.RequireRole("Aluno"));
+                options.AddPolicy("EmpresaPolicy", policy => policy.RequireRole("Empresa"));
+            });
+
             // Garantir que todos os assemblies do domínio sejam injetados
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
