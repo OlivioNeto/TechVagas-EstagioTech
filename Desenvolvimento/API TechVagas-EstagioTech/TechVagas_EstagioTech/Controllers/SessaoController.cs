@@ -4,6 +4,7 @@ using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Model.Entities;
 using TechVagas_EstagioTech.Objects.Utilities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -80,6 +81,7 @@ namespace TechVagas_EstagioTech.Controllers
             }
         }
         [HttpPost("Autentication")]
+        [Anonymous]
         public async Task<ActionResult> CreateSession([FromBody] LoginDto loginDto)
         {
             if (loginDto is null)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
@@ -33,7 +34,8 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(alunoDto);
 		}
 
-		[HttpPost]
+        [Authorize(Policy = "AdministradorPolicy")]
+        [HttpPost]
 		public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado inválido!");

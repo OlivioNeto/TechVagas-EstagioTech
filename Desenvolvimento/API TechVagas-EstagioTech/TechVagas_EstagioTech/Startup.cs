@@ -16,6 +16,8 @@ using TechVagas_EstagioTech.Dtos.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TechVagas_EstagioTech.Objects.Utilities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech
 {
@@ -86,7 +88,7 @@ namespace TechVagas_EstagioTech
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Administrador"));
+                options.AddPolicy("AdministradorPolicy", policy => policy.RequireRole("Administrador"));
                 options.AddPolicy("AlunoPolicy", policy => policy.RequireRole("Aluno"));
                 options.AddPolicy("EmpresaPolicy", policy => policy.RequireRole("Empresa"));
             });
@@ -177,28 +179,46 @@ namespace TechVagas_EstagioTech
 			services.AddMvc(); // Certifique-se de adicionar isto se ainda não estiver adicionado
 		}
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-				app.UseSwagger();
-				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sua API V1"));
-			}
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sua API V1"));
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
 
-			app.UseHttpsRedirection();
-			app.UseRouting();
-			app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCors("MyPolicy");
 
-			app.UseCors("MyPolicy");
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-			app.UseAuthentication();
-			app.UseAuthorization();
+            app.UseRouting();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
-		}
-	}
+            app.UseWhen(context => context.Request.Path.StartsWithSegments("/api") && context.GetEndpoint()?.Metadata.GetMetadata<AnonymousAttribute>() == null,
+            appBuilder =>
+            {
+                appBuilder.UseCustomMiddleware();
+            });
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Response.StatusCode == StatusCodes.Status401Unauthorized) return;
+
+                await next(context);
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+    }
 }
