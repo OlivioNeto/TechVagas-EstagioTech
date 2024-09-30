@@ -215,6 +215,12 @@ namespace TechVagas_EstagioTech
                 await next(context);
             });
 
+            app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"),
+            appBuilder =>
+            {
+                appBuilder.UsePolicyMiddleware();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

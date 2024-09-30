@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -19,6 +20,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet]
+		[Access(1,2,3,4)]
 		public async Task<ActionResult<IEnumerable<AlunoDto>>> Get()
 		{
 			var alunoDto = await _alunoService.BuscarTodosAlunos();
@@ -34,7 +36,7 @@ namespace TechVagas_EstagioTech.Controllers
 			return Ok(alunoDto);
 		}
 
-        [Authorize(Policy = "AdministradorPolicy")]
+        
         [HttpPost]
 		public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
 		{
