@@ -36,6 +36,7 @@ namespace TechVagas_EstagioTech.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] MatriculaDto matriculaDto)
         {
+            // SUPOMOS QUE EU TENHA O TOKEN NO HEADER, COMO EU PEGO ESSE TOKEN: HEADER -> AUTHORIZANTION -> BEARER
             if (matriculaDto is null) return BadRequest("Dado inválido!");
             await _matriculaService.Adicionar(matriculaDto);
             return new CreatedAtRouteResult("ObterMatricula", new { id = matriculaDto.MatriculaId }, matriculaDto);
