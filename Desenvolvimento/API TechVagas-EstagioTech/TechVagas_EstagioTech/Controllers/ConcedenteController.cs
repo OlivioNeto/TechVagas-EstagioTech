@@ -38,9 +38,12 @@ namespace TechVagas_EstagioTech.Controllers
             var concedenteDto = await _concedenteService.BuscarPorId(id);
             if (concedenteDto == null) return NotFound("Concedente não encontrado");
             return Ok(concedenteDto);
+
         }
 
+        
         [HttpPost]
+        [Authorize(Policy = "AdministradorPolicy")]
         public async Task<ActionResult> Post([FromBody] ConcedenteDto concedenteDto)
         {
             if (concedenteDto is null) return BadRequest("Dado inválido!");

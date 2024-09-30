@@ -24,7 +24,7 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
 
         public async Task<UsuarioModel> BuscarPorId(int id)
         {
-            return await _dbContext.Usuario.Where(objeto => objeto.UsuarioId == id && objeto.UsuarioId != 1).FirstOrDefaultAsync();
+            return await _dbContext.Usuario.Where(objeto => objeto.UsuarioId == id).FirstOrDefaultAsync();
         }
 
         public async Task<UsuarioModel> Adicionar(UsuarioModel usuarioModel)
