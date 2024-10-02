@@ -32,9 +32,16 @@ namespace TechVagas_EstagioTech
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var connectionString = Configuration.GetConnectionString("DefaultConnection");
-			services.AddDbContext<DBContext>(options =>
-				options.UseNpgsql(connectionString));
+            // Pega a variável de ambiente DB_HOST
+            var dbHost = Environment.GetEnvironmentVariable("DB_HOST") ?? "localhost";
+
+            // Pega a string de conexão do appsettings e substitui o host
+            var connectionString = Configuration.GetConnectionString("DefaultConnection")
+                .Replace("{DB_HOST}", dbHost);
+
+            // Adiciona o DbContext ao container de injeção de dependência
+            services.AddDbContext<DBContext>(options =>
+                options.UseNpgsql(connectionString));
 
 
             services.AddSwaggerGen(c =>
@@ -202,7 +209,7 @@ namespace TechVagas_EstagioTech
 
             app.UseRouting();
 
-            app.UseWhen(context => context.Request.Path.StartsWithSegments("/api") && context.GetEndpoint()?.Metadata.GetMetadata<AnonymousAttribute>() == null,
+            /*app.UseWhen(context => context.Request.Path.StartsWithSegments("/api") && context.GetEndpoint()?.Metadata.GetMetadata<AnonymousAttribute>() == null,
             appBuilder =>
             {
                 appBuilder.UseCustomMiddleware();
@@ -219,7 +226,7 @@ namespace TechVagas_EstagioTech
             appBuilder =>
             {
                 appBuilder.UsePolicyMiddleware();
-            });
+            });*/
 
             app.UseEndpoints(endpoints =>
             {
