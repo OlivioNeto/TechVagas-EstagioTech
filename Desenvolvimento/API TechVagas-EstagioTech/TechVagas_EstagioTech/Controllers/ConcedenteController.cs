@@ -5,6 +5,7 @@ using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Objects.Model;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -24,7 +25,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
-        //[Authorize]
+        [Access(1)]
         public async Task<ActionResult<IEnumerable<ConcedenteDto>>> Get()
         {
             var concedenteDto = await _concedenteService.BuscarTodosConcedentes();
@@ -33,6 +34,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterConcedente")]
+        [Access(1)]
         public async Task<ActionResult<ConcedenteDto>> Get(int id)
         {
             var concedenteDto = await _concedenteService.BuscarPorId(id);
@@ -43,7 +45,7 @@ namespace TechVagas_EstagioTech.Controllers
 
         
         [HttpPost]
-        [Authorize(Policy = "AdministradorPolicy")]
+        [Access(1)]
         public async Task<ActionResult> Post([FromBody] ConcedenteDto concedenteDto)
         {
             if (concedenteDto is null) return BadRequest("Dado inválido!");
@@ -52,6 +54,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Access(1, 4)]
         public async Task<ActionResult> Put([FromBody] ConcedenteDto concedenteDto)
         {
             //if (concedentedto == null)
@@ -101,6 +104,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1, 4)]
         public async Task<ActionResult<ConcedenteDto>> Delete(int id)
         {
             var concedenteDto = await _concedenteService.BuscarPorId(id);
