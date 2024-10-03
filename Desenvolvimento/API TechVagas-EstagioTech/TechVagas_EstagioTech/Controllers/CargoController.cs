@@ -6,6 +6,7 @@ using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -21,7 +22,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<CargoDto>>> Get()
+        [Access(1, 4)]
+        public async Task<ActionResult<IEnumerable<CargoDto>>> Get()
 		{
 			var cargoDto = await _cargoService.BuscarTodosCargos();
 			if (cargoDto == null) return NotFound("Cargos não encontradas!");
@@ -29,7 +31,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterCargo")]
-		public async Task<ActionResult<CargoDto>> Get(int id)
+        [Access(1, 4)]
+        public async Task<ActionResult<CargoDto>> Get(int id)
 		{
 			var cargoDto = await _cargoService.BuscarPorId(id);
 			if (cargoDto == null) return NotFound("Cargo não encontrado");
@@ -37,7 +40,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] CargoDto cargoDto)
+        [Access(1, 4)]
+        public async Task<ActionResult> Post([FromBody] CargoDto cargoDto)
 		{
 			if (cargoDto is null) return BadRequest("Dado inválido!");
 			await _cargoService.Adicionar(cargoDto);
@@ -45,7 +49,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPut("{id:int}")]
-		public async Task<ActionResult> Put([FromBody] CargoDto cargoDto)
+        [Access(1, 4)]
+        public async Task<ActionResult> Put([FromBody] CargoDto cargoDto)
 		{
 			if (cargoDto is null) return BadRequest("Dado invalido!");
 			await _cargoService.Atualizar(cargoDto);
@@ -53,7 +58,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult<CargoDto>> Delete(int id)
+        [Access(1, 4)]
+        public async Task<ActionResult<CargoDto>> Delete(int id)
 		{
 			var cargoDto = await _cargoService.BuscarPorId(id);
 			if (cargoDto == null) return NotFound("Cargo não econtrado!");
