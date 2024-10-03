@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -18,6 +19,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1, 2, 3, 4)]
         public async Task<ActionResult<IEnumerable<VagasDto>>> Get()
         {
             var vagasDto = await _vagasService.BuscarTodasVagas();
@@ -26,6 +28,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterVaga")]
+        [Access(1, 2, 3, 4)]
         public async Task<ActionResult<VagasDto>> Get(int id)
         {
             var vagasDto = await _vagasService.BuscarPorId(id);
@@ -34,6 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1, 2, 3, 4)]
         public async Task<ActionResult> Post([FromBody] VagasDto vagasDto)
         {
             if (vagasDto is null) return BadRequest("Dado inválido!");
@@ -42,6 +46,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Access(1, 2, 3, 4)]
         public async Task<ActionResult> Put([FromBody] VagasDto vagasDto)
         {
             if (vagasDto is null) return BadRequest("Dado invalido!");
@@ -50,6 +55,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1, 2, 3, 4)]
         public async Task<ActionResult<VagasDto>> Delete(int id)
         {
             var vagasDto = await _vagasService.BuscarPorId(id);
