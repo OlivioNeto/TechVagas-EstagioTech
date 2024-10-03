@@ -20,7 +20,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet]
-		[Access(1,2,3,4)]
+		[Access(1,4)]
 		public async Task<ActionResult<IEnumerable<AlunoDto>>> Get()
 		{
 			var alunoDto = await _alunoService.BuscarTodosAlunos();
@@ -29,7 +29,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterAluno")]
-		public async Task<ActionResult<AlunoDto>> Get(int id)
+        [Access(1,4)]
+        public async Task<ActionResult<AlunoDto>> Get(int id)
 		{
 			var alunoDto = await _alunoService.BuscarPorId(id);
 			if (alunoDto == null) return NotFound("Aluno não encontrado");
@@ -38,7 +39,8 @@ namespace TechVagas_EstagioTech.Controllers
 
         
         [HttpPost]
-		public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
+        [Access()]
+        public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado inválido!");
 			await _alunoService.Adicionar(alunoDto);
@@ -46,7 +48,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPut("{id:int}")]
-		public async Task<ActionResult> Put([FromBody] AlunoDto alunoDto)
+        [Access(1, 4)]
+        public async Task<ActionResult> Put([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado invalido!");
 			await _alunoService.Atualizar(alunoDto);
@@ -54,7 +57,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult<AlunoDto>> Delete(int id)
+        [Access(1, 4)]
+        public async Task<ActionResult<AlunoDto>> Delete(int id)
 		{
 			var alunoDto = await _alunoService.BuscarPorId(id);
 			if (alunoDto == null) return NotFound("Aluno não encontrado!");
