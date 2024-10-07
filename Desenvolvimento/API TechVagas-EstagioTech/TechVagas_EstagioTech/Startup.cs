@@ -226,7 +226,15 @@ namespace TechVagas_EstagioTech
             appBuilder =>
             {
                 appBuilder.UsePolicyMiddleware();
-            }); */
+            });
+            
+            app.Use(async (context, next) =>
+            {
+                if (context.Response.StatusCode == StatusCodes.Status401Unauthorized) return;
+
+                await next(context);
+            });
+             */
 
             app.UseEndpoints(endpoints =>
             {
