@@ -226,7 +226,7 @@ namespace TechVagas_EstagioTech
             appBuilder =>
             {
                 appBuilder.UsePolicyMiddleware();
-            });*/
+            }); */
 
             app.UseEndpoints(endpoints =>
             {
