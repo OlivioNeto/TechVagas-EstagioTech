@@ -111,10 +111,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Documento versão
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.idDocumentoVersao);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Comentario).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Anexo).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Data).IsRequired();
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Situacao).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.comentario).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.anexo).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.data).IsRequired();
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.situacao).IsRequired().HasMaxLength(200);
 
             //Documento necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.idDocumentoNecessario);
@@ -200,7 +200,6 @@ namespace TechVagas_EstagioTech.Data
 
             //Relacionamento: Documento -> Documento Versão
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.idDocumentoVersao);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Situacao).IsRequired();
 
             //Relacionamento: CoordenadorEstagio -> Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);

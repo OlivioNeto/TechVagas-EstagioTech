@@ -12,8 +12,8 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20241007175256_incial")]
-    partial class incial
+    [Migration("20241016122057_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -787,28 +787,31 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumentoVersao"));
 
-                    b.Property<string>("Anexo")
+                    b.Property<int?>("DocumentoidDocumento")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("anexo")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("anexo");
 
-                    b.Property<string>("Comentario")
+                    b.Property<string>("comentario")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("comentario");
 
-                    b.Property<DateOnly?>("Data")
+                    b.Property<DateOnly?>("data")
                         .IsRequired()
                         .HasColumnType("date")
                         .HasColumnName("data");
 
-                    b.Property<int>("DocumentoId")
+                    b.Property<int>("idDocumento")
                         .HasColumnType("integer")
                         .HasColumnName("documentoid");
 
-                    b.Property<string>("Situacao")
+                    b.Property<string>("situacao")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
@@ -816,7 +819,7 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("idDocumentoVersao");
 
-                    b.HasIndex("DocumentoId");
+                    b.HasIndex("DocumentoidDocumento");
 
                     b.ToTable("documentoversao");
                 });
@@ -1316,9 +1319,7 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", "Documento")
                         .WithMany("DocumentoVersoes")
-                        .HasForeignKey("DocumentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DocumentoidDocumento");
 
                     b.Navigation("Documento");
                 });

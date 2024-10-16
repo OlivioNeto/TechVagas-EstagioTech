@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TechVagas_EstagioTech.Migrations
 {
     /// <inheritdoc />
-    public partial class incial : Migration
+    public partial class teste : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -460,17 +460,17 @@ namespace TechVagas_EstagioTech.Migrations
                     anexo = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     data = table.Column<DateOnly>(type: "date", nullable: false),
                     situacao = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    DocumentoidDocumento = table.Column<int>(type: "integer", nullable: true),
                     documentoid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_documentoversao", x => x.documentoversaoid);
                     table.ForeignKey(
-                        name: "FK_documentoversao_documento_documentoid",
-                        column: x => x.documentoid,
+                        name: "FK_documentoversao_documento_DocumentoidDocumento",
+                        column: x => x.DocumentoidDocumento,
                         principalTable: "documento",
-                        principalColumn: "documentoid",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "documentoid");
                 });
 
             migrationBuilder.InsertData(
@@ -666,9 +666,9 @@ namespace TechVagas_EstagioTech.Migrations
                 column: "TipoEstagioModelidTipoEstagio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_documentoversao_documentoid",
+                name: "IX_documentoversao_DocumentoidDocumento",
                 table: "documentoversao",
-                column: "documentoid");
+                column: "DocumentoidDocumento");
 
             migrationBuilder.CreateIndex(
                 name: "IX_matricula_AlunosAlunoId",

@@ -13,19 +13,19 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         public int idDocumentoVersao { get; set; }
 
         [Column("comentario")]
-        public string? Comentario { get; set; }
+        public string? comentario { get; set; }
 
         [Column("anexo")]
-        public string? Anexo { get; set; }
+        public string? anexo { get; set; }
 
         [Column("data")]
-        public DateOnly? Data { get; set; }
+        public DateOnly? data { get; set; }
 
         [Column("situacao")]
-        public string? Situacao { get; set; }
+        public string? situacao { get; set; }
 
         public DocumentoModel? Documento { get; set; }
         [Column("documentoid")]
-        public int DocumentoId { get; set; }
+        public int idDocumento { get; set; }
     }
 }
