@@ -4,6 +4,7 @@ using System;
 using TechVagas_EstagioTech.Data;
 using TechVagas_EstagioTech.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -19,6 +20,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1)]
         public async Task<ActionResult<IEnumerable<UsuarioDto>>> Get()
         {
             var usuariosDto = await _usuarioService.BuscarTodosUsuarios();
@@ -26,6 +28,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id}", Name = "GetUsuario")]
+        [Access(1)]
         public async Task<ActionResult<UsuarioDto>> Get(int id)
         {
             var usuarioDto = await _usuarioService.BuscarPorId(id);
@@ -34,6 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1)]
         public async Task<ActionResult> Post([FromBody] UsuarioDto usuarioDto)
         {
             if (usuarioDto is null) return BadRequest("Dado(s) inválido(s)!");
@@ -74,6 +78,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut()]
+        [Access(1)]
         public async Task<ActionResult> Put([FromBody] UsuarioDto usuarioDto)
         {
             if (usuarioDto.UsuarioId == 1) return BadRequest("Dado(s) inválido(s)!");
@@ -116,6 +121,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Access(1)]
         public async Task<ActionResult<UsuarioDto>> Apagar(int id)
         {
             if (id == 1) return NotFound("Usuário não encontrado!");

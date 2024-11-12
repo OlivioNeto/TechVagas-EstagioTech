@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -18,6 +19,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult<IEnumerable<DocumentoVersaoDto>>> Get()
         {
             var documentoVersaoDto = await _documentoVersaoService.BuscarTodosTipoDocumentos();
@@ -26,6 +28,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterVersaoDocumento")]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult<DocumentoVersaoDto>> Get(int id)
         {
             var documentoVersaoDto = await _documentoVersaoService.BuscarPorId(id);
@@ -34,6 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult> Post([FromBody] DocumentoVersaoDto documentoVersaoDto)
         {
             if (documentoVersaoDto is null) return BadRequest("Dado inválido!");
@@ -42,6 +46,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult> Put([FromBody] DocumentoVersaoDto documentoVersaoDto)
         {
             if (documentoVersaoDto is null) return BadRequest("Dado invalido!");
@@ -50,6 +55,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult<DocumentoVersaoDto>> Delete(int id)
         {
             var documentoVersaoDto = await _documentoVersaoService.BuscarPorId(id);

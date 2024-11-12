@@ -4,6 +4,7 @@ using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Objects.Model;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -23,6 +24,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1)]
         public async Task<ActionResult<IEnumerable<DocumentoNecessarioDto>>> Get()
         {
             var documentoNecessarioDto = await _documentoNecessarioService.BuscarTodosDocumentosNecessarios();
@@ -31,6 +33,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterDocumentoNecessario")]
+        [Access(1)]
         public async Task<ActionResult<DocumentoNecessarioDto>> Get(int id)
         {
             var documentoNecessarioDto = await _documentoNecessarioService.BuscarPorId(id);
@@ -39,6 +42,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1)]
         public async Task<ActionResult> Post([FromBody] DocumentoNecessarioDto documentoNecessarioDto)
         {
             if (documentoNecessarioDto is null) return BadRequest("Dado inválido!");
@@ -47,6 +51,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut()]
+        [Access(1)]
         public async Task<ActionResult> Put([FromBody] DocumentoNecessarioDto documentoNecessarioDto)
         {
             if (documentoNecessarioDto == null)
@@ -108,6 +113,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1)]
         public async Task<ActionResult<DocumentoNecessarioDto>> Delete(int id)
         {
             var documentoNecessarioDto = await _documentoNecessarioService.BuscarPorId(id);

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -17,6 +18,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1, 3, 4, 5, 6)]
         public async Task<ActionResult<IEnumerable<ContratoEstagioDto>>> Get()
         {
             var contratoestagioDto = await _contratoestagioService.BuscarTodosContratoEstagios();
@@ -25,6 +27,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterContratoEstagio")]
+        [Access(1, 3, 4, 5, 6)]
         public async Task<ActionResult<ContratoEstagioDto>> Get(int id)
         {
             var contratoestagioDto = await _contratoestagioService.BuscarPorId(id);
@@ -33,6 +36,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1, 3, 4, 5, 6)]
         public async Task<ActionResult> Post([FromBody] ContratoEstagioDto contratoestagioDto)
         {
             if (contratoestagioDto is null) return BadRequest("Dados inválidos!");
@@ -41,6 +45,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Access(1, 3, 4, 5, 6)]
         public async Task<ActionResult> Put([FromBody] ContratoEstagioDto contratoestagioDto)
         {
             if (contratoestagioDto is null) return BadRequest("Dados invalidos!");
@@ -49,6 +54,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1, 3, 4, 5, 6)]
         public async Task<ActionResult<ContratoEstagioDto>> Delete(int id)
         {
             var contratoestagioDto = await _contratoestagioService.BuscarPorId(id);

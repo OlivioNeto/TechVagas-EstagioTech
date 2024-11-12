@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -18,6 +19,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1)]
         public async Task<ActionResult<IEnumerable<MatriculaDto>>> Get()
         {
             var matriculaDto = await _matriculaService.BuscarTodasMatriculas();
@@ -26,6 +28,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterMatricula")]
+        [Access(1)]
         public async Task<ActionResult<MatriculaDto>> Get(int id)
         {
             var matriculaDto = await _matriculaService.BuscarPorId(id);
@@ -34,6 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1)]
         public async Task<ActionResult> Post([FromBody] MatriculaDto matriculaDto)
         {
             // SUPOMOS QUE EU TENHA O TOKEN NO HEADER, COMO EU PEGO ESSE TOKEN: HEADER -> AUTHORIZANTION -> BEARER
@@ -43,6 +47,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Access(1)]
         public async Task<ActionResult> Put([FromBody] MatriculaDto matriculaDto)
         {
             if (matriculaDto is null) return BadRequest("Dado invalido!");
@@ -51,6 +56,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1)]
         public async Task<ActionResult<MatriculaDto>> Delete(int id)
         {
             var matriculaDto = await _matriculaService.BuscarPorId(id);

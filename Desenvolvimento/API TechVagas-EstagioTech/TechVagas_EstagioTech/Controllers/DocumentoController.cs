@@ -5,6 +5,7 @@ using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -20,7 +21,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<DocumentoDto>>> Get()
+        [Access(1, 3, 5, 6)]
+        public async Task<ActionResult<IEnumerable<DocumentoDto>>> Get()
 		{
 			var documentoDto = await _documentoService.BuscarTodosDocumentos();
 			if (documentoDto == null) return NotFound("Documentos não encontrados!");
@@ -28,7 +30,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterDocumento")]
-		public async Task<ActionResult<DocumentoDto>> Get(int id)
+        [Access(1, 3, 5, 6)]
+        public async Task<ActionResult<DocumentoDto>> Get(int id)
 		{
 			var documentoDto = await _documentoService.BuscarPorId(id);
 			if (documentoDto == null) return NotFound("Documento não encontrado");
@@ -37,6 +40,7 @@ namespace TechVagas_EstagioTech.Controllers
 
 
 		[HttpPost]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult> Post([FromBody] DocumentoDto documentoDto)
         {
             if (documentoDto is null) return BadRequest("Dado inválido!");
@@ -45,7 +49,8 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
 		[HttpPut]
-		public async Task<ActionResult> Put( [FromBody] DocumentoDto documentoDto)
+        [Access(1, 3, 5, 6)]
+        public async Task<ActionResult> Put( [FromBody] DocumentoDto documentoDto)
 		{
 			if (documentoDto is null ) return BadRequest("Dado invalido!");
 			await _documentoService.Atualizar(documentoDto);
@@ -53,7 +58,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult<DocumentoDto>> Delete(int id)
+        [Access(1, 3, 5, 6)]
+        public async Task<ActionResult<DocumentoDto>> Delete(int id)
 		{
 			var documentoDto = await _documentoService.BuscarPorId(id);
 			if (documentoDto == null) return NotFound("Documento não econtrado!");

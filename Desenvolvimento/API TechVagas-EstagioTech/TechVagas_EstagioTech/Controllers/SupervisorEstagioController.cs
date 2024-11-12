@@ -6,6 +6,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 using TechVagas_EstagioTech.Objects.Model;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -24,6 +25,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1, 6)]
         public async Task<ActionResult<IEnumerable<SupervisorEstagioDto>>> Get()
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarTodosSupervisorEstagio();
@@ -32,6 +34,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterSupervisorEstagio")]
+        [Access(1, 6)]
         public async Task<ActionResult<SupervisorEstagioDto>> Get(int id)
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
@@ -40,6 +43,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1, 6)]
         public async Task<ActionResult> Post([FromBody] SupervisorEstagioDto supervisorEstagioDto)
         {
             if (supervisorEstagioDto is null) return BadRequest("Dado inválido!");
@@ -49,6 +53,7 @@ namespace TechVagas_EstagioTech.Controllers
 
 
         [HttpPut("{id:int}")]
+        [Access(1, 6)]
         public async Task<ActionResult> Put([FromBody] SupervisorEstagioDto supervisorEstagioDto)
         {
             if (supervisorEstagioDto is null) return BadRequest("Dado invalido!");
@@ -57,6 +62,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut("{id}/Ativar")]
+        [Access(1, 6)]
         public async Task<ActionResult<SupervisorEstagioDto>> Activity(int id)
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
@@ -82,6 +88,7 @@ namespace TechVagas_EstagioTech.Controllers
 
 
         [HttpPut("{id}/Desativar")]
+        [Access(1, 6)]
         public async Task<ActionResult<SupervisorEstagioDto>> Desactivity(int id)
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
@@ -102,6 +109,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1, 6)]
         public async Task<ActionResult<SupervisorEstagioDto>> Delete(int id)
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
