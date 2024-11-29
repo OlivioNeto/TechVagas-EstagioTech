@@ -224,10 +224,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Concedente
             modelBuilder.Entity<ConcedenteModel>().HasData(
-                new ConcedenteModel { concedenteId = 1, RazaoSocial = "PRECISAO SISTEMAS LTDA", ResponsavelEstagio = "Ailton Reynaldo", Cnpj = "02433981000196", Localidade = "Jales - SP" },
-                new ConcedenteModel { concedenteId = 2, RazaoSocial = "SISTEMASBR SOLUCOES EM TECNOLOGIA LTDA", ResponsavelEstagio = "Fernando Nogarini", Cnpj = "07468363000103", Localidade = "Jales - SP" },
-                new ConcedenteModel { concedenteId = 3, RazaoSocial = "SISCOMP TECNOLOGIA EM SISTEMAS LTDA", ResponsavelEstagio = "Silvio", Cnpj = "03997115000190", Localidade = "Jales - SP" },
-                new ConcedenteModel { concedenteId = 4, RazaoSocial = "Fatec Jales", ResponsavelEstagio = "Evanivaldo Castro", Cnpj = "00000000000000", Localidade = "Jales - SP" }
+                new ConcedenteModel { concedenteId = 1, RazaoSocial = "CONCEDENTE 1", ResponsavelEstagio = "Responsável 1", Cnpj = "11111111111111", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 2, RazaoSocial = "CONCEDENTE 2", ResponsavelEstagio = "Responsável 2", Cnpj = "22222222222222", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 3, RazaoSocial = "CONCEDENTE 3", ResponsavelEstagio = "Responsável 3", Cnpj = "33333333333333", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 4, RazaoSocial = "CONCEDENTE 4", ResponsavelEstagio = "Responsável 1", Cnpj = "44444444444444", Localidade = "Jales - SP" }
                 );
 
 			//Cargo
@@ -238,13 +238,13 @@ namespace TechVagas_EstagioTech.Data
 
 			//Coordenador Estágio 
 			modelBuilder.Entity<CoordenadorEstagioModel>().HasData(
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 1, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Jorge Gregório", Status = true },
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 2, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Tiago Ribeiro", Status = true },
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 3, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Emerson Mouco", Status = true },
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 4, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Vitor Boldrin", Status = true },
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 5, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Adriana de Souza", Status = true },
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 6, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Gláucia Alvarez", Status = true },
-                new CoordenadorEstagioModel { idCoordenadorEstagio = 7, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Fellipe Ricardo", Status = true }
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 1, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 1", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 2, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 2", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 3, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 3", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 4, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 4", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 5, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 5", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 6, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 6", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 7, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 7", Status = true }
                 );
 
             //Documento
@@ -267,10 +267,10 @@ namespace TechVagas_EstagioTech.Data
 
             //Instituição de Ensino
             modelBuilder.Entity<InstituicaoEnsinoModel>().HasData(
-                new InstituicaoEnsinoModel { idInstituicaoEnsino = 1, NomeInstituicao = "Fatec Professor José Camargo", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "17996762867" },
-                new InstituicaoEnsinoModel { idInstituicaoEnsino = 2, NomeInstituicao = "UniJales", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "17996651620" },
-                new InstituicaoEnsinoModel { idInstituicaoEnsino = 3, NomeInstituicao = "Fundação Educacional de Fernandópolis", LocalInstituicao = "Fernandópolis - SP", TelefoneInstituicao = "17981840110" },
-                new InstituicaoEnsinoModel { idInstituicaoEnsino = 4, NomeInstituicao = "UniFunec", LocalInstituicao = "Santa Fé do Sul - SP", TelefoneInstituicao = "17996324602" }
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 1, NomeInstituicao = "Instituição 1", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "11111111111" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 2, NomeInstituicao = "Instituição 2", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "22222222222" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 3, NomeInstituicao = "Instituição 3", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "33333333333" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 4, NomeInstituicao = "Instituição 4", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "44444444444" }
                 );
 
             //Tipo Documento
@@ -289,13 +289,13 @@ namespace TechVagas_EstagioTech.Data
 
             //Supervisor de Estagio
             modelBuilder.Entity<SupervisorEstagioModel>().HasData(
-                new SupervisorEstagioModel { idSupervisor = 1, nomeSupervisor = "Jorge Gregório", Status = true, concedenteId = 4 },
-                new SupervisorEstagioModel { idSupervisor = 2, nomeSupervisor = "Tiago Ribeiro", Status = true, concedenteId = 4 },
-                new SupervisorEstagioModel { idSupervisor = 3, nomeSupervisor = "Luciana Matsunaga", Status = true, concedenteId = 4 },
-                new SupervisorEstagioModel { idSupervisor = 4, nomeSupervisor = "Fellipe Ricardo", Status = true, concedenteId = 4 },
-                new SupervisorEstagioModel { idSupervisor = 5, nomeSupervisor = "Vivian Basilio", Status = true, concedenteId = 1 },
-                new SupervisorEstagioModel { idSupervisor = 6, nomeSupervisor = "Augusto Formentão", Status = true, concedenteId=1 },
-                new SupervisorEstagioModel { idSupervisor = 7, nomeSupervisor = "Lidia de Haro", Status =  true, concedenteId = 2}
+                new SupervisorEstagioModel { idSupervisor = 1, nomeSupervisor = "Supervisor 1", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 2, nomeSupervisor = "Supervisor 2", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 3, nomeSupervisor = "Supervisor 3", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 4, nomeSupervisor = "Supervisor 4", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 5, nomeSupervisor = "Supervisor 5", Status = true, concedenteId = 1 },
+                new SupervisorEstagioModel { idSupervisor = 6, nomeSupervisor = "Supervisor 6", Status = true, concedenteId = 1 },
+                new SupervisorEstagioModel { idSupervisor = 7, nomeSupervisor = "Supervisor 7", Status = true, concedenteId = 2 }
                 );
 
 			//Vagas
@@ -310,10 +310,60 @@ namespace TechVagas_EstagioTech.Data
                {
                    UsuarioId = 1,
                    Nome = "Admin",
-                   Email = "techvdev@development.com",
+                   Email = "dev@admin.com",
                    Senha = "123456",
                    CpfCnpj = "000.000.000-00",
                    UserType = UserType.Administrador
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 2,
+                   Nome = "Aluno",
+                   Email = "dev@aluno.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Aluno
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 3,
+                   Nome = "Coordenador",
+                   Email = "dev@coordenador.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Coordenador
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 4,
+                   Nome = "Empresa",
+                   Email = "dev@empresa.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Empresa
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 5,
+                   Nome = "Supervisor",
+                   Email = "dev@supervisor.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Supervisor
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 6,
+                   Nome = "Instituição",
+                   Email = "dev@empresa.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Instituicao
                }
             );
         }
