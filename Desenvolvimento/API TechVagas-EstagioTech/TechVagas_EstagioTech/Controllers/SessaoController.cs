@@ -36,12 +36,12 @@ namespace TechVagas_EstagioTech.Controllers
             return Ok(usuariosDto);
         }
 
-        [HttpGet("GetSession")]
-        public async Task<ActionResult<SessaoDto>> GetSession([FromQuery] TokenAcess token)
+        [HttpGet("GetSession/{token}")]
+        public async Task<ActionResult<SessaoDto>> GetSession(string token)
         {
             if (token is null) return BadRequest(new { status = false, response = "Dados inválidos!" });
 
-            var sessaoDTO = await _sessaoService.GetByToken(token.Token);
+            var sessaoDTO = await _sessaoService.GetByToken(token);
             if (sessaoDTO is null) return Unauthorized(new { status = false, response = "Sessão não encontrada!" });
             else if (sessaoDTO.StatusSessao && sessaoDTO.ValidateToken())
             {
@@ -117,9 +117,6 @@ namespace TechVagas_EstagioTech.Controllers
 
             if (sessaoDTO.StatusSessao && sessaoDTO.ValidateToken())
             {
-                sessaoDTO.GenerateToken();
-                await _sessaoService.Update(sessaoDTO);
-
                 return Ok(new { status = true, response = sessaoDTO.TokenSessao });
             }
             else

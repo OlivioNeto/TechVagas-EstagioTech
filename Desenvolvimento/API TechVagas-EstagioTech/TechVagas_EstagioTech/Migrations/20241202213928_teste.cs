@@ -487,10 +487,10 @@ namespace TechVagas_EstagioTech.Migrations
                 columns: new[] { "concedenteid", "cnpj", "localidade", "razaosocial", "responsavelestagio" },
                 values: new object[,]
                 {
-                    { 1, "02433981000196", "Jales - SP", "PRECISAO SISTEMAS LTDA", "Ailton Reynaldo" },
-                    { 2, "07468363000103", "Jales - SP", "SISTEMASBR SOLUCOES EM TECNOLOGIA LTDA", "Fernando Nogarini" },
-                    { 3, "03997115000190", "Jales - SP", "SISCOMP TECNOLOGIA EM SISTEMAS LTDA", "Silvio" },
-                    { 4, "00000000000000", "Jales - SP", "Fatec Jales", "Evanivaldo Castro" }
+                    { 1, "11111111111111", "Jales - SP", "CONCEDENTE 1", "Responsável 1" },
+                    { 2, "22222222222222", "Jales - SP", "CONCEDENTE 2", "Responsável 2" },
+                    { 3, "33333333333333", "Jales - SP", "CONCEDENTE 3", "Responsável 3" },
+                    { 4, "44444444444444", "Jales - SP", "CONCEDENTE 4", "Responsável 1" }
                 });
 
             migrationBuilder.InsertData(
@@ -498,13 +498,13 @@ namespace TechVagas_EstagioTech.Migrations
                 columns: new[] { "coordenadorestagioid", "statuscoordenadorestagio", "datacadastro", "nomecoordenador" },
                 values: new object[,]
                 {
-                    { 1, true, new DateOnly(2024, 6, 13), "Jorge Gregório" },
-                    { 2, true, new DateOnly(2024, 6, 13), "Tiago Ribeiro" },
-                    { 3, true, new DateOnly(2024, 6, 13), "Emerson Mouco" },
-                    { 4, true, new DateOnly(2024, 6, 13), "Vitor Boldrin" },
-                    { 5, true, new DateOnly(2024, 6, 13), "Adriana de Souza" },
-                    { 6, true, new DateOnly(2024, 6, 13), "Gláucia Alvarez" },
-                    { 7, true, new DateOnly(2024, 6, 13), "Fellipe Ricardo" }
+                    { 1, true, new DateOnly(2024, 6, 13), "Coordenador 1" },
+                    { 2, true, new DateOnly(2024, 6, 13), "Coordenador 2" },
+                    { 3, true, new DateOnly(2024, 6, 13), "Coordenador 3" },
+                    { 4, true, new DateOnly(2024, 6, 13), "Coordenador 4" },
+                    { 5, true, new DateOnly(2024, 6, 13), "Coordenador 5" },
+                    { 6, true, new DateOnly(2024, 6, 13), "Coordenador 6" },
+                    { 7, true, new DateOnly(2024, 6, 13), "Coordenador 7" }
                 });
 
             migrationBuilder.InsertData(
@@ -512,10 +512,10 @@ namespace TechVagas_EstagioTech.Migrations
                 columns: new[] { "id", "local", "nomeinstituicao", "telefone" },
                 values: new object[,]
                 {
-                    { 1, "Jales - SP", "Fatec Professor José Camargo", "17996762867" },
-                    { 2, "Jales - SP", "UniJales", "17996651620" },
-                    { 3, "Fernandópolis - SP", "Fundação Educacional de Fernandópolis", "17981840110" },
-                    { 4, "Santa Fé do Sul - SP", "UniFunec", "17996324602" }
+                    { 1, "Jales - SP", "Instituição 1", "11111111111" },
+                    { 2, "Jales - SP", "Instituição 2", "22222222222" },
+                    { 3, "Jales - SP", "Instituição 3", "33333333333" },
+                    { 4, "Jales - SP", "Instituição 4", "44444444444" }
                 });
 
             migrationBuilder.InsertData(
@@ -541,7 +541,15 @@ namespace TechVagas_EstagioTech.Migrations
             migrationBuilder.InsertData(
                 table: "usuario",
                 columns: new[] { "usuarioid", "cpfcnpjpessoa", "email", "nome", "senha", "usertype" },
-                values: new object[] { 1, "000.000.000-00", "techvdev@development.com", "Admin", "123456", 1 });
+                values: new object[,]
+                {
+                    { 1, "000.000.000-00", "dev@admin.com", "Admin", "123456", 1 },
+                    { 2, "000.000.000-00", "dev@aluno.com", "Aluno", "123456", 2 },
+                    { 3, "000.000.000-00", "dev@coordenador.com", "Coordenador", "123456", 3 },
+                    { 4, "000.000.000-00", "dev@empresa.com", "Empresa", "123456", 4 },
+                    { 5, "000.000.000-00", "dev@supervisor.com", "Supervisor", "123456", 5 },
+                    { 6, "000.000.000-00", "dev@empresa.com", "Instituição", "123456", 6 }
+                });
 
             migrationBuilder.InsertData(
                 table: "documento",
@@ -572,13 +580,13 @@ namespace TechVagas_EstagioTech.Migrations
                 columns: new[] { "supervisorid", "ConcedenteModelconcedenteId", "statussupervisorestagio", "concedenteid", "nomesupervisor" },
                 values: new object[,]
                 {
-                    { 1, null, true, 4, "Jorge Gregório" },
-                    { 2, null, true, 4, "Tiago Ribeiro" },
-                    { 3, null, true, 4, "Luciana Matsunaga" },
-                    { 4, null, true, 4, "Fellipe Ricardo" },
-                    { 5, null, true, 1, "Vivian Basilio" },
-                    { 6, null, true, 1, "Augusto Formentão" },
-                    { 7, null, true, 2, "Lidia de Haro" }
+                    { 1, null, true, 4, "Supervisor 1" },
+                    { 2, null, true, 4, "Supervisor 2" },
+                    { 3, null, true, 4, "Supervisor 3" },
+                    { 4, null, true, 4, "Supervisor 4" },
+                    { 5, null, true, 1, "Supervisor 5" },
+                    { 6, null, true, 1, "Supervisor 6" },
+                    { 7, null, true, 2, "Supervisor 7" }
                 });
 
             migrationBuilder.InsertData(

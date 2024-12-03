@@ -126,10 +126,55 @@ namespace TechVagas_EstagioTech.Migrations
                         {
                             UsuarioId = 1,
                             CpfCnpj = "000.000.000-00",
-                            Email = "techvdev@development.com",
+                            Email = "dev@admin.com",
                             Nome = "Admin",
                             Senha = "123456",
                             UserType = 1
+                        },
+                        new
+                        {
+                            UsuarioId = 2,
+                            CpfCnpj = "000.000.000-00",
+                            Email = "dev@aluno.com",
+                            Nome = "Aluno",
+                            Senha = "123456",
+                            UserType = 2
+                        },
+                        new
+                        {
+                            UsuarioId = 3,
+                            CpfCnpj = "000.000.000-00",
+                            Email = "dev@coordenador.com",
+                            Nome = "Coordenador",
+                            Senha = "123456",
+                            UserType = 3
+                        },
+                        new
+                        {
+                            UsuarioId = 4,
+                            CpfCnpj = "000.000.000-00",
+                            Email = "dev@empresa.com",
+                            Nome = "Empresa",
+                            Senha = "123456",
+                            UserType = 4
+                        },
+                        new
+                        {
+                            UsuarioId = 5,
+                            CpfCnpj = "000.000.000-00",
+                            Email = "dev@supervisor.com",
+                            Nome = "Supervisor",
+                            Senha = "123456",
+                            UserType = 5
+                        },
+                        new
+                        {
+                            UsuarioId = 6,
+                            CpfCnpj = "000.000.000-00",
+                            Email = "dev@empresa.com",
+                            Nome = "Instituição",
+                            Senha = "123456",
+                            UserType = 6
                         });
                 });
 
@@ -382,34 +427,34 @@ namespace TechVagas_EstagioTech.Migrations
                         new
                         {
                             concedenteId = 1,
-                            Cnpj = "02433981000196",
+                            Cnpj = "11111111111111",
                             Localidade = "Jales - SP",
-                            RazaoSocial = "PRECISAO SISTEMAS LTDA",
-                            ResponsavelEstagio = "Ailton Reynaldo"
+                            RazaoSocial = "CONCEDENTE 1",
+                            ResponsavelEstagio = "Responsável 1"
                         },
                         new
                         {
                             concedenteId = 2,
-                            Cnpj = "07468363000103",
+                            Cnpj = "22222222222222",
                             Localidade = "Jales - SP",
-                            RazaoSocial = "SISTEMASBR SOLUCOES EM TECNOLOGIA LTDA",
-                            ResponsavelEstagio = "Fernando Nogarini"
+                            RazaoSocial = "CONCEDENTE 2",
+                            ResponsavelEstagio = "Responsável 2"
                         },
                         new
                         {
                             concedenteId = 3,
-                            Cnpj = "03997115000190",
+                            Cnpj = "33333333333333",
                             Localidade = "Jales - SP",
-                            RazaoSocial = "SISCOMP TECNOLOGIA EM SISTEMAS LTDA",
-                            ResponsavelEstagio = "Silvio"
+                            RazaoSocial = "CONCEDENTE 3",
+                            ResponsavelEstagio = "Responsável 3"
                         },
                         new
                         {
                             concedenteId = 4,
-                            Cnpj = "00000000000000",
+                            Cnpj = "44444444444444",
                             Localidade = "Jales - SP",
-                            RazaoSocial = "Fatec Jales",
-                            ResponsavelEstagio = "Evanivaldo Castro"
+                            RazaoSocial = "CONCEDENTE 4",
+                            ResponsavelEstagio = "Responsável 1"
                         });
                 });
 
@@ -545,49 +590,49 @@ namespace TechVagas_EstagioTech.Migrations
                             idCoordenadorEstagio = 1,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Jorge Gregório"
+                            nomeCoordenador = "Coordenador 1"
                         },
                         new
                         {
                             idCoordenadorEstagio = 2,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Tiago Ribeiro"
+                            nomeCoordenador = "Coordenador 2"
                         },
                         new
                         {
                             idCoordenadorEstagio = 3,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Emerson Mouco"
+                            nomeCoordenador = "Coordenador 3"
                         },
                         new
                         {
                             idCoordenadorEstagio = 4,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Vitor Boldrin"
+                            nomeCoordenador = "Coordenador 4"
                         },
                         new
                         {
                             idCoordenadorEstagio = 5,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Adriana de Souza"
+                            nomeCoordenador = "Coordenador 5"
                         },
                         new
                         {
                             idCoordenadorEstagio = 6,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Gláucia Alvarez"
+                            nomeCoordenador = "Coordenador 6"
                         },
                         new
                         {
                             idCoordenadorEstagio = 7,
                             Status = true,
                             dataCadastro = new DateOnly(2024, 6, 13),
-                            nomeCoordenador = "Fellipe Ricardo"
+                            nomeCoordenador = "Coordenador 7"
                         });
                 });
 
@@ -857,29 +902,29 @@ namespace TechVagas_EstagioTech.Migrations
                         {
                             idInstituicaoEnsino = 1,
                             LocalInstituicao = "Jales - SP",
-                            NomeInstituicao = "Fatec Professor José Camargo",
-                            TelefoneInstituicao = "17996762867"
+                            NomeInstituicao = "Instituição 1",
+                            TelefoneInstituicao = "11111111111"
                         },
                         new
                         {
                             idInstituicaoEnsino = 2,
                             LocalInstituicao = "Jales - SP",
-                            NomeInstituicao = "UniJales",
-                            TelefoneInstituicao = "17996651620"
+                            NomeInstituicao = "Instituição 2",
+                            TelefoneInstituicao = "22222222222"
                         },
                         new
                         {
                             idInstituicaoEnsino = 3,
-                            LocalInstituicao = "Fernandópolis - SP",
-                            NomeInstituicao = "Fundação Educacional de Fernandópolis",
-                            TelefoneInstituicao = "17981840110"
+                            LocalInstituicao = "Jales - SP",
+                            NomeInstituicao = "Instituição 3",
+                            TelefoneInstituicao = "33333333333"
                         },
                         new
                         {
                             idInstituicaoEnsino = 4,
-                            LocalInstituicao = "Santa Fé do Sul - SP",
-                            NomeInstituicao = "UniFunec",
-                            TelefoneInstituicao = "17996324602"
+                            LocalInstituicao = "Jales - SP",
+                            NomeInstituicao = "Instituição 4",
+                            TelefoneInstituicao = "44444444444"
                         });
                 });
 
@@ -957,49 +1002,49 @@ namespace TechVagas_EstagioTech.Migrations
                             idSupervisor = 1,
                             Status = true,
                             concedenteId = 4,
-                            nomeSupervisor = "Jorge Gregório"
+                            nomeSupervisor = "Supervisor 1"
                         },
                         new
                         {
                             idSupervisor = 2,
                             Status = true,
                             concedenteId = 4,
-                            nomeSupervisor = "Tiago Ribeiro"
+                            nomeSupervisor = "Supervisor 2"
                         },
                         new
                         {
                             idSupervisor = 3,
                             Status = true,
                             concedenteId = 4,
-                            nomeSupervisor = "Luciana Matsunaga"
+                            nomeSupervisor = "Supervisor 3"
                         },
                         new
                         {
                             idSupervisor = 4,
                             Status = true,
                             concedenteId = 4,
-                            nomeSupervisor = "Fellipe Ricardo"
+                            nomeSupervisor = "Supervisor 4"
                         },
                         new
                         {
                             idSupervisor = 5,
                             Status = true,
                             concedenteId = 1,
-                            nomeSupervisor = "Vivian Basilio"
+                            nomeSupervisor = "Supervisor 5"
                         },
                         new
                         {
                             idSupervisor = 6,
                             Status = true,
                             concedenteId = 1,
-                            nomeSupervisor = "Augusto Formentão"
+                            nomeSupervisor = "Supervisor 6"
                         },
                         new
                         {
                             idSupervisor = 7,
                             Status = true,
                             concedenteId = 2,
-                            nomeSupervisor = "Lidia de Haro"
+                            nomeSupervisor = "Supervisor 7"
                         });
                 });
 
