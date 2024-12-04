@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20241202213928_teste")]
+    [Migration("20241204041416_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -174,7 +174,7 @@ namespace TechVagas_EstagioTech.Migrations
                         {
                             UsuarioId = 6,
                             CpfCnpj = "000.000.000-00",
-                            Email = "dev@empresa.com",
+                            Email = "dev@instituicao.com",
                             Nome = "Instituição",
                             Senha = "123456",
                             UserType = 6

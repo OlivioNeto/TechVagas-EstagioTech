@@ -171,7 +171,7 @@ namespace TechVagas_EstagioTech.Migrations
                         {
                             UsuarioId = 6,
                             CpfCnpj = "000.000.000-00",
-                            Email = "dev@empresa.com",
+                            Email = "dev@instituicao.com",
                             Nome = "Instituição",
                             Senha = "123456",
                             UserType = 6

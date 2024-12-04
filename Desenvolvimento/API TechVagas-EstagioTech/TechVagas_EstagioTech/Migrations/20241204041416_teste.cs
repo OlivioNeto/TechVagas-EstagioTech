@@ -548,7 +548,7 @@ namespace TechVagas_EstagioTech.Migrations
                     { 3, "000.000.000-00", "dev@coordenador.com", "Coordenador", "123456", 3 },
                     { 4, "000.000.000-00", "dev@empresa.com", "Empresa", "123456", 4 },
                     { 5, "000.000.000-00", "dev@supervisor.com", "Supervisor", "123456", 5 },
-                    { 6, "000.000.000-00", "dev@empresa.com", "Instituição", "123456", 6 }
+                    { 6, "000.000.000-00", "dev@instituicao.com", "Instituição", "123456", 6 }
                 });
 
             migrationBuilder.InsertData(

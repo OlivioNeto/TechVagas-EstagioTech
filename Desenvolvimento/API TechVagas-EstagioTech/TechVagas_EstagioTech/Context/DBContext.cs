@@ -360,7 +360,7 @@ namespace TechVagas_EstagioTech.Data
                {
                    UsuarioId = 6,
                    Nome = "Instituição",
-                   Email = "dev@empresa.com",
+                   Email = "dev@instituicao.com",
                    Senha = "123456",
                    CpfCnpj = "000.000.000-00",
                    UserType = UserType.Instituicao
