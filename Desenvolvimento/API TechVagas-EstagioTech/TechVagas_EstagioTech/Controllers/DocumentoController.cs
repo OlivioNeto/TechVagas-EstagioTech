@@ -6,6 +6,7 @@ using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
 using TechVagas_EstagioTech.Services.Middleware;
+using TechVagas_EstagioTech.Objects.Model;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -14,11 +15,14 @@ namespace TechVagas_EstagioTech.Controllers
     public class DocumentoController : ControllerBase
     {
 		private readonly IDocumentoService _documentoService;
+        private Response _response;
 
-		public DocumentoController(IDocumentoService documentoService)
+        public DocumentoController(IDocumentoService documentoService)
 		{
 			_documentoService = documentoService;
-		}
+
+            _response = new Response();
+        }
 
 		[HttpGet]
         [Access(1, 3, 5, 6)]
@@ -48,7 +52,54 @@ namespace TechVagas_EstagioTech.Controllers
             return Ok("Dado cadastrado com sucesso");
         }
 
-		[HttpPut]
+        [HttpPut("{id}/Ativar")]
+        [Access(1, 3, 5, 6)]
+        public async Task<ActionResult<DocumentoDto>> Activity(int id)
+        {
+            var documentoDto = await _documentoService.BuscarPorId(id);
+            if (documentoDto == null)
+            {
+                _response.Status = false;
+                _response.Message = "Tipo Documento não encontrado!";
+                _response.Data = documentoDto;
+                return NotFound(_response);
+            }
+
+            if (documentoDto.Status)
+            {
+                documentoDto.Status = true; // Ativando o documento
+                await _documentoService.Atualizar(documentoDto);
+            }
+
+            _response.Status = true;
+            _response.Message = "Documento " + documentoDto.situacaoDocumento + " ativado com sucesso.";
+            _response.Data = documentoDto;
+            return Ok(_response);
+        }
+
+
+        [HttpPut("{id}/Desativar")]
+        [Access(1, 3, 5, 6)]
+        public async Task<ActionResult<DocumentoDto>> Desactivity(int id)
+        {
+            var documentoDto = await _documentoService.BuscarPorId(id);
+            if (documentoDto == null)
+            {
+                _response.Status = false; _response.Message = "Documento não encontrado!"; _response.Data = documentoDto;
+                return NotFound(_response);
+            }
+
+            if (documentoDto.Status)
+            {
+                documentoDto.DisableAllOperations();
+                await _documentoService.Atualizar(documentoDto);
+            }
+
+            _response.Status = true; _response.Message = "Documento " + documentoDto.situacaoDocumento + " desativado com sucesso."; _response.Data = documentoDto;
+            return Ok(_response);
+        }
+
+        [HttpPut]
         [Access(1, 3, 5, 6)]
         public async Task<ActionResult> Put( [FromBody] DocumentoDto documentoDto)
 		{
