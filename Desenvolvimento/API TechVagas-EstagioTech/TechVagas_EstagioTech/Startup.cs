@@ -203,6 +203,8 @@ namespace TechVagas_EstagioTech
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors("MyPolicy");
+            app.UseCors("AllowSpecificOrigins");
+
 
             app.UseAuthentication();
             app.UseAuthorization();

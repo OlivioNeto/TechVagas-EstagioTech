@@ -104,6 +104,7 @@ namespace TechVagas_EstagioTech.Data
             //Documento
             modelBuilder.Entity<DocumentoModel>().HasKey(x => x.idDocumento);
             modelBuilder.Entity<DocumentoModel>().Property(x => x.descricaoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoModel>().Property(x => x.situacaoDocumento).IsRequired().HasMaxLength(200);
             modelBuilder.Entity<DocumentoModel>().HasOne(b => b.CoordenadorEstagio).WithMany().HasForeignKey(b => b.idCoordenadorEstagio);
             modelBuilder.Entity<DocumentoModel>().HasOne(b => b.TipoDocumento).WithMany().HasForeignKey(b => b.idTipoDocumento);
             //modelBuilder.Entity<DocumentoModel>().HasMany(d => d.DocumentoVersoes).WithOne(v => v.Documento).HasForeignKey(v => v.DocumentoId);
@@ -248,11 +249,11 @@ namespace TechVagas_EstagioTech.Data
 
             //Documento
             modelBuilder.Entity<DocumentoModel>().HasData(
-                new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", idCoordenadorEstagio = 1, idTipoDocumento = 4 },
-                new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", idCoordenadorEstagio = 2, idTipoDocumento = 2 },
-                new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", idCoordenadorEstagio = 3, idTipoDocumento = 3 },
-                new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", idCoordenadorEstagio = 7, idTipoDocumento = 1 },
-                new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", idCoordenadorEstagio = 6, idTipoDocumento = 2 }
+                new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Ativo", idCoordenadorEstagio = 1, idTipoDocumento = 4 },
+                new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Ativo", idCoordenadorEstagio = 2, idTipoDocumento = 2 },
+                new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Ativo", idCoordenadorEstagio = 3, idTipoDocumento = 3 },
+                new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Ativo", idCoordenadorEstagio = 7, idTipoDocumento = 1 },
+                new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Ativo", idCoordenadorEstagio = 6, idTipoDocumento = 2 }
                 );
 
             //Documento Necessário

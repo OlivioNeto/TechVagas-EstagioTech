@@ -16,6 +16,9 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("descricao")]
         public string? descricaoDocumento { get; set; }
 
+        [Column("situacao")]
+        public string? situacaoDocumento {  get; set; }
+
         [Column("statusdocumento")]
         public bool Status { get; set; }
         public void DisableAllOperations() => IStatusExtensions.DisableAllOperations(this);
