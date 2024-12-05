@@ -211,7 +211,7 @@ namespace TechVagas_EstagioTech
 
             app.UseRouting();
 
-            /*app.UseWhen(context => context.Request.Path.StartsWithSegments("/api") && context.GetEndpoint()?.Metadata.GetMetadata<AnonymousAttribute>() == null,
+            app.UseWhen(context => context.Request.Path.StartsWithSegments("/api") && context.GetEndpoint()?.Metadata.GetMetadata<AnonymousAttribute>() == null,
             appBuilder =>
             {
                 appBuilder.UseCustomMiddleware();
@@ -236,7 +236,7 @@ namespace TechVagas_EstagioTech
 
                 await next(context);
             });
-             */
+             
 
             app.UseEndpoints(endpoints =>
             {

@@ -35,6 +35,9 @@ namespace TechVagas_EstagioTech.Services.Middleware
                     {
                         var tokenValue = tokenParts[1];
 
+                        // Adicionando log para verificar o valor do token
+                        Console.WriteLine($"Token received: {tokenValue}");
+
                         var sessao = await _sessaoRepositorio.GetByToken(tokenValue);
 
                         if (sessao == null || !sessao.StatusSessao || !sessao.ValidateToken())
@@ -51,7 +54,14 @@ namespace TechVagas_EstagioTech.Services.Middleware
                             return;
                         }
 
+                        // Log do tipo de usuário autenticado
+                        Console.WriteLine($"User authenticated: {user.UserType}");
+
+                        // Armazenando o tipo de usuário no contexto
                         context.Items["UserType"] = user.UserType;
+
+                        // Log adicional para verificar o valor armazenado
+                        Console.WriteLine($"UserType set in context: {context.Items["UserType"]}");
                     }
                     else
                     {

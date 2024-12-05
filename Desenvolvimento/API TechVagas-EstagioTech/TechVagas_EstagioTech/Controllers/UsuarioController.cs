@@ -37,7 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
-        [Access(1)]
+        [Access(1, 2, 3, 4)]
         public async Task<ActionResult> Post([FromBody] UsuarioDto usuarioDto)
         {
             if (usuarioDto is null) return BadRequest("Dado(s) inválido(s)!");
