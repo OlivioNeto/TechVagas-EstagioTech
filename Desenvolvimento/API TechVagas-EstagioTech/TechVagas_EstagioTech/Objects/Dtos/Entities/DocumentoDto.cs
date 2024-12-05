@@ -37,5 +37,9 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         [JsonIgnore]
         [Column("documento")]
         public ICollection<DocumentoModel>? Documento { get; set; }
+
+        [JsonIgnore]
+        public ContratoEstagioDto? ContratoEstagio { get; set; }
+        public int idContratoEstagio { get; set; }
     }
 }

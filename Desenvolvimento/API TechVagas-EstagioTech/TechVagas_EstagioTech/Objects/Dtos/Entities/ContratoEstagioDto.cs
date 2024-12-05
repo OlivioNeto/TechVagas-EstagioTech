@@ -73,9 +73,13 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
         [JsonIgnore]
         public ICollection<TipoEstagioModel>? TipoEstagio { get; set; }
 
+        [JsonIgnore]
+        public MatriculaDto? Matricula { get; set; }
+
         public int idTipoEstagio { get; set; }
         public int idSupervisorEstagio { get; set; }
         public int idCoordenadorEstagio { get; set; }
+        public int idMatricula { get; set; }
 
     }
 }

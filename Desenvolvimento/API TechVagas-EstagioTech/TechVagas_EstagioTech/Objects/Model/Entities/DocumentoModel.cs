@@ -32,6 +32,10 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("coordenadorestagioid")]
         public int idCoordenadorEstagio { get; set; }
 
+        public ContratoEstagioModel? ContratoEstagio { get; set; }
+        [Column("contratoestagioid")]
+        public int idContratoEstagio { get; set; }
+
         public virtual ICollection<DocumentoVersaoModel>? DocumentoVersoes { get; set; }
     }
 }

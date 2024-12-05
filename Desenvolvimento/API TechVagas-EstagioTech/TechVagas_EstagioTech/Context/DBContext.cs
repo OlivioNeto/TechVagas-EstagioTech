@@ -108,6 +108,10 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<DocumentoModel>().HasOne(b => b.CoordenadorEstagio).WithMany().HasForeignKey(b => b.idCoordenadorEstagio);
             modelBuilder.Entity<DocumentoModel>().HasOne(b => b.TipoDocumento).WithMany().HasForeignKey(b => b.idTipoDocumento);
             //modelBuilder.Entity<DocumentoModel>().HasMany(d => d.DocumentoVersoes).WithOne(v => v.Documento).HasForeignKey(v => v.DocumentoId);
+            modelBuilder.Entity<DocumentoModel>()
+                .HasOne(c => c.ContratoEstagio)
+                .WithMany(e => e.Documentos)
+                .HasForeignKey(c => c.idContratoEstagio);
 
             //Documento versão
             modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.idDocumentoVersao);
@@ -115,6 +119,10 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.anexo).IsRequired().HasMaxLength(200);
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.data).IsRequired();
             modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.situacao).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>()
+                .HasOne(c => c.Documento)
+                .WithMany(e => e.DocumentoVersoes)
+                .HasForeignKey(c => c.idDocumento);
 
             //Documento necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.idDocumentoNecessario);
@@ -213,11 +221,21 @@ namespace TechVagas_EstagioTech.Data
             //Relacionamento: TipoEstagio -> ContratoEstagio
             modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
 
+            modelBuilder.Entity<ContratoEstagioModel>()
+                .HasOne(c => c.Matricula)
+                .WithMany(e => e.ContratosEstagio)
+                .HasForeignKey(c => c.IdMatricula);
+
             //Relacionamento: Aluno -> Matricula
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
 
             //Relacionamento: Curso -> Matricula
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
+
+            modelBuilder.Entity<MatriculaModel>()
+                .HasOne(c => c.Alunos)
+                .WithMany(e => e.Matriculas)
+                .HasForeignKey(c => c.AlunoId);
 
 
             //DEIXANDO DADOS PRÉ-CADASTRADOS
@@ -366,6 +384,33 @@ namespace TechVagas_EstagioTech.Data
                    UserType = UserType.Instituicao
                }
             );
+
+            modelBuilder.Entity<AlunoModel>().HasData(
+    new AlunoModel
+    {
+        AlunoId = 1, // Valor de chave primária
+        Nome = "João da Silva",
+        Idade = 22,
+        Rg = "123456789012",
+        StatusAluno = "Ativo", // Exemplo de status (ajuste conforme o tipo da propriedade)
+        NumeroMatricula = "202401",
+        AreaInteresse = "Desenvolvimento de Software",
+        Habilidades = "C#, JavaScript, SQL",
+        Experiencias = "Estágio em desenvolvimento web por 6 meses.",
+        DisponibilidadeHorario = "Manhã e tarde",
+        Curriculo = "link_do_curriculo.pdf", // Exemplo: pode ser uma string ou binário, dependendo do tipo
+        Cpf = "123.456.789-00",
+        Cidade = "São Paulo",
+        DataNascimento = new DateTime(2001, 5, 15),
+        NivelEscolaridade = "Graduação em andamento",
+        Telefone = "(11) 91234-5678",
+        Email = "joao.silva@email.com",
+        Endereco = "Rua das Flores, 123",
+        Genero = "Masculino",
+        Bairro = "Jardim das Rosas",
+        Cep = "01234-567"
+    }
+);
         }
     }
 }

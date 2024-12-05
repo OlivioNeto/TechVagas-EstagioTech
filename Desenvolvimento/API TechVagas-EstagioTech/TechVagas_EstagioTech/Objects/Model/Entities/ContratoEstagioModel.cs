@@ -54,6 +54,10 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("tipoestagioid")]
         public int idTipoEstagio { get; set; }
 
+        public MatriculaModel? Matricula { get; set; }
+        [Column("matriculaid")]
+        public int IdMatricula { get; set; }
 
+        public virtual ICollection<DocumentoModel>? Documentos { get; set; }
     }
 }

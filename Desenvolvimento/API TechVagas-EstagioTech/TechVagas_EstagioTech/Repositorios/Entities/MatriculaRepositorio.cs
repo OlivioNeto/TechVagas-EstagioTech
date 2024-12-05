@@ -13,6 +13,10 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         {
             _dbContext = matriculaDBContex;
         }
+        public async Task<MatriculaModel> BuscarPorAluno(int idAluno)
+        {
+            return await _dbContext.Matricula.Where(x => x.AlunoId == idAluno).FirstOrDefaultAsync();
+        }
         public async Task<MatriculaModel> BuscarPorId(int id)
         {
             return await _dbContext.Matricula.Where(x => x.MatriculaId == id).FirstOrDefaultAsync();

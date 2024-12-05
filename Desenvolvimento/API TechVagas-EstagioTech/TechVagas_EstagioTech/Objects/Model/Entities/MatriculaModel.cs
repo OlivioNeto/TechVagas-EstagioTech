@@ -20,6 +20,6 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("cursoid")]
         public int cursoid { get; set; }
 
-
+        public ICollection<ContratoEstagioModel>? ContratosEstagio { get; set; }
     }
 }
