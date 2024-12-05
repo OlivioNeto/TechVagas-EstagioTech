@@ -134,7 +134,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.nomeSupervisor).IsRequired();
             modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.Status).IsRequired();
             modelBuilder.Entity<SupervisorEstagioModel>().HasOne(b => b.Concedente).WithMany().HasForeignKey(b => b.concedenteId);
-            
+
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
             modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
@@ -248,14 +248,14 @@ namespace TechVagas_EstagioTech.Data
                 new ConcedenteModel { concedenteId = 4, RazaoSocial = "CONCEDENTE 4", ResponsavelEstagio = "Responsável 1", Cnpj = "44444444444444", Localidade = "Jales - SP" }
                 );
 
-			//Cargo
-			modelBuilder.Entity<CargoModel>().HasData(
-				new CargoModel { CargoId = 1, Descricao = "O Desenvolvedor de Software será responsável por projetar, desenvolver, testar e manter aplicações de software. Este profissional trabalhará em estreita colaboração com outros desenvolvedor", Tipo = "Desenvolvedor" },
-				new CargoModel { CargoId = 2, Descricao = "O Auxiliar de Manutenção será responsável por auxiliar na execução de tarefas de manutenção preventiva e corretiva nas instalações e equipamentos da empresa. Este profissional", Tipo = "Auxiliar de Manutenção" }
-				);
+            //Cargo
+            modelBuilder.Entity<CargoModel>().HasData(
+                new CargoModel { CargoId = 1, Descricao = "O Desenvolvedor de Software será responsável por projetar, desenvolver, testar e manter aplicações de software. Este profissional trabalhará em estreita colaboração com outros desenvolvedor", Tipo = "Desenvolvedor" },
+                new CargoModel { CargoId = 2, Descricao = "O Auxiliar de Manutenção será responsável por auxiliar na execução de tarefas de manutenção preventiva e corretiva nas instalações e equipamentos da empresa. Este profissional", Tipo = "Auxiliar de Manutenção" }
+                );
 
-			//Coordenador Estágio 
-			modelBuilder.Entity<CoordenadorEstagioModel>().HasData(
+            //Coordenador Estágio 
+            modelBuilder.Entity<CoordenadorEstagioModel>().HasData(
                 new CoordenadorEstagioModel { idCoordenadorEstagio = 1, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 1", Status = true },
                 new CoordenadorEstagioModel { idCoordenadorEstagio = 2, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 2", Status = true },
                 new CoordenadorEstagioModel { idCoordenadorEstagio = 3, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 3", Status = true },
@@ -316,14 +316,14 @@ namespace TechVagas_EstagioTech.Data
                 new SupervisorEstagioModel { idSupervisor = 7, nomeSupervisor = "Supervisor 7", Status = true, concedenteId = 2 }
                 );
 
-			//Vagas
-			modelBuilder.Entity<VagasModel>().HasData(
-			   new VagasModel { VagasId = 1, Quantidade = "22", DataPublicacao = new DateOnly(2024, 7, 20), DataLimite = new DateOnly(2024, 7, 31), Localidade = "Jales / SP", Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", Titulo = "Desenvolvimento de Software", LocalidadeTrabalho = "Home Office", HorarioEntrada = "08:00", HorarioSaida = "12:00", TotalHorasSemanis = "40", CargoId = 1, concedenteId = 1 }, 
-			   new VagasModel { VagasId = 2, Quantidade = "12", DataPublicacao = new DateOnly(2024, 7, 20), DataLimite = new DateOnly(2024, 8, 31), Localidade = "Jales / SP", Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", Titulo = "Desenvolvimento de Software", LocalidadeTrabalho = "Home Office", HorarioEntrada = "08:00", HorarioSaida = "12:00", TotalHorasSemanis = "40", CargoId = 2, concedenteId = 2 }
-			   );
+            //Vagas
+            modelBuilder.Entity<VagasModel>().HasData(
+               new VagasModel { VagasId = 1, Quantidade = "22", DataPublicacao = new DateOnly(2024, 7, 20), DataLimite = new DateOnly(2024, 7, 31), Localidade = "Jales / SP", Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", Titulo = "Desenvolvimento de Software", LocalidadeTrabalho = "Home Office", HorarioEntrada = "08:00", HorarioSaida = "12:00", TotalHorasSemanis = "40", CargoId = 1, concedenteId = 1 },
+               new VagasModel { VagasId = 2, Quantidade = "12", DataPublicacao = new DateOnly(2024, 7, 20), DataLimite = new DateOnly(2024, 8, 31), Localidade = "Jales / SP", Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", Titulo = "Desenvolvimento de Software", LocalidadeTrabalho = "Home Office", HorarioEntrada = "08:00", HorarioSaida = "12:00", TotalHorasSemanis = "40", CargoId = 2, concedenteId = 2 }
+               );
 
-			//Usuario
-			modelBuilder.Entity<UsuarioModel>().HasData(
+            //Usuario
+            modelBuilder.Entity<UsuarioModel>().HasData(
                new UsuarioModel
                {
                    UsuarioId = 1,
@@ -392,7 +392,34 @@ namespace TechVagas_EstagioTech.Data
         Nome = "João da Silva",
         Idade = 22,
         Rg = "123456789012",
-        StatusAluno = "Ativo", // Exemplo de status (ajuste conforme o tipo da propriedade)
+        StatusAluno = true, // Exemplo de status (ajuste conforme o tipo da propriedade)
+        NumeroMatricula = "202401",
+        AreaInteresse = "Desenvolvimento de Software",
+        Habilidades = "C#, JavaScript, SQL",
+        Experiencias = "Estágio em desenvolvimento web por 6 meses.",
+        DisponibilidadeHorario = "Manhã e tarde",
+        Curriculo = "link_do_curriculo.pdf", // Exemplo: pode ser uma string ou binário, dependendo do tipo
+        Cpf = "123.456.789-00",
+        Cidade = "São Paulo",
+        DataNascimento = new DateTime(2001, 5, 15),
+        NivelEscolaridade = "Graduação em andamento",
+        Telefone = "(11) 91234-5678",
+        Email = "joao.silva@email.com",
+        Endereco = "Rua das Flores, 123",
+        Genero = "Masculino",
+        Bairro = "Jardim das Rosas",
+        Cep = "01234-567"
+    }
+);
+
+            modelBuilder.Entity<MatriculaModel>().HasData(
+    new AlunoModel
+    {
+        AlunoId = 1, // Valor de chave primária
+        Nome = "João da Silva",
+        Idade = 22,
+        Rg = "123456789012",
+        StatusAluno = true, // Exemplo de status (ajuste conforme o tipo da propriedade)
         NumeroMatricula = "202401",
         AreaInteresse = "Desenvolvimento de Software",
         Habilidades = "C#, JavaScript, SQL",
