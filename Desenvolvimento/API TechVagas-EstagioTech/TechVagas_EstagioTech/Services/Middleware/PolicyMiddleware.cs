@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
-using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
 namespace TechVagas_EstagioTech.Services.Middleware
@@ -26,6 +24,8 @@ namespace TechVagas_EstagioTech.Services.Middleware
 
                 // Obtém o endpoint atual
                 var endpoint = context.GetEndpoint();
+                Console.WriteLine($"Endpoint: {endpoint?.DisplayName}");
+
                 if (endpoint != null)
                 {
                     // Verifica se o método tem o atributo AccessAttribute
@@ -33,6 +33,9 @@ namespace TechVagas_EstagioTech.Services.Middleware
 
                     if (accessAttribute != null)
                     {
+                        Console.WriteLine($"AccessAttribute Values: {string.Join(", ", accessAttribute.Values)}");
+                        Console.WriteLine($"UserType: {userType}");
+
                         // Verifica se o userType está nos valores permitidos
                         if (!accessAttribute.Values.Contains(userType))
                         {

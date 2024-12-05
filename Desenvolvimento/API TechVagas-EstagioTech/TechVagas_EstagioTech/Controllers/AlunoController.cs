@@ -20,7 +20,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet]
-		[Access(1,4)]
+		[Access(1, 2)]
 		public async Task<ActionResult<IEnumerable<AlunoDto>>> Get()
 		{
 			var alunoDto = await _alunoService.BuscarTodosAlunos();
@@ -29,7 +29,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterAluno")]
-        [Access(1,4)]
+        [Access(1, 2, 4)]
         public async Task<ActionResult<AlunoDto>> Get(int id)
 		{
 			var alunoDto = await _alunoService.BuscarPorId(id);
@@ -39,7 +39,7 @@ namespace TechVagas_EstagioTech.Controllers
 
         
         [HttpPost]
-        [Access()]
+        [Access(1, 2)]
         public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado inválido!");
@@ -48,7 +48,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPut("{id:int}")]
-        [Access(1, 4)]
+        [Access(1, 2)]
         public async Task<ActionResult> Put([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado invalido!");
@@ -57,7 +57,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-        [Access(1, 4)]
+        [Access(1, 2)]
         public async Task<ActionResult<AlunoDto>> Delete(int id)
 		{
 			var alunoDto = await _alunoService.BuscarPorId(id);
