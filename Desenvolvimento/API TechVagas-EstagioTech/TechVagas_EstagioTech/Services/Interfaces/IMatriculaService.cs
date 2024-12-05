@@ -4,6 +4,7 @@ namespace TechVagas_EstagioTech.Services.Interfaces
 {
     public interface IMatriculaService
     {
+        Task<MatriculaDto> BuscarPorAluno(int idAluno);
         Task<IEnumerable<MatriculaDto>> BuscarTodasMatriculas();
         Task<MatriculaDto> BuscarPorId(int id);
         Task Adicionar(MatriculaDto matriculaDto);

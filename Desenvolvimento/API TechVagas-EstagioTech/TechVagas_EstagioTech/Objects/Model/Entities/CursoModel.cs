@@ -16,7 +16,7 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         public string? turnoCurso { get; set; }
 
         [Column("matriculaid")]
-        public ICollection<MatriculaModel>? Matricula { get; set; }
+        public ICollection<MatriculaModel>? Matriculas { get; set; }
 
 
     }

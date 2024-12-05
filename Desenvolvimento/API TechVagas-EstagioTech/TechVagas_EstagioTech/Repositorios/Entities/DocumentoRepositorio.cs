@@ -13,6 +13,11 @@ namespace TechVagas_EstagioTech.Repositorios
             _dbContext = documentoDBContex;
         }
 
+        public async Task<List<DocumentoModel>> BuscarPorContrato(int idContrato)
+        {
+            return await _dbContext.Documento.Where(x => x.idContratoEstagio == idContrato).ToListAsync();
+        }
+
         public async Task<DocumentoModel> BuscarPorId(int id)
         {
 			return await _dbContext.Documento.Where(x => x.idDocumento == id).FirstOrDefaultAsync();

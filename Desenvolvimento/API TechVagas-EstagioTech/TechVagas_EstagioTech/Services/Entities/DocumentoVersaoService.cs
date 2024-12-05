@@ -17,6 +17,11 @@ namespace TechVagas_EstagioTech.Services.Entities
             _documentoVersaoRepositorio = documentoVersaoRepositorio;
             _mapper = mapper;
         }
+        public async Task<DocumentoVersaoDto> BuscarPorDocumento(int idDocumento)
+        {
+            var documentoVersao = await _documentoVersaoRepositorio.BuscarPorId(idDocumento);
+            return _mapper.Map<DocumentoVersaoDto>(documentoVersao);
+        }
         public async Task<DocumentoVersaoDto> BuscarPorId(int id)
         {
             var documentoVersao = await _documentoVersaoRepositorio.BuscarPorId(id);

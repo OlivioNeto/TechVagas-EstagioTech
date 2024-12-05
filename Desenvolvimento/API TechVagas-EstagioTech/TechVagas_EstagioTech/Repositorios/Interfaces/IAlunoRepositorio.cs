@@ -4,6 +4,7 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
     public interface IAlunoRepositorio
     {
+        Task<AlunoModel> BuscarPorEmail(string email);
         Task<List<AlunoModel>> BuscarTodosAlunos();
 
         Task<AlunoModel> BuscarPorId(int id);

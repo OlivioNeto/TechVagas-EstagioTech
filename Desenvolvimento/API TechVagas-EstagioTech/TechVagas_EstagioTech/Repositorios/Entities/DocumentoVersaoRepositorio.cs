@@ -13,6 +13,10 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         {
             _dbContext = documentoVersaoDBContext;
         }
+        public async Task<DocumentoVersaoModel> BuscarPorDocumento(int idDocumento)
+        {
+            return await _dbContext.DocumentoVersao.Where(x => x.idDocumento == idDocumento).FirstOrDefaultAsync();
+        }
         public async Task<DocumentoVersaoModel> BuscarPorId(int id)
         {
             return await _dbContext.DocumentoVersao.Where(x=> x.idDocumentoVersao == id).FirstOrDefaultAsync();

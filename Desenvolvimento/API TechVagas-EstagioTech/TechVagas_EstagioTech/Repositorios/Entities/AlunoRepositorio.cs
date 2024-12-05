@@ -14,6 +14,11 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
             _dbContext = cargoDBContex;
         }
 
+        public async Task<AlunoModel> BuscarPorEmail(string email)
+        {
+            return await _dbContext.Alunos.Where(x => x.Email == email).FirstOrDefaultAsync();
+        }
+
         public async Task<AlunoModel> BuscarPorId(int id)
         {
             return await _dbContext.Alunos.Where(x => x.AlunoId == id).FirstOrDefaultAsync();

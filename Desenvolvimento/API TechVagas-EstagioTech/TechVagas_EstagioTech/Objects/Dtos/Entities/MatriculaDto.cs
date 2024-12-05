@@ -17,13 +17,13 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
 
 
         [JsonIgnore]
-        public AlunoDto? Alunos { get; set; }
+        public AlunoDto? Aluno { get; set; }
         public int AlunoId { get; set; }
 
         [JsonIgnore]
         public CursoDto? Curso { get; set; }
         public int cursoid { get; set; }
 
-
+        public ICollection<ContratoEstagioDto>? ContratosEstagio { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace TechVagas_EstagioTech.Objects.Model.Entities
         [Column("numeromatricula")]
         public string NumeroMatricula { get; set; }
 
-        public AlunoModel? Alunos { get; set; }
+        public AlunoModel? Aluno { get; set; }
         [Column("alunoid")]
         public int AlunoId { get; set; }
 

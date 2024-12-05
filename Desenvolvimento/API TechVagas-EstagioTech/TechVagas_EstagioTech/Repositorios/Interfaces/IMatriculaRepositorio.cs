@@ -4,6 +4,7 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
     public interface IMatriculaRepositorio
     {
+        Task<MatriculaModel> BuscarPorAluno(int idAluno);
         Task<List<MatriculaModel>> BuscarTodasMatriculas();
 
         Task<MatriculaModel> BuscarPorId(int id);

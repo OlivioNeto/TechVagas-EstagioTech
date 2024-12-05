@@ -62,7 +62,7 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
 
         [JsonIgnore]
         [Column("documento")]
-        public ICollection<DocumentoModel>? Documento { get; set; }
+        public ICollection<DocumentoModel>? Documentos { get; set; }
 
         [JsonIgnore]
         public ICollection<CoordenadorEstagioModel>? CoordenadorEstagio { get; set; }

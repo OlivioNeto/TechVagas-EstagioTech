@@ -51,7 +51,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<AlunoModel>().Property(x => x.Cidade).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<AlunoModel>().Property(x => x.DataNascimento).IsRequired();
             modelBuilder.Entity<AlunoModel>().Property(x => x.NivelEscolaridade).IsRequired().HasMaxLength(80);
-            modelBuilder.Entity<AlunoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(14);
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(15);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Email).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Endereco).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Genero).IsRequired().HasMaxLength(30);
@@ -230,10 +230,13 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
 
             //Relacionamento: Curso -> Matricula
-            modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
+            modelBuilder.Entity<MatriculaModel>()
+    .HasOne(m => m.Curso) // Propriedade de navegação
+    .WithMany(c => c.Matriculas) // Propriedade de coleção no Curso
+    .HasForeignKey(m => m.cursoid);
 
             modelBuilder.Entity<MatriculaModel>()
-                .HasOne(c => c.Alunos)
+                .HasOne(c => c.Aluno)
                 .WithMany(e => e.Matriculas)
                 .HasForeignKey(c => c.AlunoId);
 
@@ -266,13 +269,13 @@ namespace TechVagas_EstagioTech.Data
                 );
 
             //Documento
-            modelBuilder.Entity<DocumentoModel>().HasData(
+            /* modelBuilder.Entity<DocumentoModel>().HasData(
                 new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Ativo", idCoordenadorEstagio = 1, idTipoDocumento = 4 },
                 new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Ativo", idCoordenadorEstagio = 2, idTipoDocumento = 2 },
                 new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Ativo", idCoordenadorEstagio = 3, idTipoDocumento = 3 },
                 new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Ativo", idCoordenadorEstagio = 7, idTipoDocumento = 1 },
                 new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Ativo", idCoordenadorEstagio = 6, idTipoDocumento = 2 }
-                );
+                ); */
 
             //Documento Necessário
             modelBuilder.Entity<DocumentoNecessarioModel>().HasData(
@@ -401,10 +404,10 @@ namespace TechVagas_EstagioTech.Data
         Curriculo = "link_do_curriculo.pdf", // Exemplo: pode ser uma string ou binário, dependendo do tipo
         Cpf = "123.456.789-00",
         Cidade = "São Paulo",
-        DataNascimento = new DateTime(2001, 5, 15),
+        DataNascimento = DateTime.SpecifyKind(new DateTime(2001, 5, 15), DateTimeKind.Utc),
         NivelEscolaridade = "Graduação em andamento",
         Telefone = "(11) 91234-5678",
-        Email = "joao.silva@email.com",
+        Email = "dev@aluno.com",
         Endereco = "Rua das Flores, 123",
         Genero = "Masculino",
         Bairro = "Jardim das Rosas",
@@ -412,32 +415,91 @@ namespace TechVagas_EstagioTech.Data
     }
 );
 
-            modelBuilder.Entity<MatriculaModel>().HasData(
-    new AlunoModel
+            modelBuilder.Entity<CursoModel>().HasData(
+    new CursoModel
     {
-        AlunoId = 1, // Valor de chave primária
-        Nome = "João da Silva",
-        Idade = 22,
-        Rg = "123456789012",
-        StatusAluno = true, // Exemplo de status (ajuste conforme o tipo da propriedade)
-        NumeroMatricula = "202401",
-        AreaInteresse = "Desenvolvimento de Software",
-        Habilidades = "C#, JavaScript, SQL",
-        Experiencias = "Estágio em desenvolvimento web por 6 meses.",
-        DisponibilidadeHorario = "Manhã e tarde",
-        Curriculo = "link_do_curriculo.pdf", // Exemplo: pode ser uma string ou binário, dependendo do tipo
-        Cpf = "123.456.789-00",
-        Cidade = "São Paulo",
-        DataNascimento = new DateTime(2001, 5, 15),
-        NivelEscolaridade = "Graduação em andamento",
-        Telefone = "(11) 91234-5678",
-        Email = "joao.silva@email.com",
-        Endereco = "Rua das Flores, 123",
-        Genero = "Masculino",
-        Bairro = "Jardim das Rosas",
-        Cep = "01234-567"
+        cursoid = 1,            // Valor da chave primária (pode ser alterado conforme necessário)
+        nomeCurso = "Engenharia de Software", // Nome do curso
+        turnoCurso = "Noturno"  // Turno do curso
+    },
+    new CursoModel
+    {
+        cursoid = 2,            // Valor da chave primária
+        nomeCurso = "Ciência da Computação", // Nome do curso
+        turnoCurso = "Diurno"   // Turno do curso
     }
 );
+
+
+            modelBuilder.Entity<MatriculaModel>().HasData(
+    new MatriculaModel
+    {
+        MatriculaId = 1, // Valor da chave primária para MatriculaModel
+        NumeroMatricula = "202401",
+        AlunoId = 1,     // Associando ao AlunoId já existente
+        cursoid = 1
+    }
+);
+
+            modelBuilder.Entity<ContratoEstagioModel>().HasData(
+    new ContratoEstagioModel
+    {
+        idContratoEstagio = 1, // Valor da chave primária para ContratoEstagioModel
+        statusContratoEstagio = true,
+        notaFinal = "A",
+        situacao = "Ativo",
+        horarioEntrada = "09:00",
+        horarioSaida = "15:00",
+        dataInicio = new DateOnly(2024, 01, 01),
+        dataFim = new DateOnly(2024, 12, 31),
+        salario = "1500.00",
+        cargaSemanal = "30 horas",
+        cargaTotal = "1200 horas",
+        idCoordenadorEstagio = 1, // ID do coordenador de estágio (substitua por um ID válido)
+        idSupervisorEstagio = 2, // ID do supervisor de estágio (substitua por um ID válido)
+        idTipoEstagio = 1,       // ID do tipo de estágio (substitua por um ID válido)
+        IdMatricula = 1          // ID da matrícula associada (deve existir previamente)
+    }
+);
+
+            modelBuilder.Entity<DocumentoModel>().HasData(
+    new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Aprovado", Status = true, idCoordenadorEstagio = 1, idTipoDocumento = 4, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Reprovado", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 2, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Em Revisão", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 3, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Pendente", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 1, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Pendente", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 2, idContratoEstagio = 1 }
+);
+
+            modelBuilder.Entity<DocumentoVersaoModel>().HasData(
+    new DocumentoVersaoModel
+    {
+        idDocumentoVersao = 1,  // A chave primária (gerada automaticamente, mas especificada aqui para exemplo)
+        comentario = "Versão inicial do documento.",
+        anexo = "documento_v1.pdf",
+        data = new DateOnly(2024, 12, 5), // Data do anexo
+        situacao = "Aprovada",  // Situação do documento
+        idDocumento = 1  // ID do documento relacionado
+    },
+    new DocumentoVersaoModel
+    {
+        idDocumentoVersao = 2,
+        comentario = "Correção no conteúdo do documento.",
+        anexo = "documento_v2.pdf",
+        data = new DateOnly(2024, 12, 6),
+        situacao = "Reprovada",
+        idDocumento = 2
+    },
+    new DocumentoVersaoModel
+    {
+        idDocumentoVersao = 3,
+        comentario = "Atualização das informações de contato.",
+        anexo = "documento_v3.pdf",
+        data = new DateOnly(2024, 12, 7),
+        situacao = "Em Revisão",
+        idDocumento = 3
+    }
+);
+
         }
     }
 }

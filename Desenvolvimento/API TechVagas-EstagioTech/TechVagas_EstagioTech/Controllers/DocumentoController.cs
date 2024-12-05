@@ -15,17 +15,21 @@ namespace TechVagas_EstagioTech.Controllers
     [ApiController]
     public class DocumentoController : ControllerBase
     {
+        private readonly IUsuarioService _usuarioService;
         private readonly IAlunoService _alunoService;
         private readonly IMatriculaService _matriculaService;
+        private readonly ICoordenadorEstagioService _coordenadorEstagioService;
         private readonly IContratoEstagioService _contratoEstagioService;
         private readonly IDocumentoVersaoService _documentoVersaoService;
         private readonly IDocumentoService _documentoService;
         private Response _response;
 
-        public DocumentoController(IAlunoService alunoService, IMatriculaService matriculaService, IContratoEstagioService contratoEstagioService, IDocumentoVersaoService documentoVersaoService, IDocumentoService documentoService)
+        public DocumentoController(IUsuarioService usuarioService, IAlunoService alunoService, IMatriculaService matriculaService, ICoordenadorEstagioService coordenadorEstagioService, IContratoEstagioService contratoEstagioService, IDocumentoVersaoService documentoVersaoService, IDocumentoService documentoService)
         {
+            _usuarioService = usuarioService;
             _alunoService = alunoService;
             _matriculaService = matriculaService;
+            _coordenadorEstagioService = coordenadorEstagioService;
             _contratoEstagioService = contratoEstagioService;
             _documentoVersaoService = documentoVersaoService;
             _documentoService = documentoService;
@@ -51,19 +55,33 @@ namespace TechVagas_EstagioTech.Controllers
             return Ok(documentoDto);
         }
 
-        [HttpGet("{idAluno:int}", Name = "ObterDocumentosRelacionadosContrato")]
+        [HttpGet("ObterDocumentosRelacionadosContrato/{idUsuario:int}", Name = "ObterDocumentosRelacionadosContrato")]
         [Access(1, 3, 5, 6)]
-        public async Task<ActionResult<dynamic>> ObterDocumentosRelacionadosContrato(int idAluno)
+        public async Task<ActionResult<dynamic>> ObterDocumentosRelacionadosContrato(int idUsuario)
         {
-            if (idAluno == 0)
+            if (idUsuario == 0)
             {
-                return BadRequest("Informe o Id do Aluno");
+                return BadRequest("Informe o Id do Usuário");
+            }
+
+            var usuario = await _usuarioService.BuscarPorId(idUsuario);
+
+            if (usuario is null)
+            {
+                return BadRequest("Usuário não encontrado");
+            }
+
+            var aluno = await _alunoService.BuscarPorEmail(usuario.Email);
+
+            if (aluno is null)
+            {
+                return BadRequest("Aluno não encontrado");
             }
 
             dynamic dados = new ExpandoObject();
 
             // Obter a matrícula do aluno
-            var matricula = await _matriculaService.GetByAluno(idAluno);
+            var matricula = await _matriculaService.BuscarPorAluno(aluno.AlunoId);
             if (matricula == null)
             {
                 return NotFound("Matrícula não encontrada.");
@@ -72,10 +90,10 @@ namespace TechVagas_EstagioTech.Controllers
             dados.idMatricula = matricula.MatriculaId;
             dados.numeroMatricula = matricula.NumeroMatricula;
             dados.idAluno = matricula.AlunoId;
-            dados.idCurso = matricula.cursoId;
+            dados.idCurso = matricula.cursoid;
 
             // Obter contratos relacionados à matrícula
-            var contratos = await _contratoEstagioService.GetByMatricula(matricula.MatriculaId);
+            var contratos = await _contratoEstagioService.BuscarPorMatricula(matricula.MatriculaId);
             dados.contratos = new List<dynamic>();
 
             foreach (var contrato in contratos)
@@ -83,47 +101,58 @@ namespace TechVagas_EstagioTech.Controllers
                 dynamic contratoDynamic = new ExpandoObject();
                 contratoDynamic.idContratoEstagio = contrato.idContratoEstagio;
                 contratoDynamic.statusContratoEstagio = contrato.statusContratoEstagio;
-                contratoDynamic.notalFinal = contrato.notaFInal;
+                contratoDynamic.notalFinal = contrato.notaFinal;
                 contratoDynamic.situacao = contrato.situacao;
-                contratoDynamic.horarioEntrada = contrato.horaEntrada;
+                contratoDynamic.horarioEntrada = contrato.horarioEntrada;
                 contratoDynamic.horarioSaida = contrato.horarioSaida;
                 contratoDynamic.dataInicio = contrato.dataInicio;
-                contratoDynamic.dataFim = contrato.dataFIm;
+                contratoDynamic.dataFim = contrato.dataFim;
                 contratoDynamic.salario = contrato.salario;
                 contratoDynamic.cargaSemanal = contrato.cargaSemanal;
                 contratoDynamic.cargaTotal = contrato.cargaTotal;
-                contratoDynamic.idTipoEstagio = contrato.idTIpoEstagio;
+                contratoDynamic.idTipoEstagio = contrato.idTipoEstagio;
                 contratoDynamic.idSupervisorEstagio = contrato.idSupervisorEstagio;
-                contratoDynamic.idCoorderneadorEstagio = contrato.idCoorderneadorEstagio;
+                contratoDynamic.idCoorderneadorEstagio = contrato.idCoordenadorEstagio;
 
                 // Obter documentos relacionados ao contrato
-                var documentos = await _documentoService.GetByContrato(contrato.IdContratoEstagio);
+                var coordenadorDados = await _coordenadorEstagioService.BuscarPorId(contrato.idCoordenadorEstagio);
+
+                dynamic coordenador = new ExpandoObject();
+                coordenador.idCoordenadorEstagio = coordenadorDados.idCoordenadorEstagio;
+                coordenador.dataCadastro = coordenadorDados.dataCadastro;
+                coordenador.nomeCoordenador = coordenadorDados.nomeCoordenador;
+                coordenador.status = coordenadorDados.Status;
+
+                contratoDynamic.coordenador = coordenador;
+
+                // Obter documentos relacionados ao contrato
+                var documentos = await _documentoService.BuscarPorContrato(contrato.idContratoEstagio);
                 contratoDynamic.documentos = new List<dynamic>();
 
                 foreach (var documento in documentos)
                 {
                     dynamic documentoDynamic = new ExpandoObject();
-                    documentoDynamic.idDocumento = documento.IdDocumento;
+                    documentoDynamic.idDocumento = documento.idDocumento;
                     documentoDynamic.situacaoDocumento = documento.descricaoDocumento;
-                    documentoDynamic.status = documento.status;
+                    documentoDynamic.status = documento.Status;
+                    documentoDynamic.situacaoDocumento = documento.situacaoDocumento;
                     documentoDynamic.idCoordenadorEstagio = documento.idCoordenadorEstagio;
                     documentoDynamic.idTipoDocumento = documento.idTipoDocumento;
 
                     // Obter versões do documento
-                    var documentoVersoes = await _documentoVersaoService.GetByDocument(documento.IdDocumento);
-                    documentoDynamic.documentoVersao = new List<dynamic>();
+                    var documentoVersoes = await _documentoVersaoService.BuscarPorDocumento(documento.idDocumento);
 
-                    foreach (var versao in documentoVersoes)
+                    if (documentoVersoes != null)
                     {
                         dynamic versaoDynamic = new ExpandoObject();
-                        versaoDynamic.idDocumentoVersao = versao.idDocumentoVersao;
-                        versaoDynamic.comentario = versao.Comentario;
-                        versaoDynamic.anexo = versao.Anexo;
-                        versaoDynamic.data = versao.Data;
-                        versaoDynamic.situacao = versao.Situacao;
-                        versaoDynamic.idDocumento = versao.idDocumento;
+                        versaoDynamic.idDocumentoVersao = documentoVersoes.idDocumentoVersao;
+                        versaoDynamic.comentario = documentoVersoes.Comentario;
+                        versaoDynamic.anexo = documentoVersoes.Anexo;
+                        versaoDynamic.data = documentoVersoes.Data;
+                        versaoDynamic.situacao = documentoVersoes.Situacao;
+                        versaoDynamic.idDocumento = documentoVersoes.idDocumento;
 
-                        documentoDynamic.documentoVersao.Add(versaoDynamic);
+                        documentoDynamic.documentoVersao = versaoDynamic;
                     }
 
                     contratoDynamic.documentos.Add(documentoDynamic);

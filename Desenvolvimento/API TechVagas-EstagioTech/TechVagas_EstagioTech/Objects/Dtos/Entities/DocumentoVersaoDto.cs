@@ -33,7 +33,7 @@ namespace TechVagas_EstagioTech.Objects.Dtos.Entities
 
 
         [JsonIgnore]
-        public ICollection<DocumentoModel>? Documentos { get; set; }
+        public DocumentoDto? Documento { get; set; }
 
         public int idDocumento { get; set; }
     }

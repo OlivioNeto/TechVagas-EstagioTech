@@ -17,6 +17,11 @@ namespace TechVagas_EstagioTech.Services.Entities
             _matriculaRepositorio = matriculaRepositorio;
             _mapper = mapper;
         }
+        public async Task<MatriculaDto> BuscarPorAluno(int idAluno)
+        {
+            var matriculas = await _matriculaRepositorio.BuscarPorAluno(idAluno);
+            return _mapper.Map<MatriculaDto>(matriculas);
+        }
         public async Task<MatriculaDto> BuscarPorId(int id)
         {
             var matriculas = await _matriculaRepositorio.BuscarPorId(id);

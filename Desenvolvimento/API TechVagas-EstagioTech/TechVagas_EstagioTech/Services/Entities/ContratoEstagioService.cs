@@ -18,6 +18,11 @@ namespace TechVagas_EstagioTech.Services.Entities
             _mapper = mapper;
         }
 
+        public async Task<List<ContratoEstagioDto>> BuscarPorMatricula(int idMatricula)
+        {
+            var contratoEstagio = await _contratoEstagioRepositorio.BuscarPorMatricula(idMatricula);
+            return _mapper.Map<List<ContratoEstagioDto>>(contratoEstagio);
+        }
         public async Task<ContratoEstagioDto> BuscarPorId(int id)
         {
             var contratoEstagio = await _contratoEstagioRepositorio.BuscarPorId(id);

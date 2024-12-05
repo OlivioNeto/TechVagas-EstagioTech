@@ -14,9 +14,9 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
             _dbContext = contratoestagioDBContex;
         }
 
-        public async Task<ContratoEstagioModel> BuscarPorMatricula(int idMatricula)
+        public async Task<List<ContratoEstagioModel>> BuscarPorMatricula(int idMatricula)
         {
-            return await _dbContext.ContratoEstagio.Where(x => x.matr == id).FirstOrDefaultAsync();
+            return await _dbContext.ContratoEstagio.Where(x => x.IdMatricula == idMatricula).ToListAsync();
         }
 
         public async Task<ContratoEstagioModel> BuscarPorId(int id)

@@ -12,7 +12,7 @@ using TechVagas_EstagioTech.Data;
 namespace TechVagas_EstagioTech.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20241204204656_teste")]
+    [Migration("20241205083813_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -302,8 +302,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("character varying(14)")
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("telefone");
 
                     b.HasKey("AlunoId");
@@ -311,6 +311,32 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasIndex("AlunoModelAlunoId");
 
                     b.ToTable("aluno");
+
+                    b.HasData(
+                        new
+                        {
+                            AlunoId = 1,
+                            AreaInteresse = "Desenvolvimento de Software",
+                            Bairro = "Jardim das Rosas",
+                            Cep = "01234-567",
+                            Cidade = "São Paulo",
+                            Cpf = "123.456.789-00",
+                            Curriculo = "link_do_curriculo.pdf",
+                            DataNascimento = new DateTime(2001, 5, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DisponibilidadeHorario = "Manhã e tarde",
+                            Email = "dev@aluno.com",
+                            Endereco = "Rua das Flores, 123",
+                            Experiencias = "Estágio em desenvolvimento web por 6 meses.",
+                            Genero = "Masculino",
+                            Habilidades = "C#, JavaScript, SQL",
+                            Idade = 22,
+                            NivelEscolaridade = "Graduação em andamento",
+                            Nome = "João da Silva",
+                            NumeroMatricula = "202401",
+                            Rg = "123456789012",
+                            StatusAluno = true,
+                            Telefone = "(11) 91234-5678"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ApontamentoModel", b =>
@@ -473,6 +499,10 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Property<int?>("CoordenadorEstagioidCoordenadorEstagio")
                         .HasColumnType("integer");
 
+                    b.Property<int>("IdMatricula")
+                        .HasColumnType("integer")
+                        .HasColumnName("matriculaid");
+
                     b.Property<int?>("SupervisorEstagioModelidSupervisor")
                         .HasColumnType("integer");
 
@@ -551,6 +581,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasIndex("CoordenadorEstagioidCoordenadorEstagio");
 
+                    b.HasIndex("IdMatricula");
+
                     b.HasIndex("SupervisorEstagioModelidSupervisor");
 
                     b.HasIndex("TipoEstagioidTipoEstagio");
@@ -558,6 +590,26 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasIndex("idSupervisorEstagio");
 
                     b.ToTable("contratoestagio");
+
+                    b.HasData(
+                        new
+                        {
+                            idContratoEstagio = 1,
+                            IdMatricula = 1,
+                            cargaSemanal = "30 horas",
+                            cargaTotal = "1200 horas",
+                            dataFim = new DateOnly(2024, 12, 31),
+                            dataInicio = new DateOnly(2024, 1, 1),
+                            horarioEntrada = "09:00",
+                            horarioSaida = "15:00",
+                            idCoordenadorEstagio = 1,
+                            idSupervisorEstagio = 2,
+                            idTipoEstagio = 1,
+                            notaFinal = "A",
+                            salario = "1500.00",
+                            situacao = "Ativo",
+                            statusContratoEstagio = true
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", b =>
@@ -663,6 +715,20 @@ namespace TechVagas_EstagioTech.Migrations
                     b.HasKey("cursoid");
 
                     b.ToTable("curso");
+
+                    b.HasData(
+                        new
+                        {
+                            cursoid = 1,
+                            nomeCurso = "Engenharia de Software",
+                            turnoCurso = "Noturno"
+                        },
+                        new
+                        {
+                            cursoid = 2,
+                            nomeCurso = "Ciência da Computação",
+                            turnoCurso = "Diurno"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", b =>
@@ -690,6 +756,10 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("descricao");
 
+                    b.Property<int>("idContratoEstagio")
+                        .HasColumnType("integer")
+                        .HasColumnName("contratoestagioid");
+
                     b.Property<int>("idCoordenadorEstagio")
                         .HasColumnType("integer")
                         .HasColumnName("coordenadorestagioid");
@@ -710,6 +780,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasIndex("TipoDocumentoModelidTipoDocumento");
 
+                    b.HasIndex("idContratoEstagio");
+
                     b.HasIndex("idCoordenadorEstagio");
 
                     b.HasIndex("idTipoDocumento");
@@ -720,47 +792,52 @@ namespace TechVagas_EstagioTech.Migrations
                         new
                         {
                             idDocumento = 1,
-                            Status = false,
+                            Status = true,
                             descricaoDocumento = "RG",
+                            idContratoEstagio = 1,
                             idCoordenadorEstagio = 1,
                             idTipoDocumento = 4,
-                            situacaoDocumento = "Ativo"
+                            situacaoDocumento = "Aprovado"
                         },
                         new
                         {
                             idDocumento = 2,
                             Status = false,
                             descricaoDocumento = "CPF",
-                            idCoordenadorEstagio = 2,
+                            idContratoEstagio = 1,
+                            idCoordenadorEstagio = 1,
                             idTipoDocumento = 2,
-                            situacaoDocumento = "Ativo"
+                            situacaoDocumento = "Reprovado"
                         },
                         new
                         {
                             idDocumento = 3,
                             Status = false,
                             descricaoDocumento = "CNH",
-                            idCoordenadorEstagio = 3,
+                            idContratoEstagio = 1,
+                            idCoordenadorEstagio = 1,
                             idTipoDocumento = 3,
-                            situacaoDocumento = "Ativo"
+                            situacaoDocumento = "Em Revisão"
                         },
                         new
                         {
                             idDocumento = 4,
                             Status = false,
                             descricaoDocumento = "Título de Eleitor",
-                            idCoordenadorEstagio = 7,
+                            idContratoEstagio = 1,
+                            idCoordenadorEstagio = 1,
                             idTipoDocumento = 1,
-                            situacaoDocumento = "Ativo"
+                            situacaoDocumento = "Pendente"
                         },
                         new
                         {
                             idDocumento = 5,
                             Status = false,
                             descricaoDocumento = "Certificado de Dispensa",
-                            idCoordenadorEstagio = 6,
+                            idContratoEstagio = 1,
+                            idCoordenadorEstagio = 1,
                             idTipoDocumento = 2,
-                            situacaoDocumento = "Ativo"
+                            situacaoDocumento = "Pendente"
                         });
                 });
 
@@ -841,9 +918,6 @@ namespace TechVagas_EstagioTech.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idDocumentoVersao"));
 
-                    b.Property<int?>("DocumentoidDocumento")
-                        .HasColumnType("integer");
-
                     b.Property<string>("anexo")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -873,9 +947,38 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("idDocumentoVersao");
 
-                    b.HasIndex("DocumentoidDocumento");
+                    b.HasIndex("idDocumento");
 
                     b.ToTable("documentoversao");
+
+                    b.HasData(
+                        new
+                        {
+                            idDocumentoVersao = 1,
+                            anexo = "documento_v1.pdf",
+                            comentario = "Versão inicial do documento.",
+                            data = new DateOnly(2024, 12, 5),
+                            idDocumento = 1,
+                            situacao = "Aprovada"
+                        },
+                        new
+                        {
+                            idDocumentoVersao = 2,
+                            anexo = "documento_v2.pdf",
+                            comentario = "Correção no conteúdo do documento.",
+                            data = new DateOnly(2024, 12, 6),
+                            idDocumento = 2,
+                            situacao = "Reprovada"
+                        },
+                        new
+                        {
+                            idDocumentoVersao = 3,
+                            anexo = "documento_v3.pdf",
+                            comentario = "Atualização das informações de contato.",
+                            data = new DateOnly(2024, 12, 7),
+                            idDocumento = 3,
+                            situacao = "Em Revisão"
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.InstituicaoEnsinoModel", b =>
@@ -953,9 +1056,6 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("alunoid");
 
-                    b.Property<int?>("AlunosAlunoId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("NumeroMatricula")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -968,11 +1068,20 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.HasKey("MatriculaId");
 
-                    b.HasIndex("AlunosAlunoId");
+                    b.HasIndex("AlunoId");
 
                     b.HasIndex("cursoid");
 
                     b.ToTable("matricula");
+
+                    b.HasData(
+                        new
+                        {
+                            MatriculaId = 1,
+                            AlunoId = 1,
+                            NumeroMatricula = "202401",
+                            cursoid = 1
+                        });
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>
@@ -1294,6 +1403,12 @@ namespace TechVagas_EstagioTech.Migrations
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("CoordenadorEstagioidCoordenadorEstagio");
 
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.MatriculaModel", "Matricula")
+                        .WithMany("ContratosEstagio")
+                        .HasForeignKey("IdMatricula")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", null)
                         .WithMany("ContratoEstagio")
                         .HasForeignKey("SupervisorEstagioModelidSupervisor");
@@ -1310,6 +1425,8 @@ namespace TechVagas_EstagioTech.Migrations
 
                     b.Navigation("CoordenadorEstagio");
 
+                    b.Navigation("Matricula");
+
                     b.Navigation("SupervisorEstagio");
 
                     b.Navigation("TipoEstagio");
@@ -1325,6 +1442,12 @@ namespace TechVagas_EstagioTech.Migrations
                         .WithMany("Documento")
                         .HasForeignKey("TipoDocumentoModelidTipoDocumento");
 
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.ContratoEstagioModel", "ContratoEstagio")
+                        .WithMany("Documentos")
+                        .HasForeignKey("idContratoEstagio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", "CoordenadorEstagio")
                         .WithMany()
                         .HasForeignKey("idCoordenadorEstagio")
@@ -1336,6 +1459,8 @@ namespace TechVagas_EstagioTech.Migrations
                         .HasForeignKey("idTipoDocumento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ContratoEstagio");
 
                     b.Navigation("CoordenadorEstagio");
 
@@ -1373,24 +1498,28 @@ namespace TechVagas_EstagioTech.Migrations
                 {
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", "Documento")
                         .WithMany("DocumentoVersoes")
-                        .HasForeignKey("DocumentoidDocumento");
+                        .HasForeignKey("idDocumento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Documento");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.MatriculaModel", b =>
                 {
-                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", "Alunos")
-                        .WithMany()
-                        .HasForeignKey("AlunosAlunoId");
+                    b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", "Aluno")
+                        .WithMany("Matriculas")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", "Curso")
-                        .WithMany("Matricula")
+                        .WithMany("Matriculas")
                         .HasForeignKey("cursoid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Alunos");
+                    b.Navigation("Aluno");
 
                     b.Navigation("Curso");
                 });
@@ -1437,6 +1566,8 @@ namespace TechVagas_EstagioTech.Migrations
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.AlunoModel", b =>
                 {
                     b.Navigation("Alunos");
+
+                    b.Navigation("Matriculas");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ConcedenteModel", b =>
@@ -1444,6 +1575,11 @@ namespace TechVagas_EstagioTech.Migrations
                     b.Navigation("SupervisorEstagios");
 
                     b.Navigation("Vagas");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.ContratoEstagioModel", b =>
+                {
+                    b.Navigation("Documentos");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CoordenadorEstagioModel", b =>
@@ -1457,12 +1593,17 @@ namespace TechVagas_EstagioTech.Migrations
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.CursoModel", b =>
                 {
-                    b.Navigation("Matricula");
+                    b.Navigation("Matriculas");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.DocumentoModel", b =>
                 {
                     b.Navigation("DocumentoVersoes");
+                });
+
+            modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.MatriculaModel", b =>
+                {
+                    b.Navigation("ContratosEstagio");
                 });
 
             modelBuilder.Entity("TechVagas_EstagioTech.Objects.Model.Entities.SupervisorEstagioModel", b =>

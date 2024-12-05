@@ -4,6 +4,7 @@ namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
     public interface IDocumentoRepositorio
     {
+        Task<List<DocumentoModel>> BuscarPorContrato(int idContrato);
         Task<List<DocumentoModel>> BuscarTodosDocumentos();
 
         Task<DocumentoModel> BuscarPorId(int id);
