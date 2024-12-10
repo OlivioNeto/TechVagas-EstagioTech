@@ -12,9 +12,9 @@ namespace TechVagas_EstagioTech.Dtos.Entities
 
         public int Quantidade { get; set; }
     
-        public DateTime DataPublicacao { get; set; }
+        public DateOnly DataPublicacao { get; set; }
         
-        public DateTime DataLimite { get; set; }
+        public DateOnly DataLimite { get; set; }
 
         [Required(ErrorMessage = "E necessário uma localidade")]
         [MinLength(3)]
