@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Enums;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Data
 {
@@ -15,16 +18,23 @@ namespace TechVagas_EstagioTech.Data
         public DbSet<DocumentoModel> Documento { get; set; }
         public DbSet<VagasModel> Vagas { get; set; }
         public DbSet<CargoModel> Cargos { get; set; }
-		public DbSet<ConcedenteModel> Concedentes { get; set; }
+        public DbSet<ConcedenteModel> Concedentes { get; set; }
         public DbSet<AlunoModel> Alunos { get; set; }
         public DbSet<DocumentoVersaoModel> DocumentoVersao { get; set; }
         public DbSet<DocumentoNecessarioModel> DocumentoNecessario { get; set; }
         public DbSet<InstituicaoEnsinoModel> InstituicaoEnsino { get; set; }
         public DbSet<ApontamentoModel> Apontamento { get; set; }
         public DbSet<CoordenadorEstagioModel> CoordenadorEstagio { get; set; }
-        public DbSet<SupervisorEstagioModel> SupervisorEstagio {get; set;}
+        public DbSet<SupervisorEstagioModel> SupervisorEstagio { get; set; }
+        public DbSet<ContratoEstagioModel> ContratoEstagio { get; set; }
+        public DbSet<MatriculaModel> Matricula { get; set; }
+        public DbSet<UsuarioModel> Usuario { get; set; }
+        public DbSet<SessaoModel> Sessao { get; set; }
+        public DbSet<LoginModel> Login { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //LIMITANDO O MÁXIMO DE CARACTERES
+
             //Alunos
             modelBuilder.Entity<AlunoModel>().HasKey(x => x.AlunoId);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Nome).IsRequired().HasMaxLength(150);
@@ -41,7 +51,7 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<AlunoModel>().Property(x => x.Cidade).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<AlunoModel>().Property(x => x.DataNascimento).IsRequired();
             modelBuilder.Entity<AlunoModel>().Property(x => x.NivelEscolaridade).IsRequired().HasMaxLength(80);
-            modelBuilder.Entity<AlunoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(14);
+            modelBuilder.Entity<AlunoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(15);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Email).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Endereco).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<AlunoModel>().Property(x => x.Genero).IsRequired().HasMaxLength(30);
@@ -51,7 +61,9 @@ namespace TechVagas_EstagioTech.Data
             //Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
             modelBuilder.Entity<ApontamentoModel>().Property(x => x.descricaoApontamento).IsRequired().HasMaxLength(150);
-            modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ApontamentoModel>().Property(x => x.dataApontamento).IsRequired();
+            modelBuilder.Entity<ApontamentoModel>().HasOne(b => b.CoordenadorEstagio).WithMany().HasForeignKey(b => b.idCoordenadorEstagio);
+
             //Cargo
             modelBuilder.Entity<CargoModel>().HasKey(x => x.CargoId);
             modelBuilder.Entity<CargoModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
@@ -59,8 +71,24 @@ namespace TechVagas_EstagioTech.Data
 
             //Coordenador Estágio
             modelBuilder.Entity<CoordenadorEstagioModel>().HasKey(x => x.idCoordenadorEstagio);
-            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired().HasMaxLength(150);
-            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.StatusCoordenadorEstagio).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.dataCadastro).IsRequired();
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.nomeCoordenador).IsRequired();
+            modelBuilder.Entity<CoordenadorEstagioModel>().Property(x => x.Status).IsRequired();
+
+            //Contrato Estagio 
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.statusContratoEstagio).IsRequired();
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.notaFinal).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.situacao).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.horarioEntrada).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.horarioSaida).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.dataInicio).IsRequired();
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.dataFim).IsRequired();
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.salario).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaSemanal).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().Property(x => x.cargaTotal).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<ContratoEstagioModel>().HasOne(x => x.SupervisorEstagio).WithMany().HasForeignKey(x => x.idSupervisorEstagio);
+
             //Concedente
             modelBuilder.Entity<ConcedenteModel>().HasKey(x => x.concedenteId);
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.RazaoSocial).IsRequired().HasMaxLength(80);
@@ -69,61 +97,108 @@ namespace TechVagas_EstagioTech.Data
             modelBuilder.Entity<ConcedenteModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(50);
 
             //Curso
-            modelBuilder.Entity<CursoModel>().HasKey(x => x.idCurso);
-			modelBuilder.Entity<CursoModel>().Property(x => x.nomeCurso).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<CursoModel>().HasKey(x => x.cursoid);
+            modelBuilder.Entity<CursoModel>().Property(x => x.nomeCurso).IsRequired().HasMaxLength(150);
+            modelBuilder.Entity<CursoModel>().Property(x => x.turnoCurso).IsRequired().HasMaxLength(100);
 
-			//Documento
-			modelBuilder.Entity<DocumentoModel>().HasKey(x => x.DocumentoId);
-            modelBuilder.Entity<DocumentoModel>().HasMany(d => d.DocumentoVersoes).WithOne(v => v.Documento).HasForeignKey(v => v.DocumentoId);
+            //Documento
+            modelBuilder.Entity<DocumentoModel>().HasKey(x => x.idDocumento);
             modelBuilder.Entity<DocumentoModel>().Property(x => x.descricaoDocumento).IsRequired().HasMaxLength(200);
-			modelBuilder.Entity<DocumentoModel>().Property(x => x.situacaoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoModel>().Property(x => x.situacaoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoModel>().HasOne(b => b.CoordenadorEstagio).WithMany().HasForeignKey(b => b.idCoordenadorEstagio);
+            modelBuilder.Entity<DocumentoModel>().HasOne(b => b.TipoDocumento).WithMany().HasForeignKey(b => b.idTipoDocumento);
+            //modelBuilder.Entity<DocumentoModel>().HasMany(d => d.DocumentoVersoes).WithOne(v => v.Documento).HasForeignKey(v => v.DocumentoId);
+            modelBuilder.Entity<DocumentoModel>()
+                .HasOne(c => c.ContratoEstagio)
+                .WithMany(e => e.Documentos)
+                .HasForeignKey(c => c.idContratoEstagio);
 
             //Documento versão
-            modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.DocumentoVersaoId);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Comentario).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Anexo).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Data).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.Situacao).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.idDocumentoVersao);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.comentario).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.anexo).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.data).IsRequired();
+            modelBuilder.Entity<DocumentoVersaoModel>().Property(x => x.situacao).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<DocumentoVersaoModel>()
+                .HasOne(c => c.Documento)
+                .WithMany(e => e.DocumentoVersoes)
+                .HasForeignKey(c => c.idDocumento);
 
             //Documento necessário
-            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.idDocumentoNecessario);
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasOne(b => b.TipoDocumento).WithMany().HasForeignKey(b => b.idTipoDocumento);
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasOne(b => b.TipoEstagio).WithMany().HasForeignKey(b => b.idTipoEstagio);
 
             //Supervisor Estagio
             modelBuilder.Entity<SupervisorEstagioModel>().HasKey(x => x.idSupervisor);
-            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.statusSupervisor).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.nomeSupervisor).IsRequired();
+            modelBuilder.Entity<SupervisorEstagioModel>().Property(x => x.Status).IsRequired();
+            modelBuilder.Entity<SupervisorEstagioModel>().HasOne(b => b.Concedente).WithMany().HasForeignKey(b => b.concedenteId);
 
             //TipoDocumento
             modelBuilder.Entity<TipoDocumentoModel>().HasKey(x => x.idTipoDocumento);
-			modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.descricaoTipoDocumento).IsRequired().HasMaxLength(200);
+            modelBuilder.Entity<TipoDocumentoModel>().Property(x => x.Status).IsRequired();
 
-			//TipoEstagio
-			modelBuilder.Entity<TipoEstagioModel>().HasKey(x => x.idTipoEstagio);
-			modelBuilder.Entity<TipoEstagioModel>().Property(x => x.descricaoTipoEstagio).IsRequired().HasMaxLength(200);
+            //TipoEstagio
+            modelBuilder.Entity<TipoEstagioModel>().HasKey(x => x.idTipoEstagio);
+            modelBuilder.Entity<TipoEstagioModel>().Property(x => x.descricaoTipoEstagio).IsRequired().HasMaxLength(200);
 
             //Vagas
             modelBuilder.Entity<VagasModel>().HasKey(x => x.VagasId);
-			modelBuilder.Entity<VagasModel>().Property(x => x.Quantidade).IsRequired();
-			modelBuilder.Entity<VagasModel>().Property(x => x.DataPublicacao).IsRequired();
-			modelBuilder.Entity<VagasModel>().Property(x => x.DataLimite).IsRequired();
-			modelBuilder.Entity<VagasModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(80);
-			modelBuilder.Entity<VagasModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(200);
-			modelBuilder.Entity<VagasModel>().Property(x => x.Titulo).IsRequired().HasMaxLength(80);
-			modelBuilder.Entity<VagasModel>().Property(x => x.LocalidadeTrabalho).IsRequired().HasMaxLength(20);
-			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);
-			modelBuilder.Entity<VagasModel>().Property(x => x.HorarioSaida).IsRequired().HasMaxLength(20);
-			modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<VagasModel>().Property(x => x.Quantidade).IsRequired();
+            modelBuilder.Entity<VagasModel>().Property(x => x.DataPublicacao).IsRequired();
+            modelBuilder.Entity<VagasModel>().Property(x => x.DataLimite).IsRequired();
+            modelBuilder.Entity<VagasModel>().Property(x => x.Localidade).IsRequired().HasMaxLength(80);
+            modelBuilder.Entity<VagasModel>().Property(x => x.Descricao).IsRequired().HasMaxLength(800);
+            modelBuilder.Entity<VagasModel>().Property(x => x.Titulo).IsRequired().HasMaxLength(80);
+            modelBuilder.Entity<VagasModel>().Property(x => x.LocalidadeTrabalho).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<VagasModel>().Property(x => x.HorarioEntrada).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<VagasModel>().Property(x => x.HorarioSaida).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<VagasModel>().Property(x => x.TotalHorasSemanis).IsRequired().HasMaxLength(6);
 
             //Instituicao Ensino
-            modelBuilder.Entity<InstituicaoEnsinoModel>().HasKey(x => x.Id);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().HasKey(x => x.idInstituicaoEnsino);
             modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.NomeInstituicao).IsRequired().HasMaxLength(200);
-            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Local).IsRequired().HasMaxLength(120);
-            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.Telefone).IsRequired().HasMaxLength(17);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.LocalInstituicao).IsRequired().HasMaxLength(120);
+            modelBuilder.Entity<InstituicaoEnsinoModel>().Property(x => x.TelefoneInstituicao).IsRequired().HasMaxLength(17);
 
-            //Relacionamento: Cargo -> Vagas
+            //Matricula
+            modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
+            modelBuilder.Entity<MatriculaModel>().Property(x => x.NumeroMatricula).IsRequired().HasMaxLength(15);
+
+            //SessaoModel
+            modelBuilder.Entity<UsuarioModel>().HasKey(b => b.UsuarioId);
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.Nome).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.CpfCnpj).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.Email).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.Senha).IsRequired();
+            modelBuilder.Entity<UsuarioModel>().Property(b => b.UserType).IsRequired();
+
+            //Login
+            modelBuilder.Entity<LoginModel>().HasNoKey();
+
+            //SessaoModel
+            modelBuilder.Entity<SessaoModel>().HasKey(b => b.SessaoId);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.DataHoraInicio).IsRequired();
+            modelBuilder.Entity<SessaoModel>().Property(b => b.DataHoraEncerramento);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.TokenSessao);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.StatusSessao).IsRequired();
+            modelBuilder.Entity<SessaoModel>().Property(b => b.EmailPessoa);
+            modelBuilder.Entity<SessaoModel>().Property(b => b.NivelAcesso);
+            modelBuilder.Entity<SessaoModel>().HasOne(b => b.UsuarioModel).WithMany().HasForeignKey(b => b.UsuarioId);
+
+            // Relacionamento: Usuario -> Sessao
+            modelBuilder.Entity<UsuarioModel>().HasMany(p => p.Sessoes).WithOne(b => b.UsuarioModel).IsRequired().OnDelete(DeleteBehavior.Cascade);
+
+
+            //Relacionamento: Vagas -> Cargo
             modelBuilder.Entity<VagasModel>()
-				.HasMany(c => c.Cargos)
-				.WithOne(v => v.Vagas)
-				.IsRequired().OnDelete(DeleteBehavior.Cascade);
+                .HasOne(v => v.Cargo)
+                .WithMany()
+                .HasForeignKey(v => v.CargoId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             //Relacionamento: Concedente -> Vagas
             modelBuilder.Entity<ConcedenteModel>()
@@ -132,17 +207,299 @@ namespace TechVagas_EstagioTech.Data
                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             //Relacionamento: Documento -> Documento Versão
-            modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.DocumentoVersaoId);
-            modelBuilder.Entity<DocumentoVersaoModel>().Property(x=> x.Situacao).IsRequired();
-
-            //Relacionamento: TipoDocumento -> Documento Necessário
-            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
-
-            //Relacionamento: TipoEstagio -> Documento Necessário
-            modelBuilder.Entity<DocumentoNecessarioModel>().HasKey(x => x.DocumentoNecessarioId);
+            modelBuilder.Entity<DocumentoVersaoModel>().HasKey(x => x.idDocumentoVersao);
 
             //Relacionamento: CoordenadorEstagio -> Apontamento
             modelBuilder.Entity<ApontamentoModel>().HasKey(x => x.idApontamento);
-		}
+
+            //Relacionamento: CoordenadorEstagio -> ContratoEstagio
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+
+            //Relacionamento: SupervisorEstagio -> ContratoEstagio
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+
+            //Relacionamento: TipoEstagio -> ContratoEstagio
+            modelBuilder.Entity<ContratoEstagioModel>().HasKey(x => x.idContratoEstagio);
+
+            modelBuilder.Entity<ContratoEstagioModel>()
+                .HasOne(c => c.Matricula)
+                .WithMany(e => e.ContratosEstagio)
+                .HasForeignKey(c => c.IdMatricula);
+
+            //Relacionamento: Aluno -> Matricula
+            modelBuilder.Entity<MatriculaModel>().HasKey(x => x.MatriculaId);
+
+            //Relacionamento: Curso -> Matricula
+            modelBuilder.Entity<MatriculaModel>()
+    .HasOne(m => m.Curso) // Propriedade de navegação
+    .WithMany(c => c.Matriculas) // Propriedade de coleção no Curso
+    .HasForeignKey(m => m.cursoid);
+
+            modelBuilder.Entity<MatriculaModel>()
+                .HasOne(c => c.Aluno)
+                .WithMany(e => e.Matriculas)
+                .HasForeignKey(c => c.AlunoId);
+
+
+            //DEIXANDO DADOS PRÉ-CADASTRADOS
+
+            //Concedente
+            modelBuilder.Entity<ConcedenteModel>().HasData(
+                new ConcedenteModel { concedenteId = 1, RazaoSocial = "CONCEDENTE 1", ResponsavelEstagio = "Responsável 1", Cnpj = "11111111111111", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 2, RazaoSocial = "CONCEDENTE 2", ResponsavelEstagio = "Responsável 2", Cnpj = "22222222222222", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 3, RazaoSocial = "CONCEDENTE 3", ResponsavelEstagio = "Responsável 3", Cnpj = "33333333333333", Localidade = "Jales - SP" },
+                new ConcedenteModel { concedenteId = 4, RazaoSocial = "CONCEDENTE 4", ResponsavelEstagio = "Responsável 1", Cnpj = "44444444444444", Localidade = "Jales - SP" }
+                );
+
+            //Cargo
+            modelBuilder.Entity<CargoModel>().HasData(
+                new CargoModel { CargoId = 1, Descricao = "O Desenvolvedor de Software será responsável por projetar, desenvolver, testar e manter aplicações de software. Este profissional trabalhará em estreita colaboração com outros desenvolvedor", Tipo = "Desenvolvedor" },
+                new CargoModel { CargoId = 2, Descricao = "O Auxiliar de Manutenção será responsável por auxiliar na execução de tarefas de manutenção preventiva e corretiva nas instalações e equipamentos da empresa. Este profissional", Tipo = "Auxiliar de Manutenção" }
+                );
+
+            //Coordenador Estágio 
+            modelBuilder.Entity<CoordenadorEstagioModel>().HasData(
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 1, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 1", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 2, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 2", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 3, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 3", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 4, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 4", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 5, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 5", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 6, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 6", Status = true },
+                new CoordenadorEstagioModel { idCoordenadorEstagio = 7, dataCadastro = new DateOnly(2024, 6, 13), nomeCoordenador = "Coordenador 7", Status = true }
+                );
+
+            //Documento
+            /* modelBuilder.Entity<DocumentoModel>().HasData(
+                new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Ativo", idCoordenadorEstagio = 1, idTipoDocumento = 4 },
+                new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Ativo", idCoordenadorEstagio = 2, idTipoDocumento = 2 },
+                new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Ativo", idCoordenadorEstagio = 3, idTipoDocumento = 3 },
+                new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Ativo", idCoordenadorEstagio = 7, idTipoDocumento = 1 },
+                new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Ativo", idCoordenadorEstagio = 6, idTipoDocumento = 2 }
+                ); */
+
+            //Documento Necessário
+            modelBuilder.Entity<DocumentoNecessarioModel>().HasData(
+                new DocumentoNecessarioModel { idDocumentoNecessario = 1, idTipoEstagio = 1, idTipoDocumento = 1 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 2, idTipoEstagio = 1, idTipoDocumento = 2 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 3, idTipoEstagio = 1, idTipoDocumento = 3 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 4, idTipoEstagio = 1, idTipoDocumento = 4 },
+                new DocumentoNecessarioModel { idDocumentoNecessario = 5, idTipoEstagio = 2, idTipoDocumento = 4 }
+            );
+
+            //Instituição de Ensino
+            modelBuilder.Entity<InstituicaoEnsinoModel>().HasData(
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 1, NomeInstituicao = "Instituição 1", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "11111111111" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 2, NomeInstituicao = "Instituição 2", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "22222222222" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 3, NomeInstituicao = "Instituição 3", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "33333333333" },
+                new InstituicaoEnsinoModel { idInstituicaoEnsino = 4, NomeInstituicao = "Instituição 4", LocalInstituicao = "Jales - SP", TelefoneInstituicao = "44444444444" }
+                );
+
+            //Tipo Documento
+            modelBuilder.Entity<TipoDocumentoModel>().HasData(
+                new TipoDocumentoModel { idTipoDocumento = 1, descricaoTipoDocumento = "Contrato Social", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 2, descricaoTipoDocumento = "CLT", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 3, descricaoTipoDocumento = "Especificação", Status = true },
+                new TipoDocumentoModel { idTipoDocumento = 4, descricaoTipoDocumento = "Seguro de assistentes pessoais", Status = true }
+            );
+
+            //Tipo Estagio
+            modelBuilder.Entity<TipoEstagioModel>().HasData(
+                new TipoEstagioModel { idTipoEstagio = 1, descricaoTipoEstagio = "Equivalência" },
+                new TipoEstagioModel { idTipoEstagio = 2, descricaoTipoEstagio = "Normal" }
+            );
+
+            //Supervisor de Estagio
+            modelBuilder.Entity<SupervisorEstagioModel>().HasData(
+                new SupervisorEstagioModel { idSupervisor = 1, nomeSupervisor = "Supervisor 1", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 2, nomeSupervisor = "Supervisor 2", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 3, nomeSupervisor = "Supervisor 3", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 4, nomeSupervisor = "Supervisor 4", Status = true, concedenteId = 4 },
+                new SupervisorEstagioModel { idSupervisor = 5, nomeSupervisor = "Supervisor 5", Status = true, concedenteId = 1 },
+                new SupervisorEstagioModel { idSupervisor = 6, nomeSupervisor = "Supervisor 6", Status = true, concedenteId = 1 },
+                new SupervisorEstagioModel { idSupervisor = 7, nomeSupervisor = "Supervisor 7", Status = true, concedenteId = 2 }
+                );
+
+            //Vagas
+            modelBuilder.Entity<VagasModel>().HasData(
+               new VagasModel { VagasId = 1, Quantidade = "22", DataPublicacao = new DateOnly(2024, 7, 20), DataLimite = new DateOnly(2024, 7, 31), Localidade = "Jales / SP", Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", Titulo = "Desenvolvimento de Software", LocalidadeTrabalho = "Home Office", HorarioEntrada = "08:00", HorarioSaida = "12:00", TotalHorasSemanis = "40", CargoId = 1, concedenteId = 1 },
+               new VagasModel { VagasId = 2, Quantidade = "12", DataPublicacao = new DateOnly(2024, 7, 20), DataLimite = new DateOnly(2024, 8, 31), Localidade = "Jales / SP", Descricao = "Estamos em busca de um Estagiário de Desenvolvimento de Software motivado e proativo para se juntar ao nosso time. Esta é uma oportunidade fantástica para estudantes de áreas relacionadas à tecnologia que desejam aplicar seus conhecimentos em um ambiente real de trabalho, aprender novas habilidades e contribuir para projetos significativos.", Titulo = "Desenvolvimento de Software", LocalidadeTrabalho = "Home Office", HorarioEntrada = "08:00", HorarioSaida = "12:00", TotalHorasSemanis = "40", CargoId = 2, concedenteId = 2 }
+               );
+
+            //Usuario
+            modelBuilder.Entity<UsuarioModel>().HasData(
+               new UsuarioModel
+               {
+                   UsuarioId = 1,
+                   Nome = "Admin",
+                   Email = "dev@admin.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Administrador
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 2,
+                   Nome = "Aluno",
+                   Email = "dev@aluno.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Aluno
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 3,
+                   Nome = "Coordenador",
+                   Email = "dev@coordenador.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Coordenador
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 4,
+                   Nome = "Empresa",
+                   Email = "dev@empresa.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Empresa
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 5,
+                   Nome = "Supervisor",
+                   Email = "dev@supervisor.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Supervisor
+               },
+
+               new UsuarioModel
+               {
+                   UsuarioId = 6,
+                   Nome = "Instituição",
+                   Email = "dev@instituicao.com",
+                   Senha = "123456",
+                   CpfCnpj = "000.000.000-00",
+                   UserType = UserType.Instituicao
+               }
+            );
+
+            modelBuilder.Entity<AlunoModel>().HasData(
+    new AlunoModel
+    {
+        AlunoId = 1, // Valor de chave primária
+        Nome = "João da Silva",
+        Idade = 22,
+        Rg = "123456789012",
+        StatusAluno = true, // Exemplo de status (ajuste conforme o tipo da propriedade)
+        NumeroMatricula = "202401",
+        AreaInteresse = "Desenvolvimento de Software",
+        Habilidades = "C#, JavaScript, SQL",
+        Experiencias = "Estágio em desenvolvimento web por 6 meses.",
+        DisponibilidadeHorario = "Manhã e tarde",
+        Curriculo = "link_do_curriculo.pdf", // Exemplo: pode ser uma string ou binário, dependendo do tipo
+        Cpf = "123.456.789-00",
+        Cidade = "São Paulo",
+        DataNascimento = DateTime.SpecifyKind(new DateTime(2001, 5, 15), DateTimeKind.Utc),
+        NivelEscolaridade = "Graduação em andamento",
+        Telefone = "(11) 91234-5678",
+        Email = "dev@aluno.com",
+        Endereco = "Rua das Flores, 123",
+        Genero = "Masculino",
+        Bairro = "Jardim das Rosas",
+        Cep = "01234-567"
+    }
+);
+
+            modelBuilder.Entity<CursoModel>().HasData(
+    new CursoModel
+    {
+        cursoid = 1,            // Valor da chave primária (pode ser alterado conforme necessário)
+        nomeCurso = "Engenharia de Software", // Nome do curso
+        turnoCurso = "Noturno"  // Turno do curso
+    },
+    new CursoModel
+    {
+        cursoid = 2,            // Valor da chave primária
+        nomeCurso = "Ciência da Computação", // Nome do curso
+        turnoCurso = "Diurno"   // Turno do curso
+    }
+);
+
+
+            modelBuilder.Entity<MatriculaModel>().HasData(
+    new MatriculaModel
+    {
+        MatriculaId = 1, // Valor da chave primária para MatriculaModel
+        NumeroMatricula = "202401",
+        AlunoId = 1,     // Associando ao AlunoId já existente
+        cursoid = 1
+    }
+);
+
+            modelBuilder.Entity<ContratoEstagioModel>().HasData(
+    new ContratoEstagioModel
+    {
+        idContratoEstagio = 1, // Valor da chave primária para ContratoEstagioModel
+        statusContratoEstagio = true,
+        notaFinal = "A",
+        situacao = "Ativo",
+        horarioEntrada = "09:00",
+        horarioSaida = "15:00",
+        dataInicio = new DateOnly(2024, 01, 01),
+        dataFim = new DateOnly(2024, 12, 31),
+        salario = "1500.00",
+        cargaSemanal = "30 horas",
+        cargaTotal = "1200 horas",
+        idCoordenadorEstagio = 1, // ID do coordenador de estágio (substitua por um ID válido)
+        idSupervisorEstagio = 2, // ID do supervisor de estágio (substitua por um ID válido)
+        idTipoEstagio = 1,       // ID do tipo de estágio (substitua por um ID válido)
+        IdMatricula = 1          // ID da matrícula associada (deve existir previamente)
+    }
+);
+
+            modelBuilder.Entity<DocumentoModel>().HasData(
+    new DocumentoModel { idDocumento = 1, descricaoDocumento = "RG", situacaoDocumento = "Aprovado", Status = true, idCoordenadorEstagio = 1, idTipoDocumento = 4, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 2, descricaoDocumento = "CPF", situacaoDocumento = "Reprovado", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 2, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 3, descricaoDocumento = "CNH", situacaoDocumento = "Em Revisão", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 3, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 4, descricaoDocumento = "Título de Eleitor", situacaoDocumento = "Pendente", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 1, idContratoEstagio = 1 },
+    new DocumentoModel { idDocumento = 5, descricaoDocumento = "Certificado de Dispensa", situacaoDocumento = "Pendente", Status = false, idCoordenadorEstagio = 1, idTipoDocumento = 2, idContratoEstagio = 1 }
+);
+
+            modelBuilder.Entity<DocumentoVersaoModel>().HasData(
+    new DocumentoVersaoModel
+    {
+        idDocumentoVersao = 1,  // A chave primária (gerada automaticamente, mas especificada aqui para exemplo)
+        comentario = "Versão inicial do documento.",
+        anexo = "documento_v1.pdf",
+        data = new DateOnly(2024, 12, 5), // Data do anexo
+        situacao = "Aprovada",  // Situação do documento
+        idDocumento = 1  // ID do documento relacionado
+    },
+    new DocumentoVersaoModel
+    {
+        idDocumentoVersao = 2,
+        comentario = "Correção no conteúdo do documento.",
+        anexo = "documento_v2.pdf",
+        data = new DateOnly(2024, 12, 6),
+        situacao = "Reprovada",
+        idDocumento = 2
+    },
+    new DocumentoVersaoModel
+    {
+        idDocumentoVersao = 3,
+        comentario = "Atualização das informações de contato.",
+        anexo = "documento_v3.pdf",
+        data = new DateOnly(2024, 12, 7),
+        situacao = "Em Revisão",
+        idDocumento = 3
+    }
+);
+
+        }
     }
 }

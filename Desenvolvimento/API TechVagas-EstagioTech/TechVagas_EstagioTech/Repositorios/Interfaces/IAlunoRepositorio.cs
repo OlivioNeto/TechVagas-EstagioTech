@@ -1,9 +1,10 @@
-﻿using TechVagas_EstagioTech.Model.Entities;
+﻿using TechVagas_EstagioTech.Objects.Model.Entities;
 
 namespace TechVagas_EstagioTech.Repositorios.Interfaces
 {
     public interface IAlunoRepositorio
     {
+        Task<AlunoModel> BuscarPorEmail(string email);
         Task<List<AlunoModel>> BuscarTodosAlunos();
 
         Task<AlunoModel> BuscarPorId(int id);

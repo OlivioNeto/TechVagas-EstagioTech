@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
@@ -8,7 +8,7 @@ using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Services.Entities
 {
-	public class AlunoService : IAlunoService
+    public class AlunoService : IAlunoService
 	{
 		private readonly IAlunoRepositorio _alunoRepositorio;
 		private readonly IMapper _mapper;
@@ -19,7 +19,13 @@ namespace TechVagas_EstagioTech.Services.Entities
 			_mapper = mapper;
 		}
 
-		public async Task<AlunoDto> BuscarPorId(int id)
+        public async Task<AlunoDto> BuscarPorEmail(string email)
+        {
+            var aluno = await _alunoRepositorio.BuscarPorEmail(email);
+            return _mapper.Map<AlunoDto>(aluno);
+        }
+
+        public async Task<AlunoDto> BuscarPorId(int id)
 		{
 			var aluno = await _alunoRepositorio.BuscarPorId(id);
 			return _mapper.Map<AlunoDto>(aluno);

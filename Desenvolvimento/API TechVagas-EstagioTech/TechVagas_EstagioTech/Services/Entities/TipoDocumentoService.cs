@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Services.Entities
 {
-	public class TipoDocumentoService : ITipoDocumentoService
+    public class TipoDocumentoService : ITipoDocumentoService
 	{
 		private readonly ITipoDocumentoRepositorio _tipoDocumentoRepositorio;
 		private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace TechVagas_EstagioTech.Services.Entities
 		public async Task<TipoDocumentoDto> BuscarPorId(int id)
 		{
 			var tipoDocumento = await _tipoDocumentoRepositorio.BuscarPorId(id);
-			return _mapper.Map<TipoDocumentoDto>(tipoDocumento);
+            return _mapper.Map<TipoDocumentoDto>(tipoDocumento);
 		}
 
 		public async Task<IEnumerable<TipoDocumentoDto>> BuscarTodosTipoDocumentos()
@@ -32,7 +32,8 @@ namespace TechVagas_EstagioTech.Services.Entities
 
 		public async Task Adicionar(string descricaoTipoDocumento)
 		{
-			var tipoDocumento = new TipoDocumentoModel() {descricaoTipoDocumento=descricaoTipoDocumento}; //mapeamento para converter a dto em model antes
+			var tipoDocumento = new TipoDocumentoModel() {descricaoTipoDocumento=descricaoTipoDocumento};
+			tipoDocumento.EnableAllOperations();
             await _tipoDocumentoRepositorio.Adicionar(tipoDocumento);
 		}
 

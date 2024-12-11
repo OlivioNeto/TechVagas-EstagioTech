@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -16,6 +16,11 @@ namespace TechVagas_EstagioTech.Services.Entities
         {
             _documentoVersaoRepositorio = documentoVersaoRepositorio;
             _mapper = mapper;
+        }
+        public async Task<DocumentoVersaoDto> BuscarPorDocumento(int idDocumento)
+        {
+            var documentoVersao = await _documentoVersaoRepositorio.BuscarPorId(idDocumento);
+            return _mapper.Map<DocumentoVersaoDto>(documentoVersao);
         }
         public async Task<DocumentoVersaoDto> BuscarPorId(int id)
         {

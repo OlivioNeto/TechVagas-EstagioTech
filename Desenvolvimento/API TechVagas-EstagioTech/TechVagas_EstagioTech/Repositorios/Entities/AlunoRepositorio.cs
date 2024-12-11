@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios.Entities
@@ -12,6 +12,11 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         public AlunoRepositorio(DBContext cargoDBContex)
         {
             _dbContext = cargoDBContex;
+        }
+
+        public async Task<AlunoModel> BuscarPorEmail(string email)
+        {
+            return await _dbContext.Alunos.Where(x => x.Email == email).FirstOrDefaultAsync();
         }
 
         public async Task<AlunoModel> BuscarPorId(int id)

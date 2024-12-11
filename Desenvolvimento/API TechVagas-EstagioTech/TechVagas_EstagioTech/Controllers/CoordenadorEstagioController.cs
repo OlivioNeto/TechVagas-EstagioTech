@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -11,13 +13,16 @@ namespace TechVagas_EstagioTech.Controllers
     public class CoordenadorEstagioController : ControllerBase
     {
         private readonly ICoordenadorEstagioService _coordenadorEstagioService;
+        private Response _response;
 
         public CoordenadorEstagioController(ICoordenadorEstagioService cordenadorEstagioService)
         {
             _coordenadorEstagioService = cordenadorEstagioService;
+            _response = new Response();
         }
 
         [HttpGet]
+        [Access(1, 6)]
         public async Task<ActionResult<IEnumerable<CoordenadorEstagioDto>>> Get()
         {
             var cordenadorEstagioDto = await _coordenadorEstagioService.BuscarTodosCoordenadoresEstagio();
@@ -26,6 +31,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterCoordenadorEstagio")]
+        [Access(1, 6)]
         public async Task<ActionResult<CoordenadorEstagioDto>> Get(int id)
         {
             var cordenadorEstagioDto = await _coordenadorEstagioService.BuscarPorId(id);
@@ -34,14 +40,17 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1, 6)]
         public async Task<ActionResult> Post([FromBody] CoordenadorEstagioDto coordenadorEstagioDto)
         {
             if (coordenadorEstagioDto is null) return BadRequest("Dado inválido!");
+            coordenadorEstagioDto.Status = true;
             await _coordenadorEstagioService.Adicionar(coordenadorEstagioDto);
-            return Ok("Dado cadastrado com sucesso");
+            return Ok("Coordenador cadastrado com sucesso");
         }
 
         [HttpPut]
+        [Access(1, 6)]
         public async Task<ActionResult> Put([FromBody] CoordenadorEstagioDto coordenadorEstagioDto)
         {
             if (coordenadorEstagioDto is null) return BadRequest("Dado invalido!");
@@ -49,7 +58,54 @@ namespace TechVagas_EstagioTech.Controllers
             return Ok(coordenadorEstagioDto);
         }
 
+        [HttpPut("{id}/Ativar")]
+        [Access(1, 6)]
+        public async Task<ActionResult<CoordenadorEstagioDto>> Activity(int id)
+        {
+            var coordenadorEstagioDto = await _coordenadorEstagioService.BuscarPorId(id);
+            if (coordenadorEstagioDto == null)
+            {
+                _response.Status = false;
+                _response.Message = "Tipo Documento não encontrado!";
+                _response.Data = coordenadorEstagioDto;
+                return NotFound(_response);
+            }
+
+            if (!coordenadorEstagioDto.Status)
+            {
+                coordenadorEstagioDto.Status = true; // Ativando o documento
+                await _coordenadorEstagioService.Atualizar(coordenadorEstagioDto);
+            }
+
+            _response.Status = true;
+            _response.Message = "Coordenador de Estagio " + coordenadorEstagioDto.nomeCoordenador + " ativado com sucesso.";
+            _response.Data = coordenadorEstagioDto;
+            return Ok(_response);
+        }
+
+
+        [HttpPut("{id}/Desativar")]
+        [Access(1, 6)]
+        public async Task<ActionResult<CoordenadorEstagioDto>> Desactivity(int id)
+        {
+            var coordenadorEstagioDto = await _coordenadorEstagioService.BuscarPorId(id);
+            if (coordenadorEstagioDto == null)
+            {
+                _response.Status = false; _response.Message = "Coordenador de Estagio não encontrado!"; _response.Data = coordenadorEstagioDto;
+                return NotFound(_response);
+            }
+
+            if (coordenadorEstagioDto.Status)
+            {
+                coordenadorEstagioDto.DisableAllOperations();
+                await _coordenadorEstagioService.Atualizar(coordenadorEstagioDto);
+            }
+            _response.Status = true; _response.Message = "Coordenador de Estagio " + coordenadorEstagioDto.nomeCoordenador + " desativado com sucesso."; _response.Data = coordenadorEstagioDto;
+            return Ok(_response);
+        }
+
         [HttpDelete("{id:int}")]
+        [Access(1, 6)]
         public async Task<ActionResult<CoordenadorEstagioDto>> Delete(int id)
         {
             var coordenadorEstagioDto = await _coordenadorEstagioService.BuscarPorId(id);

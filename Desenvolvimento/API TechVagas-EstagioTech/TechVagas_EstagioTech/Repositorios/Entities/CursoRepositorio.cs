@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
@@ -15,7 +15,7 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<CursoModel> BuscarPorId(int id)
         {
-			return await _dbContext.Curso.Where(x => x.idCurso == id).FirstOrDefaultAsync();
+			return await _dbContext.Curso.Where(x => x.cursoid == id).FirstOrDefaultAsync();
 		}
 
         public async Task<List<CursoModel>> BuscarTodosCursos()

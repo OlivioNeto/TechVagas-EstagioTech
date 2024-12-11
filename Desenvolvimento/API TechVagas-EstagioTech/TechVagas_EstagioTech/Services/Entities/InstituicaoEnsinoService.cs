@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -33,7 +33,7 @@ namespace TechVagas_EstagioTech.Services.Entities
         {
             var instituicao = _mapper.Map<InstituicaoEnsinoModel>(instituicaoEnsinoDto);
             await _instituicaoEnsinoRepositorio.Adicionar(instituicao);
-            instituicaoEnsinoDto.Id = instituicao.Id;
+            instituicaoEnsinoDto.idInstituicaoEnsino = instituicao.idInstituicaoEnsino;
         }
 
         public async Task Atualizar(InstituicaoEnsinoDto instituicaoEnsinoDto)

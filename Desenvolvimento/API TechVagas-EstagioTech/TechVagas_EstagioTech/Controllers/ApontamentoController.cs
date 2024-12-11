@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -18,6 +19,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult<IEnumerable<ApontamentoDto>>> Get()
         {
             var apontamentoDto = await _apontamentoService.BuscarApontamento();
@@ -26,6 +28,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterApontamento")]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult<ApontamentoDto>> Get(int id)
         {
             var apontamentoDto = await _apontamentoService.BuscarPoId(id);
@@ -34,6 +37,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult> Post([FromBody] ApontamentoDto apontamentoDto)
         {
             if (apontamentoDto is null) return BadRequest("Dado inválido!");
@@ -42,6 +46,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPut]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult> Put([FromBody] ApontamentoDto apontamentoDto)
         {
             if (apontamentoDto is null) return BadRequest("Dado invalido!");
@@ -50,6 +55,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Access(1, 3, 5, 6)]
         public async Task<ActionResult<ApontamentoDto>> Delete(int id)
         {
             var apontamentoDto = await _apontamentoService.BuscarPoId(id);

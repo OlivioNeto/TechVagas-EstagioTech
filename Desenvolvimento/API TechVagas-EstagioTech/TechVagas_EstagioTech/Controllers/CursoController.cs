@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -21,7 +22,8 @@ namespace TechVagas_EstagioTech.Controllers
 
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<CursoDto>>> Get()
+        [Access(1)]
+        public async Task<ActionResult<IEnumerable<CursoDto>>> Get()
 		{
 			var cursoDto = await _cursoService.BuscarTodosCursos();
 			if (cursoDto == null) return NotFound("Cursos não encontradas!");
@@ -29,7 +31,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterCurso")]
-		public async Task<ActionResult<CursoDto>> Get(int id)
+        [Access(1)]
+        public async Task<ActionResult<CursoDto>> Get(int id)
 		{
 			var cursoDto = await _cursoService.BuscarPorId(id);
 			if (cursoDto == null) return NotFound("Curso não encontrado");
@@ -37,16 +40,18 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] CursoDto cursoDto)
+        [Access(1)]
+        public async Task<ActionResult> Post([FromBody] CursoDto cursoDto)
 		{
 			if (cursoDto is null) return BadRequest("Dado inválido!");
 			await _cursoService.Adicionar(cursoDto);
-			return new CreatedAtRouteResult("GetCurso", new { id = cursoDto.idCurso }, cursoDto);
+			return new CreatedAtRouteResult("ObterCurso", new { id = cursoDto.cursoid }, cursoDto);
 		}
 
 
 		[HttpPut("{id:int}")]
-		public async Task<ActionResult> Put([FromBody] CursoDto cursoDto)
+        [Access(1)]
+        public async Task<ActionResult> Put([FromBody] CursoDto cursoDto)
 		{
 			if (cursoDto is null) return BadRequest("Dado invalido!");
 			await _cursoService.Atualizar(cursoDto);
@@ -54,7 +59,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult<CursoDto>> Delete(int id)
+        [Access(1)]
+        public async Task<ActionResult<CursoDto>> Delete(int id)
 		{
 			var cursoDto = await _cursoService.BuscarPorId(id);
 			if (cursoDto == null) return NotFound("Curso não econtrado!");

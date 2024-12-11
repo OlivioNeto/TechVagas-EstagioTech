@@ -1,5 +1,6 @@
-﻿using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+﻿using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using AutoMapper.Configuration.Conventions;
 
 namespace TechVagas_EstagioTech.Services.Interfaces
 {

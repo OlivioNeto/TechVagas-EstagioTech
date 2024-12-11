@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios
@@ -16,12 +16,12 @@ namespace TechVagas_EstagioTech.Repositorios
 
         public async Task<SupervisorEstagioModel> BuscarPorId(int id)
         {
-            return await _dbContext.SupervisorEstagio.Where(x => x.idSupervisor == id).FirstOrDefaultAsync();
+            return await _dbContext.SupervisorEstagio.Where(x => x.idSupervisor == id).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<List<SupervisorEstagioModel>> BuscarTodosSupervisorEstagio()
         {
-            return await _dbContext.SupervisorEstagio.ToListAsync();
+            return await _dbContext.SupervisorEstagio.AsNoTracking().ToListAsync();
         }
         public async Task<SupervisorEstagioModel> Adicionar(SupervisorEstagioModel supervisorEstagioModel)
         {

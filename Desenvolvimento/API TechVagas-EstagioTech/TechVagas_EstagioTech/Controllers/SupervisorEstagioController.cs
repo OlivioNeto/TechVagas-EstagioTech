@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Objects.Model;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
@@ -13,14 +15,17 @@ namespace TechVagas_EstagioTech.Controllers
     public class SupervisorEstagioController : ControllerBase
     {
         private readonly ISupervisorEstagioService _supervisorEstagioService;
-        private SupervisorEstagioDto statusSupervisor;
+        private Response _response;
 
         public SupervisorEstagioController(ISupervisorEstagioService supervisorEstagioService)
         {
             _supervisorEstagioService = supervisorEstagioService;
+
+            _response = new Response();
         }
 
         [HttpGet]
+        [Access(1, 6)]
         public async Task<ActionResult<IEnumerable<SupervisorEstagioDto>>> Get()
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarTodosSupervisorEstagio();
@@ -29,6 +34,7 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterSupervisorEstagio")]
+        [Access(1, 6)]
         public async Task<ActionResult<SupervisorEstagioDto>> Get(int id)
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
@@ -37,14 +43,17 @@ namespace TechVagas_EstagioTech.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string statusSupervisor)
+        [Access(1, 6)]
+        public async Task<ActionResult> Post([FromBody] SupervisorEstagioDto supervisorEstagioDto)
         {
-            if (statusSupervisor is null) return BadRequest("Dado inválido!");
-            await _supervisorEstagioService.Adicionar(statusSupervisor);
-            return Ok("Status de supervisor adicionado com sucesso");
+            if (supervisorEstagioDto is null) return BadRequest("Dado inválido!");
+            await  _supervisorEstagioService.Adicionar(supervisorEstagioDto);
+            return Ok("Supervisor registrado com sucesso");
         }
 
+
         [HttpPut("{id:int}")]
+        [Access(1, 6)]
         public async Task<ActionResult> Put([FromBody] SupervisorEstagioDto supervisorEstagioDto)
         {
             if (supervisorEstagioDto is null) return BadRequest("Dado invalido!");
@@ -52,7 +61,55 @@ namespace TechVagas_EstagioTech.Controllers
             return Ok(supervisorEstagioDto);
         }
 
+        [HttpPut("{id}/Ativar")]
+        [Access(1, 6)]
+        public async Task<ActionResult<SupervisorEstagioDto>> Activity(int id)
+        {
+            var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
+            if (supervisorEstagioDto == null)
+            {
+                _response.Status = false;
+                _response.Message = "Supervisor Estágio não encontrado!";
+                _response.Data = supervisorEstagioDto;
+                return NotFound(_response);
+            }
+
+            if (!supervisorEstagioDto.Status)
+            {
+                supervisorEstagioDto.Status = true; // Ativando o documento
+                await _supervisorEstagioService.Atualizar(supervisorEstagioDto);
+            }
+
+            _response.Status = true;
+            _response.Message = "Supervisor de Estágio " + supervisorEstagioDto.nomeSupervisor + " ativado com sucesso.";
+            _response.Data = supervisorEstagioDto;
+            return Ok(_response);
+        }
+
+
+        [HttpPut("{id}/Desativar")]
+        [Access(1, 6)]
+        public async Task<ActionResult<SupervisorEstagioDto>> Desactivity(int id)
+        {
+            var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);
+            if (supervisorEstagioDto == null)
+            {
+                _response.Status = false; _response.Message = "Supervisor de Estágio não encontrado!"; _response.Data = supervisorEstagioDto;
+                return NotFound(_response);
+            }
+
+            if (supervisorEstagioDto.Status)
+            {
+                supervisorEstagioDto.DisableAllOperations();
+                await _supervisorEstagioService.Atualizar(supervisorEstagioDto);
+            }
+
+            _response.Status = true; _response.Message = "Tipo Documento " + supervisorEstagioDto.nomeSupervisor + " desativado com sucesso."; _response.Data = supervisorEstagioDto;
+            return Ok(_response);
+        }
+
         [HttpDelete("{id:int}")]
+        [Access(1, 6)]
         public async Task<ActionResult<SupervisorEstagioDto>> Delete(int id)
         {
             var supervisorEstagioDto = await _supervisorEstagioService.BuscarPorId(id);

@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TechVagas_EstagioTech.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
 using TechVagas_EstagioTech.Services.Entities;
 using TechVagas_EstagioTech.Services.Interfaces;
+using TechVagas_EstagioTech.Services.Middleware;
 
 namespace TechVagas_EstagioTech.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class AlunoController : ControllerBase
 	{
@@ -18,6 +20,7 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet]
+		[Access(1, 2)]
 		public async Task<ActionResult<IEnumerable<AlunoDto>>> Get()
 		{
 			var alunoDto = await _alunoService.BuscarTodosAlunos();
@@ -26,15 +29,18 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpGet("{id:int}", Name = "ObterAluno")]
-		public async Task<ActionResult<AlunoDto>> Get(int id)
+        [Access(1, 2, 4)]
+        public async Task<ActionResult<AlunoDto>> Get(int id)
 		{
 			var alunoDto = await _alunoService.BuscarPorId(id);
 			if (alunoDto == null) return NotFound("Aluno não encontrado");
 			return Ok(alunoDto);
 		}
 
-		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
+        
+        [HttpPost]
+        [Access(1, 2)]
+        public async Task<ActionResult> Post([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado inválido!");
 			await _alunoService.Adicionar(alunoDto);
@@ -42,7 +48,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpPut("{id:int}")]
-		public async Task<ActionResult> Put([FromBody] AlunoDto alunoDto)
+        [Access(1, 2)]
+        public async Task<ActionResult> Put([FromBody] AlunoDto alunoDto)
 		{
 			if (alunoDto is null) return BadRequest("Dado invalido!");
 			await _alunoService.Atualizar(alunoDto);
@@ -50,7 +57,8 @@ namespace TechVagas_EstagioTech.Controllers
 		}
 
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult<AlunoDto>> Delete(int id)
+        [Access(1, 2)]
+        public async Task<ActionResult<AlunoDto>> Delete(int id)
 		{
 			var alunoDto = await _alunoService.BuscarPorId(id);
 			if (alunoDto == null) return NotFound("Aluno não encontrado!");

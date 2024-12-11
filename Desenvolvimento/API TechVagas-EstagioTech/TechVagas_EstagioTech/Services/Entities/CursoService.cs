@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
 
 namespace TechVagas_EstagioTech.Services.Entities
 {
-	public class CursoService : ICursoService
+    public class CursoService : ICursoService
 	{
 		private readonly ICursoRepositorio _cursoRepositorio;
 		private readonly IMapper _mapper;
@@ -34,7 +34,7 @@ namespace TechVagas_EstagioTech.Services.Entities
 		{
 			var curso = _mapper.Map<CursoModel>(cursoDto);
 			await _cursoRepositorio.Adicionar(curso);
-			cursoDto.idCurso = curso.idCurso;
+			cursoDto.cursoid = curso.cursoid;
 		}
 
 		public async Task Atualizar(CursoDto cursoDto)

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TechVagas_EstagioTech.Dtos.Entities;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Dtos.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 using TechVagas_EstagioTech.Services.Interfaces;
@@ -23,8 +23,20 @@ namespace TechVagas_EstagioTech.Services.Entities
         }
         public async Task<IEnumerable<DocumentoNecessarioDto>> BuscarTodosDocumentosNecessarios()
         {
-            var documentoNecessario = await _documentoNecessarioRepositorio.BuscarTodosDocumentosNecessarios();
-            return _mapper.Map<IEnumerable<DocumentoNecessarioDto>>(documentoNecessario);
+            var documentoNecessarios = await _documentoNecessarioRepositorio.BuscarTodosDocumentosNecessarios();
+            var documentoNecessariosDTO = _mapper.Map<IEnumerable<DocumentoNecessarioDto>>(documentoNecessarios);
+
+            /*foreach (var documentoDto in documentoNecessariosDTO)
+            {
+                var documento = documentoNecessarios.FirstOrDefault(documentoNecessario => documentoNecessario.idDocumentoNecessario == documentoDto.idDocumentoNecessario);
+                if (documento != null)
+                {
+                    documentoDto.TipoDocumento = _mapper.Map<TipoDocumentoDto>(documento.TipoDocumento);
+                    documentoDto.TipoEstagio = _mapper.Map<TipoEstagioDto>(documento.TipoEstagio);
+                }
+            }*/
+
+            return documentoNecessariosDTO;
         }
         public async Task Adicionar(DocumentoNecessarioDto documentoNecessarioDto)
         {

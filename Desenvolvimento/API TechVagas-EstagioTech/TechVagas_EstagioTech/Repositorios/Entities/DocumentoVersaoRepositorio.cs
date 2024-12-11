@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechVagas_EstagioTech.Data;
-using TechVagas_EstagioTech.Model.Entities;
+using TechVagas_EstagioTech.Objects.Model.Entities;
 using TechVagas_EstagioTech.Repositorios.Interfaces;
 
 namespace TechVagas_EstagioTech.Repositorios.Entities
@@ -13,9 +13,13 @@ namespace TechVagas_EstagioTech.Repositorios.Entities
         {
             _dbContext = documentoVersaoDBContext;
         }
+        public async Task<DocumentoVersaoModel> BuscarPorDocumento(int idDocumento)
+        {
+            return await _dbContext.DocumentoVersao.Where(x => x.idDocumento == idDocumento).FirstOrDefaultAsync();
+        }
         public async Task<DocumentoVersaoModel> BuscarPorId(int id)
         {
-            return await _dbContext.DocumentoVersao.Where(x=> x.DocumentoVersaoId == id).FirstOrDefaultAsync();
+            return await _dbContext.DocumentoVersao.Where(x=> x.idDocumentoVersao == id).FirstOrDefaultAsync();
         }
         public async Task<List<DocumentoVersaoModel>> BuscarTodasVersoesDocumentos()
         {
